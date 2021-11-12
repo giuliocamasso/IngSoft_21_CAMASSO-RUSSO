@@ -32,7 +32,7 @@ public class MainApp extends Application {
      * Constructor
      */
     public MainApp() {
-        // mia modifica
+        // mia modifica nuova
     }
 
     /**
