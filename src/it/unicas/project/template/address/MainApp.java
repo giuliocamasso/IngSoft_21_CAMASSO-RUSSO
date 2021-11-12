@@ -33,6 +33,7 @@ public class MainApp extends Application {
      */
     public MainApp() {
         // mia modifica nuova
+        // GC
     }
 
     /**
