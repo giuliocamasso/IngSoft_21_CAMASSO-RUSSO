@@ -14,6 +14,7 @@ public class MainApp extends Application {
      * Constructor
      */
     public MainApp() {
+        System.out.println("Applicazione in esecuzione da MainApp...");
     }
 
 
