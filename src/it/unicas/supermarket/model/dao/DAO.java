@@ -1,6 +1,4 @@
-package it.unicas.project.template.address.model.dao;
-
-import it.unicas.project.template.address.model.Colleghi;
+package it.unicas.supermarket.model.dao;
 
 import java.util.List;
 

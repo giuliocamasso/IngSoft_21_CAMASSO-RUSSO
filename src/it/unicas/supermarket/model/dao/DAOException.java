@@ -1,4 +1,4 @@
-package it.unicas.project.template.address.model.dao;
+package it.unicas.supermarket.model.dao;
 
 public class DAOException extends Exception{
     public DAOException(String message){

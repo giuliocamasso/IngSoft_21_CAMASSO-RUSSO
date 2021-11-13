@@ -1,4 +1,4 @@
-package it.unicas.project.template.address.model.dao.mysql;
+package it.unicas.supermarket.model.dao.mysql;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
