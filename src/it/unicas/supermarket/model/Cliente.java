@@ -5,7 +5,7 @@ import javafx.beans.property.*;
 import java.util.Objects;
 
 /**
- * Model class for a Clienti.
+ * Model class for clients.
  * @author GC-GR
  */
 public class Cliente {
@@ -16,9 +16,6 @@ public class Cliente {
     private StringProperty telefono;
     private IntegerProperty puntiFedelta;
 
-    /**
-     * @author GC-GR
-     */
     public Cliente(String nome, String cognome, String telefono, Integer puntiFedelta, Integer idCliente) {
 
         if (idCliente != null){
