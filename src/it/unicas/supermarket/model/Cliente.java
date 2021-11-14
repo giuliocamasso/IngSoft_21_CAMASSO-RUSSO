@@ -89,7 +89,7 @@ public class Cliente {
 
     // toString() method
     public String toString(){
-        return "idCliente: " + idCliente.getValue() + "\nnome: " + nome.getValue() + "\ncognome: " + cognome.getValue() + "\ntelefono: " + telefono.getValue() + "\npunti: " + puntiFedelta.getValue() +"\n";
+        return "idCliente: " + idCliente.getValue() + "\n" + nome.getValue() + " - " + cognome.getValue() + " - " + telefono.getValue() + "\npunti: " + puntiFedelta.getValue() +"\n";
     }
 
 

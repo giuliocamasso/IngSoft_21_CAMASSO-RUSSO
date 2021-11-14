@@ -32,39 +32,38 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
 
         ClienteDAOMySQL c = new ClienteDAOMySQL();
         // 1 - testing Insert
-        // c.insert(new Cliente("Giulio", "Camasso", "-----------", 1234, null));
+        c.insert(new Cliente("Giulio", "Camasso", "-----------", 1234, 1));
 
         // 2 - testing select all
         // NB. select(null) is deprecated, a new method(selectAll()) was created
         List<Cliente> list = c.selectAll();
 
-        for (Cliente cliente : list) {
-            System.out.println(cliente);
-        }
+        list.forEach(System.out::println);
 
         // 3 - testing delete
-        /*
-        // Cliente da eliminare
-        Cliente toDelete = new Cliente(null, null, null, 56, 56);
+        // 3.1 delete all
+        c.deleteAll();
+        list = c.selectAll();
 
-        System.out.println("--- delete() target ---\n" + toDelete);
+        list.forEach(System.out::println);
+
+        c.insert(new Cliente("Nome1", "Cognome1", "telefono1", 111, 1));
+        c.insert(new Cliente("Nome2", "Cognome2", "telefono2", 222, 2));
+
+        // 3.2 delete
+        Cliente toDelete = new Cliente(null, null, null, null, 2);
 
         c.delete(toDelete);
 
-        list = c.select(null);
+        list.forEach(System.out::println);
 
-        System.out.println("--- clients after delete() ---");
-        for (Cliente cliente : list) {
-            System.out.println(cliente);
-        }
-        */
 
     }
 
     @Override
     public List<Cliente> select(Cliente a) throws DAOException {
 
-        ArrayList<Cliente> lista = new ArrayList<>();
+        ArrayList<Cliente> lista;
 
         if (a==null)
             throw new DAOException("In select: called select with a 'null' instance of Cliente");
@@ -86,51 +85,39 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
                 sql += "%' and punti_fedelta like '" + a.getPuntiFedelta() + "%'";
             }
 
-            try{
-                logger.info("SQL: " + sql);
-            }
+            printQuery(sql);
 
-            catch(NullPointerException nullPointerException){
-                System.out.println("SQL: " + sql);
-            }
+            lista = getQueryResult(st, sql);
 
-            ResultSet rs = st.executeQuery(sql);
-
-            while(rs.next()){
-                lista.add(new Cliente(rs.getString("nome"),
-                        rs.getString("cognome"),
-                        rs.getString("telefono"),
-                        rs.getInt("punti_fedelta"),
-                        rs.getInt("idCliente")));
-            }
             DAOMySQLSettings.closeStatement(st);
 
         } catch (SQLException sq){
             throw new DAOException("In select(): " + sq.getMessage());
         }
+
         return lista;
     }
 
     @Override
+    // delete key-based
     public void delete(Cliente a) throws DAOException {
-        if (a == null || a.getIdCliente() == null){
+
+        if (a == null) {
+            throw new DAOException("In delete: can't delete a null instance");
+        }
+        if (a.getIdCliente() == null){
             throw new DAOException("In delete: idColleghi cannot be null");
         }
 
         String query = "DELETE FROM cliente WHERE idCliente='" + a.getIdCliente() + "';";
-        try{
-            logger.info("SQL: " + query);
-        }
-        catch(NullPointerException nullPointerException){
-            System.out.println("SQL: " + query);
-        }
+
+        printQuery(query);
 
         executeUpdate(query);
 
     }
 
-    @Override
-    public List<Cliente> selectAll() throws DAOException {
+    public List<Cliente> selectAll() {
 
         ArrayList<Cliente> list = new ArrayList<>();
 
@@ -139,23 +126,10 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
 
             String sql = "select * from cliente";
 
-            try{
-                logger.info("SQL: " + sql);
-            }
+            printQuery(sql);
 
-            catch(NullPointerException nullPointerException){
-                System.out.println("SQL: " + sql);
-            }
+            list = getQueryResult(statement, sql);
 
-            ResultSet rs = statement.executeQuery(sql);
-
-            while(rs.next()){
-                list.add(new Cliente(rs.getString("nome"),
-                        rs.getString("cognome"),
-                        rs.getString("telefono"),
-                        rs.getInt("punti_fedelta"),
-                        rs.getInt("idCliente")));
-            }
             DAOMySQLSettings.closeStatement(statement);
         }
 
@@ -166,8 +140,13 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
         return list;
     }
 
-    @Override
     public void deleteAll() throws DAOException {
+
+        String query = "delete from cliente";
+
+        printQuery(query);
+
+        executeUpdate(query);
     }
 
     private void verifyObject(Cliente a) throws DAOException {
@@ -177,7 +156,7 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
                 || a.getTelefono()      == null
                 || a.getPuntiFedelta()  == null )
     {
-            throw new DAOException("In select: any field can be null");
+            throw new DAOException("verifyObject: any field can be null");
         }
     }
 
@@ -193,27 +172,27 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
         }
     }
 
-
-
     @Override
     public void insert(Cliente a) throws DAOException {
 
         verifyObject(a);
-
+        /*
+        // NB. qui l'idCliente e' autoincrement...
         String query = "INSERT INTO cliente (nome, cognome, telefono, punti_fedelta, idCliente) VALUES  ('" +
                 a.getNome() + "', '" + a.getCognome() + "', '" +
                 a.getTelefono() + "', " + a.getPuntiFedelta() + ", NULL)";
+        */
 
-        try{
-            logger.info("SQL: " + query);
-        }
-        catch(NullPointerException nullPointerException){
-            System.out.println("SQL: " + query);
-        }
+        //NB. qui la chiave e' inserita manualmente...
+        String query = "INSERT INTO cliente (nome, cognome, telefono, punti_fedelta, idCliente) VALUES  ('" +
+                a.getNome() + "', '" + a.getCognome() + "', '" +
+                a.getTelefono() + "', " + a.getPuntiFedelta() + ", "
+                + a.getIdCliente() + ")";
+
+        printQuery(query);
 
         executeUpdate(query);
     }
-
 
     @Override
     public void update(Cliente a) throws DAOException {
@@ -227,4 +206,35 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
         executeUpdate(query);
 
     }
+
+    void printQuery(String query){
+        try{
+            logger.info("SQL: " + query);
+        }
+        catch(NullPointerException nullPointerException){
+            System.out.println("SQL: " + query);
+        }
+    }
+
+    ArrayList<Cliente> getQueryResult(Statement statement, String query) throws SQLException {
+
+        ArrayList<Cliente> list = new ArrayList<>();
+
+        ResultSet rs = statement.executeQuery(query);
+
+        while(rs.next()){
+            list.add(new Cliente(
+                    rs.getString("nome"),
+                    rs.getString("cognome"),
+                    rs.getString("telefono"),
+                    rs.getInt("punti_fedelta"),
+                    rs.getInt("idCliente") )
+                    );
+        }
+
+        return list;
+    }
+
+
+
 }
