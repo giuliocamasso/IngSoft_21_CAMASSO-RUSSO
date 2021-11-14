@@ -31,6 +31,8 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
     public static void main(String[] args) throws DAOException {
 
         ClienteDAOMySQL c = new ClienteDAOMySQL();
+        c.deleteAll();
+
         // 1 - testing Insert
         c.insert(new Cliente("Giulio", "Camasso", "-----------", 1234, 1));
 
@@ -47,15 +49,20 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
 
         list.forEach(System.out::println);
 
+        // 3.2 delete
+        // add 2 tuples
         c.insert(new Cliente("Nome1", "Cognome1", "telefono1", 111, 1));
         c.insert(new Cliente("Nome2", "Cognome2", "telefono2", 222, 2));
 
-        // 3.2 delete
+        // could be improved... actually only removes tuple by idCliente
         Cliente toDelete = new Cliente(null, null, null, null, 2);
-
         c.delete(toDelete);
 
+        // show remaining tuples
+        list = c.selectAll();
         list.forEach(System.out::println);
+
+        // 3.3 update
 
 
     }
@@ -207,7 +214,7 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
 
     }
 
-    void printQuery(String query){
+     private void printQuery(String query){
         try{
             logger.info("SQL: " + query);
         }
@@ -216,7 +223,7 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
         }
     }
 
-    ArrayList<Cliente> getQueryResult(Statement statement, String query) throws SQLException {
+    private ArrayList<Cliente> getQueryResult(Statement statement, String query) throws SQLException {
 
         ArrayList<Cliente> list = new ArrayList<>();
 
