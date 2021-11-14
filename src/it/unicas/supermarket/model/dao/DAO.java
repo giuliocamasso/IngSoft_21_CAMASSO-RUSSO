@@ -11,4 +11,5 @@ public interface DAO <T>{
 
     List<T> selectAll() throws DAOException;
     void deleteAll() throws DAOException;
+    void initialize() throws DAOException;
 }

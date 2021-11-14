@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static com.sun.javafx.application.PlatformImpl.exit;
+
 
 public class ClienteDAOMySQL implements DAO<Cliente> {
 
@@ -30,41 +32,63 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
     // Testing Class
     public static void main(String[] args) throws DAOException {
 
+        boolean initialize = true;
+
         ClienteDAOMySQL c = new ClienteDAOMySQL();
-        c.deleteAll();
 
-        // 1 - testing Insert
-        c.insert(new Cliente("Giulio", "Camasso", "-----------", 1234, 1));
+        if (initialize){
+            c.initialize();
+        }
 
-        // 2 - testing select all
-        // NB. select(null) is deprecated, a new method(selectAll()) was created
-        List<Cliente> list = c.selectAll();
+        // testing
+        else {
 
-        list.forEach(System.out::println);
+            c.deleteAll();
 
-        // 3 - testing delete
-        // 3.1 delete all
-        c.deleteAll();
-        list = c.selectAll();
+            // 1 - testing Insert
+            c.insert(new Cliente("Giulio", "Camasso", "-----------", 1234, 1));
 
-        list.forEach(System.out::println);
+            // 2 - testing select all
+            // NB. select(null) is deprecated, a new method(selectAll()) was created
+            List<Cliente> list = c.selectAll();
 
-        // 3.2 delete
-        // add 2 tuples
-        c.insert(new Cliente("Nome1", "Cognome1", "telefono1", 111, 1));
-        c.insert(new Cliente("Nome2", "Cognome2", "telefono2", 222, 2));
+            list.forEach(System.out::println);
 
-        // could be improved... actually only removes tuple by idCliente
-        Cliente toDelete = new Cliente(null, null, null, null, 2);
-        c.delete(toDelete);
+            // 3 - testing delete
+            // 3.1 delete all
+            c.deleteAll();
+            list = c.selectAll();
 
-        // show remaining tuples
-        list = c.selectAll();
-        list.forEach(System.out::println);
+            list.forEach(System.out::println);
 
-        // 3.3 update
+            // 3.2 delete
+            // add 2 tuples
+            c.insert(new Cliente("Nome1", "Cognome1", "telefono1", 111, 1));
+            c.insert(new Cliente("Nome2", "Cognome2", "telefono2", 222, 2));
 
+            // could be improved... actually only removes tuple by idCliente
+            Cliente toDelete = new Cliente(null, null, null, null, 2);
+            c.delete(toDelete);
 
+            // show remaining tuples
+            list = c.selectAll();
+            list.forEach(System.out::println);
+
+            // 3.3 update
+            // insert a new tuple to update
+            Cliente toUpdate = new Cliente("Nome3", "Cognome3", "telefono3", 333, 3);
+            c.insert(toUpdate);
+            // print the new tuple
+            list = c.select(toUpdate);
+            list.forEach(System.out::println);
+            // call the update()
+            Cliente updated = new Cliente("NEW_Nome3", "NEW_Cognome3", "NEW_telefono3", 999, 3);
+            c.update(updated);
+
+            // shows the updated tuple (all db to catch errors)
+            list = c.selectAll();
+            list.forEach(System.out::println);
+        } // end of testing
     }
 
     @Override
@@ -84,13 +108,11 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
 
             Statement st = DAOMySQLSettings.getStatement();
 
-            String sql = "select * from cliente where cognome like '";
+            String sql = "select * from cliente where (cognome like '";
             sql += a.getCognome() + "%' and nome like '" + a.getNome();
-            sql += "%' and telefono like '" + a.getTelefono() + "%'";
+            sql += "%' and telefono like '" + a.getTelefono() + "%' "
+                    + "and punti_fedelta=" + a.getPuntiFedelta() + ")";
 
-            if (a.getPuntiFedelta() != -1){
-                sql += "%' and punti_fedelta like '" + a.getPuntiFedelta() + "%'";
-            }
 
             printQuery(sql);
 
@@ -124,7 +146,7 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
 
     }
 
-    public List<Cliente> selectAll() {
+    public ArrayList<Cliente> selectAll() {
 
         ArrayList<Cliente> list = new ArrayList<>();
 
@@ -156,6 +178,28 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
         executeUpdate(query);
     }
 
+    @Override
+    public void initialize() throws DAOException {
+
+        deleteAll();
+
+        for (int i = 1; i<=10; i++){
+            String nome_i = "nome_" + i;
+            String cognome_i = "cognome_" + i;
+            String telefono_i = "telefono_" + i;
+            Integer punti_fedelta = i;
+            Integer id_cliente = i;
+
+            insert(new Cliente(nome_i, cognome_i, telefono_i, punti_fedelta, id_cliente));
+
+        }
+
+        // also shows the tuples
+        ArrayList<Cliente> list =  selectAll();
+        list.forEach(System.out::println);
+    }
+
+    // NB. called by update()... could be modified
     private void verifyObject(Cliente a) throws DAOException {
         if (       a == null
                 || a.getCognome()       == null
@@ -191,9 +235,11 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
         */
 
         //NB. qui la chiave e' inserita manualmente...
-        String query = "INSERT INTO cliente (nome, cognome, telefono, punti_fedelta, idCliente) VALUES  ('" +
-                a.getNome() + "', '" + a.getCognome() + "', '" +
-                a.getTelefono() + "', " + a.getPuntiFedelta() + ", "
+        String query = "INSERT INTO cliente (nome, cognome, telefono, punti_fedelta, idCliente) VALUES  ('"
+                + a.getNome() + "', '"
+                + a.getCognome() + "', '"
+                + a.getTelefono() + "', "
+                + a.getPuntiFedelta() + ", "
                 + a.getIdCliente() + ")";
 
         printQuery(query);
@@ -202,13 +248,20 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
     }
 
     @Override
+    // update key-based
     public void update(Cliente a) throws DAOException {
 
         verifyObject(a);
 
-        String query = "UPDATE colleghi SET nome = '" + a.getNome() + "', cognome = '" + a.getCognome() + "',  telefono = '" + a.getTelefono() + "',  punti_fedelta = '" + a.getPuntiFedelta() ;
-        query = query + " WHERE idcolleghi = " + a.getIdCliente() + ";";
-        logger.info("SQL: " + query);
+        String query = "UPDATE cliente SET nome = '"
+                + a.getNome() + "', cognome = '"
+                + a.getCognome() + "',  telefono = '"
+                + a.getTelefono() + "',  punti_fedelta = "
+                + a.getPuntiFedelta();
+
+        query = query + " WHERE idCliente = " + a.getIdCliente() + ";";
+
+        printQuery(query);
 
         executeUpdate(query);
 
@@ -241,7 +294,4 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
 
         return list;
     }
-
-
-
 }
