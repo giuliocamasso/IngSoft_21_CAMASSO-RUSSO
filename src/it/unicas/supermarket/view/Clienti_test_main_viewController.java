@@ -1,17 +1,12 @@
 package it.unicas.supermarket.view;
 import it.unicas.supermarket.model.Cliente;
-import it.unicas.supermarket.model.dao.mysql.ClienteDAOMySQL;
-import it.unicas.supermarket.model.dao.DAOException;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import it.unicas.supermarket.MainApp;
 import javafx.util.Callback;
-import java.util.List;
 
 
 public class Clienti_test_main_viewController {
@@ -89,7 +84,7 @@ public class Clienti_test_main_viewController {
             nomeLabel.setText(cliente.getNome());
             cognomeLabel.setText(cliente.getCognome());
             telefonoLabel.setText(cliente.getTelefono());
-            fedeltaLabel.setText(cliente.getpunti_fedelta().toString());
+            fedeltaLabel.setText(cliente.getPuntiFedelta().toString());
         } else {
             // Colleghi is null, remove all the text.
             nomeLabel.setText("");

@@ -1,65 +1,43 @@
 package it.unicas.supermarket.model;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+
+import java.util.Objects;
 
 /**
  * Model class for a Clienti.
- *
  * @author GC-GR
  */
 public class Cliente {
 
-    private IntegerProperty idCliente;  //wrapper
-
-    private StringProperty nome;        //VARCHAR(45)
+    private IntegerProperty idCliente;
+    private StringProperty nome;                // varchar(45)
     private StringProperty cognome;
     private StringProperty telefono;
-
-    private IntegerProperty punti_fedelta;  //wrapper
+    private IntegerProperty puntiFedelta;
 
     /**
-     * Default constructor.
+     * @author GC-GR
      */
-    public Cliente() {
-        this(null, null);
-    }
-
-    public Cliente(String nome, String cognome, String telefono, Integer punti_fedelta, Integer idCliente) {
-        this.nome = new SimpleStringProperty(nome);
-        this.cognome = new SimpleStringProperty(cognome);
-        this.telefono = new SimpleStringProperty(telefono);
-
-        this.punti_fedelta = new SimpleIntegerProperty(punti_fedelta);
+    public Cliente(String nome, String cognome, String telefono, Integer puntiFedelta, Integer idCliente) {
 
         if (idCliente != null){
             this.idCliente = new SimpleIntegerProperty(idCliente);
         } else {
             this.idCliente = null;
         }
-    }
 
-    /**
-     * Constructor with some initial data.
-     *
-     * @param nome
-     * @param cognome
-     */
-    public Cliente(String nome, String cognome) {
-        this.nome = new SimpleStringProperty(nome);
-        this.cognome = new SimpleStringProperty(cognome);
-        // Some initial dummy data, just for convenient testing.
-        this.telefono = new SimpleStringProperty("---");
-        this.punti_fedelta = new SimpleIntegerProperty(0);
+        this.nome = new SimpleStringProperty(Objects.requireNonNullElse(nome, ""));
 
-        this.idCliente = null;
+        this.cognome = new SimpleStringProperty(Objects.requireNonNullElse(cognome, ""));
+
+        this.telefono = new SimpleStringProperty(Objects.requireNonNullElse(telefono, ""));
+
+        if (puntiFedelta != null){
+            this.puntiFedelta = new SimpleIntegerProperty(puntiFedelta);
+        } else {
+            this.puntiFedelta = null;
+        }
     }
 
     public Integer getIdCliente(){
@@ -76,62 +54,48 @@ public class Cliente {
         this.idCliente.set(idCliente);
     }
 
-    public String getNome() {
-        return nome.get();
+    // Getter setter and property: @nome
+    public String getNome()                             { return nome.get(); }
+
+    public void setNome(String nome)                    { this.nome.set(nome); }
+
+    public StringProperty nomeProperty()                { return nome; }
+
+    // Getter setter and property: @cognome
+    public String getCognome()                          { return cognome.get(); }
+
+    public void setCognome(String cognome)              { this.cognome.set(cognome); }
+
+    public StringProperty cognomeProperty()             { return cognome; }
+
+    // Getter setter and property: @telefono
+    public String getTelefono()                         { return telefono.get(); }
+
+    public void setTelefono(String telefono)            { this.telefono.set(telefono); }
+
+    public StringProperty telefonoProperty()            { return telefono; }
+
+    // Getter setter and property: @puntiFedelta
+    public Integer getPuntiFedelta()                    { return puntiFedelta.get(); }
+
+    public void setPuntiFedelta(Integer puntiFedelta)   {
+        if (this.puntiFedelta == null)
+            this.puntiFedelta = new SimpleIntegerProperty();
+
+        this.puntiFedelta.set(puntiFedelta);
     }
 
-    public void setNome(String nome) {
-        this.nome.set(nome);
-    }
+    public IntegerProperty puntiFedeltaProperty()       { return puntiFedelta; }
 
-    public StringProperty nomeProperty() {
-        return nome;
-    }
-
-    public String getCognome() {
-        return cognome.get();
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome.set(cognome);
-    }
-
-    public StringProperty cognomeProperty() {
-        return cognome;
-    }
-
-    public String getTelefono() {
-        return telefono.get();
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono.set(telefono);
-    }
-
-    public StringProperty telefonoProperty() {
-        return telefono;
-    }
-
-    public Integer getpunti_fedelta() {
-        return punti_fedelta.get();
-    }
-
-    public void setpunti_fedelta(Integer punti_fedelta) {
-        this.punti_fedelta.set(punti_fedelta);
-    }
-
-    public IntegerProperty punti_fedeltaProperty() {
-        return punti_fedelta;
-    }
-
-
+    // toString() method
     public String toString(){
-        return nome.getValue() + ", " + cognome.getValue() + ", " + telefono.getValue() + ", " + punti_fedelta.getValue() + ", " + idCliente.getValue() + ")";
+        return "idCliente: " + idCliente.getValue() + "\nnome: " + nome.getValue() + "\ncognome: " + cognome.getValue() + "\ntelefono: " + telefono.getValue() + "\npunti: " + puntiFedelta.getValue() +"\n";
     }
 
 
     public static void main(String[] args) {
-
+        Cliente test = new Cliente("Mario", "Rossi", "----------", 123, 999);
+        System.out.println(test);
     }
 
 }
