@@ -30,13 +30,14 @@ public class CartaDAOMySQL implements DAO<Carta> {
     // Testing Class
     public static void main(String[] args) throws DAOException {
 
-        // boolean initialize = true;
         boolean initialize = false;
+        // boolean initialize = false;
 
         CartaDAOMySQL c = new CartaDAOMySQL();
 
         if (initialize){
-            c.initialize();
+            c.deleteAll();
+            //c.initialize();
         }
 
         // testing
@@ -101,12 +102,12 @@ public class CartaDAOMySQL implements DAO<Carta> {
         ArrayList<Carta> lista;
 
         if (a==null)
-            throw new DAOException("In select: called select with a 'null' instance of Cliente");
+            throw new DAOException("In select: called select with a 'null' instance of Carta");
 
         try{
 
             if (    a.getIdCarta()              == null ||
-                    a.getCliente_idCliente()            == null ||
+                    a.getCliente_idCliente()    == null ||
                     a.getMassimaleRimanente()   == null ||
                     a.getMassimaleRimanente()   == null ) {
                 throw new DAOException("In select: any field can be null");
@@ -205,7 +206,7 @@ public class CartaDAOMySQL implements DAO<Carta> {
     private void verifyObject(Carta a) throws DAOException {
         if (       a == null
                 || a.getIdCarta()             == null
-                || a.getCliente_idCliente()           == null
+                || a.getCliente_idCliente()   == null
                 || a.getMassimaleMensile()    == null
                 || a.getMassimaleRimanente()  == null )
     {

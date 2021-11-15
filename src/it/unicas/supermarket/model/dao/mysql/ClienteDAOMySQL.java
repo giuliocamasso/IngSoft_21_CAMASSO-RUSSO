@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static com.sun.javafx.application.PlatformImpl.exit;
-
 
 public class ClienteDAOMySQL implements DAO<Cliente> {
 
@@ -37,7 +35,8 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
         ClienteDAOMySQL c = new ClienteDAOMySQL();
 
         if (initialize){
-            c.initialize();
+            // c.deleteAll();
+            // c.initialize();
         }
 
         // testing
@@ -112,7 +111,6 @@ public class ClienteDAOMySQL implements DAO<Cliente> {
             sql += a.getCognome() + "%' and nome like '" + a.getNome();
             sql += "%' and telefono like '" + a.getTelefono() + "%' "
                     + "and punti_fedelta=" + a.getPuntiFedelta() + ")";
-
 
             printQuery(sql);
 
