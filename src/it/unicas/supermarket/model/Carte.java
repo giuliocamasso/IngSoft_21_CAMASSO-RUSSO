@@ -8,14 +8,14 @@ import java.util.Objects;
  * Model class for client cards.
  * @author GC-GR
  */
-public class Carta {
+public class Carte {
 
     private IntegerProperty idCarta;
     private IntegerProperty Cliente_idCliente;
     private FloatProperty massimaleMensile;
     private FloatProperty massimaleRimanente;
 
-    public Carta(Integer idCarta, Integer idCliente, Float massimaleMensile, Float massimaleRimanente ) {
+    public Carte(Integer idCarta, Integer idCliente, Float massimaleMensile, Float massimaleRimanente ) {
 
         if (idCarta != null){
             this.idCarta = new SimpleIntegerProperty(idCarta);
@@ -97,7 +97,7 @@ public class Carta {
 
 
     public static void main(String[] args) {
-        Carta test = new Carta(666, 999, 1000.0f, 666.999f);
+        Carte test = new Carte(666, 999, 1000.0f, 666.999f);
         System.out.println(test);
     }
 

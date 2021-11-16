@@ -1,5 +1,5 @@
 package it.unicas.supermarket.view;
-import it.unicas.supermarket.model.Cliente;
+import it.unicas.supermarket.model.Clienti;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,11 +11,11 @@ import javafx.util.Callback;
 
 public class Clienti_test_main_viewController {
     @FXML
-    private TableView<Cliente> clientiTableView;
+    private TableView<Clienti> clientiTableView;
     @FXML
-    private TableColumn<Cliente, String> nomeColumn;
+    private TableColumn<Clienti, String> nomeColumn;
     @FXML
-    private TableColumn<Cliente, String> cognomeColumn;
+    private TableColumn<Clienti, String> cognomeColumn;
 
     @FXML
     private Label nomeLabel;
@@ -44,8 +44,8 @@ public class Clienti_test_main_viewController {
     private void initialize() {
         // Initialize the Colleghi table with the two columns.
         nomeColumn.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Cliente, String>, ObservableValue<String>>() {
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Cliente, String> p) {
+                new Callback<TableColumn.CellDataFeatures<Clienti, String>, ObservableValue<String>>() {
+                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Clienti, String> p) {
                         // p.getValue() returns the Person instance for a particular TableView row
                         return p.getValue().nomeProperty();
                     }
@@ -78,7 +78,7 @@ public class Clienti_test_main_viewController {
      *
      * @param cliente the cliente or null
      */
-    private void showClientiDetails(Cliente cliente) {
+    private void showClientiDetails(Clienti cliente) {
         if (cliente != null) {
             // Fill the labels with info from the colleghi object.
             nomeLabel.setText(cliente.getNome());

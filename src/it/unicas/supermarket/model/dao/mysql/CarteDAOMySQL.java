@@ -1,6 +1,6 @@
 package it.unicas.supermarket.model.dao.mysql;
 
-import it.unicas.supermarket.model.Carta;
+import it.unicas.supermarket.model.Carte;
 import it.unicas.supermarket.model.dao.DAO;
 import it.unicas.supermarket.model.dao.DAOException;
 
@@ -12,17 +12,17 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
-public class CartaDAOMySQL implements DAO<Carta> {
+public class CarteDAOMySQL implements DAO<Carte> {
 
-    private static DAO<Carta> dao = null;
+    private static DAO<Carte> dao = null;
     private static Logger logger = null;
 
-    private CartaDAOMySQL() {}
+    private CarteDAOMySQL() {}
 
-    public static DAO<Carta> getInstance(){
+    public static DAO<Carte> getInstance(){
         if (dao == null){
-            dao = new CartaDAOMySQL();
-            logger = Logger.getLogger(CartaDAOMySQL.class.getName());
+            dao = new CarteDAOMySQL();
+            logger = Logger.getLogger(CarteDAOMySQL.class.getName());
         }
         return dao;
     }
@@ -33,7 +33,7 @@ public class CartaDAOMySQL implements DAO<Carta> {
         boolean initialize = false;
         // boolean initialize = false;
 
-        CartaDAOMySQL c = new CartaDAOMySQL();
+        CarteDAOMySQL c = new CarteDAOMySQL();
 
         if (initialize){
             c.deleteAll();
@@ -46,11 +46,11 @@ public class CartaDAOMySQL implements DAO<Carta> {
             c.deleteAll();
 
             // 1 - testing Insert
-            c.insert(new Carta(1, 1, 1000f, 100f));
+            c.insert(new Carte(1, 1, 1000f, 100f));
 
             // 2 - testing select all
             // NB. select(null) is deprecated, a new method(selectAll()) was created
-            List<Carta> list = c.selectAll();
+            List<Carte> list = c.selectAll();
 
             list.forEach(System.out::println);
 
@@ -63,11 +63,11 @@ public class CartaDAOMySQL implements DAO<Carta> {
 
             // 3.2 delete
             // add 2 tuples
-            c.insert(new Carta(1, 1, 1000f, 100f));
-            c.insert(new Carta(2, 2, 2000f, 200f));
+            c.insert(new Carte(1, 1, 1000f, 100f));
+            c.insert(new Carte(2, 2, 2000f, 200f));
 
             // could be improved... actually only removes tuple by idCarta
-            Carta toDelete = new Carta(2, null, null, null );
+            Carte toDelete = new Carte(2, null, null, null );
 
             c.delete(toDelete);
 
@@ -77,7 +77,7 @@ public class CartaDAOMySQL implements DAO<Carta> {
 
             // 3.3 update
             // insert a new tuple to update
-            Carta toUpdate = new Carta(3, 3, 3000f, 300f);
+            Carte toUpdate = new Carte(3, 3, 3000f, 300f);
             c.insert(toUpdate);
 
             // print the new tuple
@@ -85,9 +85,9 @@ public class CartaDAOMySQL implements DAO<Carta> {
             list.forEach(System.out::println);
             // call the update()
 
-            // NB. idCliente is a foreignKey for 'Carta', and cannot be updated
-            // Carta updated = new Carta(3, 30, 3333f, 333f);
-            Carta updated = new Carta(3, 3, 3333f, 333f);
+            // NB. idCliente is a foreignKey for 'Carte', and cannot be updated
+            // Carte updated = new Carte(3, 30, 3333f, 333f);
+            Carte updated = new Carte(3, 3, 3333f, 333f);
             c.update(updated);
 
             // shows the updated tuple (all db to catch errors)
@@ -97,12 +97,12 @@ public class CartaDAOMySQL implements DAO<Carta> {
     }
 
     @Override
-    public List<Carta> select(Carta a) throws DAOException {
+    public List<Carte> select(Carte a) throws DAOException {
 
-        ArrayList<Carta> lista;
+        ArrayList<Carte> lista;
 
         if (a==null)
-            throw new DAOException("In select: called select with a 'null' instance of Carta");
+            throw new DAOException("In select: called select with a 'null' instance of Carte");
 
         try{
 
@@ -133,7 +133,7 @@ public class CartaDAOMySQL implements DAO<Carta> {
 
     @Override
     // delete key-based
-    public void delete(Carta a) throws DAOException {
+    public void delete(Carte a) throws DAOException {
 
         if (a == null) {
             throw new DAOException("In delete: can't delete a null instance");
@@ -150,9 +150,9 @@ public class CartaDAOMySQL implements DAO<Carta> {
 
     }
 
-    public ArrayList<Carta> selectAll() {
+    public ArrayList<Carte> selectAll() {
 
-        ArrayList<Carta> list = new ArrayList<>();
+        ArrayList<Carte> list = new ArrayList<>();
 
         try {
             Statement statement = DAOMySQLSettings.getStatement();
@@ -193,17 +193,17 @@ public class CartaDAOMySQL implements DAO<Carta> {
             Float massimaleMensile = i*1000f;
             Float massimaleRimanente = i*100f;
 
-            insert(new Carta(id_carta, id_cliente, massimaleMensile, massimaleRimanente));
+            insert(new Carte(id_carta, id_cliente, massimaleMensile, massimaleRimanente));
 
         }
 
         // also shows the tuples
-        ArrayList<Carta> list =  selectAll();
+        ArrayList<Carte> list =  selectAll();
         list.forEach(System.out::println);
     }
 
     // NB. called by update()... could be modified
-    private void verifyObject(Carta a) throws DAOException {
+    private void verifyObject(Carte a) throws DAOException {
         if (       a == null
                 || a.getIdCarta()             == null
                 || a.getCliente_idCliente()   == null
@@ -227,7 +227,7 @@ public class CartaDAOMySQL implements DAO<Carta> {
     }
 
     @Override
-    public void insert(Carta a) throws DAOException {
+    public void insert(Carte a) throws DAOException {
 
         verifyObject(a);
 
@@ -245,7 +245,7 @@ public class CartaDAOMySQL implements DAO<Carta> {
 
     @Override
     // update key-based
-    public void update(Carta a) throws DAOException {
+    public void update(Carte a) throws DAOException {
 
         verifyObject(a);
 
@@ -271,14 +271,14 @@ public class CartaDAOMySQL implements DAO<Carta> {
         }
     }
 
-    private ArrayList<Carta> getQueryResult(Statement statement, String query) throws SQLException {
+    private ArrayList<Carte> getQueryResult(Statement statement, String query) throws SQLException {
 
-        ArrayList<Carta> list = new ArrayList<>();
+        ArrayList<Carte> list = new ArrayList<>();
 
         ResultSet rs = statement.executeQuery(query);
 
         while(rs.next()){
-            list.add(new Carta(
+            list.add(new Carte(
                     rs.getInt("idCarta"),
                     rs.getInt("Cliente_idCliente"),
                     rs.getFloat("massimaleMensile"),
