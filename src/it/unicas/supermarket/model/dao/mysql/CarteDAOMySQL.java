@@ -200,17 +200,6 @@ public class CarteDAOMySQL implements DAO<Carte> {
         list.forEach(System.out::println);
     }
 
-    // NB. called by update()... could be modified
-    private void verifyObject(Carte a) throws DAOException {
-        if (       a == null
-                || a.getIdCarta()             == null
-                || a.getCliente_idCliente()   == null
-                || a.getMassimaleMensile()    == null
-                || a.getMassimaleRimanente()  == null )
-    {
-            throw new DAOException("verifyObject: any field can be null");
-        }
-    }
 
     private void executeUpdate(String query) throws DAOException{
         try {

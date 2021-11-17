@@ -53,6 +53,8 @@ public class Clienti {
 
     }
 
+
+    // Getter setter and property: @idCliente
     public Integer getIdCliente() throws DAOException {
         if (idCliente != null){
            throw new DAOException("idCliente must be null");

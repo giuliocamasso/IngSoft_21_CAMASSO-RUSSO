@@ -1,5 +1,6 @@
 package it.unicas.supermarket.model;
 
+import it.unicas.supermarket.model.dao.DAOException;
 import javafx.beans.property.*;
 
 import java.util.Objects;
@@ -11,17 +12,19 @@ import java.util.Objects;
 public class Carte {
 
     private IntegerProperty idCarta;
-    private IntegerProperty Cliente_idCliente;
     private FloatProperty massimaleMensile;
     private FloatProperty massimaleRimanente;
+    private IntegerProperty idCliente;
+    private StringProperty pin;
+    private StringProperty codiceCarta;
 
-    public Carte(Integer idCarta, Integer idCliente, Float massimaleMensile, Float massimaleRimanente ) {
 
-        if (idCarta != null){
+    public Carte(Float massimaleMensile, Float massimaleRimanente, Integer idCliente, String pin, String codiceCarta, Integer idCarta) throws DAOException {
+
+        if (idCarta != null)
             this.idCarta = new SimpleIntegerProperty(idCarta);
-        } else {
+        else
             this.idCarta = null;
-        }
 
         if (massimaleMensile == null || massimaleMensile < 0f)
             throw new DAOException("massimaleMensile can't be null or negative");
@@ -50,12 +53,13 @@ public class Carte {
             this.codiceCarta = new SimpleStringProperty(codiceCarta);
     }
 
-    // getter and setter: @idCarta
-    public Integer getIdCarta(){
-        if (idCarta == null){
-            idCarta = new SimpleIntegerProperty(-1);
+
+    // Getter and setter: @idCarta
+    public Integer getIdCarta() throws DAOException{
+        if (idCarta != null){
+            throw new DAOException("idCarta must be null");
         }
-        return idCarta.get();
+        else return null;
     }
 
     public void setIdCarta(Integer idCarta) {
@@ -65,23 +69,11 @@ public class Carte {
         this.idCarta.set(idCarta);
     }
 
-    // getter and setter: @idCliente
-    public Integer getCliente_idCliente(){
-        if (Cliente_idCliente == null){
-            Cliente_idCliente = new SimpleIntegerProperty(-1);
-        }
-        return Cliente_idCliente.get();
-    }
+    public IntegerProperty idCartaProperty()                        { return idCarta; }
 
-    public void setCliente_idCliente(Integer cliente_idCliente) {
-        if (this.Cliente_idCliente == null){
-            this.Cliente_idCliente = new SimpleIntegerProperty();
-        }
-        this.Cliente_idCliente.set(cliente_idCliente);
-    }
 
     // Getter setter and property: @massimaleMensile
-    public Float getMassimaleMensile()                             { return massimaleMensile.get(); }
+    public Float getMassimaleMensile()                              { return massimaleMensile.get(); }
 
     public void setMassimaleMensile(Float massimaleMensile)   {
         if (this.massimaleMensile == null)
@@ -90,10 +82,11 @@ public class Carte {
         this.massimaleMensile.set(massimaleMensile);
     }
 
-    public FloatProperty massimaleMensileProperty()             { return massimaleMensile; }
+    public FloatProperty massimaleMensileProperty()                 { return massimaleMensile; }
+
 
     // Getter setter and property: @massimaleRimanente
-    public Float getMassimaleRimanente()                           { return massimaleRimanente.get(); }
+    public Float getMassimaleRimanente()                            { return massimaleRimanente.get(); }
 
     public void setMassimaleRimanente(Float massimaleRimanente){
         if (this.massimaleRimanente == null)
@@ -102,17 +95,65 @@ public class Carte {
         this.massimaleRimanente.set(massimaleRimanente);
     }
 
-    public FloatProperty massimaleRimanenteProperty()           { return massimaleRimanente; }
+    public FloatProperty massimaleRimanenteProperty()               { return massimaleRimanente; }
+
+
+    // Getter setter and property: @idCliente
+    public Integer getIdCliente() throws DAOException {
+        if (idCliente != null){
+            throw new DAOException("idCliente must be null");
+        }
+        else return null;
+    }
+
+    public void setIdCliente(Integer idCliente) {
+        if (this.idCliente == null){
+            this.idCliente = new SimpleIntegerProperty();
+        }
+        this.idCliente.set(idCliente);
+    }
+
+    public IntegerProperty idClienteProperty()                      { return idCliente; }
+
+
+    // Getter setter and property: @pin
+    public String getPin()                                          { return pin.get(); }
+
+    public void setPin(String pin)                                  { this.pin.set(pin); }
+
+    public StringProperty pinProperty()                             { return pin; }
+
+
+
+    // Getter setter and property: @codiceCarta
+    public String getCodiceCarta()                                  { return codiceCarta.get(); }
+
+    public void setCodiceCarta(String codiceCarta)                  { this.codiceCarta.set(codiceCarta); }
+
+    public StringProperty codiceCartaProperty()                     { return codiceCarta; }
 
 
     // toString() method
     public String toString(){
-        return "idCarta: " + Cliente_idCliente.getValue() + "\nidCliente: " + Cliente_idCliente.getValue() + "\nrimanente/mensile: " + massimaleRimanente.getValue() + " / " + massimaleMensile.getValue() +"\n";
+        String id;
+
+        if (idCartaProperty()==null)
+            id = "null";
+
+        else id = idCarta.getValue().toString();
+        return "id: " + id + " - cliente: " + idCliente.getValue() + "\nmassimale: " +
+                massimaleRimanente.getValue() + " / " + massimaleMensile.getValue() + "\n" +
+                "codice: " + codiceCarta.getValue() + " - pin: " + pin.getValue() + "\n";
     }
 
 
     public static void main(String[] args) {
-        Carte test = new Carte(666, 999, 1000.0f, 666.999f);
+        Carte test = null;
+        try {
+            test = new Carte(1551f, 154f, 123, "12345", "1234-1234-1234-1234", null );
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
         System.out.println(test);
     }
 
