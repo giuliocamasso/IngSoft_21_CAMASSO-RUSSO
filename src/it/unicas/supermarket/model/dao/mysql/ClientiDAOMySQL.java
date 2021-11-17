@@ -37,7 +37,7 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         ClientiDAOMySQL c = new ClientiDAOMySQL();
 
         if (initialize){
-            //c.deleteAll();
+            c.deleteAll();
             c.initialize();
         }
 
@@ -206,15 +206,13 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
     @Override
     public void initialize() throws DAOException {
 
-        deleteAll();
-
         for (int i = 0; i<10; i++){
             String nome_i = "nome_" + i;
             String cognome_i = "cognome_" + i;
-            String telefono_i = "telefono_"+i;
+            String telefono_i = "telefono_" + i;
             Integer puntiFedelta = i;
-            String iban_i = "IBAN______________________"+i;
-            String codiceCliente_i = "codice_"+i;
+            String iban_i = "IBAN______________________" + i;
+            String codiceCliente_i = "codice_" + i;
 
             insert(new Clienti(nome_i, cognome_i, telefono_i, puntiFedelta, iban_i, codiceCliente_i, null));
 

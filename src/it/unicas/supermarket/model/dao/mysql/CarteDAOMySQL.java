@@ -50,38 +50,37 @@ public class CarteDAOMySQL implements DAO<Carte> {
             List<Clienti> clientiList = ClientiDAOMySQL.getInstance().selectAll();
             clientiList.forEach(System.out::println);
 
-            clientiList = ClientiDAOMySQL.getInstance().select(new Clienti("","","codice_1"));
-            //clientiList.forEach(System.out::println);
-            System.out.println(clientiList.get(0));
-            Integer idCliente = clientiList.get(0).getIdCliente();
+            Integer idCliente = c.getIdClienteFromCode("codice_1");
+            c.insert(new Carte(100f, 10f, idCliente, "11111", "1111-1111-1111-1111", null));
 
-            // OK ORA FUNZIONA: continuare da qua_______________________________________________________________________
-
-            c.insert(new Carte(100f, 10f,idCliente,"11111", "1111-1111-1111-1111", null));
-            // c.insert(new Carte(136,"2222-2222-2222-2222"));
+            idCliente = c.getIdClienteFromCode("codice_2");
+            c.insert(new Carte(idCliente,"2222-2222-2222-2222"));
 
             // 2 - testing select all
-            // NB. select(null) is deprecated, a new method(selectAll()) was created
             List<Carte> list = c.selectAll();
-
             list.forEach(System.out::println);
 
             // 3 - testing delete
             // 3.1 delete all
             c.deleteAll();
             list = c.selectAll();
-
             list.forEach(System.out::println);
 
             // 3.2 delete
-            // add 2 tuples
-            c.insert(new Carte(100f, 10f,137,"11111", "1111-1111-1111-1111", null));
-            c.insert(new Carte(138, "2222-2222-2222-2222"));
-            c.insert(new Carte(139, "3333-3333-3333-3333"));
+            idCliente = c.getIdClienteFromCode("codice_1");
+            c.insert(new Carte(100f, 10f, idCliente,"11111", "1111-1111-1111-1111", null));
 
-            // could be improved... actually only removes tuple by idCarta
-            Carte toDelete = new Carte(null, null,2,null, "2222-2222-2222-2222", null);
-            Carte toDelete2 = new Carte(1, "1111-1111-1111-1111");
+            idCliente = c.getIdClienteFromCode("codice_2");
+            c.insert(new Carte(idCliente, "2222-2222-2222-2222"));
+
+            idCliente = c.getIdClienteFromCode("codice_3");
+            c.insert(new Carte(idCliente, "3333-3333-3333-3333"));
+
+            idCliente = c.getIdClienteFromCode("codice_1");
+            Carte toDelete = new Carte(0f, 0f, idCliente,"11111", "1111-1111-1111-1111", null);
+
+            idCliente = c.getIdClienteFromCode("codice_2");
+            Carte toDelete2 = new Carte(idCliente, "2222-2222-2222-2222");
 
             c.delete(toDelete);
             c.delete(toDelete2);
@@ -91,20 +90,24 @@ public class CarteDAOMySQL implements DAO<Carte> {
             list.forEach(System.out::println);
 
             // 3.3 update
-            // insert a new tuple to update
-            Carte toUpdate = new Carte(300f, 30f,3,"33333", "3333-3333-3333-3333", null);
-            Carte toUpdate2 = new Carte(4, "4444-4444-4444-4444");
+            idCliente = c.getIdClienteFromCode("codice_4");
+            Carte toUpdate = new Carte(400f, 40f, idCliente,"44444", "4444-4444-4444-4444", null);
+
+            idCliente = c.getIdClienteFromCode("codice_5");
+            Carte toUpdate2 = new Carte(idCliente, "5555-5555-5555-5555");
+
             c.insert(toUpdate);
             c.insert(toUpdate2);
 
-            // print the new tuple
             list = c.selectAll();
             list.forEach(System.out::println);
-            // call the update()
 
-            // Carte updated = new Carte(3, 30, 3333f, 333f);
-            Carte updated = new Carte(600f, 60f,3,null, "3333-3333-3333-3333", null);
-            Carte updated2 = new Carte(10f, 1f, 4, "PIN-4", "4444-4444-4444-4444", null);
+            idCliente = c.getIdClienteFromCode("codice_4");
+            Carte updated = new Carte(400f, 40f,idCliente,"44444", "4444-4444-4444-4444", null);
+
+            idCliente = c.getIdClienteFromCode("codice_5");
+            Carte updated2 = new Carte(500f, 50f,idCliente,"55555", "5555-5555-5555-5555", null);
+
             c.update(updated);
             c.update(updated2);
 
@@ -203,13 +206,12 @@ public class CarteDAOMySQL implements DAO<Carte> {
     @Override
     public void initialize() throws DAOException {
 
-        deleteAll();
-
-        for (int i = 1; i<=10; i++){
+        for (int i = 0; i<10; i++){
             Integer id_carta = i;
             Float massimaleMensile = i*1000f;
             Float massimaleRimanente = i*100f;
-            Integer id_cliente = i;
+            String codiceCliente_i = "codice_" + i;
+            Integer id_cliente = getIdClienteFromCode(codiceCliente_i);
             String pin = "pin_" + i;
             String seed4_i = ""+ i + i + i + i;
 
@@ -263,11 +265,11 @@ public class CarteDAOMySQL implements DAO<Carte> {
         if ( a == null)
             throw new DAOException("cannot update with a null instance of carte");
 
-        String query = "UPDATE carta SET massimaleMensile = "
+        String query = "UPDATE carte SET massimaleMensile = "
                 + a.getMassimaleMensile() + ", massimaleRimanente = "
                 + a.getMassimaleRimanente();
 
-        query = query + " WHERE codiceCarta = " + a.getCodiceCarta() + ";";
+        query = query + " WHERE codiceCarta = '" + a.getCodiceCarta() + "';";
 
         printQuery(query);
 
@@ -309,16 +311,11 @@ public class CarteDAOMySQL implements DAO<Carte> {
         return list;
     }
 
-    public Integer getIdClienteFromCode(String codiceCliente){
-        try {
-            Clienti target = new Clienti("", "", codiceCliente);
-            List<Clienti> cliente = ClientiDAOMySQL.getInstance().select(target);
-            System.out.println(cliente.get(0));
 
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
+    public Integer getIdClienteFromCode(String codiceCliente) throws DAOException {
 
-        return 1;
+        List<Clienti> clientiList = ClientiDAOMySQL.getInstance().select(new Clienti("","", codiceCliente));
+
+        return clientiList.get(0).getIdCliente();
     }
 }

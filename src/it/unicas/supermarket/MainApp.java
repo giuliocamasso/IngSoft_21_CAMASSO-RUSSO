@@ -1,4 +1,9 @@
 package it.unicas.supermarket;
+import it.unicas.supermarket.model.Carte;
+import it.unicas.supermarket.model.Clienti;
+import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.model.dao.mysql.CarteDAOMySQL;
+import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
 import it.unicas.supermarket.view.Clienti_test_main_viewController;
 import it.unicas.supermarket.view.RootLayoutController;
 import javafx.application.Application;
@@ -13,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 public class MainApp extends Application {
@@ -25,11 +31,40 @@ public class MainApp extends Application {
      * Constructor
      */
     public MainApp() {
+
+        try {
+            initializeDB();
+        }
+        catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initializeDB() throws DAOException {
+
+        System.out.println("---initializeDB()---\n");
+
+        System.out.println("Resetting DB: ...");
+
+        CarteDAOMySQL.getInstance().deleteAll();
+        ClientiDAOMySQL.getInstance().deleteAll();
+
+        ClientiDAOMySQL.getInstance().initialize();
+        CarteDAOMySQL.getInstance().initialize();
+
+        System.out.println("DB initialization: SUCCESS\nPrinting tables");
+        List<Clienti> listaClienti = ClientiDAOMySQL.getInstance().selectAll();
+        List<Carte> listaCarte = CarteDAOMySQL.getInstance().selectAll();
+
+        listaClienti.forEach(System.out::println);
+        listaCarte.forEach(System.out::println);
+
     }
 
 
     @Override
     public void start(Stage primaryStage) {
+        System.out.println("Starting...");
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Market app");
 
@@ -37,17 +72,13 @@ public class MainApp extends Application {
         this.primaryStage.getIcons().add(new Image("file:resources/images/shopping-cart.png"));
 
         initRootLayout();
+
         // Clienti_test_mainpage();
-        System.out.println("I'm here bro");
         this.primaryStage.show();
 
     }
 
 
-    /**
-     * Returns the main stage.
-     * @return
-     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -98,7 +129,7 @@ public class MainApp extends Application {
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeOne){
+        if (result.isPresent() && result.get() == buttonTypeOne){
             System.exit(0);
         }
 
