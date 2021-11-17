@@ -32,13 +32,13 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
     // Testing Class
     public static void main(String[] args) throws DAOException {
 
-        boolean initialize = false;
+        boolean initialize = true;
 
         ClientiDAOMySQL c = new ClientiDAOMySQL();
 
         if (initialize){
-            c.deleteAll();
-            //c.initialize();
+            //c.deleteAll();
+            c.initialize();
         }
 
         // testing
@@ -47,7 +47,8 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
             c.deleteAll();
 
             // 1 - testing Insert
-            c.insert(new Clienti("Giulio", "Camasso", ghostPhone('a'), 1234, ghostIBAN('a'), ghostClientCode('a'), null));
+            c.insert(new Clienti("Giulio", "Camasso", ghostPhone("01"), 1234, ghostIBAN("01"), ghostClientCode("01"), null));
+            c.insert(new Clienti("Nome", "Cognome", ghostClientCode("02")));
 
             // 2 - testing select all
             List<Clienti> list = c.selectAll();
@@ -63,13 +64,15 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
             // 3.2 delete
             // add 2 tuples
-            c.insert(new Clienti("Nome1", "Cognome1", ghostPhone('1'), 111, ghostIBAN('1'), ghostClientCode('1'), null));
-            c.insert(new Clienti("Nome2", "Cognome2", ghostPhone('2'), 222, ghostIBAN('2'), ghostClientCode('2'), null));
-            c.insert(new Clienti("Nome3", "Cognome3", ghostPhone('3'), 333, ghostIBAN('3'), ghostClientCode('3'), null));
+            c.insert(new Clienti("Nome1", "Cognome1", ghostPhone("01"), 111, ghostIBAN("01"), ghostClientCode("01"), null));
+            c.insert(new Clienti("Nome2", "Cognome2", ghostClientCode("02")));
 
             // could be improved... actually only removes tuple by codiceCliente
-            Clienti toDelete = new Clienti("", "", ghostPhone(' '), 0, ghostIBAN(' '), ghostClientCode('1'), null);
+            Clienti toDelete = new Clienti("", "", ghostPhone("01"), 0, ghostIBAN("01"), ghostClientCode("01"), null);
+            Clienti toDelete2 = new Clienti("", "", ghostClientCode("02"));
+
             c.delete(toDelete);
+            c.delete(toDelete2);
 
             // show remaining tuples
             list = c.selectAll();
@@ -77,14 +80,25 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
             // 3.3 update
             // insert a new tuple to update
-            Clienti toUpdate = new Clienti("", "", ghostPhone('4'), 4, ghostIBAN('4'), ghostClientCode('4'), null);
+            Clienti toUpdate = new Clienti("", "", ghostPhone("04"), 4, ghostIBAN("04"), ghostClientCode("04"), null);
+            Clienti toUpdate2 = new Clienti("", "", ghostClientCode("05"));
+
             c.insert(toUpdate);
+            c.insert(toUpdate2);
+
             // print the new tuple
             list = c.select(toUpdate);
             list.forEach(System.out::println);
+
+            list = c.select(toUpdate2);
+            list.forEach(System.out::println);
+
             // call the update()
-            Clienti updated = new Clienti("NEW", "NEW", ghostPhone('N'), 55119451, ghostIBAN('N'), ghostClientCode('4'), null);
+            Clienti updated = new Clienti("NEW", "NEW", ghostPhone("N1"), 55119451, ghostIBAN("N1"), ghostClientCode("N1"), null);
+            Clienti updated2 = new Clienti("NEW2", "NEW2", ghostClientCode("N2"));
+
             c.update(updated);
+            c.update(updated2);
 
             // shows the updated tuple (all db to catch errors)
             list = c.selectAll();
@@ -101,22 +115,27 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
             throw new DAOException("In select: called select with a 'null' instance of Clienti");
 
         try{
+            /*
             if (a.getIdCliente()!= null)
                 throw new DAOException("In select: idCliente must be null");
-            else if (a.getNome()     == null || a.getCognome()       == null ||
+            */
+
+            //else if (a.getNome()     == null || a.getCognome()       == null ||
+            if (     a.getNome()     == null || a.getCognome()       == null ||
                      a.getTelefono() == null || a.getPuntiFedelta()  == null ||
                      a.getIban()     == null || a.getCodiceCliente() == null ) {
                 throw new DAOException("In select: any field can be null");
             }
 
             Statement st = DAOMySQLSettings.getStatement();
-
+            /*
             String sql = "select * from clienti where (cognome like '";
             sql += a.getCognome() + "%' and nome like '" + a.getNome()
                 +   "%' and telefono like '" + a.getTelefono() + "%' "
                 +   "and iban like '" + a.getIban() + "%' "
                 +   "and codiceCliente like '" + a.getCodiceCliente() + "%')";
-
+            */
+            String sql = "select * from clienti where (codiceCliente= '"+ a.getCodiceCliente() + "')";
             printQuery(sql);
 
             lista = getQueryResult(st, sql);
@@ -189,13 +208,13 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
         deleteAll();
 
-        for (int i = 1; i<=10; i++){
+        for (int i = 0; i<10; i++){
             String nome_i = "nome_" + i;
             String cognome_i = "cognome_" + i;
-            String telefono_i = "telefono_" + i;
+            String telefono_i = "telefono_"+i;
             Integer puntiFedelta = i;
-            String iban_i = "IBAN____" + i;
-            String codiceCliente_i = "codice_" + i;
+            String iban_i = "IBAN______________________"+i;
+            String codiceCliente_i = "codice_"+i;
 
             insert(new Clienti(nome_i, cognome_i, telefono_i, puntiFedelta, iban_i, codiceCliente_i, null));
 

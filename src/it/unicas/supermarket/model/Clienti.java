@@ -12,12 +12,36 @@ import java.util.Objects;
 public class Clienti {
 
     private IntegerProperty idCliente;
-    private StringProperty nome;                // varchar(45)
+    private StringProperty nome;
     private StringProperty cognome;
     private StringProperty telefono;
     private IntegerProperty puntiFedelta;
     private StringProperty iban;
     private StringProperty codiceCliente;
+
+    public Clienti(String nome, String cognome, String codiceCliente) throws DAOException {
+
+        this.idCliente = null;
+
+        if (nome == null || nome.length() > 45)
+            throw new DAOException("Invalid nome");
+        this.nome = new SimpleStringProperty(nome);
+
+        if (cognome == null || cognome.length() > 45)
+            throw new DAOException("Invalid cognome");
+        this.cognome = new SimpleStringProperty(cognome);
+
+        this.telefono = new SimpleStringProperty(ghostPhone("  "));
+
+        this.puntiFedelta = new SimpleIntegerProperty(0);
+
+        this.iban = new SimpleStringProperty(ghostIBAN("  "));
+
+        if (codiceCliente == null || codiceCliente.length() != 8)
+            throw new DAOException("Invalid codiceCliente");
+        this.codiceCliente = new SimpleStringProperty(codiceCliente);
+
+    }
 
     public Clienti(String nome, String cognome, String telefono, Integer puntiFedelta, String iban, String codiceCliente, Integer idCliente) throws DAOException {
 
@@ -56,10 +80,10 @@ public class Clienti {
 
     // Getter setter and property: @idCliente
     public Integer getIdCliente() throws DAOException {
-        if (idCliente != null){
-           throw new DAOException("idCliente must be null");
+        if (idCliente == null){
+           throw new DAOException("idCliente is null");
         }
-        else return null;
+        else return idCliente.getValue();
     }
 
     public void setIdCliente(Integer idCliente) {
@@ -140,31 +164,29 @@ public class Clienti {
     }
 
     // 10 spaces long
-    public static String ghostPhone(char seed){
-        return seed + "         ";
-    }
+    public static String ghostPhone(String seed2)              { return "telefono" + seed2; }
 
     // 27 spaces long
-    public static String ghostIBAN(char seed){
-        return seed + "                          ";
-    }
+    public static String ghostIBAN(String seed2)               { return "IBAN_____________________" + seed2; }
 
     // 8 spaces long
-    public static String ghostClientCode(char seed){
-        return seed + "       ";
-    }
+    public static String ghostClientCode(String seed2)         { return "codice" + seed2; }
 
     public static void main(String[] args) {
-        Clienti test = null;
+
         try {
-            test = new Clienti("Mario", "Rossi", ghostPhone('a'), 123, ghostIBAN('a'), ghostClientCode('a'), null);
+            // costruttore 1
+            Clienti test1 = new Clienti("Mario", "Rossi", ghostPhone("01"), 123, ghostIBAN("01"), ghostClientCode("01"), null);
+            // Costruttore 2
+            Clienti test2 = new Clienti("Nome", "Cognome", "CLIENTE0");
+
+            System.out.println(test1);
+            System.out.println(test2);
+
         } catch (DAOException e) {
             e.printStackTrace();
         }
-        System.out.println(test);
     }
-
-
 
 }
 

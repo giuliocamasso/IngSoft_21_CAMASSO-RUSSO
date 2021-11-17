@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-
 public class CarteDAOMySQL implements DAO<Carte> {
 
     private static DAO<Carte> dao = null;
@@ -28,17 +27,18 @@ public class CarteDAOMySQL implements DAO<Carte> {
         return dao;
     }
 
+
     // Testing Class
     public static void main(String[] args) throws DAOException {
 
-        boolean initialize = true;
+        boolean initialize = false;
         // boolean initialize = false;
 
         CarteDAOMySQL c = new CarteDAOMySQL();
 
         if (initialize){
             c.deleteAll();
-            //c.initialize();
+            c.initialize();
         }
 
         // testing
@@ -47,7 +47,18 @@ public class CarteDAOMySQL implements DAO<Carte> {
             c.deleteAll();
 
             // 1 - testing Insert
-            c.insert(new Carte(100f, 10f,1,"11111", "1111-1111-1111-1111", null));
+            List<Clienti> clientiList = ClientiDAOMySQL.getInstance().selectAll();
+            clientiList.forEach(System.out::println);
+
+            clientiList = ClientiDAOMySQL.getInstance().select(new Clienti("","","codice_1"));
+            //clientiList.forEach(System.out::println);
+            System.out.println(clientiList.get(0));
+            Integer idCliente = clientiList.get(0).getIdCliente();
+
+            // OK ORA FUNZIONA: continuare da qua_______________________________________________________________________
+
+            c.insert(new Carte(100f, 10f,idCliente,"11111", "1111-1111-1111-1111", null));
+            // c.insert(new Carte(136,"2222-2222-2222-2222"));
 
             // 2 - testing select all
             // NB. select(null) is deprecated, a new method(selectAll()) was created
@@ -64,13 +75,16 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
             // 3.2 delete
             // add 2 tuples
-            c.insert(new Carte(100f, 10f,1,"11111", "1111-1111-1111-1111", null));
-            c.insert(new Carte(200f, 20f,1,"22222", "2222-2222-2222-2222", null));
+            c.insert(new Carte(100f, 10f,137,"11111", "1111-1111-1111-1111", null));
+            c.insert(new Carte(138, "2222-2222-2222-2222"));
+            c.insert(new Carte(139, "3333-3333-3333-3333"));
 
             // could be improved... actually only removes tuple by idCarta
-            Carte toDelete = new Carte(null, null,null,null, "2222-2222-2222-2222", null);
+            Carte toDelete = new Carte(null, null,2,null, "2222-2222-2222-2222", null);
+            Carte toDelete2 = new Carte(1, "1111-1111-1111-1111");
 
             c.delete(toDelete);
+            c.delete(toDelete2);
 
             // show remaining tuples
             list = c.selectAll();
@@ -79,16 +93,20 @@ public class CarteDAOMySQL implements DAO<Carte> {
             // 3.3 update
             // insert a new tuple to update
             Carte toUpdate = new Carte(300f, 30f,3,"33333", "3333-3333-3333-3333", null);
+            Carte toUpdate2 = new Carte(4, "4444-4444-4444-4444");
             c.insert(toUpdate);
+            c.insert(toUpdate2);
 
             // print the new tuple
-            list = c.select(toUpdate);
+            list = c.selectAll();
             list.forEach(System.out::println);
             // call the update()
 
             // Carte updated = new Carte(3, 30, 3333f, 333f);
-            Carte updated = new Carte(600f, 60f,null,null, "3333-3333-3333-3333", null);
+            Carte updated = new Carte(600f, 60f,3,null, "3333-3333-3333-3333", null);
+            Carte updated2 = new Carte(10f, 1f, 4, "PIN-4", "4444-4444-4444-4444", null);
             c.update(updated);
+            c.update(updated2);
 
             // shows the updated tuple (all db to catch errors)
             list = c.selectAll();
@@ -96,6 +114,7 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
         } // end of testing
     }
+
 
     @Override
     public List<Carte> select(Carte a) throws DAOException {
@@ -126,6 +145,7 @@ public class CarteDAOMySQL implements DAO<Carte> {
         return lista;
     }
 
+
     @Override
     // delete key-based
     public void delete(Carte a) throws DAOException {
@@ -144,6 +164,7 @@ public class CarteDAOMySQL implements DAO<Carte> {
         executeUpdate(query);
 
     }
+
 
     public ArrayList<Carte> selectAll() {
 
@@ -168,6 +189,7 @@ public class CarteDAOMySQL implements DAO<Carte> {
         return list;
     }
 
+
     public void deleteAll() throws DAOException {
 
         String query = "delete from carte";
@@ -176,6 +198,7 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
         executeUpdate(query);
     }
+
 
     @Override
     public void initialize() throws DAOException {
@@ -188,10 +211,9 @@ public class CarteDAOMySQL implements DAO<Carte> {
             Float massimaleRimanente = i*100f;
             Integer id_cliente = i;
             String pin = "pin_" + i;
-            String codiceCarta_i = "code-code-code-cod" + i;
+            String seed4_i = ""+ i + i + i + i;
 
-
-            insert(new Carte( massimaleMensile, massimaleRimanente, id_cliente, pin, codiceCarta_i, id_carta));
+            insert(new Carte( massimaleMensile, massimaleRimanente, id_cliente, pin, Carte.ghostCardCode(seed4_i), id_carta));
 
         }
 
@@ -213,6 +235,7 @@ public class CarteDAOMySQL implements DAO<Carte> {
         }
     }
 
+
     @Override
     public void insert(Carte a) throws DAOException {
 
@@ -231,6 +254,7 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
         executeUpdate(query);
     }
+
 
     @Override
     // update key-based
@@ -251,7 +275,8 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
     }
 
-     private void printQuery(String query){
+
+    private void printQuery(String query){
         try{
             logger.info("SQL: " + query);
         }
@@ -282,5 +307,18 @@ public class CarteDAOMySQL implements DAO<Carte> {
         }
 
         return list;
+    }
+
+    public Integer getIdClienteFromCode(String codiceCliente){
+        try {
+            Clienti target = new Clienti("", "", codiceCliente);
+            List<Clienti> cliente = ClientiDAOMySQL.getInstance().select(target);
+            System.out.println(cliente.get(0));
+
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+
+        return 1;
     }
 }

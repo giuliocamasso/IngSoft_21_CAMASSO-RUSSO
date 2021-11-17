@@ -3,8 +3,6 @@ package it.unicas.supermarket.model;
 import it.unicas.supermarket.model.dao.DAOException;
 import javafx.beans.property.*;
 
-import java.util.Objects;
-
 /**
  * Model class for client cards.
  * @author GC-GR
@@ -17,6 +15,25 @@ public class Carte {
     private IntegerProperty idCliente;
     private StringProperty pin;
     private StringProperty codiceCarta;
+
+
+    public Carte(Integer idCliente, String codiceCarta) throws DAOException {
+
+        this.idCarta = null;
+
+        this.massimaleMensile = new SimpleFloatProperty(0f);
+
+        this.massimaleRimanente = new SimpleFloatProperty(0f);
+
+        if (idCliente == null)
+            throw new DAOException("idCliente can't be null to create a new card");
+        else
+            this.idCliente = new SimpleIntegerProperty(idCliente);
+
+        this.pin = new SimpleStringProperty("00000");
+
+        this.codiceCarta = new SimpleStringProperty(codiceCarta);
+    }
 
 
     public Carte(Float massimaleMensile, Float massimaleRimanente, Integer idCliente, String pin, String codiceCarta, Integer idCarta) throws DAOException {
@@ -100,10 +117,10 @@ public class Carte {
 
     // Getter setter and property: @idCliente
     public Integer getIdCliente() throws DAOException {
-        if (idCliente != null){
-            throw new DAOException("idCliente must be null");
+        if (idCliente == null){
+            throw new DAOException("idCliente is null");
         }
-        else return null;
+        else return idCliente.get();
     }
 
     public void setIdCliente(Integer idCliente) {
@@ -122,7 +139,6 @@ public class Carte {
     public void setPin(String pin)                                  { this.pin.set(pin); }
 
     public StringProperty pinProperty()                             { return pin; }
-
 
 
     // Getter setter and property: @codiceCarta
@@ -146,15 +162,24 @@ public class Carte {
                 "codice: " + codiceCarta.getValue() + " - pin: " + pin.getValue() + "\n";
     }
 
+    // 8 spaces long
+    public static String ghostCardCode(String seed4)         { return "****-****-****-" + seed4; }
 
     public static void main(String[] args) {
-        Carte test = null;
+
         try {
-            test = new Carte(1551f, 154f, 123, "12345", "1234-1234-1234-1234", null );
-        } catch (DAOException e) {
+            // costruttore 1
+            Carte test1 = new Carte(1551f, 154f, 123, "12345", ghostCardCode("1111"), null );
+            // costruttore 2
+            Carte test2 = new Carte(12,ghostCardCode("2222"));
+
+            System.out.println(test1);
+            System.out.println(test2);
+        }
+        catch (DAOException e) {
             e.printStackTrace();
         }
-        System.out.println(test);
+
     }
 
 }
