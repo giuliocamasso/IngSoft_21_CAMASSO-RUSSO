@@ -23,16 +23,31 @@ public class Carte {
             this.idCarta = null;
         }
 
-        if (idCliente != null){
-            this.Cliente_idCliente = new SimpleIntegerProperty(idCliente);
-        } else {
-            this.Cliente_idCliente = null;
-        }
+        if (massimaleMensile == null || massimaleMensile < 0f)
+            throw new DAOException("massimaleMensile can't be null or negative");
+        this.massimaleMensile = new SimpleFloatProperty(massimaleMensile);
 
-        this.massimaleMensile = new SimpleFloatProperty(Objects.requireNonNullElse(massimaleMensile, 0f));
+        if (massimaleRimanente == null || massimaleRimanente < 0f || massimaleRimanente > massimaleMensile)
+            throw new DAOException("massimaleRimanente can't be null, negative or greater than massimaleMensile");
+        this.massimaleRimanente = new SimpleFloatProperty(massimaleRimanente);
 
-        this.massimaleRimanente = new SimpleFloatProperty(Objects.requireNonNullElse(massimaleRimanente, 0f));
+        if (idCliente == null)
+            throw new DAOException("idCliente can't be null to create a new card");
+        else
+            this.idCliente = new SimpleIntegerProperty(idCliente);
 
+        if ( pin==null || pin.length() != 5 )
+            throw new DAOException("pin must be non null and long 5 characters");
+        else
+            this.pin = new SimpleStringProperty(pin);
+
+        char delim = '-';
+        if ( codiceCarta == null )
+            throw new DAOException("codiceCarta can't be null");
+        else if( codiceCarta.length() != 19 || codiceCarta.charAt(4) != delim || codiceCarta.charAt(9) != delim || codiceCarta.charAt(14) != delim)
+            throw new DAOException("Invalid card code while creating a new card");
+        else
+            this.codiceCarta = new SimpleStringProperty(codiceCarta);
     }
 
     // getter and setter: @idCarta

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static it.unicas.supermarket.model.Clienti.*;
+
 
 public class ClientiDAOMySQL implements DAO<Clienti> {
 
@@ -35,8 +37,8 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         ClientiDAOMySQL c = new ClientiDAOMySQL();
 
         if (initialize){
-            //c.deleteAll();
-            c.initialize();
+            c.deleteAll();
+            //c.initialize();
         }
 
         // testing
@@ -45,7 +47,7 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
             c.deleteAll();
 
             // 1 - testing Insert
-            c.insert(new Clienti("Giulio", "Camasso", "", 1234, "ibanGiulio", "codiceCliente1", null));
+            c.insert(new Clienti("Giulio", "Camasso", ghostPhone('a'), 1234, ghostIBAN('a'), ghostClientCode('a'), null));
 
             // 2 - testing select all
             List<Clienti> list = c.selectAll();
@@ -61,12 +63,12 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
             // 3.2 delete
             // add 2 tuples
-            c.insert(new Clienti("Nome1", "Cognome1", "telefono1", 111, "Iban1", "codiceCliente1", null));
-            c.insert(new Clienti("Nome2", "Cognome2", "telefono2", 222, "Iban2", "codiceCliente2", null));
-            c.insert(new Clienti("Nome3", "Cognome3", "telefono3", 333, "Iban3", "codiceCliente3", null));
+            c.insert(new Clienti("Nome1", "Cognome1", ghostPhone('1'), 111, ghostIBAN('1'), ghostClientCode('1'), null));
+            c.insert(new Clienti("Nome2", "Cognome2", ghostPhone('2'), 222, ghostIBAN('2'), ghostClientCode('2'), null));
+            c.insert(new Clienti("Nome3", "Cognome3", ghostPhone('3'), 333, ghostIBAN('3'), ghostClientCode('3'), null));
 
-            // could be improved... actually only removes tuple by idCliente
-            Clienti toDelete = new Clienti(null, null, null, null, null, "codiceCliente3", null);
+            // could be improved... actually only removes tuple by codiceCliente
+            Clienti toDelete = new Clienti("", "", ghostPhone(' '), 0, ghostIBAN(' '), ghostClientCode('1'), null);
             c.delete(toDelete);
 
             // show remaining tuples
@@ -75,14 +77,13 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
             // 3.3 update
             // insert a new tuple to update
-            Clienti toUpdate = new Clienti("", "", "", -444, "", "codiceCliente4", null);
+            Clienti toUpdate = new Clienti("", "", ghostPhone('4'), 4, ghostIBAN('4'), ghostClientCode('4'), null);
             c.insert(toUpdate);
             // print the new tuple
             list = c.select(toUpdate);
             list.forEach(System.out::println);
             // call the update()
-            Clienti updated = new Clienti("Nome4", "Cognome4", "", 444, "", "codiceCliente4", null);
-            Clienti updated5 = new Clienti("Nome4", "Cognome4", "", 444, "", "codiceCliente5", null);
+            Clienti updated = new Clienti("NEW", "NEW", ghostPhone('N'), 55119451, ghostIBAN('N'), ghostClientCode('4'), null);
             c.update(updated);
 
             // shows the updated tuple (all db to catch errors)
@@ -205,24 +206,6 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         list.forEach(System.out::println);
     }
 
-    // NB. called by update()... could be modified
-    private void verifyObject(Clienti a) throws DAOException {
-        if (       a == null
-                || a.getCognome()       == null
-                || a.getNome()          == null
-                || a.getTelefono()      == null
-                || a.getPuntiFedelta()  == null
-                || a.getIban()          == null
-                || a.getCodiceCliente() == null
-        )
-        {
-            throw new DAOException("verifyObject: any field can be null");
-        }
-        if (a.getIdCliente()!=null){
-            throw new DAOException("verifyObject: idCliente must be null");
-        }
-    }
-
     private void executeUpdate(String query) throws DAOException{
         try {
             Statement st = DAOMySQLSettings.getStatement();
@@ -238,7 +221,8 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
     @Override
     public void insert(Clienti a) throws DAOException {
 
-        verifyObject(a);
+        if (a == null)
+            throw new DAOException("Can't insert a null instance of clienti");
 
         //NB. idCliente = NULL (autoincrement in MySql)
         String query = "INSERT INTO clienti (idCliente, nome, cognome, telefono, puntiFedelta, iban, codiceCliente) VALUES (NULL, '" +
@@ -258,7 +242,8 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
     // update key-based
     public void update(Clienti a) throws DAOException {
 
-        verifyObject(a);
+        if (a == null)
+            throw new DAOException("Can't update with a null instance of clienti");
 
         String query = "UPDATE clienti SET nome = '"
                 + a.getNome() + "', cognome = '"
