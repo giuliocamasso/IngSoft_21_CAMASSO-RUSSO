@@ -312,4 +312,13 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
         return list;
     }
+
+    public static Integer getIdClienteFromCode(String codiceCliente) throws DAOException {
+
+        List<Clienti> clientiList = ClientiDAOMySQL.getInstance().select(new Clienti("","", codiceCliente));
+
+        return clientiList.get(0).getIdCliente();
+    }
+
+
 }
