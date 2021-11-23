@@ -149,6 +149,7 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         return lista;
     }
 
+
     @Override
     // delete codiceCliente-based
     public void delete(Clienti a) throws DAOException {
@@ -159,9 +160,6 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         if (a.getCodiceCliente() == null){
             throw new DAOException("In delete: codiceCliente cannot be null");
         }
-        if (a.getIdCliente() != null) {
-            throw new DAOException("In delete: idCliente must be null");
-        }
 
         String query = "DELETE FROM clienti WHERE codiceCliente='" + a.getCodiceCliente() + "';";
 
@@ -170,6 +168,7 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         executeUpdate(query);
 
     }
+
 
     public ArrayList<Clienti> selectAll() {
 
@@ -194,6 +193,7 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         return list;
     }
 
+
     public void deleteAll() throws DAOException {
 
         String query = "delete from clienti";
@@ -202,6 +202,7 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
         executeUpdate(query);
     }
+
 
     @Override
     public void initialize() throws DAOException {
@@ -223,6 +224,7 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         list.forEach(System.out::println);
     }
 
+
     private void executeUpdate(String query) throws DAOException{
         try {
             Statement st = DAOMySQLSettings.getStatement();
@@ -231,9 +233,10 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
             DAOMySQLSettings.closeStatement(st);
 
         } catch (SQLException e) {
-            throw new DAOException("In insert(): " + e.getMessage());
+            throw new DAOException("executeUpdate(): DAOException " + e.getMessage());
         }
     }
+
 
     @Override
     public void insert(Clienti a) throws DAOException {
@@ -255,20 +258,23 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         executeUpdate(query);
     }
 
+
     @Override
-    // update key-based
+    // update codiceCliente-based
     public void update(Clienti a) throws DAOException {
 
         if (a == null)
             throw new DAOException("Can't update with a null instance of clienti");
+
+        if (a.getCodiceCliente() == null)
+            throw new DAOException("Can't update with a null codiceCliente");
 
         String query = "UPDATE clienti SET nome = '"
                 + a.getNome() + "', cognome = '"
                 + a.getCognome() + "',  telefono = '"
                 + a.getTelefono() + "',  puntiFedelta = "
                 + a.getPuntiFedelta() + ", iban = '"
-                + a.getIban() + "', codiceCliente = '"
-                + a.getCodiceCliente() + "'";
+                + a.getIban() + "'";
 
         query = query + " WHERE codiceCliente = '" + a.getCodiceCliente() + "';";
 
@@ -278,6 +284,7 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
     }
 
+
      private void printQuery(String query){
         try{
             logger.info("SQL: " + query);
@@ -286,6 +293,7 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
             System.out.println("SQL: " + query);
         }
     }
+
 
     private ArrayList<Clienti> getQueryResult(Statement statement, String query) throws SQLException {
 
@@ -312,6 +320,7 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
         return list;
     }
+
 
     public static Integer getIdClienteFromCode(String codiceCliente) throws DAOException {
 

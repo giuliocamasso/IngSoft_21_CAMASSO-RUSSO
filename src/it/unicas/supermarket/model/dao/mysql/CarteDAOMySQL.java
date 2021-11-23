@@ -267,6 +267,9 @@ public class CarteDAOMySQL implements DAO<Carte> {
         if ( a == null)
             throw new DAOException("cannot update with a null instance of carte");
 
+        if ( a.getCodiceCarta() == null)
+            throw new DAOException("cannot update with a null codiceCarta");
+
         String query = "UPDATE carte SET massimaleMensile = "
                 + a.getMassimaleMensile() + ", massimaleRimanente = "
                 + a.getMassimaleRimanente();

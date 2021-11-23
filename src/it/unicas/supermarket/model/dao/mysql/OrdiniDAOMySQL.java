@@ -25,7 +25,7 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
     public static DAO<Ordini> getInstance(){
         if (dao == null){
             dao = new OrdiniDAOMySQL();
-            logger = Logger.getLogger(CarteDAOMySQL.class.getName());
+            logger = Logger.getLogger(OrdiniDAOMySQL.class.getName());
         }
         return dao;
     }
@@ -228,7 +228,7 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
             DAOMySQLSettings.closeStatement(st);
 
         } catch (SQLException e) {
-            throw new DAOException("In insert(): " + e.getMessage());
+            throw new DAOException("executeUpdate(): DAOException " + e.getMessage());
         }
     }
 

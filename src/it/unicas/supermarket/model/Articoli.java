@@ -17,6 +17,38 @@ public class Articoli {
     private IntegerProperty scorteMagazzino;
     private StringProperty barcode;
 
+
+    public Articoli(String nome, String barcode) throws DAOException {
+
+        this.idArticolo = null;
+        this.prezzo = new SimpleFloatProperty(-1f);
+        this.scorteMagazzino = new SimpleIntegerProperty(-1);
+
+        if (nome == null || barcode == null)
+            throw new DAOException("nome or barcode can't be null");
+
+        if (barcode.length() != 13){
+            if (barcode.equals("")){
+                if (nome.length() <= 45) {
+                    this.nome = new SimpleStringProperty(nome);
+                    this.barcode = new SimpleStringProperty("             ");
+                }
+                else
+                    throw new DAOException("nome can't be longer than 45 chars");
+            }
+            else{
+                throw new DAOException("barcode must be long 13 chars");
+            }
+        }
+        else if (nome.equals("")){
+            this.barcode = new SimpleStringProperty(barcode);
+            this.nome = new SimpleStringProperty("");
+        }
+        else
+            throw new DAOException("barcode or nome must be ''");
+    }
+
+
     public Articoli(String nome, Float prezzo, Integer scorteMagazzino, String barcode, Integer idArticolo) throws DAOException {
 
         if (idArticolo != null)
@@ -36,12 +68,10 @@ public class Articoli {
             throw new DAOException("scorteMagazzino can't be null or negative");
         this.scorteMagazzino = new SimpleIntegerProperty(scorteMagazzino);
 
-        if (barcode == null || barcode.length() > 13)
+        if (barcode == null || barcode.length() != 13)
             throw new DAOException("Invalid barcode");
         this.barcode = new SimpleStringProperty(barcode);
     }
-
-    // Implementare altri costruttori per i test
 
 
     // Getter setter and property: @idArticolo
