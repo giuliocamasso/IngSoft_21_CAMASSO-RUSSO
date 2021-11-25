@@ -15,7 +15,7 @@ import javafx.scene.control.Alert.AlertType;
  *
  * @author GC-GR
  */
-public class RootLayoutController {
+public class LoginLayoutController {
 
     // Reference to the main application
     private MainApp mainApp;
@@ -42,4 +42,11 @@ public class RootLayoutController {
         mainApp.handleExit();
 
     }
+
+    @FXML
+    private void handleValidate() {
+        mainApp.handleValidate();
+
+    }
+
 }

@@ -1,0 +1,25 @@
+modifiche DB:
+- aggiungere descrizione e REPARTI alla tabella articoli
+
+REPARTI:
+
+Macelleria
+Pescheria
+Ortofrutta
+Prodotti alimentari
+Forno e pasticceria
+Bevande
+Benessere
+Gelati e surgelati
+Prodotti per la casa
+Animali
+Bambini
+Cartoleria
+Snack
+
+Interfacce:
+1) login (inserimento della carta)
+2) mappa reparti + carrello a lato
+3) riepilogo carrello e invio pagamento
+4) conferma pagamento (aggiorno massimale, aggiorno punti e invio dell'ordine) -> scontrino
+5) scontrino + possiblità nuova spesa

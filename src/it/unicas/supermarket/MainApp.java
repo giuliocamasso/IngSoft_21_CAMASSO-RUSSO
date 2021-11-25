@@ -8,7 +8,8 @@ import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.CarteDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.OrdiniDAOMySQL;
-import it.unicas.supermarket.view.RootLayoutController;
+import it.unicas.supermarket.view.LoginLayoutController;
+import it.unicas.supermarket.view.MarketSectionLayoutController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,16 +27,21 @@ import java.util.Optional;
 public class MainApp extends Application {
 
     private Stage primaryStage;
-    // private BorderPane rootLayout;
-    private AnchorPane rootLayout;
+
+    private AnchorPane loginLayout;
+
+    private AnchorPane marketSectionLayout;
 
     /**
      * Constructor
      */
     public MainApp() {
 
+        boolean initializeDB = false;
+
         try {
-            initializeDB();
+            if (initializeDB)
+                initializeDB();
         }
         catch (DAOException e) {
             e.printStackTrace();
@@ -86,14 +92,17 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         System.out.println("Starting...");
+
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Market app");
+        this.primaryStage.setResizable(false);
 
         // Set the application icon.
         this.primaryStage.getIcons().add(new Image("file:resources/images/shopping-cart.png"));
 
-        initRootLayout();
+        initLoginLayout();
 
         // Clienti_test_mainpage();
         this.primaryStage.show();
@@ -110,19 +119,18 @@ public class MainApp extends Application {
     }
 
 
-    public void initRootLayout() {
+    public void initLoginLayout() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class
-                    .getResource("view/RootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/LoginLayout.fxml"));
 
-            // rootLayout = (BorderPane)loader.load();
-            rootLayout = loader.load();
+            loginLayout = loader.load();
 
             // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
+            Scene loginScene = new Scene(loginLayout);
+            primaryStage.setScene(loginScene);
+
 
             primaryStage.setOnCloseRequest(event -> {
                 event.consume();
@@ -131,7 +139,7 @@ public class MainApp extends Application {
 
 
             // Give the controller access to the main app.
-            RootLayoutController controller = loader.getController();
+            LoginLayoutController controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {
@@ -157,4 +165,40 @@ public class MainApp extends Application {
 
     }
 
+
+    public void handleValidate() {
+        System.out.println("Validating card...");
+        initMarketSectionLayout();
+
+    }
+
+
+    public void initMarketSectionLayout() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/MarketSectionLayout.fxml"));
+
+            marketSectionLayout = loader.load();
+
+            // Show the scene containing the root layout.
+            Scene marketSectionScene = new Scene(marketSectionLayout);
+            primaryStage.setScene(marketSectionScene);
+
+
+            primaryStage.setOnCloseRequest(event -> {
+                event.consume();
+                handleExit();
+            });
+
+
+            // Give the controller access to the main app.
+            MarketSectionLayoutController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 }
+}
+
