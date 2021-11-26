@@ -90,7 +90,7 @@
 	
 		<fx:application id="fxApplication"
 			name="AddressApp"
-			mainClass="it.unicas.supermarket.MainApp"
+			mainClass="it.unicas.supermarket.Main"
 			version="1.0"
 		/>
 	
