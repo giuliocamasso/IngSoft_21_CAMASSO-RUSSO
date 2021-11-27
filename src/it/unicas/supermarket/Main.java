@@ -67,7 +67,6 @@ public class Main extends Application {
         try {
             if (initializeDB)
                 initializeDB();
-
             App.getInstance().launch(primaryStage);
         }
         catch (DAOException e){

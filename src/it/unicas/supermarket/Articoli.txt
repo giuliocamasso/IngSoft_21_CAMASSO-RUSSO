@@ -1,0 +1,5 @@
+Articolo_01 - 14.50 - 111 - BARCODE___111
+Articolo_02 - 10.99 - 222 - BARCODE___222
+Articolo_03 - 0.99 - 333 - BARCODE___333
+Articolo_04 - 99.99 - 444 - BARCODE___444
+Articolo_05 - 27.00 - 555 - BARCODE___555

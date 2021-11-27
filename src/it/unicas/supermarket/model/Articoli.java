@@ -64,7 +64,7 @@ public class Articoli {
             throw new DAOException("prezzo can't be null or negative");
         this.prezzo = new SimpleFloatProperty(prezzo);
 
-        if (scorteMagazzino == null || scorteMagazzino < 0f)
+        if (scorteMagazzino == null || scorteMagazzino < 0)
             throw new DAOException("scorteMagazzino can't be null or negative");
         this.scorteMagazzino = new SimpleIntegerProperty(scorteMagazzino);
 
