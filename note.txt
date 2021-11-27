@@ -3,19 +3,19 @@ modifiche DB:
 
 REPARTI:
 
-Macelleria
-Pescheria
-Ortofrutta
-Prodotti alimentari
-Forno e pasticceria
-Bevande
-Benessere
-Gelati e surgelati
-Prodotti per la casa
-Animali
-Bambini
-Cartoleria
-Snack
+01 Macelleria
+02 Pescheria
+03 Ortofrutta
+04 Prodotti alimentari
+05 Forno e pasticceria
+06 Bevande
+07 Benessere
+08 Gelati e surgelati
+09 Prodotti per la casa
+10 Animali
+11 Bambini
+12 Cartoleria
+13 Snack
 
 Interfacce:
 1) login (inserimento della carta)

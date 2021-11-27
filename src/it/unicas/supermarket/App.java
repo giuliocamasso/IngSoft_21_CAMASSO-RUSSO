@@ -12,6 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -19,7 +20,7 @@ import java.util.Optional;
 public class App {
     private static App app = null;
 
-    private Stage primaryStage;
+    private Stage mainStage;
 
     private AnchorPane loginLayout;
     private AnchorPane marketSectionLayout;
@@ -35,22 +36,33 @@ public class App {
     public void launch(Stage primaryStage){
         System.out.println("Starting...");
 
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Market app");
-        this.primaryStage.setResizable(false);
+        mainStage = primaryStage;
+        mainStage.setTitle("Market app");
+
+        // mainStage.setWidth(1280.0);
+        // mainStage.setHeight(720.0);
+        mainStage.setResizable(false);
+
+        // mainStage.initStyle(StageStyle.DECORATED);       // default
+        // mainStage.initStyle(StageStyle.UNDECORATED);     // only content, without OS-style windows
+        // mainStage.initStyle(StageStyle.TRANSPARENT);     // useless//
+        // mainStage.initStyle(StageStyle.UTILITY);         // orribile
+
+        mainStage.initStyle(StageStyle.UNIFIED);         // solves the 'white border' glitch
+        // ("A unified Stage is like a decorated stage, except it has no border between the decoration area and the main content area."
 
         // Set the application icon.
-        this.primaryStage.getIcons().add(new Image("file:resources/images/shopping-cart.png"));
+        mainStage.getIcons().add(new Image("file:resources/images/shopping-cart.png"));
 
         initLoginLayout();
 
-        // Clienti_test_mainpage();
-        this.primaryStage.show();
+        // mainStage.setFullScreen(true);
+        mainStage.show();
 
     }
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
+    public Stage getMainStage() {
+        return mainStage;
     }
 
     public void initLoginLayout() {
@@ -63,10 +75,10 @@ public class App {
 
             // Show the scene containing the root layout.
             Scene loginScene = new Scene(loginLayout);
-            primaryStage.setScene(loginScene);
+            mainStage.setScene(loginScene);
 
 
-            primaryStage.setOnCloseRequest(event -> {
+            mainStage.setOnCloseRequest(event -> {
                 event.consume();
                 handleExit();
             });
@@ -113,10 +125,10 @@ public class App {
 
             // Show the scene containing the root layout.
             Scene marketSectionScene = new Scene(marketSectionLayout);
-            primaryStage.setScene(marketSectionScene);
+            mainStage.setScene(marketSectionScene);
 
 
-            primaryStage.setOnCloseRequest(event -> {
+            mainStage.setOnCloseRequest(event -> {
                 event.consume();
                 handleExit();
             });
@@ -140,10 +152,10 @@ public class App {
 
             // Show the scene containing the root layout.
             Scene orderSummaryScene = new Scene(orderSummaryLayout);
-            primaryStage.setScene(orderSummaryScene);
+            mainStage.setScene(orderSummaryScene);
 
 
-            primaryStage.setOnCloseRequest(event -> {
+            mainStage.setOnCloseRequest(event -> {
                 event.consume();
                 handleExit();
             });
