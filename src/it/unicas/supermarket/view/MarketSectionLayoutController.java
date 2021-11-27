@@ -1,6 +1,5 @@
 package it.unicas.supermarket.view;
 import it.unicas.supermarket.App;
-import it.unicas.supermarket.Main;
 import javafx.fxml.FXML;
 
 public class MarketSectionLayoutController {

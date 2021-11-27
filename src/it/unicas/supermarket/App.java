@@ -3,6 +3,7 @@ package it.unicas.supermarket;
 import it.unicas.supermarket.view.LoginLayoutController;
 import it.unicas.supermarket.view.MarketSectionLayoutController;
 import it.unicas.supermarket.view.OrderSummaryLayoutController;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -97,13 +98,10 @@ public class App {
 
     }
 
-
     public void handleValidate() {
         System.out.println("Validating card...");
         initMarketSectionLayout();
-
     }
-
 
     public void initMarketSectionLayout() {
         try {
@@ -122,7 +120,6 @@ public class App {
                 event.consume();
                 handleExit();
             });
-
 
             // Give the controller access to the main app.
             MarketSectionLayoutController controller = loader.getController();
@@ -150,7 +147,6 @@ public class App {
                 event.consume();
                 handleExit();
             });
-
 
             // Give the controller access to the main app.
             OrderSummaryLayoutController controller = loader.getController();

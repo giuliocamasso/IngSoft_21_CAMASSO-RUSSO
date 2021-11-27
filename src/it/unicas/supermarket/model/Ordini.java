@@ -64,7 +64,7 @@ public class Ordini {
         if ( codiceOrdine == null )
             throw new DAOException("codiceOrdine can't be null");
         else if( codiceOrdine.length() != 10 )
-            throw new DAOException("Invalid order code while creating a new card");
+            throw new DAOException("Invalid order code while creating a new ordine");
         else
             this.codiceOrdine = new SimpleStringProperty(codiceOrdine);
 

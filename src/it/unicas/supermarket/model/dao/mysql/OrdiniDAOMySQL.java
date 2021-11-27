@@ -203,11 +203,8 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
             Integer id_cliente = getIdClienteFromCode(codiceCliente_i);
 
             String data = ""+i+i+"-"+i+i+"-"+i+i+i+i+" "+i+i+":"+i+i;
-
             String codiceOrdine_i = "codice___" + i;
-
             Float importoTotale = i*1000f;
-
             String pin = "pin_" + i;
 
             insert(new Ordini(id_cliente, data, codiceOrdine_i, importoTotale, null));
