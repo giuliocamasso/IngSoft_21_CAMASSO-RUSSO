@@ -14,14 +14,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.view.LoginLayoutController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.view.LoginLayoutController">
    <children>
-      <ImageView fitHeight="753.0" fitWidth="1338.0" layoutY="-12.0" smooth="false">
+      <ImageView fitHeight="720.0" fitWidth="1280.0" smooth="false">
          <image>
             <Image url="@../../../../../resources/backgrounds/loginBG.png" />
          </image>
       </ImageView>
-      <Pane layoutX="309.0" layoutY="171.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="720.0" styleClass="LoginPane" stylesheets="@market.css">
+      <Pane layoutX="280.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="720.0" styleClass="LoginPane" stylesheets="@market.css">
          <children>
             <GridPane alignment="CENTER" layoutX="110.0" layoutY="35.0" prefHeight="231.0" prefWidth="501.0" stylesheets="@market.css">
               <columnConstraints>

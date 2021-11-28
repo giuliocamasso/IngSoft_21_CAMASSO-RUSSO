@@ -39,17 +39,18 @@ public class App {
         mainStage = primaryStage;
         mainStage.setTitle("Market app");
 
-        // mainStage.setWidth(1280.0);
-        // mainStage.setHeight(720.0);
-        mainStage.setResizable(false);
-
         // mainStage.initStyle(StageStyle.DECORATED);       // default
         // mainStage.initStyle(StageStyle.UNDECORATED);     // only content, without OS-style windows
         // mainStage.initStyle(StageStyle.TRANSPARENT);     // useless//
         // mainStage.initStyle(StageStyle.UTILITY);         // orribile
+        // mainStage.initStyle(StageStyle.UNIFIED);         // solves the 'white border' glitch
 
-        mainStage.initStyle(StageStyle.UNIFIED);         // solves the 'white border' glitch
         // ("A unified Stage is like a decorated stage, except it has no border between the decoration area and the main content area."
+        mainStage.initStyle(StageStyle.UNIFIED);
+
+        // mainStage.setWidth(1280.0);
+        // mainStage.setHeight(720.0);
+        mainStage.setResizable(false);
 
         // Set the application icon.
         mainStage.getIcons().add(new Image("file:resources/images/shopping-cart.png"));
