@@ -29,5 +29,4 @@ public class LoginLayoutController {
         App.getInstance().handleValidate();
 
     }
-
 }

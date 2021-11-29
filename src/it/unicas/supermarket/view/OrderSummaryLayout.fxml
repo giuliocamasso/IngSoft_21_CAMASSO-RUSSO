@@ -65,7 +65,7 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <Button layoutX="203.0" layoutY="632.0" mnemonicParsing="false" text="Paga ora" />
+      <Button layoutX="203.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleShowPayment" text="Paga ora" />
       <Label layoutX="742.0" layoutY="630.0" text="Totale:">
          <font>
             <Font size="26.0" />
@@ -86,6 +86,6 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="55.0" layoutY="630.0" mnemonicParsing="false" text="Torna ai reparti" />
+      <Button layoutX="55.0" layoutY="630.0" mnemonicParsing="false" onAction="#handleMarket" text="Torna ai reparti" />
    </children>
 </AnchorPane>
