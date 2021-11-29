@@ -1,5 +1,9 @@
 .LoginPane{
-    -fx-background-color: rgba(44, 44, 44, 0.93);
+    -fx-background-color: rgba(31, 30, 30, 0.945);
+    -fx-background-radius: 20, 20, 20, 20;
+    -fx-border-radius: 20, 20, 20, 20;
+    -fx-border-with: 2;
+    -fx-border-color: rgb(255, 255, 255);
 }
 
 .ButtonDarkBlue {
