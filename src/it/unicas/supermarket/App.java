@@ -4,6 +4,8 @@ import it.unicas.supermarket.view.LoginLayoutController;
 import it.unicas.supermarket.view.MarketSectionLayoutController;
 import it.unicas.supermarket.view.OrderSummaryLayoutController;
 
+import it.unicas.supermarket.view.ReceiptController;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -11,6 +13,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -50,6 +53,7 @@ public class App {
 
         // mainStage.setWidth(1280.0);
         // mainStage.setHeight(720.0);
+
         mainStage.setResizable(false);
 
         // Set the application icon.
@@ -163,6 +167,34 @@ public class App {
 
             // Give the controller access to the main app.
             OrderSummaryLayoutController controller = loader.getController();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Opens a dialog to show the receipt
+     */
+    public void showReceipt() {
+        try {
+            // Load the fxml file and create a new stage for the popup.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource("view/Receipt.fxml"));
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Receipt");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(mainStage);
+
+            dialogStage.setScene(new Scene(loader.load()));
+
+            // Set the Colleghis into the controller.
+            ReceiptController controller = loader.getController();
+
+            // Set the dialog icon.
+            // dialogStage.getIcons().add(new Image("file:resources/images/calendar.png"));
+
+            dialogStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
