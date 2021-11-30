@@ -1,8 +1,9 @@
 package it.unicas.supermarket.controller;
 
-import it.unicas.indian.src.main.Main;
-import it.unicas.indian.src.main.MyListener;
-import it.unicas.indian.src.model.Fruit;
+import it.unicas.supermarket.IndianListener;
+import it.unicas.supermarket.MainSample;
+import it.unicas.supermarket.model.Fruit;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -21,18 +22,18 @@ public class ItemController {
 
     @FXML
     private void click(MouseEvent mouseEvent) {
-        myListener.onClickListener(fruit);
+        indianListener.onClickListener(fruit);
     }
 
     private Fruit fruit;
-    private MyListener myListener;
+    private IndianListener indianListener;
 
-    public void setData(Fruit fruit, MyListener myListener) {
+    public void setData(Fruit fruit, IndianListener myListener) {
         this.fruit = fruit;
-        this.myListener = myListener;
+        this.indianListener = myListener;
         nameLabel.setText(fruit.getName());
-        priceLable.setText(Main.CURRENCY + fruit.getPrice());
-        Image image = new Image(getClass().getResourceAsStream(fruit.getImgSrc()));
+        priceLable.setText(MainSample.CURRENCY + fruit.getPrice());
+        Image image = new Image("file:"+fruit.getImgSrc());
         img.setImage(image);
     }
 }

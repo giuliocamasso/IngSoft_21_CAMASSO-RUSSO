@@ -73,6 +73,7 @@ public class App {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
+            System.out.println(Main.class.getResource("view/LoginLayout.fxml"));
             loader.setLocation(Main.class.getResource("view/LoginLayout.fxml"));
 
             loginLayout = loader.load();

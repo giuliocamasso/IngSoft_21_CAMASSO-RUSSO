@@ -1,4 +1,4 @@
-package it.unicas.indian.src.model;
+package it.unicas.supermarket.model;
 
 public class Fruit {
     private String name;
