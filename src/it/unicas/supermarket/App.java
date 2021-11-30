@@ -1,11 +1,10 @@
 package it.unicas.supermarket;
 
-import it.unicas.supermarket.view.LoginLayoutController;
-import it.unicas.supermarket.view.MarketSectionLayoutController;
-import it.unicas.supermarket.view.OrderSummaryLayoutController;
+import it.unicas.supermarket.controller.LoginLayoutController;
+import it.unicas.supermarket.controller.MarketSectionLayoutController;
+import it.unicas.supermarket.controller.OrderSummaryLayoutController;
 
-import it.unicas.supermarket.view.ReceiptController;
-import javafx.fxml.FXML;
+import it.unicas.supermarket.controller.ReceiptController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;

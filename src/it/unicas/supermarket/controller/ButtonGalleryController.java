@@ -1,4 +1,4 @@
-package it.unicas.supermarket.view;
+package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.Main;
 import javafx.fxml.FXML;

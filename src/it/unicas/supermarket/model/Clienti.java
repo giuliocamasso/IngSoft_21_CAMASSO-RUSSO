@@ -79,14 +79,14 @@ public class Clienti {
 
 
     // Getter setter and property: @idCliente
-    public Integer getIdCliente() throws DAOException {
+    public Integer getIdCliente() throws DAOException       {
         if (idCliente == null){
            throw new DAOException("idCliente is null");
         }
         else return idCliente.getValue();
     }
 
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(Integer idCliente)             {
         if (this.idCliente == null){
             this.idCliente = new SimpleIntegerProperty();
         }
