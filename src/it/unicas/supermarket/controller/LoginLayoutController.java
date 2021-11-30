@@ -25,7 +25,7 @@ public class LoginLayoutController {
     }
 
     @FXML
-    private void handleValidate() {
+    private void handleConfirm() {
         App.getInstance().handleValidate();
 
     }

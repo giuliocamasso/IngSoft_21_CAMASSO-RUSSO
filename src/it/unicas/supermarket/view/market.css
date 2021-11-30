@@ -1,8 +1,9 @@
 .LoginPane{
-    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-color: rgba(14, 14, 14, 0.96);
     -fx-background-radius: 30, 30, 30, 30;
-    -fx-border-radius: 20, 20, 20, 20;
-    -fx-border-with: 2;
+    -fx-border-radius: 30, 30, 30, 30;
+    -fx-border-with: 15;
+    -fx-border-color: rgb(240, 109, 139);
 }
 .radius{
     -fx-border-radius: 20, 20, 20, 20;
@@ -12,13 +13,17 @@
     -fx-background-color: #fff;
 }
 
+.paneBG{
+    -fx-background-color: rgba(14, 14, 14, 0.94);
+}
+
 .transparent{
     -fx-background-color: rgba(0, 0, 0, 0);
 }
 
 .input{
     -fx-border-width: 0 0 1 0;
-    -fx-border-color: rgb(0, 0, 0);
+    -fx-border-color: rgb(240, 109, 139);
 }
 
 .ButtonDarkBlue {

@@ -15,14 +15,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.LoginLayoutController">
    <children>
-      <ImageView fitHeight="854.0" fitWidth="1280.0" layoutY="-132.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="1298.0" fitWidth="1298.0" layoutY="-229.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../resources/backgrounds/BGColor.jpg" />
+            <Image url="@../../../../../resources/backgrounds/BGWhite.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="265.0" layoutY="195.0" prefHeight="330.0" prefWidth="750.0" styleClass="LoginPane" stylesheets="@market.css">
+      <AnchorPane layoutX="265.0" layoutY="195.0" prefHeight="330.0" prefWidth="800.0" styleClass="LoginPane" stylesheets="@market.css">
          <children>
-            <HBox layoutX="260.0" layoutY="247.0" prefHeight="480.0" prefWidth="829.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox layoutX="-77.0" layoutY="-364.0" prefHeight="694.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-77.0" AnchorPane.topAnchor="0.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="480.0" prefWidth="420.0">
                      <children>
@@ -39,19 +39,22 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="460.0" prefWidth="291.0">
+                  <VBox alignment="CENTER" prefHeight="328.0" prefWidth="327.0">
                      <children>
                         <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="286.0" stylesheets="@market.css">
                            <children>
-                              <Label prefHeight="30.0" prefWidth="140.0" text="Codice Carta">
+                              <Label prefHeight="30.0" prefWidth="140.0" text="Codice Carta" textFill="WHITE">
                                  <font>
                                     <Font name="Verdana" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField alignment="CENTER" prefHeight="30.0" prefWidth="140.0" promptText="XXXX-XXXX-XXXX-XXXX" style="-fx-background-color: fff;" styleClass="RedBG" stylesheets="@market.css">
+                              <TextField alignment="CENTER" prefHeight="30.0" prefWidth="170.0" promptText="XXXX-XXXX-XXXX-XXXX" style="-fx-background-color: rgba(0, 0, 0, 0);" stylesheets="@market.css">
                                  <padding>
                                     <Insets right="10.0" />
                                  </padding>
+                                 <font>
+                                    <Font name="Verdana" size="12.0" />
+                                 </font>
                               </TextField>
                            </children>
                            <opaqueInsets>
@@ -67,12 +70,12 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="286.0" stylesheets="@market.css">
                            <children>
-                              <Label prefHeight="30.0" prefWidth="140.0" text="PIN">
+                              <Label prefHeight="30.0" prefWidth="140.0" text="PIN" textFill="WHITE">
                                  <font>
                                     <Font name="Verdana" size="18.0" />
                                  </font>
                               </Label>
-                              <PasswordField alignment="CENTER" prefHeight="30.0" prefWidth="140.0" promptText="*****" style="-fx-background-color: fff;" styleClass="whiteBG" stylesheets="@market.css">
+                              <PasswordField alignment="CENTER" prefHeight="30.0" prefWidth="170.0" promptText="*****" style="-fx-background-color: rgba(0, 0, 0, 0);" stylesheets="@market.css">
                                  <font>
                                     <Font name="Verdana" size="12.0" />
                                  </font>
@@ -89,7 +92,7 @@
                               <String fx:value="transparent" />
                            </styleClass>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="323.0" stylesheets="@market.css">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="81.0" prefWidth="286.0" stylesheets="@market.css">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -97,17 +100,28 @@
                               <Insets left="10.0" />
                            </padding>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="323.0" stylesheets="@market.css">
+                        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="323.0" spacing="40.0" stylesheets="@market.css">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                            <padding>
-                              <Insets left="10.0" />
+                              <Insets left="10.0" right="10.0" />
                            </padding>
                            <children>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Confirm" />
-                              <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Eject" />
+                              <Button id="glass" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="30.0" prefWidth="90.0" stylesheets="@buttons.css" text="Confirm">
+                                 <font>
+                                    <Font name="Verdana" size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button id="glass" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleExit" prefHeight="30.0" prefWidth="90.0" stylesheets="@buttons.css" text="Eject">
+                                 <font>
+                                    <Font name="Verdana" size="11.0" />
+                                 </font>
+                              </Button>
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </HBox>
                      </children>
                      <opaqueInsets>
@@ -117,7 +131,7 @@
                         <Insets />
                      </HBox.margin>
                      <padding>
-                        <Insets right="5.0" />
+                        <Insets left="10.0" right="10.0" />
                      </padding>
                   </VBox>
                </children>
