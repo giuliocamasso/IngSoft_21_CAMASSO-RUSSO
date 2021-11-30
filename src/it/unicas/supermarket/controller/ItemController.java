@@ -1,14 +1,13 @@
-package it.unicas.indian.src.Controller;
+package it.unicas.supermarket.controller;
 
-import javafx.event.ActionEvent;
+import it.unicas.indian.src.main.Main;
+import it.unicas.indian.src.main.MyListener;
+import it.unicas.indian.src.model.Fruit;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import it.unicas.indian.src.main.Main;
-import it.unicas.indian.src.main.MyListener;
-import it.unicas.indian.src.model.Fruit;
 
 public class ItemController {
     @FXML

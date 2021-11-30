@@ -1,5 +1,8 @@
-package it.unicas.indian.src.Controller;
+package it.unicas.supermarket.controller;
 
+import it.unicas.indian.src.main.Main;
+import it.unicas.indian.src.main.MyListener;
+import it.unicas.indian.src.model.Fruit;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,9 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import it.unicas.indian.src.main.Main;
-import it.unicas.indian.src.main.MyListener;
-import it.unicas.indian.src.model.Fruit;
 
 import java.io.IOException;
 import java.net.URL;
