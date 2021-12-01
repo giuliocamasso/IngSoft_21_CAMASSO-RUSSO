@@ -64,7 +64,7 @@
                               <Insets left="10.0" />
                            </padding>
                            <styleClass>
-                              <String fx:value="input" />
+                              <String fx:value="peachUnderline" />
                               <String fx:value="transparent" />
                            </styleClass>
                         </HBox>
@@ -88,7 +88,7 @@
                               <Insets left="10.0" />
                            </padding>
                            <styleClass>
-                              <String fx:value="input" />
+                              <String fx:value="peachUnderline" />
                               <String fx:value="transparent" />
                            </styleClass>
                         </HBox>
@@ -108,12 +108,12 @@
                               <Insets left="10.0" right="10.0" />
                            </padding>
                            <children>
-                              <Button id="glass" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="30.0" prefWidth="90.0" stylesheets="@buttons.css" text="Confirm">
+                              <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="30.0" prefWidth="90.0" styleClass="searchButton" stylesheets="@market.css" text="Confirm">
                                  <font>
                                     <Font name="Verdana" size="11.0" />
                                  </font>
                               </Button>
-                              <Button id="glass" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleExit" prefHeight="30.0" prefWidth="90.0" stylesheets="@buttons.css" text="Eject">
+                              <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleExit" prefHeight="30.0" prefWidth="90.0" styleClass="searchButton" stylesheets="@market.css" text="Eject">
                                  <font>
                                     <Font name="Verdana" size="11.0" />
                                  </font>

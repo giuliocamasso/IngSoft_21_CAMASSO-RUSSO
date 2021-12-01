@@ -5,77 +5,26 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.MarketSectionLayoutController">
     <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
-      <top>
-         <AnchorPane prefHeight="141.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
-            <children>
-               <GridPane gridLinesVisible="true" prefHeight="95.0" prefWidth="1240.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints prefHeight="50.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                     <GridPane GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                       <columnConstraints>
-                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                       </columnConstraints>
-                       <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                       </rowConstraints>
-                        <children>
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 1" GridPane.halignment="CENTER" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 3" GridPane.columnIndex="2" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 4" GridPane.columnIndex="3" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 5" GridPane.columnIndex="4" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 6" GridPane.columnIndex="5" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 7" GridPane.columnIndex="6" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 8" GridPane.columnIndex="7" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 9" GridPane.columnIndex="8" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 10" GridPane.columnIndex="9" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 11" GridPane.columnIndex="10" />
-                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" text="Reparto 12" GridPane.columnIndex="11" />
-                        </children>
-                     </GridPane>
-                  </children>
-               </GridPane>
-            </children>
-         </AnchorPane>
-      </top>
       <left>
          <VBox prefHeight="578.0" prefWidth="250.0" BorderPane.alignment="CENTER">
             <children>
-               <HBox alignment="CENTER" prefHeight="65.0" prefWidth="200.0" stylesheets="@SampleStyle.css">
+               <HBox alignment="CENTER" prefHeight="65.0" prefWidth="200.0" stylesheets="@market.css">
                   <children>
-                     <TextField prefHeight="40.0" prefWidth="235.0" promptText="Cerca..." styleClass="transparent" stylesheets="@SampleStyle.css">
+                     <TextField prefHeight="40.0" prefWidth="235.0" promptText="Cerca..." style="-fx-background-color: trasparent;" styleClass="transparent" stylesheets="@market.css">
                         <HBox.margin>
                            <Insets left="10.0" />
                         </HBox.margin>
@@ -83,7 +32,7 @@
                            <Font name="Verdana" size="16.0" />
                         </font>
                      </TextField>
-                     <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="168.0" styleClass="search-button" stylesheets="@SampleStyle.css" text="Cerca">
+                     <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="168.0" styleClass="searchButton" stylesheets="@market.css" text="Cerca">
                         <font>
                            <Font name="Verdana" size="16.0" />
                         </font>
@@ -92,15 +41,15 @@
                         </HBox.margin>
                      </Button>
                   </children>
-                  <styleClass>
-                     <String fx:value="search-box" />
-                     <String fx:value="shadow" />
-                  </styleClass>
                   <VBox.margin>
                      <Insets bottom="10.0" />
                   </VBox.margin>
+                  <styleClass>
+                     <String fx:value="searchBox" />
+                     <String fx:value="shadow" />
+                  </styleClass>
                </HBox>
-               <VBox fx:id="chosenFruitCard" alignment="CENTER" prefHeight="535.0" prefWidth="100.0" stylesheets="@SampleStyle.css">
+               <VBox fx:id="chosenFruitCard" alignment="CENTER" prefHeight="535.0" prefWidth="100.0" stylesheets="@market.css">
                   <children>
                      <HBox prefHeight="23.0" prefWidth="411.0">
                         <children>
@@ -140,12 +89,17 @@
                      </HBox>
                      <HBox>
                         <children>
-                           <Label alignment="CENTER" prefHeight="123.0" prefWidth="406.0" text="\@ descrizione prodotto: vedere come cazzo mettere il testo" />
+                           <Label alignment="CENTER" prefHeight="48.0" prefWidth="248.0" text="\@ descrizione prodotto: vedere come ..." textFill="WHITE" />
                         </children>
                      </HBox>
+                     <VBox prefHeight="268.0" prefWidth="248.0">
+                        <children>
+                           <Pane prefHeight="86.0" prefWidth="248.0" />
+                        </children>
+                     </VBox>
                      <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                         <children>
-                           <Label prefHeight="47.0" prefWidth="369.0" text="Quantità" textFill="WHITE">
+                           <Label prefHeight="33.0" prefWidth="181.0" text="Quantità" textFill="WHITE">
                               <font>
                                  <Font name="Verdana" size="20.0" />
                               </font>
@@ -153,17 +107,29 @@
                                  <Insets />
                               </HBox.margin>
                            </Label>
-                           <Slider majorTickUnit="2.0" max="20.0" minorTickCount="1" prefHeight="14.0" prefWidth="464.0" showTickLabels="true" showTickMarks="true" value="1.0">
-                              <HBox.margin>
-                                 <Insets top="20.0" />
-                              </HBox.margin>
-                           </Slider>
+                           <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="120.0" styleClass="ovalHBox" stylesheets="@market.css">
+                              <children>
+                                 <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: trasparent;" text="-" textFill="#f06d8b">
+                                    <font>
+                                       <Font name="Verdana Bold" size="12.0" />
+                                    </font></Button>
+                                 <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="40.0" text="01" textFill="WHITE">
+                                    <font>
+                                       <Font name="Verdana Bold" size="12.0" />
+                                    </font>
+                                 </Label>
+                                 <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: trasparent;" text="+" textFill="#f06d8b">
+                                    <font>
+                                       <Font name="Verdana Bold" size="12.0" />
+                                    </font></Button>
+                              </children>
+                           </HBox>
                         </children>
                         <padding>
                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </padding>
                      </HBox>
-                     <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" styleClass="add-btn" stylesheets="@SampleStyle.css" text="Aggiungi al carrello" textFill="#828282">
+                     <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" styleClass="addToCartButton" stylesheets="@market.css" text="Aggiungi al carrello" textFill="#828282">
                         <VBox.margin>
                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
@@ -173,7 +139,7 @@
                      </Button>
                   </children>
                   <styleClass>
-                     <String fx:value="chosen-fruit-card" />
+                     <String fx:value="LoginPane" />
                      <String fx:value="shadow" />
                   </styleClass>
                </VBox>
@@ -212,9 +178,9 @@
       <right>
          <VBox prefHeight="558.0" prefWidth="250.0" BorderPane.alignment="CENTER">
             <children>
-               <HBox alignment="CENTER" prefHeight="57.0" prefWidth="330.0" stylesheets="@SampleStyle.css">
+               <HBox alignment="CENTER" prefHeight="57.0" prefWidth="330.0" stylesheets="@market.css">
                   <styleClass>
-                     <String fx:value="search-box" />
+                     <String fx:value="addToCartButton" />
                      <String fx:value="shadow" />
                   </styleClass>
                   <children>
@@ -231,7 +197,7 @@
                      <Insets bottom="10.0" />
                   </VBox.margin>
                </HBox>
-               <VBox fx:id="chosenFruitCard1" alignment="CENTER" prefHeight="518.0" prefWidth="330.0" stylesheets="@SampleStyle.css">
+               <VBox fx:id="chosenFruitCard1" alignment="CENTER" prefHeight="518.0" prefWidth="330.0" stylesheets="@market.css">
                   <children>
                      <HBox prefHeight="53.0" prefWidth="234.0">
                         <children>
@@ -250,10 +216,11 @@
                            </Label>
                         </children>
                         <VBox.margin>
-                           <Insets bottom="50.0" left="10.0" right="10.0" top="10.0" />
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                      </HBox>
-                     <VBox prefHeight="16.0" prefWidth="330.0">
+                     <Pane prefHeight="195.0" prefWidth="250.0" />
+                     <VBox prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
                         <children>
                            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
                               <children>
@@ -262,21 +229,17 @@
                                        <Font name="Verdana" size="16.0" />
                                     </font>
                                     <HBox.margin>
-                                       <Insets left="10.0" right="10.0" />
+                                       <Insets />
                                     </HBox.margin>
                                  </Label>
-                                 <HBox alignment="CENTER" prefHeight="22.0" prefWidth="125.0" stylesheets="@SampleStyle.css">
-                                    <styleClass>
-                                       <String fx:value="search-box" />
-                                       <String fx:value="shadow" />
-                                    </styleClass>
+                                 <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" stylesheets="@market.css">
                                     <children>
-                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x">
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
                                        </Label>
-                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@prezzo">
+                                       <Label prefHeight="20.0" prefWidth="75.0" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
@@ -285,27 +248,22 @@
                                     <HBox.margin>
                                        <Insets left="10.0" right="10.0" />
                                     </HBox.margin>
+                                    <styleClass>
+                                       <String fx:value="shadow" />
+                                       <String fx:value="ovalHBox" />
+                                    </styleClass>
                                  </HBox>
                               </children>
                               <VBox.margin>
-                                 <Insets top="10.0" />
+                                 <Insets bottom="10.0" />
                               </VBox.margin>
-                           </HBox>
-                           <HBox alignment="CENTER" prefHeight="8.0" prefWidth="330.0">
-                              <VBox.margin>
-                                 <Insets bottom="20.0" top="10.0" />
-                              </VBox.margin>
-                              <children>
-                                 <Separator prefHeight="0.0" prefWidth="390.0">
-                                    <padding>
-                                       <Insets left="10.0" right="10.0" />
-                                    </padding>
-                                 </Separator>
-                              </children>
                            </HBox>
                         </children>
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </VBox.margin>
                      </VBox>
-                     <VBox prefHeight="16.0" prefWidth="330.0">
+                     <VBox prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
                         <children>
                            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
                               <children>
@@ -314,50 +272,41 @@
                                        <Font name="Verdana" size="16.0" />
                                     </font>
                                     <HBox.margin>
-                                       <Insets left="10.0" right="10.0" />
+                                       <Insets />
                                     </HBox.margin>
                                  </Label>
-                                 <HBox alignment="CENTER" prefHeight="22.0" prefWidth="125.0" stylesheets="@SampleStyle.css">
-                                    <styleClass>
-                                       <String fx:value="search-box" />
-                                       <String fx:value="shadow" />
-                                    </styleClass>
-                                    <HBox.margin>
-                                       <Insets left="10.0" right="10.0" />
-                                    </HBox.margin>
+                                 <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" stylesheets="@market.css">
                                     <children>
-                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x">
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
                                        </Label>
-                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@prezzo">
+                                       <Label prefHeight="20.0" prefWidth="75.0" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
                                        </Label>
                                     </children>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                    <styleClass>
+                                       <String fx:value="shadow" />
+                                       <String fx:value="ovalHBox" />
+                                    </styleClass>
                                  </HBox>
                               </children>
                               <VBox.margin>
-                                 <Insets top="10.0" />
+                                 <Insets bottom="10.0" />
                               </VBox.margin>
-                           </HBox>
-                           <HBox alignment="CENTER" prefHeight="8.0" prefWidth="330.0">
-                              <VBox.margin>
-                                 <Insets bottom="20.0" top="10.0" />
-                              </VBox.margin>
-                              <children>
-                                 <Separator prefHeight="0.0" prefWidth="390.0">
-                                    <padding>
-                                       <Insets left="10.0" right="10.0" />
-                                    </padding>
-                                 </Separator>
-                              </children>
                            </HBox>
                         </children>
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </VBox.margin>
                      </VBox>
-                     <VBox prefHeight="16.0" prefWidth="330.0">
+                     <VBox prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
                         <children>
                            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
                               <children>
@@ -366,50 +315,41 @@
                                        <Font name="Verdana" size="16.0" />
                                     </font>
                                     <HBox.margin>
-                                       <Insets left="10.0" right="10.0" />
+                                       <Insets />
                                     </HBox.margin>
                                  </Label>
-                                 <HBox alignment="CENTER" prefHeight="22.0" prefWidth="125.0" stylesheets="@SampleStyle.css">
-                                    <styleClass>
-                                       <String fx:value="search-box" />
-                                       <String fx:value="shadow" />
-                                    </styleClass>
-                                    <HBox.margin>
-                                       <Insets left="10.0" right="10.0" />
-                                    </HBox.margin>
+                                 <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" stylesheets="@market.css">
                                     <children>
-                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x">
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
                                        </Label>
-                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@prezzo">
+                                       <Label prefHeight="20.0" prefWidth="75.0" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
                                        </Label>
                                     </children>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                    <styleClass>
+                                       <String fx:value="shadow" />
+                                       <String fx:value="ovalHBox" />
+                                    </styleClass>
                                  </HBox>
                               </children>
                               <VBox.margin>
-                                 <Insets top="10.0" />
+                                 <Insets bottom="10.0" />
                               </VBox.margin>
-                           </HBox>
-                           <HBox alignment="CENTER" prefHeight="8.0" prefWidth="330.0">
-                              <VBox.margin>
-                                 <Insets bottom="20.0" top="10.0" />
-                              </VBox.margin>
-                              <children>
-                                 <Separator prefHeight="0.0" prefWidth="390.0">
-                                    <padding>
-                                       <Insets left="10.0" right="10.0" />
-                                    </padding>
-                                 </Separator>
-                              </children>
                            </HBox>
                         </children>
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </VBox.margin>
                      </VBox>
-                     <VBox prefHeight="16.0" prefWidth="330.0">
+                     <VBox prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
                         <children>
                            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
                               <children>
@@ -418,60 +358,102 @@
                                        <Font name="Verdana" size="16.0" />
                                     </font>
                                     <HBox.margin>
-                                       <Insets left="10.0" right="10.0" />
+                                       <Insets />
                                     </HBox.margin>
                                  </Label>
-                                 <HBox alignment="CENTER" prefHeight="22.0" prefWidth="125.0" stylesheets="@SampleStyle.css">
-                                    <styleClass>
-                                       <String fx:value="search-box" />
-                                       <String fx:value="shadow" />
-                                    </styleClass>
-                                    <HBox.margin>
-                                       <Insets left="10.0" right="10.0" />
-                                    </HBox.margin>
+                                 <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" stylesheets="@market.css">
                                     <children>
-                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x">
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
                                        </Label>
-                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@prezzo">
+                                       <Label prefHeight="20.0" prefWidth="75.0" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
                                        </Label>
                                     </children>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                    <styleClass>
+                                       <String fx:value="shadow" />
+                                       <String fx:value="ovalHBox" />
+                                    </styleClass>
                                  </HBox>
                               </children>
                               <VBox.margin>
-                                 <Insets top="10.0" />
+                                 <Insets bottom="10.0" />
                               </VBox.margin>
                            </HBox>
-                           <HBox alignment="CENTER" prefHeight="8.0" prefWidth="330.0">
-                              <VBox.margin>
-                                 <Insets bottom="20.0" top="10.0" />
-                              </VBox.margin>
+                        </children>
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </VBox.margin>
+                     </VBox>
+                     <VBox prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
+                        <children>
+                           <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
                               <children>
-                                 <Separator prefHeight="0.0" prefWidth="390.0">
-                                    <padding>
+                                 <Label prefHeight="53.0" prefWidth="167.0" text="articolo 1" textFill="WHITE">
+                                    <font>
+                                       <Font name="Verdana" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                       <Insets />
+                                    </HBox.margin>
+                                 </Label>
+                                 <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" stylesheets="@market.css">
+                                    <children>
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x" textFill="WHITE">
+                                          <font>
+                                             <Font name="Verdana" size="12.0" />
+                                          </font>
+                                       </Label>
+                                       <Label prefHeight="20.0" prefWidth="75.0" text="\@prezzo" textFill="WHITE">
+                                          <font>
+                                             <Font name="Verdana" size="12.0" />
+                                          </font>
+                                       </Label>
+                                    </children>
+                                    <HBox.margin>
                                        <Insets left="10.0" right="10.0" />
-                                    </padding>
-                                 </Separator>
+                                    </HBox.margin>
+                                    <styleClass>
+                                       <String fx:value="shadow" />
+                                       <String fx:value="ovalHBox" />
+                                    </styleClass>
+                                 </HBox>
+                              </children>
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
+                           </HBox>
+                        </children>
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </VBox.margin>
+                     </VBox>
+                     <VBox>
+                        <children>
+                           <HBox>
+                              <children>
+                                 <Button mnemonicParsing="false" prefHeight="2.0" prefWidth="310.0" styleClass="addToCartButton" stylesheets="@market.css" text="Paga ora" textFill="#828282">
+                                    <font>
+                                       <Font name="System Bold" size="18.0" />
+                                    </font>
+                                 </Button>
                               </children>
                            </HBox>
                         </children>
-                     </VBox>
-                     <Button mnemonicParsing="false" prefHeight="2.0" prefWidth="310.0" styleClass="add-btn" stylesheets="@SampleStyle.css" text="Paga ora" textFill="#828282">
                         <VBox.margin>
                            <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
                         </VBox.margin>
-                        <font>
-                           <Font name="System Bold" size="18.0" />
-                        </font>
-                     </Button>
+                     </VBox>
                   </children>
                   <styleClass>
-                     <String fx:value="chosen-fruit-card" />
+                     <String fx:value="LoginPane" />
                      <String fx:value="shadow" />
                   </styleClass>
                </VBox>
@@ -481,5 +463,196 @@
             </BorderPane.margin>
          </VBox>
       </right>
+      <top>
+         <VBox alignment="TOP_CENTER" prefHeight="28.0" prefWidth="1260.0" BorderPane.alignment="CENTER">
+            <children>
+               <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="1063.0" spacing="5.0" styleClass="departmentBox" stylesheets="@market.css">
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin>
+                  <children>
+                     <VBox prefHeight="100.0" prefWidth="28.0">
+                        <children>
+                           <Button id="meatButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: trasparent;" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Macelleria" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="100.0" prefWidth="17.0">
+                        <children>
+                           <Button id="fishButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Pescheria" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="100.0" prefWidth="0.0">
+                        <children>
+                           <Button id="fruitButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Ortofrutta" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="100.0" prefWidth="0.0">
+                        <children>
+                           <Button id="groceryButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Alimentari" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="100.0" prefWidth="21.0">
+                        <children>
+                           <Button id="breadButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Forno" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="37.0" prefWidth="70.0">
+                        <children>
+                           <Button id="beerButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Bevande" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="100.0" prefWidth="31.0">
+                        <children>
+                           <Button id="ice-creamButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Surgelati" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="100.0" prefWidth="42.0">
+                        <children>
+                           <Button id="snackButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Snacks" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="100.0" prefWidth="29.0">
+                        <children>
+                           <Button id="babyButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Baby" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="100.0" prefWidth="27.0">
+                        <children>
+                           <Button id="stationeryButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Cartoleria" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox>
+                        <children>
+                           <Button id="petButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Pet" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox>
+                        <children>
+                           <Button id="healthcareButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Benessere" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                     <VBox>
+                        <children>
+                           <Button id="housekeepingButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Casalinghi" textAlignment="CENTER">
+                              <font>
+                                 <Font name="Verdana" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="5.0" />
+                              </VBox.margin>
+                           </Label>
+                        </children>
+                     </VBox>
+                  </children>
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               </HBox>
+            </children>
+            <BorderPane.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" />
+            </BorderPane.margin>
+         </VBox>
+      </top>
     </BorderPane>
 </AnchorPane>
