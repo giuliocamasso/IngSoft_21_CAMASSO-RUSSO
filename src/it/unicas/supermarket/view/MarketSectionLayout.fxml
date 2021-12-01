@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,159 +14,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.MarketSectionLayoutController">
     <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
-      <left>
-         <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-               <GridPane layoutX="-8.0" layoutY="134.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                 <columnConstraints>
-                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
-                 </columnConstraints>
-                 <rowConstraints>
-                   <RowConstraints maxHeight="129.0" prefHeight="61.0" vgrow="SOMETIMES" />
-                     <RowConstraints maxHeight="232.0" prefHeight="167.0" vgrow="SOMETIMES" />
-                     <RowConstraints maxHeight="259.0" minHeight="10.0" prefHeight="202.0" vgrow="SOMETIMES" />
-                     <RowConstraints maxHeight="259.0" minHeight="10.0" prefHeight="129.0" vgrow="SOMETIMES" />
-                 </rowConstraints>
-                  <children>
-                     <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="238.0" text="Cerca" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                     <GridPane gridLinesVisible="true" GridPane.rowIndex="1">
-                        <columnConstraints>
-                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="80.0" />
-                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="198.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                           <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
-                           <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
-                           <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
-                        <children>
-                           <Label text="Minimo" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                              <font>
-                                 <Font name="Verdana Bold" size="14.0" />
-                              </font>
-                              <GridPane.margin>
-                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                              </GridPane.margin>
-                           </Label>
-                           <Slider blockIncrement="1.0" max="50.0" showTickLabels="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                              <GridPane.margin>
-                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                              </GridPane.margin>
-                           </Slider>
-                           <Label text="Massimo" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                              <font>
-                                 <Font name="Verdana Bold" size="14.0" />
-                              </font>
-                              <GridPane.margin>
-                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                              </GridPane.margin>
-                              <padding>
-                                 <Insets bottom="5.0" />
-                              </padding>
-                           </Label>
-                           <Slider blockIncrement="1.0" max="50.0" showTickLabels="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                              <GridPane.margin>
-                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                              </GridPane.margin>
-                           </Slider>
-                           <Label alignment="CENTER" contentDisplay="CENTER" text="Nome" textAlignment="CENTER">
-                              <font>
-                                 <Font name="Verdana Bold" size="15.0" />
-                              </font>
-                              <padding>
-                                 <Insets left="5.0" />
-                              </padding>
-                              <GridPane.margin>
-                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                              </GridPane.margin>
-                           </Label>
-                           <TextField GridPane.columnIndex="1">
-                              <GridPane.margin>
-                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                              </GridPane.margin>
-                           </TextField>
-                        </children>
-                        <GridPane.margin>
-                           <Insets />
-                        </GridPane.margin>
-                     </GridPane>
-                     <GridPane gridLinesVisible="true" GridPane.rowIndex="2">
-                       <columnConstraints>
-                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                       </columnConstraints>
-                       <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                       </rowConstraints>
-                        <children>
-                           <Label alignment="CENTER" contentDisplay="CENTER" text="Codice cliente" textAlignment="CENTER">
-                              <font>
-                                 <Font name="Verdana Bold" size="15.0" />
-                              </font>
-                              <padding>
-                                 <Insets left="5.0" />
-                              </padding>
-                           </Label>
-                           <Label alignment="CENTER" contentDisplay="CENTER" text="\@codiceCliente" textAlignment="CENTER" GridPane.rowIndex="1">
-                              <font>
-                                 <Font name="Verdana" size="15.0" />
-                              </font>
-                           </Label>
-                           <Label alignment="CENTER" contentDisplay="CENTER" text="Massimale" textAlignment="CENTER" GridPane.rowIndex="2">
-                              <font>
-                                 <Font name="Verdana Bold" size="15.0" />
-                              </font>
-                           </Label>
-                           <Label alignment="CENTER" contentDisplay="CENTER" text="\@massimale rimanente/ mensile" textAlignment="CENTER" GridPane.rowIndex="3">
-                              <font>
-                                 <Font name="Verdana" size="15.0" />
-                              </font>
-                              <padding>
-                                 <Insets left="5.0" />
-                              </padding>
-                           </Label>
-                           <Label alignment="CENTER" contentDisplay="CENTER" text="Punti Fedeltà" textAlignment="CENTER" GridPane.rowIndex="4">
-                              <font>
-                                 <Font name="Verdana Bold" size="15.0" />
-                              </font>
-                              <padding>
-                                 <Insets left="5.0" />
-                              </padding>
-                           </Label>
-                           <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="111.0" text="\@punti fedeltà" textAlignment="CENTER" GridPane.rowIndex="5">
-                              <font>
-                                 <Font name="Verdana" size="15.0" />
-                              </font>
-                           </Label>
-                        </children>
-                     </GridPane>
-                     <AnchorPane GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                        <children>
-                           <ImageView fitHeight="70.0" fitWidth="198.0" layoutX="7.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                 <Image url="@../../../../../resources/images/logo-edit.jpg" />
-                              </image>
-                           </ImageView>
-                        </children>
-                     </AnchorPane>
-                  </children>
-                  <opaqueInsets>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </opaqueInsets>
-               </GridPane>
-            </children>
-         </AnchorPane>
-      </left>
       <top>
          <AnchorPane prefHeight="141.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
             <children>
@@ -213,351 +70,416 @@
             </children>
          </AnchorPane>
       </top>
-      <right>
-         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="220.0" BorderPane.alignment="CENTER">
+      <left>
+         <VBox prefHeight="578.0" prefWidth="250.0" BorderPane.alignment="CENTER">
             <children>
-               <GridPane gridLinesVisible="true" layoutX="142.0" prefHeight="578.4" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
-                     <RowConstraints maxHeight="558.0" minHeight="10.0" prefHeight="553.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
+               <HBox alignment="CENTER" prefHeight="65.0" prefWidth="200.0" stylesheets="@SampleStyle.css">
                   <children>
-                     <Label alignment="CENTER" contentDisplay="CENTER" text="Chart section" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <TextField prefHeight="40.0" prefWidth="235.0" promptText="Cerca..." styleClass="transparent" stylesheets="@SampleStyle.css">
+                        <HBox.margin>
+                           <Insets left="10.0" />
+                        </HBox.margin>
                         <font>
-                           <Font name="Verdana Bold" size="15.0" />
+                           <Font name="Verdana" size="16.0" />
                         </font>
-                        <padding>
-                           <Insets left="5.0" right="5.0" />
-                        </padding>
-                     </Label>
-                     <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleChart" prefHeight="269.0" prefWidth="90.0" text="Vai al Carrello" GridPane.rowIndex="1" />
+                     </TextField>
+                     <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="168.0" styleClass="search-button" stylesheets="@SampleStyle.css" text="Cerca">
+                        <font>
+                           <Font name="Verdana" size="16.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </HBox.margin>
+                     </Button>
                   </children>
-               </GridPane>
-            </children>
-         </AnchorPane>
-      </right>
-      <center>
-         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-               <GridPane layoutX="111.0" layoutY="90.0" prefHeight="578.4" prefWidth="655.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                 <columnConstraints>
-                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" />
-                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" />
-                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="300.0" />
-                 </columnConstraints>
-                 <rowConstraints>
-                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                 </rowConstraints>
+                  <styleClass>
+                     <String fx:value="search-box" />
+                     <String fx:value="shadow" />
+                  </styleClass>
+                  <VBox.margin>
+                     <Insets bottom="10.0" />
+                  </VBox.margin>
+               </HBox>
+               <VBox fx:id="chosenFruitCard" alignment="CENTER" prefHeight="535.0" prefWidth="100.0" stylesheets="@SampleStyle.css">
                   <children>
-                     <GridPane prefHeight="578.4" prefWidth="655.2">
-                        <columnConstraints>
-                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                           <RowConstraints maxHeight="56.8000244140625" minHeight="4.00000705718994" prefHeight="16.80001106262207" vgrow="SOMETIMES" />
-                           <RowConstraints maxHeight="120.79999294281006" minHeight="10.0" prefHeight="107.99998893737794" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
+                     <HBox prefHeight="23.0" prefWidth="411.0">
                         <children>
-                           <Label text="\@NomeArticolo" GridPane.halignment="CENTER">
+                           <Label fx:id="fruitNameLable" prefHeight="23.0" prefWidth="237.0" text="\@nome articolo" textFill="WHITE">
                               <font>
-                                 <Font name="Georgia Bold" size="14.0" />
+                                 <Font name="Verdana" size="18.0" />
                               </font>
                            </Label>
-                           <ImageView fitHeight="120.0" fitWidth="238.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                              <image>
-                                 <Image url="@../../../../../resources/images/mele.jpg" />
-                              </image>
-                           </ImageView>
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\@Descrizione mele, sono rosse con bellissime foglie verdi" textAlignment="JUSTIFY" wrappingWidth="219.66599941253662" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <Label fx:id="fruitPriceLabel" alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="171.0" text="\@$2.99" textFill="WHITE">
                               <font>
-                                 <Font name="Verdana" size="12.0" />
+                                 <Font name="Verdana" size="18.0" />
                               </font>
-                           </Text>
-                           <GridPane GridPane.rowIndex="3">
-                              <columnConstraints>
-                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.20001220703125" minWidth="10.0" prefWidth="46.400056457519526" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.5999755859375" minWidth="10.0" prefWidth="150.39994354248043" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
-                              <children>
-                                 <Label text="\@price $">
-                                    <font>
-                                       <Font name="Verdana Bold" size="12.0" />
-                                    </font>
-                                    <GridPane.margin>
-                                       <Insets left="5.0" />
-                                    </GridPane.margin>
-                                 </Label>
-                                 <Button mnemonicParsing="false" text="Aggiungi al carrello" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                                 <TextField alignment="CENTER" promptText="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              </children>
-                           </GridPane>
-                        </children>
-                     </GridPane>
-                     <GridPane prefHeight="578.4" prefWidth="655.2" GridPane.rowIndex="1">
-                        <columnConstraints>
-                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                           <RowConstraints maxHeight="56.8000244140625" minHeight="4.00000705718994" prefHeight="16.80001106262207" vgrow="SOMETIMES" />
-                           <RowConstraints maxHeight="120.79999294281006" minHeight="10.0" prefHeight="107.99998893737794" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
-                        <children>
-                           <Label text="\@NomeArticolo" GridPane.halignment="CENTER">
-                              <font>
-                                 <Font name="Georgia Bold" size="14.0" />
-                              </font>
+                              <HBox.margin>
+                                 <Insets />
+                              </HBox.margin>
                            </Label>
-                           <ImageView fitHeight="120.0" fitWidth="238.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                              <image>
-                                 <Image url="@../../../../../resources/images/mele.jpg" />
-                              </image>
-                           </ImageView>
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\@Descrizione mele, sono rosse con bellissime foglie verdi" textAlignment="JUSTIFY" wrappingWidth="219.66599941253662" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                              <font>
-                                 <Font name="Verdana" size="12.0" />
-                              </font>
-                           </Text>
-                           <GridPane GridPane.rowIndex="3">
-                              <columnConstraints>
-                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.20001220703125" minWidth="10.0" prefWidth="46.400056457519526" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.5999755859375" minWidth="10.0" prefWidth="150.39994354248043" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
-                              <children>
-                                 <Label text="\@price $">
-                                    <font>
-                                       <Font name="Verdana Bold" size="12.0" />
-                                    </font>
-                                    <GridPane.margin>
-                                       <Insets left="5.0" />
-                                    </GridPane.margin>
-                                 </Label>
-                                 <Button mnemonicParsing="false" text="Aggiungi al carrello" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                                 <TextField alignment="CENTER" promptText="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              </children>
-                           </GridPane>
                         </children>
-                     </GridPane>
-                     <GridPane prefHeight="578.4" prefWidth="655.2" GridPane.columnIndex="1">
-                        <columnConstraints>
-                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                           <RowConstraints maxHeight="56.8000244140625" minHeight="4.00000705718994" prefHeight="16.80001106262207" vgrow="SOMETIMES" />
-                           <RowConstraints maxHeight="120.79999294281006" minHeight="10.0" prefHeight="107.99998893737794" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                        </VBox.margin>
+                     </HBox>
+                     <HBox prefHeight="134.0" prefWidth="310.0">
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                        </VBox.margin>
                         <children>
-                           <Label text="\@NomeArticolo" GridPane.halignment="CENTER">
-                              <font>
-                                 <Font name="Georgia Bold" size="14.0" />
-                              </font>
-                           </Label>
-                           <ImageView fitHeight="120.0" fitWidth="238.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                              <image>
-                                 <Image url="@../../../../../resources/images/mele.jpg" />
-                              </image>
-                           </ImageView>
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\@Descrizione mele, sono rosse con bellissime foglie verdi" textAlignment="JUSTIFY" wrappingWidth="219.66599941253662" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                              <font>
-                                 <Font name="Verdana" size="12.0" />
-                              </font>
-                           </Text>
-                           <GridPane GridPane.rowIndex="3">
-                              <columnConstraints>
-                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.20001220703125" minWidth="10.0" prefWidth="46.400056457519526" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.5999755859375" minWidth="10.0" prefWidth="150.39994354248043" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
+                           <VBox alignment="CENTER" prefHeight="150.0" prefWidth="335.0">
                               <children>
-                                 <Label text="\@price $">
-                                    <font>
-                                       <Font name="Verdana Bold" size="12.0" />
-                                    </font>
-                                    <GridPane.margin>
-                                       <Insets left="5.0" />
-                                    </GridPane.margin>
-                                 </Label>
-                                 <Button mnemonicParsing="false" text="Aggiungi al carrello" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                                 <TextField alignment="CENTER" promptText="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                 <ImageView fx:id="fruitImg" fitHeight="157.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../../../../../resources/images/fruits/peach.png" />
+                                    </image>
+                                 </ImageView>
                               </children>
-                           </GridPane>
+                           </VBox>
                         </children>
-                     </GridPane>
-                     <GridPane prefHeight="578.4" prefWidth="655.2" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                        <columnConstraints>
-                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                           <RowConstraints maxHeight="56.8000244140625" minHeight="4.00000705718994" prefHeight="16.80001106262207" vgrow="SOMETIMES" />
-                           <RowConstraints maxHeight="120.79999294281006" minHeight="10.0" prefHeight="107.99998893737794" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
+                     </HBox>
+                     <HBox>
                         <children>
-                           <Label text="\@NomeArticolo" GridPane.halignment="CENTER">
-                              <font>
-                                 <Font name="Georgia Bold" size="14.0" />
-                              </font>
-                           </Label>
-                           <ImageView fitHeight="120.0" fitWidth="238.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                              <image>
-                                 <Image url="@../../../../../resources/images/mele.jpg" />
-                              </image>
-                           </ImageView>
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\@Descrizione mele, sono rosse con bellissime foglie verdi" textAlignment="JUSTIFY" wrappingWidth="219.66599941253662" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                              <font>
-                                 <Font name="Verdana" size="12.0" />
-                              </font>
-                           </Text>
-                           <GridPane GridPane.rowIndex="3">
-                              <columnConstraints>
-                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.20001220703125" minWidth="10.0" prefWidth="46.400056457519526" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.5999755859375" minWidth="10.0" prefWidth="150.39994354248043" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
-                              <children>
-                                 <Label text="\@price $">
-                                    <font>
-                                       <Font name="Verdana Bold" size="12.0" />
-                                    </font>
-                                    <GridPane.margin>
-                                       <Insets left="5.0" />
-                                    </GridPane.margin>
-                                 </Label>
-                                 <Button mnemonicParsing="false" text="Aggiungi al carrello" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                                 <TextField alignment="CENTER" promptText="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              </children>
-                           </GridPane>
+                           <Label alignment="CENTER" prefHeight="123.0" prefWidth="406.0" text="\@ descrizione prodotto: vedere come cazzo mettere il testo" />
                         </children>
-                     </GridPane>
-                     <GridPane prefHeight="578.4" prefWidth="655.2" GridPane.rowIndex="2">
-                        <columnConstraints>
-                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                           <RowConstraints maxHeight="56.8000244140625" minHeight="4.00000705718994" prefHeight="16.80001106262207" vgrow="SOMETIMES" />
-                           <RowConstraints maxHeight="120.79999294281006" minHeight="10.0" prefHeight="107.99998893737794" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
+                     </HBox>
+                     <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                         <children>
-                           <Label text="\@NomeArticolo" GridPane.halignment="CENTER">
+                           <Label prefHeight="47.0" prefWidth="369.0" text="Quantità" textFill="WHITE">
                               <font>
-                                 <Font name="Georgia Bold" size="14.0" />
+                                 <Font name="Verdana" size="20.0" />
                               </font>
+                              <HBox.margin>
+                                 <Insets />
+                              </HBox.margin>
                            </Label>
-                           <ImageView fitHeight="120.0" fitWidth="238.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                              <image>
-                                 <Image url="@../../../../../resources/images/mele.jpg" />
-                              </image>
-                           </ImageView>
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\@Descrizione mele, sono rosse con bellissime foglie verdi" textAlignment="JUSTIFY" wrappingWidth="219.66599941253662" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                              <font>
-                                 <Font name="Verdana" size="12.0" />
-                              </font>
-                           </Text>
-                           <GridPane GridPane.rowIndex="3">
-                              <columnConstraints>
-                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.20001220703125" minWidth="10.0" prefWidth="46.400056457519526" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.5999755859375" minWidth="10.0" prefWidth="150.39994354248043" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
-                              <children>
-                                 <Label text="\@price $">
-                                    <font>
-                                       <Font name="Verdana Bold" size="12.0" />
-                                    </font>
-                                    <GridPane.margin>
-                                       <Insets left="5.0" />
-                                    </GridPane.margin>
-                                 </Label>
-                                 <Button mnemonicParsing="false" text="Aggiungi al carrello" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                                 <TextField alignment="CENTER" promptText="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              </children>
-                           </GridPane>
+                           <Slider majorTickUnit="2.0" max="20.0" minorTickCount="1" prefHeight="14.0" prefWidth="464.0" showTickLabels="true" showTickMarks="true" value="1.0">
+                              <HBox.margin>
+                                 <Insets top="20.0" />
+                              </HBox.margin>
+                           </Slider>
                         </children>
-                     </GridPane>
-                     <GridPane prefHeight="578.4" prefWidth="655.2" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                        <columnConstraints>
-                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                           <RowConstraints maxHeight="56.8000244140625" minHeight="4.00000705718994" prefHeight="16.80001106262207" vgrow="SOMETIMES" />
-                           <RowConstraints maxHeight="120.79999294281006" minHeight="10.0" prefHeight="107.99998893737794" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
-                        <children>
-                           <Label text="\@NomeArticolo" GridPane.halignment="CENTER">
-                              <font>
-                                 <Font name="Georgia Bold" size="14.0" />
-                              </font>
-                           </Label>
-                           <ImageView fitHeight="120.0" fitWidth="238.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                              <image>
-                                 <Image url="@../../../../../resources/images/mele.jpg" />
-                              </image>
-                           </ImageView>
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\@Descrizione mele, sono rosse con bellissime foglie verdi" textAlignment="JUSTIFY" wrappingWidth="219.66599941253662" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                              <font>
-                                 <Font name="Verdana" size="12.0" />
-                              </font>
-                           </Text>
-                           <GridPane GridPane.rowIndex="3">
-                              <columnConstraints>
-                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.20001220703125" minWidth="10.0" prefWidth="46.400056457519526" />
-                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.5999755859375" minWidth="10.0" prefWidth="150.39994354248043" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
-                              <children>
-                                 <Label text="\@price $">
-                                    <font>
-                                       <Font name="Verdana Bold" size="12.0" />
-                                    </font>
-                                    <GridPane.margin>
-                                       <Insets left="5.0" />
-                                    </GridPane.margin>
-                                 </Label>
-                                 <Button mnemonicParsing="false" text="Aggiungi al carrello" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                                 <TextField alignment="CENTER" promptText="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              </children>
-                           </GridPane>
-                        </children>
-                     </GridPane>
+                        <padding>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                     </HBox>
+                     <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" styleClass="add-btn" stylesheets="@SampleStyle.css" text="Aggiungi al carrello" textFill="#828282">
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </VBox.margin>
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font>
+                     </Button>
                   </children>
-               </GridPane>
+                  <styleClass>
+                     <String fx:value="chosen-fruit-card" />
+                     <String fx:value="shadow" />
+                  </styleClass>
+               </VBox>
             </children>
-         </AnchorPane>
+            <BorderPane.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+         </VBox>
+      </left>
+      <center>
+         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+               <VBox prefHeight="598.0" prefWidth="730.0">
+                  <children>
+                     <HBox alignment="CENTER" prefHeight="600.0" prefWidth="730.0">
+                        <children>
+                           <ScrollPane fx:id="scroll" prefHeight="570.0" prefWidth="785.0" styleClass="transparent" stylesheets="@SampleStyle.css">
+                              <content>
+                                 <GridPane fx:id="grid" prefHeight="0.0" prefWidth="0.0">
+                                    <rowConstraints>
+                                       <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                    </rowConstraints>
+                                 </GridPane>
+                              </content>
+                              <HBox.margin>
+                                 <Insets top="10.0" />
+                              </HBox.margin>
+                           </ScrollPane>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+            </children>
+         </VBox>
       </center>
+      <right>
+         <VBox prefHeight="558.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+            <children>
+               <HBox alignment="CENTER" prefHeight="57.0" prefWidth="330.0" stylesheets="@SampleStyle.css">
+                  <styleClass>
+                     <String fx:value="search-box" />
+                     <String fx:value="shadow" />
+                  </styleClass>
+                  <children>
+                     <Label text="Carrello">
+                        <font>
+                           <Font name="Verdana Bold" size="24.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                     </Label>
+                  </children>
+                  <VBox.margin>
+                     <Insets bottom="10.0" />
+                  </VBox.margin>
+               </HBox>
+               <VBox fx:id="chosenFruitCard1" alignment="CENTER" prefHeight="518.0" prefWidth="330.0" stylesheets="@SampleStyle.css">
+                  <children>
+                     <HBox prefHeight="53.0" prefWidth="234.0">
+                        <children>
+                           <Label fx:id="fruitNameLable1" contentDisplay="CENTER" prefHeight="95.0" prefWidth="200.0" text="\@tot articoli" textAlignment="CENTER" textFill="WHITE">
+                              <font>
+                                 <Font name="Verdana" size="18.0" />
+                              </font>
+                              <HBox.margin>
+                                 <Insets />
+                              </HBox.margin>
+                           </Label>
+                           <Label fx:id="fruitPriceLabel1" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="83.0" prefWidth="188.0" text="\@tot.$" textAlignment="CENTER" textFill="WHITE">
+                              <font>
+                                 <Font name="Verdana Bold" size="18.0" />
+                              </font>
+                           </Label>
+                        </children>
+                        <VBox.margin>
+                           <Insets bottom="50.0" left="10.0" right="10.0" top="10.0" />
+                        </VBox.margin>
+                     </HBox>
+                     <VBox prefHeight="16.0" prefWidth="330.0">
+                        <children>
+                           <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
+                              <children>
+                                 <Label prefHeight="53.0" prefWidth="167.0" text="articolo 1" textFill="WHITE">
+                                    <font>
+                                       <Font name="Verdana" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                 </Label>
+                                 <HBox alignment="CENTER" prefHeight="22.0" prefWidth="125.0" stylesheets="@SampleStyle.css">
+                                    <styleClass>
+                                       <String fx:value="search-box" />
+                                       <String fx:value="shadow" />
+                                    </styleClass>
+                                    <children>
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x">
+                                          <font>
+                                             <Font name="Verdana" size="12.0" />
+                                          </font>
+                                       </Label>
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@prezzo">
+                                          <font>
+                                             <Font name="Verdana" size="12.0" />
+                                          </font>
+                                       </Label>
+                                    </children>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                 </HBox>
+                              </children>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox alignment="CENTER" prefHeight="8.0" prefWidth="330.0">
+                              <VBox.margin>
+                                 <Insets bottom="20.0" top="10.0" />
+                              </VBox.margin>
+                              <children>
+                                 <Separator prefHeight="0.0" prefWidth="390.0">
+                                    <padding>
+                                       <Insets left="10.0" right="10.0" />
+                                    </padding>
+                                 </Separator>
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="16.0" prefWidth="330.0">
+                        <children>
+                           <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
+                              <children>
+                                 <Label prefHeight="53.0" prefWidth="167.0" text="articolo 1" textFill="WHITE">
+                                    <font>
+                                       <Font name="Verdana" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                 </Label>
+                                 <HBox alignment="CENTER" prefHeight="22.0" prefWidth="125.0" stylesheets="@SampleStyle.css">
+                                    <styleClass>
+                                       <String fx:value="search-box" />
+                                       <String fx:value="shadow" />
+                                    </styleClass>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                    <children>
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x">
+                                          <font>
+                                             <Font name="Verdana" size="12.0" />
+                                          </font>
+                                       </Label>
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@prezzo">
+                                          <font>
+                                             <Font name="Verdana" size="12.0" />
+                                          </font>
+                                       </Label>
+                                    </children>
+                                 </HBox>
+                              </children>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox alignment="CENTER" prefHeight="8.0" prefWidth="330.0">
+                              <VBox.margin>
+                                 <Insets bottom="20.0" top="10.0" />
+                              </VBox.margin>
+                              <children>
+                                 <Separator prefHeight="0.0" prefWidth="390.0">
+                                    <padding>
+                                       <Insets left="10.0" right="10.0" />
+                                    </padding>
+                                 </Separator>
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="16.0" prefWidth="330.0">
+                        <children>
+                           <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
+                              <children>
+                                 <Label prefHeight="53.0" prefWidth="167.0" text="articolo 1" textFill="WHITE">
+                                    <font>
+                                       <Font name="Verdana" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                 </Label>
+                                 <HBox alignment="CENTER" prefHeight="22.0" prefWidth="125.0" stylesheets="@SampleStyle.css">
+                                    <styleClass>
+                                       <String fx:value="search-box" />
+                                       <String fx:value="shadow" />
+                                    </styleClass>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                    <children>
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x">
+                                          <font>
+                                             <Font name="Verdana" size="12.0" />
+                                          </font>
+                                       </Label>
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@prezzo">
+                                          <font>
+                                             <Font name="Verdana" size="12.0" />
+                                          </font>
+                                       </Label>
+                                    </children>
+                                 </HBox>
+                              </children>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox alignment="CENTER" prefHeight="8.0" prefWidth="330.0">
+                              <VBox.margin>
+                                 <Insets bottom="20.0" top="10.0" />
+                              </VBox.margin>
+                              <children>
+                                 <Separator prefHeight="0.0" prefWidth="390.0">
+                                    <padding>
+                                       <Insets left="10.0" right="10.0" />
+                                    </padding>
+                                 </Separator>
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+                     <VBox prefHeight="16.0" prefWidth="330.0">
+                        <children>
+                           <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
+                              <children>
+                                 <Label prefHeight="53.0" prefWidth="167.0" text="articolo 1" textFill="WHITE">
+                                    <font>
+                                       <Font name="Verdana" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                 </Label>
+                                 <HBox alignment="CENTER" prefHeight="22.0" prefWidth="125.0" stylesheets="@SampleStyle.css">
+                                    <styleClass>
+                                       <String fx:value="search-box" />
+                                       <String fx:value="shadow" />
+                                    </styleClass>
+                                    <HBox.margin>
+                                       <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                    <children>
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@1x">
+                                          <font>
+                                             <Font name="Verdana" size="12.0" />
+                                          </font>
+                                       </Label>
+                                       <Label prefHeight="42.0" prefWidth="52.0" text="\@prezzo">
+                                          <font>
+                                             <Font name="Verdana" size="12.0" />
+                                          </font>
+                                       </Label>
+                                    </children>
+                                 </HBox>
+                              </children>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox alignment="CENTER" prefHeight="8.0" prefWidth="330.0">
+                              <VBox.margin>
+                                 <Insets bottom="20.0" top="10.0" />
+                              </VBox.margin>
+                              <children>
+                                 <Separator prefHeight="0.0" prefWidth="390.0">
+                                    <padding>
+                                       <Insets left="10.0" right="10.0" />
+                                    </padding>
+                                 </Separator>
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+                     <Button mnemonicParsing="false" prefHeight="2.0" prefWidth="310.0" styleClass="add-btn" stylesheets="@SampleStyle.css" text="Paga ora" textFill="#828282">
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
+                        </VBox.margin>
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font>
+                     </Button>
+                  </children>
+                  <styleClass>
+                     <String fx:value="chosen-fruit-card" />
+                     <String fx:value="shadow" />
+                  </styleClass>
+               </VBox>
+            </children>
+            <BorderPane.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+         </VBox>
+      </right>
     </BorderPane>
 </AnchorPane>
