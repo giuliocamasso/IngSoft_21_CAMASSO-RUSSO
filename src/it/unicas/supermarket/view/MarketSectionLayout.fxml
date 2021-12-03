@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -175,12 +176,18 @@
                      </HBox>
                      <HBox alignment="CENTER" prefHeight="600.0" prefWidth="730.0">
                         <children>
-                           <ScrollPane fx:id="articleScrollPane" prefHeight="570.0" prefWidth="785.0" styleClass="transparent" stylesheets="@SampleStyle.css">
+                           <ScrollPane fx:id="articleScrollPane" hbarPolicy="NEVER" prefHeight="570.0" prefWidth="785.0" styleClass="transparent" stylesheets="@market.css" vbarPolicy="NEVER">
                               <content>
-                                 <GridPane fx:id="articleGridPane" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="0.0">
+                                 <GridPane fx:id="articleGridPane" alignment="CENTER" gridLinesVisible="true" prefHeight="27.0" prefWidth="72.0">
                                     <rowConstraints>
-                                       <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                       <RowConstraints prefHeight="170.0" />
                                     </rowConstraints>
+                                    <columnConstraints>
+                                       <ColumnConstraints prefWidth="180.0" />
+                                       <ColumnConstraints prefWidth="180.0" />
+                                       <ColumnConstraints prefWidth="180.0" />
+                                       <ColumnConstraints prefWidth="180.0" />
+                                    </columnConstraints>
                                  </GridPane>
                               </content>
                               <HBox.margin>

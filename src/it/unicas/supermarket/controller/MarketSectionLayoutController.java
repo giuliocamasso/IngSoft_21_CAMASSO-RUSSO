@@ -1,7 +1,7 @@
 package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.ArticleSelectionListener;
-import it.unicas.supermarket.MainSample;
+import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.Fruit;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -125,7 +125,7 @@ public class MarketSectionLayoutController implements Initializable {
 
     private void setChosenFruit(Fruit fruit) {
         articleNameLabel.setText(fruit.getName());
-        articlePriceLabel.setText(MainSample.CURRENCY + fruit.getPrice());
+        articlePriceLabel.setText(fruit.getPrice());
         image = new Image("file:"+fruit.getImgSrc());
         articleImage.setImage(image);
         /*
@@ -142,11 +142,12 @@ public class MarketSectionLayoutController implements Initializable {
             articleSelectionListener = fruit -> setChosenFruit(fruit);
         }
         int column = 0;
-        int row = 1;
+        int row = 0;
+
         try {
             for (int i = 0; i < fruits.size(); i++) {
                 FXMLLoader itemLoader = new FXMLLoader();
-                itemLoader.setLocation(MainSample.class.getResource("view/ArticleGridItem.fxml"));
+                itemLoader.setLocation(Main.class.getResource("view/ArticleGridItem.fxml"));
                 AnchorPane anchorPane = itemLoader.load();
                 ArticleGridItemController articleGridItemController = itemLoader.getController();
 
@@ -158,6 +159,7 @@ public class MarketSectionLayoutController implements Initializable {
                 }
 
                 articleGridPane.add(anchorPane, column++, row); //(child,column,row)
+
                 //set grid width
                 articleGridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
                 articleGridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
@@ -168,7 +170,9 @@ public class MarketSectionLayoutController implements Initializable {
                 articleGridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
                 articleGridPane.setMaxHeight(Region.USE_PREF_SIZE);
 
-                GridPane.setMargin(anchorPane, new Insets(10));
+                // margini all'interno del grid pane
+                GridPane.setMargin(anchorPane, new Insets(0));
+
             }
         } catch (IOException e) {
             e.printStackTrace();

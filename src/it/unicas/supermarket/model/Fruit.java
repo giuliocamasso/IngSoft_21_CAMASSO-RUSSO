@@ -22,8 +22,8 @@ public class Fruit {
         this.imgSrc = imgSrc;
     }
 
-    public double getPrice() {
-        return price;
+    public String getPrice() {
+        return "€ " + price;
     }
 
     public void setPrice(double price) {

@@ -1,7 +1,6 @@
 package it.unicas.supermarket.controller;
 
 import it.unicas.supermarket.ArticleSelectionListener;
-import it.unicas.supermarket.MainSample;
 import it.unicas.supermarket.model.Fruit;
 
 import javafx.fxml.FXML;
@@ -32,7 +31,7 @@ public class ArticleGridItemController {
         this.fruit = fruit;
         this.articleSelectionListener = articleSelectionListener;
         articleNameLabel.setText(fruit.getName());
-        articlePriceLabel.setText(MainSample.CURRENCY + fruit.getPrice());
+        articlePriceLabel.setText(fruit.getPrice());
         Image image = new Image("file:"+fruit.getImgSrc());
         articleImage.setImage(image);
     }
