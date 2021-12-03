@@ -176,12 +176,13 @@ public class App {
     /**
      * Opens a dialog to show the receipt
      */
-    public void showReceipt() {
+    public boolean showReceipt() {
         try {
             // Load the fxml file and create a new stage for the popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("view/Receipt.fxml"));
             Stage dialogStage = new Stage();
+
             dialogStage.setTitle("Receipt");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(mainStage);
@@ -190,14 +191,17 @@ public class App {
 
             // Set the Colleghis into the controller.
             ReceiptController controller = loader.getController();
-
+            controller.setDialogStage(dialogStage);
             // Set the dialog icon.
             // dialogStage.getIcons().add(new Image("file:resources/images/calendar.png"));
 
-            dialogStage.show();
+            dialogStage.showAndWait();
+
+            return controller.isBackClicked();
 
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }
