@@ -461,7 +461,7 @@
                         <children>
                            <HBox>
                               <children>
-                                 <Button mnemonicParsing="false" prefHeight="2.0" prefWidth="310.0" styleClass="addToCartButton" stylesheets="@market.css" text="Paga ora" textFill="#828282">
+                                 <Button mnemonicParsing="false" onAction="#handleChart" prefHeight="2.0" prefWidth="310.0" styleClass="addToCartButton" stylesheets="@market.css" text="Paga ora" textFill="#828282">
                                     <font>
                                        <Font name="System Bold" size="18.0" />
                                     </font>

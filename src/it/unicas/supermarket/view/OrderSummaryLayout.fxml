@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -24,24 +25,26 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="854.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="79.0" prefWidth="844.0" stylesheets="@market.css">
                      <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../resources/images/shopping-cart.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="100.0" prefWidth="854.0" text="Carrello">
-                           <padding>
-                              <Insets bottom="30.0" left="30.0" top="30.0" />
-                           </padding>
+                        <Label text="Carrello">
                            <font>
                               <Font name="Verdana Bold" size="31.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets bottom="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
                         </Label>
                      </children>
+                     <styleClass>
+                        <String fx:value="addToCartButton" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
                   </HBox>
-                  <ScrollPane prefHeight="620.0" prefWidth="854.0">
+                  <ScrollPane prefHeight="525.0">
                      <content>
                         <GridPane>
                           <columnConstraints>
@@ -49,152 +52,229 @@
                           </columnConstraints>
                         </GridPane>
                      </content>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
                   </ScrollPane>
-                  <HBox prefHeight="150.0" prefWidth="854.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="89.0" prefWidth="854.0">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleMarket" prefHeight="100.0" prefWidth="162.0" text="Torna ai Reparti">
+                        <Button mnemonicParsing="false" onAction="#handleMarket" prefHeight="45.0" prefWidth="306.0" styleClass="addToCartButton" stylesheets="@market.css" text="Torna ai Reparti" textFill="#828282">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
                            <HBox.margin>
-                              <Insets bottom="10.0" left="30.0" top="10.0" />
+                              <Insets />
                            </HBox.margin>
                         </Button>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="150.0" prefWidth="150.0" text="Totale: €">
-                           <HBox.margin>
-                              <Insets left="450.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="76.0" prefWidth="124.0" text=" 0.00" />
+                        <HBox prefHeight="89.0" prefWidth="349.0" />
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="89.0" prefWidth="544.0" styleClass="peachUnderline" stylesheets="@market.css">
+                                 <children>
+                                    <Label text="Totale: €">
+                                       <font>
+                                          <Font name="Verdana" size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets right="30.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label text="\@0.00">
+                                       <font>
+                                          <Font name="Verdana" size="16.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets right="30.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                        </HBox>
                      </children>
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>
             <VBox prefHeight="720.0" prefWidth="426.0">
                <children>
-                  <Label prefHeight="100.0" prefWidth="426.0" text="Dettagli Pagamento">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" stylesheets="@market.css">
+                     <children>
+                        <Label text="Dettagli Pagamento">
+                           <font>
+                              <Font name="Verdana Bold" size="31.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <styleClass>
+                        <String fx:value="addToCartButton" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <VBox alignment="CENTER" prefHeight="643.0" prefWidth="426.0" stylesheets="@market.css">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="70.0" prefWidth="359.0" styleClass="peachUnderline" stylesheets="@market.css">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Codice Cliente" textFill="WHITE">
+                                             <font>
+                                                <Font name="Verdana" size="16.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="\@codiceCliente" textFill="WHITE">
+                                             <font>
+                                                <Font name="Verdana" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="70.0" prefWidth="359.0" styleClass="peachUnderline" stylesheets="@market.css">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Punti Fedeltà" textFill="WHITE">
+                                             <font>
+                                                <Font name="Verdana" size="16.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="\@puntiFedeltà" textFill="WHITE">
+                                             <font>
+                                                <Font name="Verdana" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="70.0" prefWidth="359.0" styleClass="peachUnderline" stylesheets="@market.css">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Codice Carta" textFill="WHITE">
+                                             <font>
+                                                <Font name="Verdana" size="16.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="\@codiceCarta" textFill="WHITE">
+                                             <font>
+                                                <Font name="Verdana" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="70.0" prefWidth="359.0" styleClass="peachUnderline" stylesheets="@market.css">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Codice Cliente" textFill="WHITE">
+                                             <font>
+                                                <Font name="Verdana" size="16.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="\@attuale/mensile" textFill="WHITE">
+                                             <font>
+                                                <Font name="Verdana" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="272.0" prefWidth="384.0" />
+                        <VBox>
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#handlePayment" prefHeight="47.0" prefWidth="143.0" styleClass="addToCartButton" stylesheets="@market.css" text="Paga ora" textFill="#828282">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <styleClass>
+                        <String fx:value="LoginPane" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
                      <padding>
-                        <Insets bottom="30.0" left="30.0" top="30.0" />
+                        <Insets left="15.0" right="15.0" />
                      </padding>
-                     <font>
-                        <Font name="Verdana Bold" size="31.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Cliente:">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Verdana Bold Italic" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="CodiceCliente">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Verdana Bold Italic" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Punti fedeltà:">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Verdana Bold Italic" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="puntiFedelta">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Verdana Bold Italic" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Codice Carta:">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Verdana Bold Italic" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="codiceCarta">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Verdana Bold Italic" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="Massimale">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Verdana Bold Italic" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="attuale / totale">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Verdana Bold Italic" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="243.0" prefWidth="426.0" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleReceipt" prefHeight="66.0" text="Paga ora! / Massimale insufficiente" />
-                     </children>
-                  </HBox>
+                  </VBox>
                </children>
             </VBox>
          </children>

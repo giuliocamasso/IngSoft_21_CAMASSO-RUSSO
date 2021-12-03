@@ -177,7 +177,7 @@ public class MarketSectionLayoutController implements Initializable {
 
     @FXML
     public void handleChart() {
-        System.out.println("Going to chart section...");
+        System.out.println("Going to Chart section...");
         App.getInstance().initOrderSummaryLayout();
     }
 }

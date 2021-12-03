@@ -11,7 +11,7 @@ public class OrderSummaryLayoutController {
     }
 
     @FXML
-    private void handleShowPayment() {
+    private void handlePayment() {
         System.out.println("Going to the Receipt section ...");
         App.getInstance().showReceipt();
     }
