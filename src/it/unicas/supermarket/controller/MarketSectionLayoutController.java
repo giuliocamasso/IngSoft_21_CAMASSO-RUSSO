@@ -142,8 +142,7 @@ public class MarketSectionLayoutController implements Initializable {
             articleSelectionListener = fruit -> setChosenFruit(fruit);
         }
         int column = 0;
-        int row = 0;
-
+        int row = 1;
         try {
             for (int i = 0; i < fruits.size(); i++) {
                 FXMLLoader itemLoader = new FXMLLoader();
@@ -153,7 +152,7 @@ public class MarketSectionLayoutController implements Initializable {
 
                 articleGridItemController.setData(fruits.get(i), articleSelectionListener);
 
-                if (column == 4) {
+                if (column == 3) {
                     column = 0;
                     row++;
                 }
@@ -171,7 +170,7 @@ public class MarketSectionLayoutController implements Initializable {
                 articleGridPane.setMaxHeight(Region.USE_PREF_SIZE);
 
                 // margini all'interno del grid pane
-                GridPane.setMargin(anchorPane, new Insets(0));
+                GridPane.setMargin(anchorPane, new Insets(10, 10, 10 ,10));
 
             }
         } catch (IOException e) {

@@ -20,122 +20,147 @@
             <Image url="@../../../../../resources/backgrounds/BGWhite.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="265.0" layoutY="195.0" prefHeight="330.0" prefWidth="800.0" styleClass="LoginPane" stylesheets="@market.css">
+      <AnchorPane layoutX="240.0" layoutY="135.0" prefHeight="330.0" prefWidth="800.0" styleClass="LoginPane" stylesheets="@market.css">
          <children>
-            <HBox layoutX="-77.0" layoutY="-364.0" prefHeight="694.0" prefWidth="827.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-77.0" AnchorPane.topAnchor="0.0">
+            <VBox layoutX="11.0" layoutY="11.0" prefHeight="379.0" prefWidth="777.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="480.0" prefWidth="420.0">
+                  <HBox prefHeight="80.0" prefWidth="778.0">
                      <children>
-                        <ImageView fitHeight="280.0" fitWidth="415.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-                           <image>
-                              <Image url="@../../../../../resources/images/unicas-card.png" />
-                           </image>
-                        </ImageView>
+                        <Label alignment="CENTER" prefHeight="78.0" prefWidth="778.0" text="Benvenuti nel nostro supermercato!" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
                      </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
+                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="328.0" prefWidth="327.0">
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="138.0" prefWidth="776.0">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="286.0" stylesheets="@market.css">
-                           <children>
-                              <Label prefHeight="30.0" prefWidth="140.0" text="Codice Carta" textFill="WHITE">
-                                 <font>
-                                    <Font name="Verdana" size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField alignment="CENTER" prefHeight="30.0" prefWidth="170.0" promptText="XXXX-XXXX-XXXX-XXXX" style="-fx-background-color: rgba(0, 0, 0, 0);" stylesheets="@market.css">
-                                 <padding>
-                                    <Insets right="10.0" />
-                                 </padding>
-                                 <font>
-                                    <Font name="Verdana" size="12.0" />
-                                 </font>
-                              </TextField>
-                           </children>
-                           <opaqueInsets>
+                        <Label alignment="CENTER" prefHeight="107.0" prefWidth="756.0" text="Inserite la vostra carta..." textFill="#00ff2b">
+                           <font>
+                              <Font name="Verdana" size="18.0" />
+                           </font>
+                           <HBox.margin>
                               <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                           <styleClass>
-                              <String fx:value="peachUnderline" />
-                              <String fx:value="transparent" />
-                           </styleClass>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="286.0" stylesheets="@market.css">
-                           <children>
-                              <Label prefHeight="30.0" prefWidth="140.0" text="PIN" textFill="WHITE">
-                                 <font>
-                                    <Font name="Verdana" size="18.0" />
-                                 </font>
-                              </Label>
-                              <PasswordField alignment="CENTER" prefHeight="30.0" prefWidth="170.0" promptText="*****" style="-fx-background-color: rgba(0, 0, 0, 0);" stylesheets="@market.css">
-                                 <font>
-                                    <Font name="Verdana" size="12.0" />
-                                 </font>
-                              </PasswordField>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                           <styleClass>
-                              <String fx:value="peachUnderline" />
-                              <String fx:value="transparent" />
-                           </styleClass>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="81.0" prefWidth="286.0" stylesheets="@market.css">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="323.0" spacing="40.0" stylesheets="@market.css">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets left="10.0" right="10.0" />
-                           </padding>
-                           <children>
-                              <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="30.0" prefWidth="90.0" styleClass="searchButton" stylesheets="@market.css" text="Confirm">
-                                 <font>
-                                    <Font name="Verdana" size="11.0" />
-                                 </font>
-                              </Button>
-                              <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleExit" prefHeight="30.0" prefWidth="90.0" styleClass="searchButton" stylesheets="@market.css" text="Eject">
-                                 <font>
-                                    <Font name="Verdana" size="11.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
+                           </HBox.margin>
+                        </Label>
                      </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <padding>
-                        <Insets left="10.0" right="10.0" />
-                     </padding>
-                  </VBox>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="694.0" prefWidth="827.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="480.0" prefWidth="420.0">
+                           <children>
+                              <ImageView fitHeight="280.0" fitWidth="415.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../../../../../resources/images/unicas-card.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="328.0" prefWidth="327.0">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="286.0" stylesheets="@market.css">
+                                 <children>
+                                    <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="140.0" text="Codice Carta" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="170.0" promptText="XXXX-XXXX-XXXX-XXXX" style="-fx-background-color: rgba(0, 0, 0, 0);" stylesheets="@market.css">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <styleClass>
+                                    <String fx:value="peachUnderline" />
+                                    <String fx:value="transparent" />
+                                 </styleClass>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="286.0" stylesheets="@market.css">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="140.0" text="PIN" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField alignment="CENTER" prefHeight="30.0" prefWidth="170.0" promptText="*****" style="-fx-background-color: rgba(0, 0, 0, 0);" stylesheets="@market.css">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </PasswordField>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <styleClass>
+                                    <String fx:value="peachUnderline" />
+                                    <String fx:value="transparent" />
+                                 </styleClass>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="249.0" prefWidth="322.0" stylesheets="@market.css">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="35.0" prefWidth="323.0" spacing="50.0" stylesheets="@market.css">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="30.0" prefWidth="90.0" styleClass="searchButton" stylesheets="@market.css" text="Confirm">
+                                       <font>
+                                          <Font name="Verdana" size="11.0" />
+                                       </font>
+                                    </Button>
+                                    <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleExit" prefHeight="30.0" prefWidth="90.0" styleClass="searchButton" stylesheets="@market.css" text="Eject">
+                                       <font>
+                                          <Font name="Verdana" size="11.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="60.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </children>
       </AnchorPane>
    </children>
