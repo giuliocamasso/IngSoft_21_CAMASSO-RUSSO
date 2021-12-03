@@ -174,3 +174,7 @@
     -fx-background-image: url('../../../../../resources/icons/13-snack.png');
 }
 /*---------------------------------------------------------------------------*/
+.articleItem{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+}

@@ -1,7 +1,6 @@
 package it.unicas.supermarket.controller;
 
-import it.unicas.supermarket.IndianListener;
-import it.unicas.supermarket.Main;
+import it.unicas.supermarket.ArticleSelectionListener;
 import it.unicas.supermarket.MainSample;
 import it.unicas.supermarket.model.Fruit;
 
@@ -22,7 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MarketController implements Initializable {
@@ -46,7 +44,7 @@ public class MarketController implements Initializable {
 
     private List<Fruit> fruits = new ArrayList<>();
     private Image image;
-    private IndianListener indianListener;
+    private ArticleSelectionListener articleSelectionListener;
 
     private List<Fruit> getData() {
         List<Fruit> fruits = new ArrayList<>();
@@ -139,17 +137,17 @@ public class MarketController implements Initializable {
         fruits.addAll(getData());
         if (fruits.size() > 0) {
             setChosenFruit(fruits.get(0));
-            indianListener = fruit -> setChosenFruit(fruit);
+            articleSelectionListener = fruit -> setChosenFruit(fruit);
         }
         int column = 0;
         int row = 1;
         try {
             for (int i = 0; i < fruits.size(); i++) {
                 FXMLLoader itemLoader = new FXMLLoader();
-                itemLoader.setLocation(MainSample.class.getResource("view/item.fxml"));
+                itemLoader.setLocation(MainSample.class.getResource("view/ArticleGridItem.fxml"));
                 AnchorPane anchorPane = itemLoader.load();
-                ItemController itemController = itemLoader.getController();
-                itemController.setData(fruits.get(i), indianListener);
+                ArticleGridItemController articleGridItemController = itemLoader.getController();
+                articleGridItemController.setData(fruits.get(i), articleSelectionListener);
                 if (column == 3) {
                     column = 0;
                     row++;

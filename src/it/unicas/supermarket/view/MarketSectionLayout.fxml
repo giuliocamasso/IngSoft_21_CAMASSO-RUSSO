@@ -22,43 +22,35 @@
       <left>
          <VBox prefHeight="578.0" prefWidth="250.0" BorderPane.alignment="CENTER">
             <children>
-               <HBox alignment="CENTER" prefHeight="65.0" prefWidth="200.0" stylesheets="@market.css">
+               <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="330.0" stylesheets="@market.css">
+                  <styleClass>
+                     <String fx:value="addToCartButton" />
+                     <String fx:value="shadow" />
+                  </styleClass>
                   <children>
-                     <TextField prefHeight="40.0" prefWidth="235.0" promptText="Cerca..." style="-fx-background-color: trasparent;" styleClass="transparent" stylesheets="@market.css">
-                        <HBox.margin>
-                           <Insets left="10.0" />
-                        </HBox.margin>
+                     <Label text="Dettagli">
                         <font>
-                           <Font name="Verdana" size="16.0" />
-                        </font>
-                     </TextField>
-                     <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="168.0" styleClass="searchButton" stylesheets="@market.css" text="Cerca">
-                        <font>
-                           <Font name="Verdana" size="16.0" />
+                           <Font name="Verdana Bold" size="24.0" />
                         </font>
                         <HBox.margin>
-                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           <Insets />
                         </HBox.margin>
-                     </Button>
+                     </Label>
                   </children>
                   <VBox.margin>
                      <Insets bottom="10.0" />
                   </VBox.margin>
-                  <styleClass>
-                     <String fx:value="searchBox" />
-                     <String fx:value="shadow" />
-                  </styleClass>
                </HBox>
-               <VBox fx:id="chosenFruitCard" alignment="CENTER" prefHeight="535.0" prefWidth="100.0" stylesheets="@market.css">
+               <VBox fx:id="articleDetails" alignment="CENTER" prefHeight="535.0" prefWidth="100.0" stylesheets="@market.css">
                   <children>
                      <HBox prefHeight="23.0" prefWidth="411.0">
                         <children>
-                           <Label fx:id="fruitNameLable" prefHeight="23.0" prefWidth="237.0" text="\@nome articolo" textFill="WHITE">
+                           <Label fx:id="articleNameLabel" prefHeight="23.0" prefWidth="237.0" text="\@nome articolo" textFill="WHITE">
                               <font>
                                  <Font name="Verdana" size="18.0" />
                               </font>
                            </Label>
-                           <Label fx:id="fruitPriceLabel" alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="171.0" text="\@$2.99" textFill="WHITE">
+                           <Label fx:id="articlePriceLabel" alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="171.0" text="\@$2.99" textFill="WHITE">
                               <font>
                                  <Font name="Verdana" size="18.0" />
                               </font>
@@ -78,7 +70,7 @@
                         <children>
                            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="335.0">
                               <children>
-                                 <ImageView fx:id="fruitImg" fitHeight="157.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
+                                 <ImageView fx:id="articleImage" fitHeight="157.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                        <Image url="@../../../../../resources/images/fruits/peach.png" />
                                     </image>
@@ -152,25 +144,55 @@
       <center>
          <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-               <VBox prefHeight="598.0" prefWidth="730.0">
+               <VBox alignment="CENTER" prefHeight="598.0" prefWidth="730.0">
                   <children>
+                     <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="668.0" stylesheets="@market.css">
+                        <children>
+                           <TextField prefHeight="40.0" prefWidth="473.0" promptText="Cerca..." style="-fx-background-color: trasparent;" styleClass="transparent" stylesheets="@market.css">
+                              <HBox.margin>
+                                 <Insets left="10.0" />
+                              </HBox.margin>
+                              <font>
+                                 <Font name="Verdana" size="16.0" />
+                              </font>
+                           </TextField>
+                           <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="218.0" styleClass="searchButton" stylesheets="@market.css" text="Cerca">
+                              <font>
+                                 <Font name="Verdana" size="16.0" />
+                              </font>
+                              <HBox.margin>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              </HBox.margin>
+                           </Button>
+                        </children>
+                        <styleClass>
+                           <String fx:value="searchBox" />
+                           <String fx:value="shadow" />
+                        </styleClass>
+                        <VBox.margin>
+                           <Insets bottom="10.0" left="100.0" right="100.0" />
+                        </VBox.margin>
+                     </HBox>
                      <HBox alignment="CENTER" prefHeight="600.0" prefWidth="730.0">
                         <children>
-                           <ScrollPane fx:id="scroll" prefHeight="570.0" prefWidth="785.0" styleClass="transparent" stylesheets="@SampleStyle.css">
+                           <ScrollPane fx:id="articleScrollPane" prefHeight="570.0" prefWidth="785.0" styleClass="transparent" stylesheets="@SampleStyle.css">
                               <content>
-                                 <GridPane fx:id="grid" prefHeight="0.0" prefWidth="0.0">
+                                 <GridPane fx:id="articleGridPane" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="0.0">
                                     <rowConstraints>
                                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
                                     </rowConstraints>
                                  </GridPane>
                               </content>
                               <HBox.margin>
-                                 <Insets top="10.0" />
+                                 <Insets />
                               </HBox.margin>
                            </ScrollPane>
                         </children>
                      </HBox>
                   </children>
+                  <VBox.margin>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </VBox.margin>
                </VBox>
             </children>
          </VBox>
@@ -178,7 +200,7 @@
       <right>
          <VBox prefHeight="558.0" prefWidth="250.0" BorderPane.alignment="CENTER">
             <children>
-               <HBox alignment="CENTER" prefHeight="57.0" prefWidth="330.0" stylesheets="@market.css">
+               <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="330.0" stylesheets="@market.css">
                   <styleClass>
                      <String fx:value="addToCartButton" />
                      <String fx:value="shadow" />
