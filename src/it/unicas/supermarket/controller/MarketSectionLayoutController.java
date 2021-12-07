@@ -11,11 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MarketSectionLayoutController implements Initializable {
+
 
     @FXML
     private VBox articleDetails;
@@ -183,4 +183,5 @@ public class MarketSectionLayoutController implements Initializable {
         System.out.println("Going to Chart section...");
         App.getInstance().initOrderSummaryLayout();
     }
+
 }

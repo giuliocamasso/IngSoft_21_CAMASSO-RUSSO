@@ -114,11 +114,6 @@ public class App {
 
     }
 
-    public void handleValidate() {
-        System.out.println("Validating card...");
-        initMarketSectionLayout();
-    }
-
     public void initMarketSectionLayout() {
         try {
             // Load root layout from fxml file.
@@ -203,4 +198,6 @@ public class App {
             return false;
         }
     }
+
+
 }

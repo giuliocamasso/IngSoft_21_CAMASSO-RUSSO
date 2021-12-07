@@ -15,7 +15,7 @@ public class ButtonGalleryController {
 
     @FXML
     private void handleValidate() {
-        App.getInstance().handleValidate();
+        //App.getInstance().handleValidate();
 
     }
 
