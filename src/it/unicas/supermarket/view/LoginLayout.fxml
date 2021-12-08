@@ -62,73 +62,102 @@
                                  <children>
                                     <VBox prefHeight="258.0" prefWidth="576.0">
                                        <children>
-                                          <HBox prefHeight="258.0" prefWidth="471.0">
+                                          <HBox alignment="CENTER" prefHeight="138.0" prefWidth="405.0">
                                              <children>
-                                                <Label fx:id="codiceCartaLabel" alignment="CENTER" prefHeight="104.0" prefWidth="414.0" text="XXXX-XXXX-XXXX-XXXX">
-                                                   <font>
-                                                      <Font name="Verdana Bold Italic" size="16.0" />
-                                                   </font>
-                                                </Label>
+                                                <HBox alignment="CENTER" prefHeight="76.0" prefWidth="69.0">
+                                                   <children>
+                                                      <ImageView fitHeight="69.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../../resources/images/chip.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="35.0" />
+                                                   </HBox.margin>
+                                                </HBox>
+                                                <HBox alignment="CENTER" prefHeight="142.0" prefWidth="405.0">
+                                                   <children>
+                                                      <Label fx:id="codiceCartaLabel" alignment="CENTER" prefHeight="100.0" prefWidth="293.0" text="XXXX-XXXX-XXXX-XXXX">
+                                                         <font>
+                                                            <Font name="Verdana Bold Italic" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
                                              </children>
                                           </HBox>
-                                          <HBox alignment="CENTER" prefHeight="258.0" prefWidth="471.0">
+                                          <HBox alignment="CENTER" prefHeight="115.0" prefWidth="405.0">
                                              <children>
-                                                <Label prefHeight="124.0" prefWidth="405.0" text="Codice cliente" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="Verdana" size="16.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets bottom="10.0" left="10.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <Label fx:id="codiceClienteLabel1" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="250.0" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="Verdana" size="18.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="258.0" prefWidth="471.0">
-                                             <children>
-                                                <Label prefHeight="134.0" prefWidth="405.0" text="Massimali" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="Verdana" size="16.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets bottom="10.0" left="10.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <Label fx:id="massimaliLabel1" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="250.0" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="Verdana" size="18.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="258.0" prefWidth="471.0">
-                                             <children>
-                                                <Label prefHeight="146.0" prefWidth="405.0" text="Punti fedelta'" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="Verdana" size="16.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets bottom="10.0" left="10.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <Label fx:id="puntiFedeltaLabel1" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="250.0" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="Verdana" size="18.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
+                                                <VBox prefHeight="129.0" prefWidth="316.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="305.0">
+                                                         <children>
+                                                            <Label prefHeight="49.0" prefWidth="117.0" text="Codice cliente" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="Verdana" size="16.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets bottom="10.0" left="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label fx:id="codiceClienteLabel1" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="159.0" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="Verdana" size="18.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="305.0">
+                                                         <children>
+                                                            <Label prefHeight="49.0" prefWidth="112.0" text="Massimali" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="Verdana" size="16.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets bottom="10.0" left="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label fx:id="massimaliLabel1" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="163.0" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="Verdana" size="18.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="305.0">
+                                                         <children>
+                                                            <Label prefHeight="23.0" prefWidth="109.0" text="Punti fedelta'" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="Verdana" size="16.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets bottom="10.0" left="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label fx:id="puntiFedeltaLabel1" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="166.0" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="Verdana" size="18.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <ImageView fitHeight="70.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../../../resources/images/logo_unicas.png" />
+                                                   </image>
+                                                </ImageView>
                                              </children>
                                           </HBox>
                                        </children>
