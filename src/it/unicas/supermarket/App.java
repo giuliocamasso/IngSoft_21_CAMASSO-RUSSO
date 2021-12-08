@@ -98,12 +98,12 @@ public class App {
 
     public void handleExit() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Are you sure?");
-        alert.setHeaderText("Exit");
-        alert.setContentText("Exit from application.");
+        alert.setTitle("Uscita");
+        alert.setHeaderText("Vuoi uscire dal supermercato?");
+        alert.setContentText("Grazie per averci scelto.");
 
-        ButtonType buttonTypeOne = new ButtonType("Yes");
-        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonTypeOne = new ButtonType("Si");
+        ButtonType buttonTypeCancel = new ButtonType("Torna al supermercato", ButtonBar.ButtonData.CANCEL_CLOSE);
 
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
 

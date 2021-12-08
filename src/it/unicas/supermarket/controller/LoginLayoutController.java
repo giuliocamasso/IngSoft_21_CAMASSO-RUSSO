@@ -2,8 +2,10 @@ package it.unicas.supermarket.controller;
 
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.model.Carte;
+import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.model.dao.mysql.CarteDAOMySQL;
+import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.DAOMySQLSettings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,10 +30,6 @@ import java.util.logging.Logger;
  * @author GC-GR
  */
 public class LoginLayoutController {
-
-    /**
-     * Closes the application.
-     */
 
     @FXML
     private TextField codiceCartaTextField;
@@ -62,56 +60,36 @@ public class LoginLayoutController {
 
     private Boolean cardAccepted = false;
 
-    private static Logger logger = null;
+    private static Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
     @FXML
-    private void handleExit() {
+    private void handleConfirm() throws DAOException, SQLException {
 
-        App.getInstance().handleExit();
-
-    }
-
-    @FXML
-    private void handleConfirm() throws DAOException {
-        System.out.println("Validating card...");
+        if (cardAccepted) {
+            App.getInstance().initMarketSectionLayout();
+            resetForm();
+            return;
+        }
+        // else
         String codiceCarta = codiceCartaTextField.getText();
         String pin = pinPasswordField.getText();
 
-        if (checkLoginData(codiceCarta, pin))
-            System.out.println("Dati ok");
-        else
-            System.out.println("errore");
+        // checking data before accessing db
+        if ( !checkLoginData(codiceCarta, pin) )
+            return;
 
+        // checking PIN
         String pinFromDB = getPinFromCodiceCarta(codiceCarta);
-        if (pinFromDB.equals("ERROR")){
-            messageLabel.setText("Carta non trovata.");
-            messageLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
-            if (this.cardAccepted)
-                this.cardAccepted= false;
-        }
 
+        if (pinFromDB.equals("ERROR"))
+           cardRejected();
 
-        else if (pin.equals(pinFromDB)) {
-            System.out.println("PIN CORRETTO: " + pinFromDB);
-            messageLabel.setText("CARTA ACCETTATA!");
-            messageLabel.setStyle("-fx-text-fill: rgb(0,255,43)");
-            this.cardAccepted = true;
-            confirmButton.setText("AI REPARTI");
-            codiceCartaLabel.setText(codiceCarta);
+        else if (!pin.equals(pinFromDB))
+            pinRejected();
 
-            try {
-                codiceClienteLabel.setText(getCodiceClienteFromCodiceCarta(codiceCarta));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-        }
-        else {
-            System.out.println("PIN errato(carta esistente): " + pin );
-            messageLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
-            messageLabel.setText("PIN errato.");
-            if (this.cardAccepted)
-                this.cardAccepted= false;
+        // pin.equals(pinFromDB))
+        else{
+           loginSuccess(codiceCarta, getCodiceClienteFromCodiceCarta(codiceCarta));
         }
 
     }
@@ -119,11 +97,19 @@ public class LoginLayoutController {
 
     Boolean checkLoginData (String codiceCarta, String pin){
 
-        if (codiceCarta.length() != 19 || codiceCarta.charAt(4) != '-' || codiceCarta.charAt(9) != '-' || codiceCarta.charAt(14) != '-' || pin.length() !=5)
+        if (codiceCarta.length() != 19 ||
+                codiceCarta.charAt(4) != '-'||codiceCarta.charAt(9) != '-' || codiceCarta.charAt(14) != '-'){
+            messageLabel.setText("Codice carta non valido.");
+            messageLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
             return false;
+        }
+        else if (pin.length() !=5) {
+            messageLabel.setText("PIN non valido.");
+            messageLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
+            return false;
+        }
         else return true;
     }
-
 
     String getPinFromCodiceCarta(String codiceCarta) throws DAOException {
         List<Carte> cardToBeChecked = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
@@ -131,7 +117,6 @@ public class LoginLayoutController {
             return cardToBeChecked.get(0).getPin();
         else return "ERROR";
     }
-
 
     String getCodiceClienteFromCodiceCarta(String codiceCarta) throws SQLException {
 
@@ -161,10 +146,82 @@ public class LoginLayoutController {
 
         if (result.size() == 1)
             return result.get(0);
+
         // 1 - more than one client is correlated to the given card
         // OR
         // 2 - client not found (db error, something went wrong)
         else return "ERROR";
+    }
+
+    String getMassimaliFromCodiceCarta(String codiceCarta) throws SQLException, DAOException {
+       // select() function is codiceCarta-based
+       List<Carte> card = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
+       if( card.size() != 1)
+           return "ERROR";
+       else
+           return card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €";
+    }
+
+    String getPuntiFedeltaFromCodiceCliente(String codiceCliente) throws SQLException, DAOException {
+        // select() function is codiceCliente-based
+        List<Clienti> customer = ClientiDAOMySQL.getInstance().select(new Clienti("","",codiceCliente));
+        if( customer.size() != 1)
+            return "ERROR";
+        else
+            return customer.get(0).getPuntiFedelta().toString();
+    }
+
+    void cardRejected(){
+        messageLabel.setText("Carta non trovata.");
+        messageLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
+        if (this.cardAccepted)
+            this.cardAccepted= false;       // updating login-state
+    }
+
+    void pinRejected(){
+        messageLabel.setText("PIN errato! Riprovare.");
+        messageLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
+        if (this.cardAccepted)
+            this.cardAccepted= false;       // updating login-state
+    }
+
+    void loginSuccess(String codiceCarta, String codiceCliente) throws SQLException, DAOException {
+
+        codiceClienteLabel.setText(getCodiceClienteFromCodiceCarta(codiceCarta));
+        massimaliLabel.setText(getMassimaliFromCodiceCarta(codiceCarta));
+        puntiFedeltaLabel.setText(getPuntiFedeltaFromCodiceCliente(codiceCliente));
+
+        // updating login label
+        messageLabel.setText("CARTA ACCETTATA!");
+        messageLabel.setStyle("-fx-text-fill: rgb(0,255,43)");
+
+        // updating login-state
+        this.cardAccepted = true;
+
+        // updating navigation button
+        confirmButton.setText("AI REPARTI");
+        codiceCartaLabel.setText(codiceCarta);
+    }
+
+    void resetForm(){
+        codiceCartaTextField.setText("");
+        pinPasswordField.setText("");
+        codiceCartaLabel.setText("xxxx-xxxx-xxxx-xxxx");
+        codiceClienteLabel.setText("");
+        massimaliLabel.setText("");
+        puntiFedeltaLabel.setText("");
+
+        messageLabel.setText("Inserite la vostra carta...");
+        messageLabel.setStyle("-fx-text-fill: rgb(0,255,43)");
+
+        // also resets the card-state!
+        cardAccepted = false;
+    }
+
+    // called by 'eject' button
+    @FXML
+    private void handleEject(){
+        resetForm();
     }
 
 }
