@@ -142,10 +142,10 @@ public class Dataloader {
             ClientiDAOMySQL.getInstance().deleteAll();
             ArticoliDAOMySQL.getInstance().deleteAll();
 
-            loadClienti("src/it/unicas/supermarket/Clienti.txt", " - ");
-            loadArticoli("src/it/unicas/supermarket/Articoli.txt", " - ");
-            loadCarte("src/it/unicas/supermarket/Carte.txt", " - ");
-            loadOrdini("src/it/unicas/supermarket/Ordini.txt", " - ");
+            loadClienti("src/it/unicas/supermarket/dataloader/Clienti.txt", " - ");
+            loadArticoli("src/it/unicas/supermarket/dataloader/Articoli.txt", " - ");
+            loadCarte("src/it/unicas/supermarket/dataloader/Carte.txt", " - ");
+            loadOrdini("src/it/unicas/supermarket/dataloader/Ordini.txt", " - ");
 
         } catch (IOException | DAOException e) {
             e.printStackTrace();
