@@ -2,10 +2,9 @@ package it.unicas.supermarket.controller;
 
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.model.Carte;
-import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.model.dao.mysql.CarteDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
+import it.unicas.supermarket.model.dao.mysql.DAOMySQLSettings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +12,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * [ ! MUST UPDATE THIS______________________________________________________________________________]
@@ -58,6 +62,8 @@ public class LoginLayoutController {
 
     private Boolean cardAccepted = false;
 
+    private static Logger logger = null;
+
     @FXML
     private void handleExit() {
 
@@ -92,7 +98,12 @@ public class LoginLayoutController {
             this.cardAccepted = true;
             confirmButton.setText("AI REPARTI");
             codiceCartaLabel.setText(codiceCarta);
-            codiceClienteLabel.setText(getCodiceClienteFromCodiceCarta(codiceCarta));
+
+            try {
+                codiceClienteLabel.setText(getCodiceClienteFromCodiceCarta(codiceCarta));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
         }
         else {
@@ -105,12 +116,14 @@ public class LoginLayoutController {
 
     }
 
+
     Boolean checkLoginData (String codiceCarta, String pin){
 
         if (codiceCarta.length() != 19 || codiceCarta.charAt(4) != '-' || codiceCarta.charAt(9) != '-' || codiceCarta.charAt(14) != '-' || pin.length() !=5)
             return false;
         else return true;
     }
+
 
     String getPinFromCodiceCarta(String codiceCarta) throws DAOException {
         List<Carte> cardToBeChecked = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
@@ -119,17 +132,40 @@ public class LoginLayoutController {
         else return "ERROR";
     }
 
-    String getCodiceClienteFromCodiceCarta(String codiceCarta) throws DAOException {
-        List<Carte> card = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
-        if (card.size() == 1) {
-            Integer idCliente = card.get(0).getIdCliente();
-            return idCliente.toString();
-        } else return "ERROR";
+
+    String getCodiceClienteFromCodiceCarta(String codiceCarta) throws SQLException {
+
+        Statement statement = DAOMySQLSettings.getStatement();
+
+        String query = "SELECT clienti.codiceCliente " +
+                "FROM Clienti JOIN Carte " +
+                "ON Clienti.idCliente = Carte.idCliente " +
+                "WHERE codiceCarta = '" + codiceCarta + "';";
+
+        try{
+            logger.info("SQL: " + query);
+        }
+        catch(NullPointerException nullPointerException){
+            System.out.println("SQL: " + query);
+        }
+
+        ArrayList<String> result = new ArrayList<>();
+
+        ResultSet rs = statement.executeQuery(query);
+
+        while(rs.next()){
+            result.add(rs.getString("codiceCliente"));
+        }
+
+        DAOMySQLSettings.closeStatement(statement);
+
+        if (result.size() == 1)
+            return result.get(0);
+        // 1 - more than one client is correlated to the given card
+        // OR
+        // 2 - client not found (db error, something went wrong)
+        else return "ERROR";
     }
 
-    /*
-    SELECT * from Carte JOIN Clienti on Carte.idCliente = Cliente.idCliente
-    WHERE codiceCarta=@codiceCarta
-    * */
 }
 

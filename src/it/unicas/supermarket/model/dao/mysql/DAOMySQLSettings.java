@@ -1,8 +1,15 @@
 package it.unicas.supermarket.model.dao.mysql;
 
+import it.unicas.supermarket.model.Carte;
+import it.unicas.supermarket.model.dao.DAOException;
+
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class DAOMySQLSettings {
 
@@ -20,6 +27,8 @@ public class DAOMySQLSettings {
     private String username = "market_user";
     private String password = "ROOT";
     private String schema = "market";
+
+    private static Logger logger = null;
 
     // getter and setter: @Host
     public String getHost()                                 { return host; }
