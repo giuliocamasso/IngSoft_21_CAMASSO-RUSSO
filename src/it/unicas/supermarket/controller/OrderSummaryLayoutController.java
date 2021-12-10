@@ -3,6 +3,7 @@ import it.unicas.supermarket.App;
 import it.unicas.supermarket.ArticleSelectionListener;
 import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.Fruit;
+import it.unicas.supermarket.model.dao.DAOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,12 +44,24 @@ public class OrderSummaryLayoutController implements Initializable {
     @FXML
     private GridPane chartArticleGridPane;
 
+    @FXML
+    private Label codiceCartaLabel;
+
+    @FXML
+    private Label puntiFedeltaLabel;
+
+    @FXML
+    private Label codiceClienteLabel;
+
+    @FXML
+    private Label massimaliLabel;
+
     private List<Fruit> fruits = new ArrayList<>();
     private Image image;
     private ArticleSelectionListener articleSelectionListener;
 
     @FXML
-    private void handleMarket(){
+    private void handleMarket() {
         App.getInstance().initMarketSectionLayout();
     }
 
@@ -164,8 +178,19 @@ public class OrderSummaryLayoutController implements Initializable {
                 GridPane.setMargin(anchorPane, new Insets(10, 10, 10 ,10));
 
             }
-        } catch (IOException e) {
+
+            paymentDetails(App.getInstance().codiceCarta, App.getInstance().codiceCliente);
+
+        } catch (IOException | SQLException | DAOException e) {
             e.printStackTrace();
         }
     }
+
+    void paymentDetails(String codiceCarta, String codiceCliente) throws SQLException, DAOException {
+        codiceClienteLabel.setText(codiceCliente);
+        massimaliLabel.setText(App.getInstance().massimali);
+        puntiFedeltaLabel.setText(App.getInstance().puntiFedelta);
+        codiceCartaLabel.setText(codiceCarta);
+    }
+
 }
