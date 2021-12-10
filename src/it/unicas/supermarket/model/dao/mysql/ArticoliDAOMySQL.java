@@ -330,4 +330,22 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
 
         return articoliList.get(0).getIdArticolo();
     }
+
+    public List<Articoli> filterBySection(String section) throws DAOException {
+
+        ArrayList<Articoli> filteredList;
+
+        try{
+            Statement st = DAOMySQLSettings.getStatement();
+            String sql = "select * from articoli where (reparto = '" + section +"');" ;
+            printQuery(sql);
+            filteredList = getQueryResult(st, sql);
+            DAOMySQLSettings.closeStatement(st);
+
+        } catch (SQLException sq){
+            throw new DAOException("In filterBySection(): " + sq.getMessage());
+        }
+
+        return filteredList;
+    }
 }

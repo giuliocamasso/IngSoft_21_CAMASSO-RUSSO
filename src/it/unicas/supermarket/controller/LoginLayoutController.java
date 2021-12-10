@@ -31,23 +31,12 @@ import java.util.logging.Logger;
  */
 public class LoginLayoutController {
 
-    @FXML
-    private TextField codiceCartaTextField;
-
-    @FXML
-    private PasswordField pinPasswordField;
-
-    @FXML
-    private Label messageLabel;
-
-    @FXML
-    private Label codiceCartaLabel;
-
-    @FXML
-    private Label codiceClienteLabel;
-
-    @FXML
-    private Label massimaliLabel;
+    @FXML private TextField codiceCartaTextField;
+    @FXML private PasswordField pinPasswordField;
+    @FXML private Label messageLabel;
+    @FXML private Label codiceCartaLabel;
+    @FXML private Label codiceClienteLabel;
+    @FXML private Label massimaliLabel;
 
     @FXML
     private Label puntiFedeltaLabel;
@@ -60,7 +49,7 @@ public class LoginLayoutController {
 
     private Boolean cardAccepted = false;
 
-    private static Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
+    private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
     @FXML
     private void handleConfirm() throws DAOException, SQLException {
@@ -119,13 +108,13 @@ public class LoginLayoutController {
     }
 
 
-
     void cardRejected(){
         messageLabel.setText("Carta non trovata.");
         messageLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
         if (this.cardAccepted)
             this.cardAccepted= false;       // updating login-state
     }
+
 
     void pinRejected(){
         messageLabel.setText("PIN errato! Riprovare.");
@@ -134,7 +123,8 @@ public class LoginLayoutController {
             this.cardAccepted= false;       // updating login-state
     }
 
-    void loginSuccess(String codiceCarta, String codiceCliente) throws SQLException, DAOException {
+
+    void loginSuccess(String codiceCarta, String codiceCliente) throws DAOException {
 
         codiceClienteLabel.setText(codiceCliente);
         massimaliLabel.setText(getMassimaliFromCodiceCarta(codiceCarta));
@@ -152,6 +142,7 @@ public class LoginLayoutController {
         codiceCartaLabel.setText(codiceCarta);
     }
 
+
     void resetForm(){
         codiceCartaTextField.setText("");
         pinPasswordField.setText("");
@@ -167,11 +158,13 @@ public class LoginLayoutController {
         cardAccepted = false;
     }
 
+
     // called by 'eject' button
     @FXML
     private void handleEject(){
         resetForm();
     }
+
 
     public String getPinFromCodiceCarta(String codiceCarta) throws DAOException {
         List<Carte> cardToBeChecked = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
@@ -179,6 +172,7 @@ public class LoginLayoutController {
             return cardToBeChecked.get(0).getPin();
         else return "ERROR";
     }
+
 
     public String getCodiceClienteFromCodiceCarta(String codiceCarta) throws SQLException {
 
@@ -217,7 +211,8 @@ public class LoginLayoutController {
         else return "ERROR";
     }
 
-    public String getMassimaliFromCodiceCarta(String codiceCarta) throws SQLException, DAOException {
+
+    public String getMassimaliFromCodiceCarta(String codiceCarta) throws DAOException {
         // select() function is codiceCarta-based
         List<Carte> card = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
         if( card.size() != 1)
@@ -228,7 +223,8 @@ public class LoginLayoutController {
         }
     }
 
-    public String getPuntiFedeltaFromCodiceCliente(String codiceCliente) throws SQLException, DAOException {
+
+    public String getPuntiFedeltaFromCodiceCliente(String codiceCliente) throws DAOException {
         // select() function is codiceCliente-based
         List<Clienti> customer = ClientiDAOMySQL.getInstance().select(new Clienti("","",codiceCliente));
         if( customer.size() != 1)

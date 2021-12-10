@@ -5,12 +5,6 @@ import it.unicas.supermarket.controller.MarketSectionLayoutController;
 import it.unicas.supermarket.controller.OrderSummaryLayoutController;
 
 import it.unicas.supermarket.controller.ReceiptController;
-import it.unicas.supermarket.model.Carte;
-import it.unicas.supermarket.model.Clienti;
-import it.unicas.supermarket.model.dao.DAOException;
-import it.unicas.supermarket.model.dao.mysql.CarteDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.DAOMySQLSettings;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -23,11 +17,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -36,11 +25,7 @@ public class App {
 
     private Stage mainStage;
 
-    private AnchorPane loginLayout;
-    private AnchorPane marketSectionLayout;
-    private AnchorPane orderSummaryLayout;
-
-    private static Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
+    private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
     public String codiceCarta;
     public String codiceCliente;
@@ -88,13 +73,14 @@ public class App {
         return mainStage;
     }
 
+
     public void initLoginLayout() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/LoginLayout.fxml"));
 
-            loginLayout = loader.load();
+            AnchorPane loginLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene loginScene = new Scene(loginLayout);
@@ -115,6 +101,7 @@ public class App {
         }
     }
 
+
     public void handleExit() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Uscita");
@@ -133,13 +120,14 @@ public class App {
 
     }
 
+
     public void initMarketSectionLayout() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/MarketSectionLayout.fxml"));
 
-            marketSectionLayout = loader.load();
+            AnchorPane marketSectionLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene marketSectionScene = new Scene(marketSectionLayout);
@@ -166,7 +154,7 @@ public class App {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/OrderSummaryLayout.fxml"));
 
-            orderSummaryLayout = loader.load();
+            AnchorPane orderSummaryLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene orderSummaryScene = new Scene(orderSummaryLayout);

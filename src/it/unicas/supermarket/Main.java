@@ -23,7 +23,6 @@ public class Main extends Application {
 
     public Main() {}
 
-
     private void initializeDB() throws DAOException, IOException {
 
         System.out.println("---initializeDB()---\n");
