@@ -1,6 +1,5 @@
 package it.unicas.supermarket.controller;
 
-import it.unicas.supermarket.ArticleSelectionListener;
 import it.unicas.supermarket.model.Fruit;
 
 import javafx.fxml.FXML;

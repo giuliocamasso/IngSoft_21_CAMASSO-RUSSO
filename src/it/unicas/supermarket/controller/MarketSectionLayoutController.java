@@ -1,6 +1,5 @@
 package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
-import it.unicas.supermarket.ArticleSelectionListener;
 import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.dao.DAOException;
@@ -28,6 +27,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class MarketSectionLayoutController implements Initializable {
+
     // left-panel
     @FXML private Label articleNameLabel;
     @FXML private Label articlePriceLabel;
@@ -35,6 +35,10 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private Label articleProducerLabel;
     @FXML private Label articleDescription1Label;
     @FXML private Label articleDescription2Label;
+    @FXML private Label quantityLabel;
+    @FXML private Button incrementButton;
+    @FXML private Button decrementButton;
+    @FXML private Button addToCartButton;
 
     // grid-scrollable pane
     @FXML private ScrollPane articleScrollPane;
@@ -42,27 +46,47 @@ public class MarketSectionLayoutController implements Initializable {
 
     private final List<Articoli> gridPaneArticles = new ArrayList<>();
     private ArticleSelectionListener articleSelectionListener;
+    private Articoli chosenArticle;
+    private Integer chosenArticleQuantity;
+    private Integer chosenArticleStorage;
 
     // Section Buttons
     @FXML private Button macelleriaButton;
+    @FXML private Label macelleriaLabel;
     @FXML private Button pescheriaButton;
+    @FXML private Label pescheriaLabel;
     @FXML private Button ortofruttaButton;
+    @FXML private Label ortofruttaLabel;
     @FXML private Button alimentariButton;
+    @FXML private Label alimentariLabel;
     @FXML private Button fornoButton;
+    @FXML private Label fornoLabel;
     @FXML private Button bevandeButton;
+    @FXML private Label bevandeLabel;
     @FXML private Button surgelatiButton;
+    @FXML private Label surgelatiLabel;
     @FXML private Button snacksButton;
+    @FXML private Label snacksLabel;
     @FXML private Button babyButton;
+    @FXML private Label babyLabel;
     @FXML private Button cartoleriaButton;
+    @FXML private Label cartoleriaLabel;
     @FXML private Button petButton;
+    @FXML private Label petLabel;
     @FXML private Button benessereButton;
+    @FXML private Label benessereLabel;
     @FXML private Button casalinghiButton;
+    @FXML private Label casalinghiLabel;
 
+    // logger for tracking queries
     private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
     // by default, this loads and shows all the available articles
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        App.getInstance().setReparto("All");
+
         try {
             gridPaneArticles.addAll(getArticles("Initialize"));
             loadImages();
@@ -98,17 +122,17 @@ public class MarketSectionLayoutController implements Initializable {
 
     private void setChosenArticle(Articoli articolo) {
         // updates the left-panel
-        articleNameLabel.setText(articolo.getNome());
-        articlePriceLabel.setText(articolo.getPrezzo()+" €");
-        Image image = new Image("file:" + articolo.getImageURL());
-        articleImageView.setImage(image);
-        articleProducerLabel.setText(articolo.getProduttore());
-        articleDescription1Label.setText(articolo.getDescrizioneProdotto());
-        articleDescription2Label.setText(articolo.getDescrizioneQuantita());
-        /*
-        articleDetails.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n" +
-                "    -fx-background-radius: 30;");
-        */
+        this.chosenArticle = articolo;
+        this.chosenArticleQuantity = 0;
+        try {
+            this.chosenArticleStorage = checkStock(this.chosenArticle.getBarcode());
+            System.out.println("Articoli disponibili: " + this.chosenArticleStorage);
+        }
+        catch (DAOException e) {
+            e.printStackTrace();
+        }
+
+        updateArticlePane();
     }
 
     @FXML
@@ -118,16 +142,23 @@ public class MarketSectionLayoutController implements Initializable {
     }
 
     public void loadSectionArticles(String section){
+
         System.out.println("Loading" + section);
+
         clearGridItems();
         gridPaneArticles.clear();
 
         try {
             loadFilteredItems(section);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
 
+        // update graphics
+        updateSectionBar(section);
+
+        App.getInstance().setReparto(section);
 
     }
 
@@ -146,7 +177,6 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML public void handleWellness()              { loadSectionArticles("Benessere");  }
     @FXML public void handleHousehold()             { loadSectionArticles("Casalinghi"); }
 
-
     public void setGridLayout(AnchorPane anchorPane){
         // grid width
         articleGridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
@@ -162,7 +192,7 @@ public class MarketSectionLayoutController implements Initializable {
         GridPane.setMargin(anchorPane, new Insets(10, 10, 10, 10));
     }
 
-   public void loadFilteredItems(String section) throws IOException {
+    public void loadFilteredItems(String section) throws IOException {
         clearGridItems();
 
         try {
@@ -255,5 +285,202 @@ public class MarketSectionLayoutController implements Initializable {
     private void loadImages(){
         for (Articoli articoli : gridPaneArticles)
             articoli.setImageURL(Articoli.getURLfromCode(articoli.getBarcode()));
+    }
+
+    void updateSectionBar(String section){
+        String prevStyle = "";
+
+        String newStyle = "    -fx-border-width: 1;\n" +
+                          "    -fx-border-color: rgb(240, 109, 139);" +
+                          "    -fx-effect: dropshadow( three-pass-box , rgba(240, 109, 139, 0.6), 5, 0.0 , 0 , 1 );";
+
+        String newFontStyle = "-fx-font-weight: bold";
+
+        // restoring prev selected one
+        switch (App.getInstance().getReparto()) {
+            case "Macelleria":
+                macelleriaButton.setStyle(prevStyle);
+                macelleriaLabel.setStyle(prevStyle);
+                break;
+            case "Pescheria":
+                pescheriaButton.setStyle(prevStyle);
+                pescheriaLabel.setStyle(prevStyle);
+                break;
+            case "Ortofrutta":
+                ortofruttaButton.setStyle(prevStyle);
+                ortofruttaLabel.setStyle(prevStyle);
+                break;
+            case "Alimentari":
+                alimentariButton.setStyle(prevStyle);
+                alimentariLabel.setStyle(prevStyle);
+                break;
+            case "Forno":
+                fornoButton.setStyle(prevStyle);
+                fornoLabel.setStyle(prevStyle);
+                break;
+            case "Bevande":
+                bevandeButton.setStyle(prevStyle);
+                bevandeLabel.setStyle(prevStyle);
+                break;
+            case "Surgelati":
+                surgelatiButton.setStyle(prevStyle);
+                surgelatiLabel.setStyle(prevStyle);
+                break;
+            case "Snacks":
+                snacksButton.setStyle(prevStyle);
+                snacksLabel.setStyle(prevStyle);
+                break;
+            case "Baby":
+                babyButton.setStyle(prevStyle);
+                babyLabel.setStyle(prevStyle);
+                break;
+            case "Cartoleria":
+                cartoleriaButton.setStyle(prevStyle);
+                cartoleriaLabel.setStyle(prevStyle);
+                break;
+            case "Pet":
+                petButton.setStyle(prevStyle);
+                petLabel.setStyle(prevStyle);
+                break;
+            case "Benessere":
+                benessereButton.setStyle(prevStyle);
+                benessereLabel.setStyle(prevStyle);
+                break;
+            case "Casalinghi":
+                casalinghiButton.setStyle(prevStyle);
+                casalinghiLabel.setStyle(prevStyle);
+                break;
+            case "INIT"   :             // NB. it does nothing of first interaction!
+        }
+
+        switch (section) {
+            case "Macelleria":
+                macelleriaButton.setStyle(newStyle);
+                macelleriaLabel.setStyle(newFontStyle);
+                break;
+            case "Pescheria":
+                pescheriaButton.setStyle(newStyle);
+                pescheriaLabel.setStyle(newFontStyle);
+                break;
+            case "Ortofrutta":
+                ortofruttaButton.setStyle(newStyle);
+                ortofruttaLabel.setStyle(newFontStyle);
+                break;
+            case "Alimentari":
+                alimentariButton.setStyle(newStyle);
+                alimentariLabel.setStyle(newFontStyle);
+                break;
+            case "Forno":
+                fornoButton.setStyle(newStyle);
+                fornoLabel.setStyle(newFontStyle);
+                break;
+            case "Bevande":
+                bevandeButton.setStyle(newStyle);
+                bevandeLabel.setStyle(newFontStyle);
+                break;
+            case "Surgelati":
+                surgelatiButton.setStyle(newStyle);
+                surgelatiLabel.setStyle(newFontStyle);
+                break;
+            case "Snacks":
+                snacksButton.setStyle(newStyle);
+                snacksLabel.setStyle(newFontStyle);
+                break;
+            case "Baby":
+                babyButton.setStyle(newStyle);
+                babyLabel.setStyle(newFontStyle);
+                break;
+            case "Cartoleria":
+                cartoleriaButton.setStyle(newStyle);
+                cartoleriaLabel.setStyle(newFontStyle);
+                break;
+            case "Pet":
+                petButton.setStyle(newStyle);
+                petLabel.setStyle(newFontStyle);
+                break;
+            case "Benessere":
+                benessereButton.setStyle(newStyle);
+                benessereLabel.setStyle(newFontStyle);
+                break;
+            case "Casalinghi":
+                casalinghiButton.setStyle(newStyle);
+                casalinghiLabel.setStyle(newFontStyle);
+                break;
+        }
+    }
+
+    void updateArticlePane(){
+
+        articleNameLabel.setText(this.chosenArticle.getNome());
+        articlePriceLabel.setText(this.chosenArticle.getPrezzo()+" €");
+
+        Image image = new Image("file:" + this.chosenArticle.getImageURL());
+        articleImageView.setImage(image);
+
+        articleProducerLabel.setText(this.chosenArticle.getProduttore());
+        articleDescription1Label.setText(this.chosenArticle.getDescrizioneProdotto());
+        articleDescription2Label.setText(this.chosenArticle.getDescrizioneQuantita());
+
+        // also set quantityLabel to zero
+        quantityLabel.setText(String.valueOf(chosenArticleQuantity));
+        /*
+        articleDetails.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n" +
+                "    -fx-background-radius: 30;");
+        */
+    }
+
+    // order buttons
+    @FXML public void handleIncrement() {
+        System.out.println("Increment Pressed");
+
+        if(this.chosenArticleQuantity < this.chosenArticleStorage) {
+            this.chosenArticleQuantity++;
+            quantityLabel.setText(String.valueOf(chosenArticleQuantity));
+        }
+    }
+
+    @FXML public void handleDecrement(){
+        System.out.println("Decrement Pressed");
+        if(this.chosenArticleQuantity > 0) {
+            this.chosenArticleQuantity--;
+            quantityLabel.setText(String.valueOf(chosenArticleQuantity));
+        }
+    }
+
+    @FXML public void handleAddToCart(){
+        System.out.println("AddToCart Pressed with quantity: " + this.chosenArticleQuantity);
+
+        // nothing to do in this case
+        if(this.chosenArticleQuantity == 0)
+            return;
+
+        String cartMapKey = this.chosenArticle.getBarcode();
+
+        // the article is already in the cart
+        if(App.getInstance().getCartMap().containsKey(cartMapKey)) {
+            Integer oldQuantity = App.getInstance().getCartMap().get(cartMapKey);
+            System.out.println("oldQuantity: " + oldQuantity);
+            App.getInstance().getCartMap().replace(cartMapKey, oldQuantity + this.chosenArticleQuantity);
+            System.out.println("newQuantity: " + App.getInstance().getCartMap().get(cartMapKey));
+        }
+        else{
+            App.getInstance().getCartMap().put(cartMapKey, this.chosenArticleQuantity);
+        }
+
+        System.out.println(App.getInstance().getCartMap());
+    }
+
+    Integer checkStock(String codiceArticolo) throws DAOException {
+        List<Articoli> result = ArticoliDAOMySQL.getInstance().select(new Articoli("", codiceArticolo));
+        if (result.size() != 1)
+            throw new DAOException("checkStock() error. Article not found.");
+        Integer storage = result.get(0).getScorteMagazzino();
+
+        if(storage < 1) {
+            //articolo non disponibile
+            System.out.println("Articolo non disponibile.");
+            return 0;
+        }
+        else return storage;
     }
 }

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -31,6 +32,21 @@ public class App {
     public String codiceCliente;
     public String massimali;
     public String puntiFedelta;
+
+    public String reparto = "INIT";
+
+    public HashMap<String, Integer> getCartMap() {
+        return cartMap;
+    }
+
+    public HashMap<String, Integer> cartMap = new HashMap<>();
+    // nome articolo / quantita'?
+    // codiceArticolo / quantita'?
+    //capitalCities.put("England", "London");
+
+    public String getReparto()                   { return reparto; }
+
+    public void setReparto(String reparto)       { this.reparto = reparto; }
 
     public static App getInstance(){
         if (app == null){

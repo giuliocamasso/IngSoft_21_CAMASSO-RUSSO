@@ -1,8 +1,8 @@
-package it.unicas.supermarket;
+package it.unicas.supermarket.controller;
 
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.Fruit;
 
 public interface ArticleSelectionListener {
-    public void onClickListener(Articoli articolo);
+    void onClickListener(Articoli articolo);
 }
