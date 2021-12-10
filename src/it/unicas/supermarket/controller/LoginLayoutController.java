@@ -69,6 +69,8 @@ public class LoginLayoutController {
         boolean checcoJoni = true;
         if(checcoJoni)  return;
 
+        // debug per andare subito ai reparti
+
         if (cardAccepted) {
             App.getInstance().initMarketSectionLayout();
             resetForm();
@@ -76,6 +78,7 @@ public class LoginLayoutController {
         }
         // else
         String codiceCarta = codiceCartaTextField.getText();
+        App.getInstance().getCodiceCarta(codiceCarta);
         String pin = pinPasswordField.getText();
 
         // checking data before accessing db
@@ -115,65 +118,7 @@ public class LoginLayoutController {
         else return true;
     }
 
-    String getPinFromCodiceCarta(String codiceCarta) throws DAOException {
-        List<Carte> cardToBeChecked = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
-        if (cardToBeChecked.size() == 1)
-            return cardToBeChecked.get(0).getPin();
-        else return "ERROR";
-    }
 
-    String getCodiceClienteFromCodiceCarta(String codiceCarta) throws SQLException {
-
-        Statement statement = DAOMySQLSettings.getStatement();
-
-        String query = "SELECT clienti.codiceCliente " +
-                "FROM Clienti JOIN Carte " +
-                "ON Clienti.idCliente = Carte.idCliente " +
-                "WHERE codiceCarta = '" + codiceCarta + "';";
-
-        try{
-            logger.info("SQL: " + query);
-        }
-        catch(NullPointerException nullPointerException){
-            System.out.println("SQL: " + query);
-        }
-
-        ArrayList<String> result = new ArrayList<>();
-
-        ResultSet rs = statement.executeQuery(query);
-
-        while(rs.next()){
-            result.add(rs.getString("codiceCliente"));
-        }
-
-        DAOMySQLSettings.closeStatement(statement);
-
-        if (result.size() == 1)
-            return result.get(0);
-
-        // 1 - more than one client is correlated to the given card
-        // OR
-        // 2 - client not found (db error, something went wrong)
-        else return "ERROR";
-    }
-
-    String getMassimaliFromCodiceCarta(String codiceCarta) throws SQLException, DAOException {
-       // select() function is codiceCarta-based
-       List<Carte> card = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
-       if( card.size() != 1)
-           return "ERROR";
-       else
-           return card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €";
-    }
-
-    String getPuntiFedeltaFromCodiceCliente(String codiceCliente) throws SQLException, DAOException {
-        // select() function is codiceCliente-based
-        List<Clienti> customer = ClientiDAOMySQL.getInstance().select(new Clienti("","",codiceCliente));
-        if( customer.size() != 1)
-            return "ERROR";
-        else
-            return customer.get(0).getPuntiFedelta().toString();
-    }
 
     void cardRejected(){
         messageLabel.setText("Carta non trovata.");
@@ -191,7 +136,7 @@ public class LoginLayoutController {
 
     void loginSuccess(String codiceCarta, String codiceCliente) throws SQLException, DAOException {
 
-        codiceClienteLabel.setText(getCodiceClienteFromCodiceCarta(codiceCarta));
+        codiceClienteLabel.setText(codiceCarta);
         massimaliLabel.setText(getMassimaliFromCodiceCarta(codiceCarta));
         puntiFedeltaLabel.setText(getPuntiFedeltaFromCodiceCliente(codiceCliente));
 
@@ -226,6 +171,72 @@ public class LoginLayoutController {
     @FXML
     private void handleEject(){
         resetForm();
+    }
+
+    public String getPinFromCodiceCarta(String codiceCarta) throws DAOException {
+        List<Carte> cardToBeChecked = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
+        if (cardToBeChecked.size() == 1)
+            return cardToBeChecked.get(0).getPin();
+        else return "ERROR";
+    }
+
+    public String getCodiceClienteFromCodiceCarta(String codiceCarta) throws SQLException {
+
+        Statement statement = DAOMySQLSettings.getStatement();
+
+        String query = "SELECT clienti.codiceCliente " +
+                "FROM Clienti JOIN Carte " +
+                "ON Clienti.idCliente = Carte.idCliente " +
+                "WHERE codiceCarta = '" + codiceCarta + "';";
+
+        try{
+            logger.info("SQL: " + query);
+        }
+        catch(NullPointerException nullPointerException){
+            System.out.println("SQL: " + query);
+        }
+
+        ArrayList<String> result = new ArrayList<>();
+
+        ResultSet rs = statement.executeQuery(query);
+
+        while(rs.next()){
+            result.add(rs.getString("codiceCliente"));
+        }
+
+        DAOMySQLSettings.closeStatement(statement);
+
+        if (result.size() == 1) {
+            App.getInstance().getCodiceCliente(result.get(0));
+            return result.get(0);
+        }
+
+            // 1 - more than one client is correlated to the given card
+            // OR
+            // 2 - client not found (db error, something went wrong)
+        else return "ERROR";
+    }
+
+    public String getMassimaliFromCodiceCarta(String codiceCarta) throws SQLException, DAOException {
+        // select() function is codiceCarta-based
+        List<Carte> card = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
+        if( card.size() != 1)
+            return "ERROR";
+        else {
+            App.getInstance().getMassimali(card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €");
+            return card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €";
+        }
+    }
+
+    public String getPuntiFedeltaFromCodiceCliente(String codiceCliente) throws SQLException, DAOException {
+        // select() function is codiceCliente-based
+        List<Clienti> customer = ClientiDAOMySQL.getInstance().select(new Clienti("","",codiceCliente));
+        if( customer.size() != 1)
+            return "ERROR";
+        else {
+            App.getInstance().getPuntiFedelta(customer.get(0).getPuntiFedelta().toString());
+            return customer.get(0).getPuntiFedelta().toString();
+        }
     }
 
 }

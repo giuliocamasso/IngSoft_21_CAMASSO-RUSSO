@@ -145,7 +145,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label text="\@codiceCliente" textFill="WHITE">
+                                          <Label fx:id="codiceClienteLabel" text="\@codiceCliente" textFill="WHITE">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -174,7 +174,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label text="\@puntiFedeltà" textFill="WHITE">
+                                          <Label fx:id="puntiFedeltaLabel" text="\@puntiFedeltà" textFill="WHITE">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -203,7 +203,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label text="\@codiceCarta" textFill="WHITE">
+                                          <Label fx:id="codiceCartaLabel" text="\@codiceCarta" textFill="WHITE">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -220,7 +220,7 @@
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label text="Codice Cliente" textFill="WHITE">
+                                          <Label text="Massimale" textFill="WHITE">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -232,7 +232,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label text="\@attuale/mensile" textFill="WHITE">
+                                          <Label fx:id="massimaliLabel" text="\@attuale/mensile" textFill="WHITE">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
