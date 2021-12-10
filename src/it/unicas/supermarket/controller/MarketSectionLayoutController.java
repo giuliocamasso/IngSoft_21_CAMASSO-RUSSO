@@ -3,6 +3,7 @@ import it.unicas.supermarket.App;
 import it.unicas.supermarket.ArticleSelectionListener;
 import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.Fruit;
+import it.unicas.supermarket.model.dao.DAOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -177,9 +179,10 @@ public class MarketSectionLayoutController implements Initializable {
     }
 
     @FXML
-    public void handleChart() {
+    public void handleChart() throws SQLException, DAOException {
         System.out.println("Going to Chart section...");
         App.getInstance().initOrderSummaryLayout();
     }
+
 
 }
