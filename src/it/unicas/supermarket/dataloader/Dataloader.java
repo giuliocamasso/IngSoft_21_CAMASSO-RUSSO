@@ -63,7 +63,12 @@ public class Dataloader {
             Integer scorteMagazzino = Integer.valueOf(values[2]);
             String barcode = values[3];
 
-            ArticoliDAOMySQL.getInstance().insert(new Articoli(nome, prezzo, scorteMagazzino, barcode, null));
+            String produttore = values[4];
+            String descrizioneProdotto = values[5];
+            String descrizioneQuantita = values[6];
+            String reparto = values[7];
+
+            ArticoliDAOMySQL.getInstance().insert(new Articoli(nome, prezzo, scorteMagazzino, barcode, reparto, produttore, descrizioneProdotto, descrizioneQuantita, null));
 
             // reads next line
             line = reader.readLine();

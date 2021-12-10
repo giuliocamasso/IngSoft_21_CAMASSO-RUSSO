@@ -1,7 +1,6 @@
 package it.unicas.supermarket.model.dao.mysql;
 
 import it.unicas.supermarket.model.Articoli;
-import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.dao.DAO;
 import it.unicas.supermarket.model.dao.DAOException;
 
@@ -46,8 +45,8 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
             c.deleteAll();
 
             // 1 - testing Insert
-            c.insert(new Articoli("nome_0", 0f, 0, "barcode_____0", null ));
-            c.insert(new Articoli("nome_1", 100f, 100, "barcode_____1", null ));
+            c.insert(new Articoli("nome_0", 0f, 0, "barcode_____0","Macelleria", "CONAD", "Bistecca suino", "500g", null ));
+            c.insert(new Articoli("nome_1", 100f, 100, "barcode_____1","Macelleria", "CONAD", "Bistecca suino", "500g", null ));
 
             // 2 - testing select all
             List<Articoli> list = c.selectAll();
@@ -63,11 +62,11 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
 
             // 3.2 delete
             // add 2 tuples
-            c.insert(new Articoli("nome_0", 0f, 0, "barcode_____0", null ));
-            c.insert(new Articoli("nome_1", 100f, 100, "barcode_____1", null ));
+            c.insert(new Articoli("nome_0", 0f, 0, "barcode_____0","Macelleria", "CONAD", "Bistecca suino", "500g", null ));
+            c.insert(new Articoli("nome_1", 100f, 100, "barcode_____1","Macelleria", "CONAD", "Bistecca suino", "500g", null ));
 
             Articoli toDelete = new Articoli("", "barcode_____0");
-            Articoli toDelete2 = new Articoli("nome_1", 100f, 100, "barcode_____1", null );
+            Articoli toDelete2 = new Articoli("nome_1", 100f, 100, "barcode_____1","Macelleria", "CONAD", "Bistecca suino", "500g", null );
 
             c.delete(toDelete);
             c.delete(toDelete2);
@@ -78,8 +77,8 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
 
             // 3.3 update
             // insert a new tuple to update
-            Articoli toUpdate = new Articoli("nome_2", 200.20f, 200, "barcode_____2", null );
-            Articoli toUpdate2 = new Articoli("nome_3", 300.30f, 300, "barcode_____3", null );
+            Articoli toUpdate = new Articoli("nome_2", 200.20f, 200, "barcode_____2","Macelleria", "CONAD", "Bistecca suino", "500g", null );
+            Articoli toUpdate2 = new Articoli("nome_3", 300.30f, 300, "barcode_____3","Macelleria", "CONAD", "Bistecca suino", "500g", null );
 
             c.insert(toUpdate);
             c.insert(toUpdate2);
@@ -95,7 +94,7 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
             list.forEach(System.out::println);
 
             // call the update()
-            Articoli updated = new Articoli("NEW_nome_2", 20000.20f, 20000, "barcode_____2", null );
+            Articoli updated = new Articoli("NEW_nome_2", 20000.20f, 20000, "barcode_____2","Macelleria", "CONAD", "Bistecca suino", "500g", null );
 
             c.update(updated);
 
@@ -210,8 +209,12 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
             Float prezzo_i = 100f*i;
             Integer scorteMagazzino_i = 100*i;
             String barcode_i = "barcode_____" + i;
-
-            insert(new Articoli(nome_i, prezzo_i, scorteMagazzino_i, barcode_i, null));
+            String reparto_i = "Macelleria";
+            String produttore_i = "produttore_____" + i;
+            String descrizioneProdotto_i = "DescrizioneProdotto_____" + i;
+            String descrizioneQuantita_i = "DescrizioneQuantita_____" + i;
+            insert(new Articoli(nome_i, prezzo_i, scorteMagazzino_i, barcode_i,reparto_i, produttore_i,
+                    descrizioneProdotto_i, descrizioneQuantita_i, null));
 
         }
 
@@ -241,11 +244,16 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
             throw new DAOException("Can't insert a null instance of Articoli");
 
         //NB. idArticoli = NULL (autoincrement in MySql)
-        String query = "INSERT INTO articoli (idArticolo, nome, prezzo, scorteMagazzino, barcode) VALUES (NULL, '" +
+        String query = "INSERT INTO articoli (idArticolo, nome, prezzo, scorteMagazzino, barcode," +
+                " produttore, descrizioneProdotto, descrizioneQuantita, reparto) VALUES (NULL, '" +
                 a.getNome() + "', " +
                 a.getPrezzo() + ", " +
                 a.getScorteMagazzino() + ", '" +
-                a.getBarcode() + "')";
+                a.getBarcode() +"', '" +
+                a.getProduttore() + "', '" +
+                a.getDescrizioneProdotto() + "', '" +
+                a.getDescrizioneQuantita() + "', '" +
+                a.getReparto() + "')";
 
         printQuery(query);
 
@@ -300,6 +308,10 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
                         rs.getFloat("prezzo"),
                         rs.getInt("scorteMagazzino"),
                         rs.getString("barcode"),
+                        rs.getString("reparto"),
+                        rs.getString("produttore"),
+                        rs.getString("descrizioneProdotto"),
+                        rs.getString("descrizioneQuantita"),
                         rs.getInt("idArticolo"))
                         );
             }

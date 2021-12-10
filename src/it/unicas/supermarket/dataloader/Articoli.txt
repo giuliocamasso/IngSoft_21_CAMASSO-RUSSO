@@ -1,5 +1,5 @@
-Articolo_01 - 14.50 - 111 - BARCODE___111
-Articolo_02 - 10.99 - 222 - BARCODE___222
-Articolo_03 - 0.99 - 333 - BARCODE___333
-Articolo_04 - 99.99 - 444 - BARCODE___444
-Articolo_05 - 27.00 - 555 - BARCODE___555
+Articolo_01 - 14.50 - 111 - BARCODE___111 - Produttore01 - Prodotto di tipo 1 - Confezione da 1 - Macelleria
+Articolo_02 - 10.99 - 222 - BARCODE___222 - Produttore02 - Prodotto di tipo 2 - Confezione da 2 - Macelleria
+Articolo_03 - 0.99 - 333 - BARCODE___333 - Produttore03 - Prodotto di tipo 3 - Confezione da 3 - Macelleria
+Articolo_04 - 99.99 - 444 - BARCODE___444 - Produttore04 - Prodotto di tipo 4 - Confezione da 4 - Pescheria
+Articolo_05 - 27.00 - 555 - BARCODE___555 - Produttore05 - Prodotto di tipo 5 - Confezione da 5 - Pescheria

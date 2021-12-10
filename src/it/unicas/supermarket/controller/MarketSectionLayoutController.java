@@ -7,11 +7,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +25,13 @@ public class MarketSectionLayoutController implements Initializable {
 
 
     @FXML
-    private VBox articleDetails;
+    private Label articleDescription1;
+
+    @FXML
+    private Label articleDescription2;
+
+    @FXML
+    private Label articleProducerLabel;
 
     @FXML
     private Label articleNameLabel;
@@ -39,6 +47,37 @@ public class MarketSectionLayoutController implements Initializable {
 
     @FXML
     private GridPane articleGridPane;
+
+    // Section Buttons
+    @FXML
+    private Button macelleriaButton;
+    @FXML
+    private Button pescheriaButton;
+    @FXML
+    private Button ortofruttaButton;
+    @FXML
+    private Button alimentariButton;
+    @FXML
+    private Button fornoButton;
+    @FXML
+    private Button bevandeButton;
+    @FXML
+    private Button surgelatiButton;
+    @FXML
+    private Button snacksButton;
+    @FXML
+    private Button babyButton;
+    @FXML
+    private Button cartoleriaButton;
+    @FXML
+    private Button petButton;
+    @FXML
+    private Button benessereButton;
+    @FXML
+    private Button casalinghiButton;
+
+
+
 
     private List<Fruit> fruits = new ArrayList<>();
     private Image image;
@@ -181,5 +220,79 @@ public class MarketSectionLayoutController implements Initializable {
         System.out.println("Going to Chart section...");
         App.getInstance().initOrderSummaryLayout();
     }
+
+    public void loadSectionArticles(String section){
+        System.out.println("Loading" + section);
+    }
+
+    // section buttons
+    @FXML
+    public void handleButchery(){
+        loadSectionArticles("Macelleria");
+    }
+
+    @FXML
+    public void handleFishmonger(){
+        loadSectionArticles("Pescheria");
+    }
+
+    @FXML
+    public void handleFruitAndVegetables(){
+        loadSectionArticles("Ortofrutta");
+    }
+
+    @FXML
+    public void handleGrocery(){
+        loadSectionArticles("Alimentari");
+    }
+
+    @FXML
+    public void handleBackery(){
+        loadSectionArticles("Forno");
+    }
+
+    @FXML
+    public void handleDrinks(){
+        loadSectionArticles("Bevande");
+    }
+
+    @FXML
+    public void handleFrozen(){
+        loadSectionArticles("Surgelati");
+    }
+
+    @FXML
+    public void handleSnacks(){
+        loadSectionArticles("Snacks");
+    }
+
+    @FXML
+    public void handleBaby(){
+        loadSectionArticles("Baby");
+    }
+
+    @FXML
+    public void handleStationery(){
+        loadSectionArticles("Cartoleria");
+    }
+
+    @FXML
+    public void handlePet(){
+        loadSectionArticles("Pet");
+    }
+
+    @FXML
+    public void handleWellness(){
+        loadSectionArticles("Benessere");
+    }
+
+    @FXML
+    public void handleHousehold(){
+        loadSectionArticles("Casalinghi");
+    }
+
+
+
+
 
 }

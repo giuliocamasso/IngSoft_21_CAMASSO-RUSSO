@@ -79,21 +79,51 @@
                            </VBox>
                         </children>
                      </HBox>
-                     <HBox>
+                     <VBox alignment="CENTER" prefHeight="268.0" prefWidth="248.0">
                         <children>
-                           <Label alignment="CENTER" prefHeight="48.0" prefWidth="248.0" text="\@ descrizione prodotto: vedere come ..." textFill="WHITE" />
-                        </children>
-                     </HBox>
-                     <VBox prefHeight="268.0" prefWidth="248.0">
-                        <children>
-                           <Pane prefHeight="86.0" prefWidth="248.0" />
+                           <HBox prefHeight="1.0" prefWidth="249.0">
+                              <children>
+                                 <Label fx:id="articleProducerLabel" prefHeight="48.0" prefWidth="229.0" text="\@Marca" textFill="WHITE">
+                                    <font>
+                                       <Font name="Verdana Italic" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </HBox.margin>
+                                 </Label>
+                              </children>
+                           </HBox>
+                           <HBox prefHeight="6.0" prefWidth="249.0">
+                              <children>
+                                 <Label fx:id="articleDescription1" prefHeight="48.0" prefWidth="248.0" text="\@descrizione" textFill="WHITE">
+                                    <font>
+                                       <Font name="Verdana Italic" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </HBox.margin>
+                                 </Label>
+                              </children>
+                           </HBox>
+                           <HBox prefHeight="2.0" prefWidth="249.0">
+                              <children>
+                                 <Label fx:id="articleDescription2" prefHeight="48.0" prefWidth="248.0" text="\@quantita" textFill="WHITE">
+                                    <font>
+                                       <Font name="Verdana Italic" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </HBox.margin>
+                                 </Label>
+                              </children>
+                           </HBox>
                         </children>
                      </VBox>
                      <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                         <children>
                            <Label prefHeight="33.0" prefWidth="181.0" text="Quantità" textFill="WHITE">
                               <font>
-                                 <Font name="Verdana" size="20.0" />
+                                 <Font name="Verdana" size="18.0" />
                               </font>
                               <HBox.margin>
                                  <Insets />
@@ -494,7 +524,7 @@
                   <children>
                      <VBox prefHeight="100.0" prefWidth="28.0">
                         <children>
-                           <Button id="meatButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: trasparent;" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="meatButton" fx:id="macelleriaButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButchery" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: trasparent;" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Macelleria" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -507,7 +537,7 @@
                      </VBox>
                      <VBox prefHeight="100.0" prefWidth="17.0">
                         <children>
-                           <Button id="fishButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="fishButton" fx:id="pescheriaButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleFishmonger" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Pescheria" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -520,7 +550,7 @@
                      </VBox>
                      <VBox prefHeight="100.0" prefWidth="0.0">
                         <children>
-                           <Button id="fruitButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="fruitButton" fx:id="ortofruttaButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleFruitAndVegetables" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Ortofrutta" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -533,7 +563,7 @@
                      </VBox>
                      <VBox prefHeight="100.0" prefWidth="0.0">
                         <children>
-                           <Button id="groceryButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="groceryButton" fx:id="alimentariButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleGrocery" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Alimentari" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -546,7 +576,7 @@
                      </VBox>
                      <VBox prefHeight="100.0" prefWidth="21.0">
                         <children>
-                           <Button id="breadButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="breadButton" fx:id="fornoButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleBackery" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Forno" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -559,7 +589,7 @@
                      </VBox>
                      <VBox prefHeight="37.0" prefWidth="70.0">
                         <children>
-                           <Button id="beerButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="beerButton" fx:id="bevandeButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDrinks" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Bevande" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -572,7 +602,7 @@
                      </VBox>
                      <VBox prefHeight="100.0" prefWidth="31.0">
                         <children>
-                           <Button id="ice-creamButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="ice-creamButton" fx:id="surgelatiButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleFrozen" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Surgelati" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -585,7 +615,7 @@
                      </VBox>
                      <VBox prefHeight="100.0" prefWidth="42.0">
                         <children>
-                           <Button id="snackButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="snackButton" fx:id="snacksButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSnacks" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Snacks" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -598,7 +628,7 @@
                      </VBox>
                      <VBox prefHeight="100.0" prefWidth="29.0">
                         <children>
-                           <Button id="babyButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="babyButton" fx:id="babyButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleBaby" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Baby" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -611,7 +641,7 @@
                      </VBox>
                      <VBox prefHeight="100.0" prefWidth="27.0">
                         <children>
-                           <Button id="stationeryButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="stationeryButton" fx:id="cartoleriaButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleStationery" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="131.0" text="Cartoleria" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -624,7 +654,7 @@
                      </VBox>
                      <VBox>
                         <children>
-                           <Button id="petButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="petButton" fx:id="petButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePet" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Pet" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -637,7 +667,7 @@
                      </VBox>
                      <VBox>
                         <children>
-                           <Button id="healthcareButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="healthcareButton" fx:id="benessereButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleWellness" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Benessere" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />
@@ -650,7 +680,7 @@
                      </VBox>
                      <VBox>
                         <children>
-                           <Button id="housekeepingButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
+                           <Button id="housekeepingButton" fx:id="casalinghiButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleHousehold" prefHeight="70.0" prefWidth="70.0" styleClass="departmentButton" stylesheets="@market.css" />
                            <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Casalinghi" textAlignment="CENTER">
                               <font>
                                  <Font name="Verdana" size="12.0" />

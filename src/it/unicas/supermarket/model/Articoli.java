@@ -16,6 +16,10 @@ public class Articoli {
     private FloatProperty prezzo;
     private IntegerProperty scorteMagazzino;
     private StringProperty barcode;
+    private StringProperty reparto;
+    private StringProperty produttore;
+    private StringProperty descrizioneProdotto;
+    private StringProperty descrizioneQuantita;
 
 
     public Articoli(String nome, String barcode) throws DAOException {
@@ -23,6 +27,12 @@ public class Articoli {
         this.idArticolo = null;
         this.prezzo = new SimpleFloatProperty(-1f);
         this.scorteMagazzino = new SimpleIntegerProperty(-1);
+
+        this.reparto = new SimpleStringProperty("");
+        this.produttore = new SimpleStringProperty("");
+        this.descrizioneProdotto = new SimpleStringProperty("");
+        this.descrizioneQuantita = new SimpleStringProperty("");
+
 
         if (nome == null || barcode == null)
             throw new DAOException("nome or barcode can't be null");
@@ -49,7 +59,7 @@ public class Articoli {
     }
 
 
-    public Articoli(String nome, Float prezzo, Integer scorteMagazzino, String barcode, Integer idArticolo) throws DAOException {
+    public Articoli(String nome, Float prezzo, Integer scorteMagazzino, String barcode, String reparto, String produttore, String descrizioneProdotto, String descrizioneQuantita, Integer idArticolo) throws DAOException {
 
         if (idArticolo != null)
             this.idArticolo = new SimpleIntegerProperty(idArticolo);
@@ -67,6 +77,22 @@ public class Articoli {
         if (scorteMagazzino == null || scorteMagazzino < 0)
             throw new DAOException("scorteMagazzino can't be null or negative");
         this.scorteMagazzino = new SimpleIntegerProperty(scorteMagazzino);
+
+        if (reparto == null || reparto.length() > 45)
+            throw new DAOException("Invalid reparto");
+        this.reparto = new SimpleStringProperty(reparto);
+
+        if (produttore == null || produttore.length() > 45)
+            throw new DAOException("Invalid produttore");
+        this.produttore = new SimpleStringProperty(produttore);
+
+        if (descrizioneProdotto == null || descrizioneProdotto.length() > 45)
+            throw new DAOException("Invalid descrizioneProdotto");
+        this.descrizioneProdotto = new SimpleStringProperty(descrizioneProdotto);
+
+        if (descrizioneQuantita == null || descrizioneQuantita.length() > 45)
+            throw new DAOException("Invalid descrizioneQuantita");
+        this.descrizioneQuantita = new SimpleStringProperty(descrizioneQuantita);
 
         if (barcode == null || barcode.length() != 13)
             throw new DAOException("Invalid barcode");
@@ -133,6 +159,34 @@ public class Articoli {
 
     public StringProperty barcodeProperty()                         { return barcode; }
 
+    // Getter setter and property: @produttore
+    public String getProduttore()                                   { return produttore.get(); }
+
+    public void setProduttore(String produttore)                    { this.produttore.set(produttore); }
+
+    public StringProperty produttoreProperty()                      { return produttore; }
+
+    // Getter setter and property: @reparto
+    public String getReparto()                                      { return reparto.get(); }
+
+    public void setReparto(String reparto)                          { this.reparto.set(reparto); }
+
+    public StringProperty repartoProperty()                         { return reparto; }
+
+    // Getter setter and property: @descrizioneProdotto
+    public String getDescrizioneProdotto()                          { return descrizioneProdotto.get(); }
+
+    public void setDescrizioneProdotto(String descrizioneProdotto)  { this.descrizioneProdotto.set(descrizioneProdotto); }
+
+    public StringProperty descrizioneProdottoProperty()             { return descrizioneProdotto; }
+
+    // Getter setter and property: @descrizioneQuantita
+    public String getDescrizioneQuantita()                          { return descrizioneQuantita.get(); }
+
+    public void setDescrizioneQuantita(String descrizioneQuantita)  { this.descrizioneQuantita.set(descrizioneQuantita); }
+
+    public StringProperty descrizioneQuantitaProperty()             { return descrizioneQuantita; }
+
 
     // toString() method
     public String toString(){
@@ -144,13 +198,14 @@ public class Articoli {
         else id = idArticolo.getValue().toString();
 
         return "id: " + id + " - barcode: " + barcode.getValue() + "\n" +
-                nome.getValue() + " - " + prezzo.getValue() + " - " + scorteMagazzino.getValue() + "\n";
+                nome.getValue() + " - " + prezzo.getValue() + " - " + scorteMagazzino.getValue() + "\n" +
+                "produttore: " + produttore.getValue() + "  reparto: " + reparto.getValue() + "\n";
     }
 
     public static void main(String[] args) {
 
         try {
-            Articoli test1 = new Articoli("nome", 1000f, 10, "1234567890123", null);
+            Articoli test1 = new Articoli("nome", 1000f, 10, "1234567890123","Macelleria", "CONAD", "Bistecca suino", "500g", null);
 
             System.out.println(test1);
 
@@ -158,4 +213,19 @@ public class Articoli {
             e.printStackTrace();
         }
     }
+
+    boolean controlloReparti(String reparto){
+        if (    reparto.equals("Macelleria") || reparto.equals("Pescheria")  ||
+                reparto.equals("Ortofrutta") || reparto.equals("Alimentari") ||
+                reparto.equals("Forno")      || reparto.equals("Bevande")    ||
+                reparto.equals("Surgelati")  || reparto.equals("Snacks")     ||
+                reparto.equals("Baby")       || reparto.equals("Cartoleria") ||
+                reparto.equals("Pet")        || reparto.equals("Benessere")  ||
+                reparto.equals("Casalinghi")
+        )
+            return true;
+        else
+            return false;
+    }
+
 }
