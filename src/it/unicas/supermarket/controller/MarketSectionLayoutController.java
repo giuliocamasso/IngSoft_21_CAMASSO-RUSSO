@@ -27,10 +27,10 @@ import java.util.ResourceBundle;
 public class MarketSectionLayoutController implements Initializable {
 
     @FXML
-    private Label articleDescription1;
+    private Label articleDescription1Label;
 
     @FXML
-    private Label articleDescription2;
+    private Label articleDescription2Label;
 
     @FXML
     private Label articleProducerLabel;
@@ -42,7 +42,7 @@ public class MarketSectionLayoutController implements Initializable {
     private Label articlePriceLabel;
 
     @FXML
-    private ImageView articleImage;
+    private ImageView articleImageView;
 
     @FXML
     private ScrollPane articleScrollPane;
@@ -96,8 +96,11 @@ public class MarketSectionLayoutController implements Initializable {
     private void setChosenArticle(Articoli articolo) {
         articleNameLabel.setText(articolo.getNome());
         articlePriceLabel.setText(String.valueOf(articolo.getPrezzo()));
-        image = new Image("file:"+articolo.getImageURL());
-        articleImage.setImage(image);
+        image = new Image("file:" + articolo.getImageURL());
+        articleImageView.setImage(image);
+        articleProducerLabel.setText(articolo.getProduttore());
+        articleDescription1Label.setText(articolo.getDescrizioneProdotto());
+        articleDescription2Label.setText(articolo.getDescrizioneQuantita());
         /*
         articleDetails.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n" +
                 "    -fx-background-radius: 30;");

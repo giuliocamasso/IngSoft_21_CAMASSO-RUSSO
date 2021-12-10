@@ -20,7 +20,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.MarketSectionLayoutController">
     <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
       <left>
-         <VBox prefHeight="578.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+         <VBox prefHeight="558.0" prefWidth="250.0" BorderPane.alignment="CENTER">
             <children>
                <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="330.0" stylesheets="@market.css">
                   <styleClass>
@@ -43,16 +43,19 @@
                </HBox>
                <VBox fx:id="articleDetails" alignment="CENTER" prefHeight="535.0" prefWidth="100.0" stylesheets="@market.css">
                   <children>
-                     <HBox prefHeight="23.0" prefWidth="411.0">
+                     <HBox fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="301.0">
                         <children>
-                           <Label fx:id="articleNameLabel" prefHeight="23.0" prefWidth="237.0" text="\@nome articolo" textFill="WHITE">
+                           <Label fx:id="articleNameLabel" prefHeight="30.0" prefWidth="195.0" text="\@nome articolo" textFill="WHITE">
                               <font>
-                                 <Font name="Verdana" size="18.0" />
+                                 <Font name="Verdana" size="16.0" />
                               </font>
+                              <HBox.margin>
+                                 <Insets />
+                              </HBox.margin>
                            </Label>
-                           <Label fx:id="articlePriceLabel" alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="171.0" text="\@$2.99" textFill="WHITE">
+                           <Label fx:id="articlePriceLabel" alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="126.0" text="\@$2.99" textFill="WHITE">
                               <font>
-                                 <Font name="Verdana" size="18.0" />
+                                 <Font name="Verdana Bold" size="16.0" />
                               </font>
                               <HBox.margin>
                                  <Insets />
@@ -60,68 +63,76 @@
                            </Label>
                         </children>
                         <VBox.margin>
-                           <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                      </HBox>
-                     <HBox prefHeight="134.0" prefWidth="310.0">
+                     <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="194.0">
                         <VBox.margin>
-                           <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                           <Insets bottom="10.0" top="10.0" />
                         </VBox.margin>
                         <children>
-                           <VBox alignment="CENTER" prefHeight="150.0" prefWidth="335.0">
-                              <children>
-                                 <ImageView fx:id="articleImage" fitHeight="157.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                       <Image url="@../../../../../resources/images/Ortofrutta/peach.png" />
-                                    </image>
-                                 </ImageView>
-                              </children>
-                           </VBox>
+                           <ImageView fx:id="articleImageView" fitHeight="150.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../../../resources/images/Ortofrutta/peach.png" />
+                              </image>
+                           </ImageView>
                         </children>
                      </HBox>
-                     <VBox alignment="CENTER" prefHeight="268.0" prefWidth="248.0">
+                     <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="249.0">
                         <children>
                            <HBox prefHeight="1.0" prefWidth="249.0">
                               <children>
                                  <Label fx:id="articleProducerLabel" prefHeight="48.0" prefWidth="229.0" text="\@Marca" textFill="WHITE">
                                     <font>
-                                       <Font name="Verdana Italic" size="14.0" />
+                                       <Font name="Verdana Bold Italic" size="16.0" />
                                     </font>
                                     <HBox.margin>
-                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       <Insets />
                                     </HBox.margin>
                                  </Label>
                               </children>
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
                            </HBox>
                            <HBox prefHeight="6.0" prefWidth="249.0">
                               <children>
-                                 <Label fx:id="articleDescription1" prefHeight="48.0" prefWidth="248.0" text="\@descrizione" textFill="WHITE">
+                                 <Label fx:id="articleDescription1Label" prefHeight="48.0" prefWidth="248.0" text="\@descrizione" textFill="WHITE">
                                     <font>
                                        <Font name="Verdana Italic" size="14.0" />
                                     </font>
                                     <HBox.margin>
-                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       <Insets />
                                     </HBox.margin>
                                  </Label>
                               </children>
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
                            </HBox>
                            <HBox prefHeight="2.0" prefWidth="249.0">
                               <children>
-                                 <Label fx:id="articleDescription2" prefHeight="48.0" prefWidth="248.0" text="\@quantita" textFill="WHITE">
+                                 <Label fx:id="articleDescription2Label" prefHeight="48.0" prefWidth="248.0" text="\@quantita" textFill="WHITE">
                                     <font>
                                        <Font name="Verdana Italic" size="14.0" />
                                     </font>
                                     <HBox.margin>
-                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       <Insets />
                                     </HBox.margin>
                                  </Label>
                               </children>
+                              <VBox.margin>
+                                 <Insets bottom="10.0" />
+                              </VBox.margin>
                            </HBox>
                         </children>
+                        <VBox.margin>
+                           <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                        </VBox.margin>
                      </VBox>
                      <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                         <children>
-                           <Label prefHeight="33.0" prefWidth="181.0" text="Quantità" textFill="WHITE">
+                           <Label prefHeight="82.0" prefWidth="109.0" text="Quantità" textFill="WHITE">
                               <font>
                                  <Font name="Verdana" size="18.0" />
                               </font>
@@ -131,25 +142,25 @@
                            </Label>
                            <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="120.0" styleClass="ovalHBox" stylesheets="@market.css">
                               <children>
-                                 <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: trasparent;" text="-" textFill="#f06d8b">
+                                 <Button alignment="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="39.0" style="-fx-background-color: trasparent;" text="-" textFill="#f06d8b">
                                     <font>
                                        <Font name="Verdana Bold" size="12.0" />
                                     </font></Button>
-                                 <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="40.0" text="01" textFill="WHITE">
+                                 <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="48.0" text="01" textFill="WHITE">
                                     <font>
                                        <Font name="Verdana Bold" size="12.0" />
                                     </font>
                                  </Label>
-                                 <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: trasparent;" text="+" textFill="#f06d8b">
+                                 <Button alignment="CENTER" mnemonicParsing="false" prefHeight="72.0" prefWidth="40.0" style="-fx-background-color: trasparent;" text="+" textFill="#f06d8b">
                                     <font>
                                        <Font name="Verdana Bold" size="12.0" />
                                     </font></Button>
                               </children>
                            </HBox>
                         </children>
-                        <padding>
+                        <VBox.margin>
                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                        </padding>
+                        </VBox.margin>
                      </HBox>
                      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" styleClass="addToCartButton" stylesheets="@market.css" text="Aggiungi al carrello" textFill="#828282">
                         <VBox.margin>
@@ -164,6 +175,9 @@
                      <String fx:value="LoginPane" />
                      <String fx:value="shadow" />
                   </styleClass>
+                  <VBox.margin>
+                     <Insets bottom="10.0" />
+                  </VBox.margin>
                </VBox>
             </children>
             <BorderPane.margin>
