@@ -354,58 +354,58 @@ public class MarketSectionLayoutController implements Initializable {
         }
 
         switch (section) {
-            case "Macelleria":
+            case "Macelleria" -> {
                 macelleriaButton.setStyle(newStyle);
                 macelleriaLabel.setStyle(newFontStyle);
-                break;
-            case "Pescheria":
+            }
+            case "Pescheria" -> {
                 pescheriaButton.setStyle(newStyle);
                 pescheriaLabel.setStyle(newFontStyle);
-                break;
-            case "Ortofrutta":
+            }
+            case "Ortofrutta" -> {
                 ortofruttaButton.setStyle(newStyle);
                 ortofruttaLabel.setStyle(newFontStyle);
-                break;
-            case "Alimentari":
+            }
+            case "Alimentari" -> {
                 alimentariButton.setStyle(newStyle);
                 alimentariLabel.setStyle(newFontStyle);
-                break;
-            case "Forno":
+            }
+            case "Forno" -> {
                 fornoButton.setStyle(newStyle);
                 fornoLabel.setStyle(newFontStyle);
-                break;
-            case "Bevande":
+            }
+            case "Bevande" -> {
                 bevandeButton.setStyle(newStyle);
                 bevandeLabel.setStyle(newFontStyle);
-                break;
-            case "Surgelati":
+            }
+            case "Surgelati" -> {
                 surgelatiButton.setStyle(newStyle);
                 surgelatiLabel.setStyle(newFontStyle);
-                break;
-            case "Snacks":
+            }
+            case "Snacks" -> {
                 snacksButton.setStyle(newStyle);
                 snacksLabel.setStyle(newFontStyle);
-                break;
-            case "Baby":
+            }
+            case "Baby" -> {
                 babyButton.setStyle(newStyle);
                 babyLabel.setStyle(newFontStyle);
-                break;
-            case "Cartoleria":
+            }
+            case "Cartoleria" -> {
                 cartoleriaButton.setStyle(newStyle);
                 cartoleriaLabel.setStyle(newFontStyle);
-                break;
-            case "Pet":
+            }
+            case "Pet" -> {
                 petButton.setStyle(newStyle);
                 petLabel.setStyle(newFontStyle);
-                break;
-            case "Benessere":
+            }
+            case "Benessere" -> {
                 benessereButton.setStyle(newStyle);
                 benessereLabel.setStyle(newFontStyle);
-                break;
-            case "Casalinghi":
+            }
+            case "Casalinghi" -> {
                 casalinghiButton.setStyle(newStyle);
                 casalinghiLabel.setStyle(newFontStyle);
-                break;
+            }
         }
     }
 
@@ -429,11 +429,18 @@ public class MarketSectionLayoutController implements Initializable {
         */
     }
 
-    // order buttons
+    // Add to cart buttons section
     @FXML public void handleIncrement() {
         System.out.println("Increment Pressed");
 
-        if(this.chosenArticleQuantity < this.chosenArticleStorage) {
+        Integer cartQuantity = 0;
+        String cartMapKey = this.chosenArticle.getBarcode();
+
+        // chosen quantity + already in the cart quantity must be < than the available articles
+        if(App.getInstance().getCartMap().containsKey(cartMapKey))
+            cartQuantity = App.getInstance().getCartMap().get(cartMapKey);
+
+        if(this.chosenArticleQuantity + cartQuantity < this.chosenArticleStorage) {
             this.chosenArticleQuantity++;
             quantityLabel.setText(String.valueOf(chosenArticleQuantity));
         }
@@ -468,6 +475,10 @@ public class MarketSectionLayoutController implements Initializable {
         }
 
         System.out.println(App.getInstance().getCartMap());
+
+        // resets the current article quantity
+        this.chosenArticleQuantity = 0;
+        quantityLabel.setText(String.valueOf(0));
     }
 
     Integer checkStock(String codiceArticolo) throws DAOException {
