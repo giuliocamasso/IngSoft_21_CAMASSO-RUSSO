@@ -2,7 +2,10 @@ package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.ArticleSelectionListener;
 import it.unicas.supermarket.Main;
+import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.Fruit;
+import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,7 +25,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MarketSectionLayoutController implements Initializable {
-
 
     @FXML
     private Label articleDescription1;
@@ -77,93 +79,24 @@ public class MarketSectionLayoutController implements Initializable {
     private Button casalinghiButton;
 
 
-
-
-    private List<Fruit> fruits = new ArrayList<>();
+    private List<Articoli> articoli = new ArrayList<>();
     private Image image;
     private ArticleSelectionListener articleSelectionListener;
 
-    private List<Fruit> getData() {
-        List<Fruit> fruits = new ArrayList<>();
-        Fruit fruit;
-        fruit = new Fruit();
-        fruit.setName("Kiwi");
-        fruit.setPrice(2.99);
-        fruit.setImgSrc("resources/images/fruits/kiwi.png");
-        fruit.setColor("6A7324");
-        fruits.add(fruit);
+    private List<Articoli> getData() throws DAOException {
+        // loading articles from catalogue
+        List<Articoli> catalogo = ArticoliDAOMySQL.getInstance().selectAll();
+        // updating url
+        for (Articoli articoli : catalogo)
+            articoli.setImageURL(Articoli.getURLfromCode(articoli.getBarcode()));
 
-        fruit = new Fruit();
-        fruit.setName("Coconut");
-        fruit.setPrice(3.99);
-        fruit.setImgSrc("resources/images/fruits/coconut.png");
-        fruit.setColor("A7745B");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Peach");
-        fruit.setPrice(1.50);
-
-        fruit.setImgSrc("resources/images/fruits/peach.png");
-        fruit.setColor("F16C31");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Grapes");
-        fruit.setPrice(0.99);
-        fruit.setImgSrc("resources/images/fruits/grapes.png");
-        fruit.setColor("291D36");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Watermelon");
-        fruit.setPrice(4.99);
-        fruit.setImgSrc("resources/images/fruits/watermelon.png");
-        fruit.setColor("22371D");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Orange");
-        fruit.setPrice(2.99);
-        fruit.setImgSrc("resources/images/fruits/orange.png");
-        fruit.setColor("FB5D03");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("StrawBerry");
-        fruit.setPrice(0.99);
-        fruit.setImgSrc("resources/images/fruits/strawberry.png");
-        fruit.setColor("80080C");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Mango");
-        fruit.setPrice(0.99);
-        fruit.setImgSrc("resources/images/fruits/mango.png");
-        fruit.setColor("FFB605");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Cherry");
-        fruit.setPrice(0.99);
-        fruit.setImgSrc("resources/images/fruits/cherry.png");
-        fruit.setColor("5F060E");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Banana");
-        fruit.setPrice(1.99);
-        fruit.setImgSrc("resources/images/fruits/banana.png");
-        fruit.setColor("E7C00F");
-        fruits.add(fruit);
-
-        return fruits;
+        return catalogo;
     }
 
-    private void setChosenFruit(Fruit fruit) {
-        articleNameLabel.setText(fruit.getName());
-        articlePriceLabel.setText(fruit.getPrice());
-        image = new Image("file:"+fruit.getImgSrc());
+    private void setChosenArticle(Articoli articolo) {
+        articleNameLabel.setText(articolo.getNome());
+        articlePriceLabel.setText(String.valueOf(articolo.getPrezzo()));
+        image = new Image("file:"+articolo.getImageURL());
         articleImage.setImage(image);
         /*
         articleDetails.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n" +
@@ -173,21 +106,25 @@ public class MarketSectionLayoutController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        fruits.addAll(getData());
-        if (fruits.size() > 0) {
-            setChosenFruit(fruits.get(0));
-            articleSelectionListener = fruit -> setChosenFruit(fruit);
+        try {
+            articoli.addAll(getData());
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        if (articoli.size() > 0) {
+            setChosenArticle(articoli.get(0));
+            articleSelectionListener = this::setChosenArticle;
         }
         int column = 0;
         int row = 1;
         try {
-            for (int i = 0; i < fruits.size(); i++) {
+            for (int i = 0; i < articoli.size(); i++) {
                 FXMLLoader itemLoader = new FXMLLoader();
                 itemLoader.setLocation(Main.class.getResource("view/ArticleGridItem.fxml"));
                 AnchorPane anchorPane = itemLoader.load();
                 ArticleGridItemController articleGridItemController = itemLoader.getController();
 
-                articleGridItemController.setData(fruits.get(i), articleSelectionListener);
+                articleGridItemController.setData(articoli.get(i), articleSelectionListener);
 
                 if (column == 3) {
                     column = 0;

@@ -1,5 +1,7 @@
-Articolo_01 - 14.50 - 111 - BARCODE___111 - Produttore01 - Prodotto di tipo 1 - Confezione da 1 - Macelleria
-Articolo_02 - 10.99 - 222 - BARCODE___222 - Produttore02 - Prodotto di tipo 2 - Confezione da 2 - Macelleria
-Articolo_03 - 0.99 - 333 - BARCODE___333 - Produttore03 - Prodotto di tipo 3 - Confezione da 3 - Macelleria
-Articolo_04 - 99.99 - 444 - BARCODE___444 - Produttore04 - Prodotto di tipo 4 - Confezione da 4 - Pescheria
-Articolo_05 - 27.00 - 555 - BARCODE___555 - Produttore05 - Prodotto di tipo 5 - Confezione da 5 - Pescheria
+Banane - 3.99 - 50 - 000000_BANANA - Chiquita - Banane filiera qualità - Casco da 6 - Ortofrutta
+Mele - 1.99 - 100 - 000000_MELE01 - Prodotto locale - Mele Golden Italia - 4 unità - Ortofrutta
+Mele - 2.99 - 100 - 000000_MELE02 - Melinda - Mele Red Delicious Italia - 4 unità - Ortofrutta
+Insalata - 0.50 - 50 - 00000_ICEBERG - Prodotto locale - Insalata tipo Iceberg - 200g - Ortofrutta
+Baguette - 0.99 - 10 - 0000_BAGUETTE - Forno Cassino1 - Baguette suprema di giornata - 300 g - Forno
+Cornetti - 0.99 - 20 - 000_CROISSANT - Prodotti da forno Unicas - Croissant gusti vari - 200g - Forno
+Pane - 4.99 - 40 - 00000000_PANE - Forno Cassino 1 - Filone pane varie tipologie - 2Kg - Forno

@@ -44,7 +44,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <ScrollPane prefHeight="525.0" prefWidth="854.0">
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="525.0" prefWidth="854.0" vbarPolicy="NEVER">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>

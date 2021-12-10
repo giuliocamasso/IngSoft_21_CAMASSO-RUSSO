@@ -21,6 +21,7 @@ public class Articoli {
     private StringProperty descrizioneProdotto;
     private StringProperty descrizioneQuantita;
 
+    private String imageURL = null;
 
     public Articoli(String nome, String barcode) throws DAOException {
 
@@ -32,7 +33,6 @@ public class Articoli {
         this.produttore = new SimpleStringProperty("");
         this.descrizioneProdotto = new SimpleStringProperty("");
         this.descrizioneQuantita = new SimpleStringProperty("");
-
 
         if (nome == null || barcode == null)
             throw new DAOException("nome or barcode can't be null");
@@ -188,6 +188,9 @@ public class Articoli {
     public StringProperty descrizioneQuantitaProperty()             { return descrizioneQuantita; }
 
 
+    public String getImageURL()                                     { return imageURL; }
+    public void setImageURL(String imageURL)                        { this.imageURL = imageURL; };
+
     // toString() method
     public String toString(){
         String id;
@@ -228,4 +231,22 @@ public class Articoli {
             return false;
     }
 
+    public static String getURLfromCode(String barcode){
+        return switch (barcode) {
+            // Ortofrutta
+            case "000000_BANANA" -> "resources/images/Ortofrutta/banana.png";
+            case "000000_MELE01" -> "resources/images/Ortofrutta/yellowApples.png";
+            case "000000_MELE02" -> "resources/images/Ortofrutta/red-apples.png";
+            case "00000_ICEBERG" -> "resources/images/Ortofrutta/insalata.png";
+
+            // Forno
+            case "0000_BAGUETTE" -> "resources/images/Forno/baguette.png";
+            case "000_CROISSANT" -> "resources/images/Forno/cornetto.png";
+            case "00000000_PANE" -> "resources/images/Forno/pane.png";
+
+            default -> "ERROR";
+        };
+    }
 }
+
+

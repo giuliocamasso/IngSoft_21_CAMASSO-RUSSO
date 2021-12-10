@@ -136,7 +136,7 @@ public class LoginLayoutController {
 
     void loginSuccess(String codiceCarta, String codiceCliente) throws SQLException, DAOException {
 
-        codiceClienteLabel.setText(codiceCarta);
+        codiceClienteLabel.setText(codiceCliente);
         massimaliLabel.setText(getMassimaliFromCodiceCarta(codiceCarta));
         puntiFedeltaLabel.setText(getPuntiFedeltaFromCodiceCliente(codiceCliente));
 

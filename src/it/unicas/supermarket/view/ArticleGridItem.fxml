@@ -47,7 +47,7 @@
                <children>
                   <ImageView fx:id="articleImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" styleClass="articleItem">
                      <image>
-                        <Image url="@../../../../../resources/images/fruits/cherry.png" />
+                        <Image url="@../../../../../resources/images/Ortofrutta/cherry.png" />
                      </image>
                      <VBox.margin>
                         <Insets bottom="10.0" />

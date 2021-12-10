@@ -1,6 +1,7 @@
 package it.unicas.supermarket.controller;
 
 import it.unicas.supermarket.ArticleSelectionListener;
+import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.Fruit;
 
 import javafx.fxml.FXML;
@@ -21,18 +22,18 @@ public class ArticleGridItemController {
 
     @FXML
     private void click(MouseEvent mouseEvent) {
-        articleSelectionListener.onClickListener(fruit);
+        articleSelectionListener.onClickListener(articolo);
     }
 
-    private Fruit fruit;
+    private Articoli articolo;
     private ArticleSelectionListener articleSelectionListener;
 
-    public void setData(Fruit fruit, ArticleSelectionListener articleSelectionListener) {
-        this.fruit = fruit;
+    public void setData(Articoli articolo, ArticleSelectionListener articleSelectionListener) {
+        this.articolo = articolo;
         this.articleSelectionListener = articleSelectionListener;
-        articleNameLabel.setText(fruit.getName());
-        articlePriceLabel.setText(fruit.getPrice());
-        Image image = new Image("file:"+fruit.getImgSrc());
+        articleNameLabel.setText(articolo.getNome());
+        articlePriceLabel.setText(String.valueOf(articolo.getPrezzo()));
+        Image image = new Image("file:"+articolo.getImageURL());
         articleImage.setImage(image);
     }
 }
