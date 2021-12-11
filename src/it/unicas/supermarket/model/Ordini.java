@@ -11,9 +11,11 @@ public class Ordini {
 
     private IntegerProperty idOrdine;
     private IntegerProperty idCliente;
-    private StringProperty data;
-    private StringProperty codiceOrdine;
+    private final StringProperty data;
+    private final StringProperty codiceOrdine;
     private FloatProperty importoTotale;
+
+
 
 
     // used to create tmp orders searching in select() by codiceOrdine

@@ -30,6 +30,7 @@
 .loginFields{
     -fx-text-fill: rgb(255, 255, 255);
 }
+
 .text-field {
     -fx-background-color: #a9a9a9 , white , white;
     -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
@@ -143,7 +144,8 @@
 }
 #fishButton {
     -fx-background-image: url('../../../../../resources/icons/02-fish.png');
-}#fruitButton {
+}
+#fruitButton {
      -fx-background-image: url('../../../../../resources/icons/03-fruit.png');
  }
 #groceryButton {

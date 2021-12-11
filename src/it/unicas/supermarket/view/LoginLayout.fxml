@@ -95,7 +95,7 @@
                                                          <children>
                                                             <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="125.0" text="Codice cliente" textAlignment="CENTER">
                                                                <font>
-                                                                  <Font name="Verdana Bold" size="16.0" />
+                                                                  <Font name="Verdana Bold" size="14.0" />
                                                                </font>
                                                                <HBox.margin>
                                                                   <Insets bottom="10.0" left="10.0" top="10.0" />
@@ -115,7 +115,7 @@
                                                          <children>
                                                             <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="125.0" text="Massimali" textAlignment="CENTER">
                                                                <font>
-                                                                  <Font name="Verdana Bold" size="16.0" />
+                                                                  <Font name="Verdana Bold" size="14.0" />
                                                                </font>
                                                                <HBox.margin>
                                                                   <Insets bottom="10.0" left="10.0" top="10.0" />
@@ -135,7 +135,7 @@
                                                          <children>
                                                             <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="125.0" text="Punti fedelta'" textAlignment="CENTER">
                                                                <font>
-                                                                  <Font name="Verdana Bold" size="16.0" />
+                                                                  <Font name="Verdana Bold" size="14.0" />
                                                                </font>
                                                                <HBox.margin>
                                                                   <Insets bottom="10.0" left="10.0" top="10.0" />

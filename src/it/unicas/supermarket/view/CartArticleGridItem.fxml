@@ -23,7 +23,9 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="188.0">
                      <children>
+
                         <ImageView fx:id="cartArticleImage" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+
                            <image>
                               <Image url="@../../../../../resources/images/Ortofrutta/cherry.png" />
                            </image>
@@ -32,7 +34,9 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="262.0">
                      <children>
+
                         <Label fx:id="cartArticleNameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="277.0" text="\@Nome prodotto">
+
                            <font>
                               <Font name="Verdana Bold" size="21.0" />
                            </font>
@@ -70,7 +74,9 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="171.0">
                      <children>
+
                         <Label fx:id="cartArticlePriceLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="277.0" text="\@totale">
+
                            <font>
                               <Font name="Verdana Bold" size="21.0" />
                            </font>
