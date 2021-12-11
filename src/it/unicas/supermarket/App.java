@@ -48,6 +48,32 @@ public class App {
 
     public void setReparto(String reparto)       { this.reparto = reparto; }
 
+    public void setCodiceCarta(String codiceCarta){ this.codiceCarta = codiceCarta; }
+
+    public String getCodiceCarta(){
+        return codiceCarta;
+    }
+
+    public void setCodiceCliente(String codiceCliente){
+        this.codiceCliente = codiceCliente;
+    }
+
+    public String getCodiceCliente(){
+        return codiceCliente;
+    }
+
+    public void setMassimali(String massimali) { this.massimali = massimali; }
+
+    public String getMassimali(){
+        return massimali;
+    }
+
+    public void setPuntiFedelta(String puntiFedelta) { this.puntiFedelta = puntiFedelta; }
+
+    public String getPuntiFedelta(){
+        return puntiFedelta;
+    }
+
     public static App getInstance(){
         if (app == null){
             app = new App();
@@ -222,31 +248,7 @@ public class App {
         }
     }
 
-    public void setCodiceCarta(String codiceCarta){ this.codiceCarta = codiceCarta; }
 
-    public String getCodiceCarta(){
-        return codiceCarta;
-    }
-
-    public void setCodiceCliente(String codiceCliente){
-        this.codiceCliente = codiceCliente;
-    }
-
-    public String getCodiceCliente(){
-        return codiceCliente;
-    }
-
-    public void setMassimali(String massimali) { this.massimali = massimali; }
-
-    public String getMassimali(){
-        return massimali;
-    }
-
-    public void setPuntiFedelta(String puntiFedelta) { this.puntiFedelta = puntiFedelta; }
-
-    public String getPuntiFedelta(){
-        return puntiFedelta;
-    }
 
 
 

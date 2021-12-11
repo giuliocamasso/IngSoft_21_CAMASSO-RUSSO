@@ -1,7 +1,6 @@
 package it.unicas.supermarket.controller;
 
-import it.unicas.supermarket.ArticleSelectionListener;
-
+import it.unicas.supermarket.model.Articoli;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -18,16 +17,11 @@ public class CartArticleGridItemController {
     private ImageView cartArticleImage;
 
 
-    private Fruit fruit;
-    private ArticleSelectionListener articleSelectionListener;
+    public void setData(Articoli article, ArticleSelectionListener articleSelectionListener) {
 
-    public void setData(Fruit fruit, ArticleSelectionListener articleSelectionListener) {
-        this.fruit = fruit;
-        this.articleSelectionListener = articleSelectionListener;
-
-        cartArticleNameLabel.setText(fruit.getName());
-        cartArticlePriceLabel.setText(fruit.getPrice());
-        Image image = new Image("file:"+fruit.getImgSrc());
+        cartArticleNameLabel.setText(article.getNome());
+        cartArticlePriceLabel.setText(article.getPrezzo()+" €");
+        Image image = new Image("file:"+article.getImageURL());
         cartArticleImage.setImage(image);
 
     }
