@@ -28,28 +28,6 @@ import java.util.logging.Logger;
 
 public class MarketSectionLayoutController implements Initializable {
 
-    // left-panel
-    @FXML private Label articleNameLabel;
-    @FXML private Label articlePriceLabel;
-    @FXML private ImageView articleImageView;
-    @FXML private Label articleProducerLabel;
-    @FXML private Label articleDescription1Label;
-    @FXML private Label articleDescription2Label;
-    @FXML private Label quantityLabel;
-    @FXML private Button incrementButton;
-    @FXML private Button decrementButton;
-    @FXML private Button addToCartButton;
-
-    // grid-scrollable pane
-    @FXML private ScrollPane articleScrollPane;
-    @FXML private GridPane articleGridPane;
-
-    private final List<Articoli> gridPaneArticles = new ArrayList<>();
-    private ArticleSelectionListener articleSelectionListener;
-    private Articoli chosenArticle;
-    private Integer chosenArticleQuantity;
-    private Integer chosenArticleStorage;
-
     // Section Buttons
     @FXML private Button macelleriaButton;
     @FXML private Label macelleriaLabel;
@@ -77,6 +55,55 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private Label benessereLabel;
     @FXML private Button casalinghiButton;
     @FXML private Label casalinghiLabel;
+
+    // left-panel
+    @FXML private Label articleNameLabel;
+    @FXML private Label articlePriceLabel;
+    @FXML private ImageView articleImageView;
+    @FXML private Label articleProducerLabel;
+    @FXML private Label articleDescription1Label;
+    @FXML private Label articleDescription2Label;
+    @FXML private Label quantityLabel;
+    @FXML private Button incrementButton;
+    @FXML private Button decrementButton;
+    @FXML private Button addToCartButton;
+
+    // grid-scrollable pane
+    @FXML private ScrollPane articleScrollPane;
+    @FXML private GridPane articleGridPane;
+
+    private final List<Articoli> gridPaneArticles = new ArrayList<>();
+    private ArticleSelectionListener articleSelectionListener;
+    private Articoli chosenArticle;
+    private Integer chosenArticleQuantity;
+    private Integer chosenArticleStorage;
+
+    // right-panel
+    @FXML private Label articolo1Label;
+    @FXML private Label quantita1Label;
+    @FXML private Label prezzo1Label;
+
+    @FXML private Label articolo2Label;
+    @FXML private Label quantita2Label;
+    @FXML private Label prezzo2Label;
+
+    @FXML private Label articolo3Label;
+    @FXML private Label quantita3Label;
+    @FXML private Label prezzo3Label;
+
+    @FXML private Label articolo4Label;
+    @FXML private Label quantita4Label;
+    @FXML private Label prezzo4Label;
+
+    @FXML private Label articolo5Label;
+    @FXML private Label quantita5Label;
+    @FXML private Label prezzo5Label;
+
+    @FXML private Label rimanentiLabel;
+
+    @FXML private Button pagaOraButton;
+
+
 
     // logger for tracking queries
     private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
@@ -479,6 +506,8 @@ public class MarketSectionLayoutController implements Initializable {
         // resets the current article quantity
         this.chosenArticleQuantity = 0;
         quantityLabel.setText(String.valueOf(0));
+
+        updateCartPane();
     }
 
     Integer checkStock(String codiceArticolo) throws DAOException {
@@ -493,5 +522,49 @@ public class MarketSectionLayoutController implements Initializable {
             return 0;
         }
         else return storage;
+    }
+
+
+    void updateCartPane(){
+
+        Integer cartSize = App.getInstance().getCartMap().keySet().size();
+
+        switch (cartSize) {
+            case 1 -> {
+                articolo1Label.setText(this.chosenArticle.getNome());
+                prezzo1Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita1Label.setText(String.valueOf(App.getInstance().getCartMap().get(this.chosenArticle.getBarcode())));
+            }
+            case 2 -> {
+                articolo2Label.setText(this.chosenArticle.getNome());
+                prezzo2Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita2Label.setText(String.valueOf(App.getInstance().getCartMap().get(this.chosenArticle.getBarcode())));
+            }
+
+            case 3 -> {
+                articolo3Label.setText(this.chosenArticle.getNome());
+                prezzo3Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita3Label.setText(String.valueOf(App.getInstance().getCartMap().get(this.chosenArticle.getBarcode())));
+            }
+            case 4 -> {
+                articolo4Label.setText(this.chosenArticle.getNome());
+                prezzo4Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita4Label.setText(String.valueOf(App.getInstance().getCartMap().get(this.chosenArticle.getBarcode())));
+            }
+            case 5 -> {
+                articolo5Label.setText(this.chosenArticle.getNome());
+                prezzo5Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita5Label.setText(String.valueOf(App.getInstance().getCartMap().get(this.chosenArticle.getBarcode())));
+            }
+            default -> System.out.println("cartsize > 5");
+        }
+
+
+        // Integer inter = quantitaCarrello.get()
+        // articolo1Label;
+        // quantita1Label;
+        // prezzo1Label;
+
+
     }
 }
