@@ -155,11 +155,11 @@ public class OrderSummaryLayoutController implements Initializable {
         try {
             for (int i = 0; i < fruits.size(); i++) {
                 FXMLLoader itemLoader = new FXMLLoader();
-                itemLoader.setLocation(Main.class.getResource("view/ChartArticleGridItem.fxml"));
+                itemLoader.setLocation(Main.class.getResource("view/CartArticleGridItem.fxml"));
                 AnchorPane anchorPane = itemLoader.load();
-                ChartArticleGridItemController chartArticleGridItemController = itemLoader.getController();
+                CartArticleGridItemController cartArticleGridItemController = itemLoader.getController();
 
-                chartArticleGridItemController.setData(fruits.get(i), articleSelectionListener);
+                cartArticleGridItemController.setData(fruits.get(i), articleSelectionListener);
 
                 chartArticleGridPane.add(anchorPane, column, row++); //(child,column,row)
 
