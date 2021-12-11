@@ -26,22 +26,22 @@ import java.util.ResourceBundle;
 public class OrderSummaryLayoutController implements Initializable {
 
     @FXML
-    private VBox chartArticleDetails;
+    private VBox cartArticleDetails;
 
     @FXML
-    private Label chartArticleNameLabel;
+    private Label cartArticleNameLabel;
 
     @FXML
-    private Label chartArticlePriceLabel;
+    private Label cartArticlePriceLabel;
 
     @FXML
-    private ImageView chartArticleImage;
+    private ImageView cartArticleImage;
 
     @FXML
-    private ScrollPane chartArticleScrollPane;
+    private ScrollPane cartArticleScrollPane;
 
     @FXML
-    private GridPane chartArticleGridPane;
+    private GridPane cartArticleGridPane;
 
     @FXML
     private Label codiceCartaLabel;
@@ -70,6 +70,7 @@ public class OrderSummaryLayoutController implements Initializable {
         App.getInstance().showReceipt();
     }
 
+    /*
     private List<Fruit> getData() {
         List<Fruit> fruits = new ArrayList<>();
         Fruit fruit;
@@ -146,9 +147,11 @@ public class OrderSummaryLayoutController implements Initializable {
 
         return fruits;
     }
+*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    /*
         fruits.addAll(getData());
         int column = 0;
         int row = 1;
@@ -161,35 +164,38 @@ public class OrderSummaryLayoutController implements Initializable {
 
                 cartArticleGridItemController.setData(fruits.get(i), articleSelectionListener);
 
-                chartArticleGridPane.add(anchorPane, column, row++); //(child,column,row)
+                cartArticleGridPane.add(anchorPane, column, row++); //(child,column,row)
 
                 //set grid width
-                chartArticleGridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
-                chartArticleGridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                chartArticleGridPane.setMaxWidth(Region.USE_PREF_SIZE);
+                cartArticleGridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
+                cartArticleGridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                cartArticleGridPane.setMaxWidth(Region.USE_PREF_SIZE);
 
                 //set grid height
-                chartArticleGridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
-                chartArticleGridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                chartArticleGridPane.setMaxHeight(Region.USE_PREF_SIZE);
+                cartArticleGridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
+                cartArticleGridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                cartArticleGridPane.setMaxHeight(Region.USE_PREF_SIZE);
 
                 // margini all'interno del grid pane
                 GridPane.setMargin(anchorPane, new Insets(10, 10, 10 ,10));
 
             }
 
-            paymentDetails(App.getInstance().codiceCarta, App.getInstance().codiceCliente);
+            paymentDetails(App.getInstance().getCodiceCarta(), App.getInstance().getCodiceCliente());
 
         } catch (IOException | SQLException | DAOException e) {
             e.printStackTrace();
         }
+
+    */
+        paymentDetails();
     }
 
-    void paymentDetails(String codiceCarta, String codiceCliente) throws SQLException, DAOException {
-        codiceClienteLabel.setText(codiceCliente);
-        massimaliLabel.setText(App.getInstance().massimali);
-        puntiFedeltaLabel.setText(App.getInstance().puntiFedelta);
-        codiceCartaLabel.setText(codiceCarta);
+    private void paymentDetails() {
+        codiceClienteLabel.setText(App.getInstance().getCodiceCliente());
+        massimaliLabel.setText(App.getInstance().getMassimali());
+        puntiFedeltaLabel.setText(App.getInstance().getPuntiFedelta());
+        codiceCartaLabel.setText(App.getInstance().getCodiceCarta());
     }
-
 }
+
