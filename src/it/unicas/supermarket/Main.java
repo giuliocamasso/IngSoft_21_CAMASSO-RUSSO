@@ -21,7 +21,6 @@ import java.util.List;
 
 public class Main extends Application {
 
-    // PROVA MODIFICA
     public Main() {}
 
     private void initializeDB() throws DAOException, IOException {
