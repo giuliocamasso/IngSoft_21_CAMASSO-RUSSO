@@ -271,7 +271,7 @@
                   <children>
                      <HBox prefHeight="53.0" prefWidth="234.0">
                         <children>
-                           <Label fx:id="quantitaTotaleCarrello" contentDisplay="CENTER" prefHeight="95.0" prefWidth="200.0" text="\@tot articoli" textAlignment="CENTER" textFill="WHITE">
+                           <Label fx:id="quantitaTotaleCarrelloLabel" contentDisplay="CENTER" prefHeight="95.0" prefWidth="200.0" text="\@tot articoli" textAlignment="CENTER" textFill="WHITE">
                               <font>
                                  <Font name="Verdana" size="18.0" />
                               </font>
@@ -517,7 +517,7 @@
                      </VBox>
                      <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="31.0" prefWidth="248.0">
                         <children>
-                           <Label fx:id="rimanentiLabel" alignment="CENTER" prefHeight="60.0" prefWidth="248.0" text="e altri x...." textAlignment="CENTER" textFill="WHITE">
+                           <Label fx:id="rimanentiLabel" alignment="CENTER" prefHeight="60.0" prefWidth="248.0" textAlignment="CENTER" textFill="WHITE">
                               <font>
                                  <Font name="Verdana Italic" size="12.0" />
                               </font>

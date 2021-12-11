@@ -2,10 +2,8 @@ package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.Articoli;
-import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.DAOMySQLSettings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -112,13 +110,19 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private Label prezzo5Label;
 
     @FXML private Label rimanentiLabel;
+    @FXML private Label totaleCarrelloLabel;
+    @FXML private Label quantitaTotaleCarrelloLabel;
+
 
     @FXML private Button pagaOraButton;
 
-
-
     // logger for tracking queries
     private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
+
+    private Integer cartSize = 0;
+
+    private final ArrayList<String> showedBarcodes = new ArrayList<>();
+
 
     // by default, this loads and shows all the available articles
     @Override
@@ -146,7 +150,12 @@ public class MarketSectionLayoutController implements Initializable {
         }
 
         //clear right-pane
-        for (Integer i = 1; i < 6; i++)
+        try {
+            updateCartHeaderLabels();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 1; i < 6; i++)
             clearRow(i);
     }
 
@@ -516,15 +525,13 @@ public class MarketSectionLayoutController implements Initializable {
             App.getInstance().getCartMap().put(cartMapKey, this.chosenArticleQuantity);
         }
 
-        System.out.println(App.getInstance().getCartMap());
-        System.out.println(App.getInstance().getCartListArticles());
-        System.out.println(App.getInstance().getCartListQuantity());
-
         // resets the current article quantity
         this.chosenArticleQuantity = 0;
         quantityLabel.setText(String.valueOf(0));
 
         updateCart();
+
+        App.getInstance().printCart();
     }
 
     Integer checkStock(String codiceArticolo) throws DAOException {
@@ -541,84 +548,145 @@ public class MarketSectionLayoutController implements Initializable {
         else return storage;
     }
 
-
     void updateCart() throws DAOException {
 
-        //Integer cartSize = App.getInstance().getCartMap().keySet().size();
+        Integer cartSize = App.getInstance().getCartMap().size();
+        System.out.println(cartSize);
 
-        //articolo1Label.setText(this.chosenArticle.getNome());
-        //prezzo1Label.setText(this.chosenArticle.getPrezzo() + " €");
-        //quantita1Label.setText(String.valueOf(App.getInstance().getCartMap().get(this.chosenArticle.getBarcode())));
+        updateCartHeaderLabels();
 
+        // aggiunto un nuovo articolo al carrello
+        if (!cartSize.equals(this.cartSize)){
+            // update che cartSize var
+            this.cartSize = cartSize;
 
-        updateCartPane();
+            // devo riempire per la prima volta il pannello
+            if (cartSize < 6) {
+                this.showedBarcodes.add(this.chosenArticle.getBarcode());
+                updateRow(cartSize, false);
+            }
+            else{
+                // libero prima riga e aggiorno la 5
+                updateShowedArticles(this.chosenArticle.getBarcode());
+                shiftRows();
+                updateRow(5, true);
+            }
+        }
+
+        // aggiorno quantita di articoli già visualizzati nel carrello
+        else{
+
+            String newArticleBarcode = this.chosenArticle.getBarcode();
+            // raccolgo i barcode degli articoli mostrati
+
+            // se il barcode e' presente (cioe' se l'articolo e' mostrato...
+            if(this.showedBarcodes.contains(newArticleBarcode))
+                // ...allora aggiorno la relativa riga
+                updateRow(showedBarcodes.indexOf(newArticleBarcode)+1, false);
+
+        }
 
         System.out.println(App.getInstance().getCartMap());
-
-
         System.out.println(App.getInstance().getCartListArticles());
         System.out.println(App.getInstance().getCartListQuantity());
 
     }
 
-    private void updateCartPane() throws DAOException {
-        Integer cartSize = App.getInstance().getCartMap().size();
-        System.out.println(cartSize);
+    private void updateCartHeaderLabels() throws DAOException {
 
-        if (cartSize < 6) {
-            for (Integer i = 1; i < cartSize + 1; i++)
-                updateRow(i);
+        // cartSums.get(0) = quantità totali
+        // cartSums.get(1) = importo totale
+        ArrayList<Float> cartSums = getCartSums();
 
-            for (Integer i = cartSize + 1; i < 6; i++)
-                clearRow(i);
-        }
+        // head
+        if (cartSums.get(0) > 0)
+            quantitaTotaleCarrelloLabel.setText(cartSums.get(0).intValue() + " articoli");
         else
-            shiftRows();
+            quantitaTotaleCarrelloLabel.setText("");
+        if (cartSums.get(1) > 0)
+            totaleCarrelloLabel.setText(cartSums.get(1) + " €");
+        else
+            totaleCarrelloLabel.setText("");
+
+        // foot
+        if(cartSize > 5)
+            rimanentiLabel.setText("Altri " + (cartSize-5) + " elementi nel carrello...");
+        else
+            rimanentiLabel.setText("");
 
     }
 
-    private void updateRow(Integer row) throws DAOException {
-        Integer index = row-1;
-        String barcode = App.getInstance().getCartListArticles().get(index);
+    private void updateShowedArticles(String newArticleBarcode) {
+        ArrayList<String> tmpList = new ArrayList<>();
+
+        // nb. copio solo gli ultimi size-1 elementi!
+        for(int i=1; i<this.showedBarcodes.size(); i++)
+            tmpList.add(this.showedBarcodes.get(i));
+
+        // rialloco i size-1 barcode
+        this.showedBarcodes.clear();
+        this.showedBarcodes.addAll(tmpList);
+        // e aggiungo l'ultimo inserito
+        this.showedBarcodes.add(newArticleBarcode);
+    }
+
+
+    // isNewArticle means that i need to read the last added article...
+    private void updateRow(Integer row, boolean isNewArticle){
+
         String vBoxStyle =  "-fx-border-width: 0 0 1 0;\n-fx-border-color: rgb(240, 109, 139);";
         String hBoxStyle =  "-fx-border-radius: 50;\n-fx-border-width: 1;\n-fx-border-color: rgb(240, 109, 139);";
 
-
         switch (row) {
             case 1 -> {
-                articolo1Label.setText(getNomeArticoloFromBarcode(barcode));
-                prezzo1Label.setText(getPrezzoArticoloFromBarcode(barcode));
-                quantita1Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(index)));
-                articolo1VBox.setStyle(vBoxStyle);
-                articolo1InfoHBox.setStyle(hBoxStyle);
+                articolo1Label.setText(this.chosenArticle.getNome());
+                prezzo1Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita1Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(row-1)));
+                if(this.cartSize == 1) {
+                    articolo1VBox.setStyle(vBoxStyle);
+                    articolo1InfoHBox.setStyle(hBoxStyle);
+                }
             }
             case 2 -> {
-                articolo2Label.setText(getNomeArticoloFromBarcode(barcode));
-                prezzo2Label.setText(getPrezzoArticoloFromBarcode(barcode));
-                quantita2Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(index)));
-                articolo2VBox.setStyle(vBoxStyle);
-                articolo2InfoHBox.setStyle(hBoxStyle);
+                articolo2Label.setText(this.chosenArticle.getNome());
+                prezzo2Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita2Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(row-1)));
+                if(this.cartSize == 2) {
+                    articolo2VBox.setStyle(vBoxStyle);
+                    articolo2InfoHBox.setStyle(hBoxStyle);
+                }
             }
             case 3 -> {
-                articolo3Label.setText(getNomeArticoloFromBarcode(barcode));
-                prezzo3Label.setText(getPrezzoArticoloFromBarcode(barcode));
-                quantita3Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(index)));
-                articolo3VBox.setStyle(vBoxStyle);
-                articolo3InfoHBox.setStyle(hBoxStyle);
+                articolo3Label.setText(this.chosenArticle.getNome());
+                prezzo3Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita3Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(row-1)));
+                if(this.cartSize == 3) {
+                    articolo3VBox.setStyle(vBoxStyle);
+                    articolo3InfoHBox.setStyle(hBoxStyle);
+                }
             }
             case 4 -> {
-                articolo4Label.setText(getNomeArticoloFromBarcode(barcode));
-                prezzo4Label.setText(getPrezzoArticoloFromBarcode(barcode));
-                quantita4Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(index)));
-                articolo4VBox.setStyle(vBoxStyle);
-                articolo4InfoHBox.setStyle(hBoxStyle);
+                articolo4Label.setText(this.chosenArticle.getNome());
+                prezzo4Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita4Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(row-1)));
+                if(this.cartSize == 4) {
+                    articolo4VBox.setStyle(vBoxStyle);
+                    articolo4InfoHBox.setStyle(hBoxStyle);
+                }
             }
             case 5 -> {
-                articolo5Label.setText(getNomeArticoloFromBarcode(barcode));
-                prezzo5Label.setText(getPrezzoArticoloFromBarcode(barcode));
-                quantita5Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(index)));
-                articolo5VBox.setStyle(vBoxStyle);
-                articolo5InfoHBox.setStyle(hBoxStyle);
+                articolo5Label.setText(this.chosenArticle.getNome());
+                prezzo5Label.setText(this.chosenArticle.getPrezzo() + " €");
+                // loads the last added article...
+                if(isNewArticle)
+                    quantita5Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(this.cartSize-1)));
+                else
+                    quantita5Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(row-1)));
+                // nb. the clearAll function also resets the style
+                if(this.cartSize >= 5) {
+                    articolo5VBox.setStyle(vBoxStyle);
+                    articolo5InfoHBox.setStyle(hBoxStyle);
+                }
             }
             default -> throw new IllegalStateException("Unexpected value: " + row);
         }
@@ -689,9 +757,29 @@ public class MarketSectionLayoutController implements Initializable {
         }
     }
 
+    private ArrayList<Float> getCartSums() throws DAOException {
+        ArrayList<Float> resultItem = new ArrayList<>();
 
+        float articleQuantity = 0f;
+        float cartImport = 0f;
 
-    public String getNomeArticoloFromBarcode(String barcode) throws DAOException {
+        List<Integer> quantityList = App.getInstance().getCartListQuantity();
+        List<String> barcodeList = App.getInstance().getCartListArticles();
+
+        for (int i=0; i<App.getInstance().getCartMap().size(); i++){
+            Integer quantity = quantityList.get(i);
+            Float price = getPrezzoArticoloFromBarcode(barcodeList.get(i));
+            articleQuantity += quantity.floatValue();
+            cartImport += quantity*price;
+        }
+
+        resultItem.add(articleQuantity);
+        resultItem.add(cartImport);
+
+        return resultItem;
+    }
+
+    public static String getNomeArticoloFromBarcode(String barcode) throws DAOException {
         // select() function is barcode-based
         List<Articoli> article = ArticoliDAOMySQL.getInstance().select(new Articoli("", barcode));
         if( article.size() != 1)
@@ -700,13 +788,13 @@ public class MarketSectionLayoutController implements Initializable {
             return article.get(0).getNome();
     }
 
-    public String getPrezzoArticoloFromBarcode(String barcode) throws DAOException {
+    public static Float getPrezzoArticoloFromBarcode(String barcode) throws DAOException {
         // select() function is barcode-based
         List<Articoli> article = ArticoliDAOMySQL.getInstance().select(new Articoli("", barcode));
         if( article.size() != 1)
-            return "ERROR";
+            return -1f;
         else
-            return article.get(0).getPrezzo()+" €";
+            return article.get(0).getPrezzo();
     }
 
 }
