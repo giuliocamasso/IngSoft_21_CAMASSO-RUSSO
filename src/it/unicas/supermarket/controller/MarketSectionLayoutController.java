@@ -81,22 +81,32 @@ public class MarketSectionLayoutController implements Initializable {
     private Integer chosenArticleStorage;
 
     // right-panel
+    @FXML private VBox articolo1VBox;
+    @FXML private HBox articolo1InfoHBox;
     @FXML private Label articolo1Label;
     @FXML private Label quantita1Label;
     @FXML private Label prezzo1Label;
 
+    @FXML private VBox articolo2VBox;
+    @FXML private HBox articolo2InfoHBox;
     @FXML private Label articolo2Label;
     @FXML private Label quantita2Label;
     @FXML private Label prezzo2Label;
 
+    @FXML private VBox articolo3VBox;
+    @FXML private HBox articolo3InfoHBox;
     @FXML private Label articolo3Label;
     @FXML private Label quantita3Label;
     @FXML private Label prezzo3Label;
 
+    @FXML private VBox articolo4VBox;
+    @FXML private HBox articolo4InfoHBox;
     @FXML private Label articolo4Label;
     @FXML private Label quantita4Label;
     @FXML private Label prezzo4Label;
 
+    @FXML private VBox articolo5VBox;
+    @FXML private HBox articolo5InfoHBox;
     @FXML private Label articolo5Label;
     @FXML private Label quantita5Label;
     @FXML private Label prezzo5Label;
@@ -135,6 +145,9 @@ public class MarketSectionLayoutController implements Initializable {
             e.printStackTrace();
         }
 
+        //clear right-pane
+        for (Integer i = 1; i < 6; i++)
+            clearRow(i);
     }
 
     private List<Articoli> getArticles(String section) throws DAOException, SQLException, IOException {
@@ -567,32 +580,45 @@ public class MarketSectionLayoutController implements Initializable {
     private void updateRow(Integer row) throws DAOException {
         Integer index = row-1;
         String barcode = App.getInstance().getCartListArticles().get(index);
+        String vBoxStyle =  "-fx-border-width: 0 0 1 0;\n-fx-border-color: rgb(240, 109, 139);";
+        String hBoxStyle =  "-fx-border-radius: 50;\n-fx-border-width: 1;\n-fx-border-color: rgb(240, 109, 139);";
+
 
         switch (row) {
             case 1 -> {
                 articolo1Label.setText(getNomeArticoloFromBarcode(barcode));
                 prezzo1Label.setText(getPrezzoArticoloFromBarcode(barcode));
                 quantita1Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(index)));
+                articolo1VBox.setStyle(vBoxStyle);
+                articolo1InfoHBox.setStyle(hBoxStyle);
             }
             case 2 -> {
                 articolo2Label.setText(getNomeArticoloFromBarcode(barcode));
                 prezzo2Label.setText(getPrezzoArticoloFromBarcode(barcode));
                 quantita2Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(index)));
+                articolo2VBox.setStyle(vBoxStyle);
+                articolo2InfoHBox.setStyle(hBoxStyle);
             }
             case 3 -> {
                 articolo3Label.setText(getNomeArticoloFromBarcode(barcode));
                 prezzo3Label.setText(getPrezzoArticoloFromBarcode(barcode));
                 quantita3Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(index)));
+                articolo3VBox.setStyle(vBoxStyle);
+                articolo3InfoHBox.setStyle(hBoxStyle);
             }
             case 4 -> {
                 articolo4Label.setText(getNomeArticoloFromBarcode(barcode));
                 prezzo4Label.setText(getPrezzoArticoloFromBarcode(barcode));
                 quantita4Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(index)));
+                articolo4VBox.setStyle(vBoxStyle);
+                articolo4InfoHBox.setStyle(hBoxStyle);
             }
             case 5 -> {
                 articolo5Label.setText(getNomeArticoloFromBarcode(barcode));
                 prezzo5Label.setText(getPrezzoArticoloFromBarcode(barcode));
                 quantita5Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(index)));
+                articolo5VBox.setStyle(vBoxStyle);
+                articolo5InfoHBox.setStyle(hBoxStyle);
             }
             default -> throw new IllegalStateException("Unexpected value: " + row);
         }
@@ -621,33 +647,44 @@ public class MarketSectionLayoutController implements Initializable {
     }
 
     private void clearRow(Integer row){
-
+        String borderStyle = "-fx-border-width: 0";
         switch (row) {
             case 1 -> {
                 articolo1Label.setText("");
                 prezzo1Label.setText("");
                 quantita1Label.setText("");
+                articolo1VBox.setStyle(borderStyle);
+                articolo1InfoHBox.setStyle(borderStyle);
             }
             case 2 -> {
                 articolo2Label.setText("");
                 prezzo2Label.setText("");
                 quantita2Label.setText("");
+                articolo2VBox.setStyle("-fx-border-width: 0 0 0 0;");
+                articolo2InfoHBox.setStyle(borderStyle);
             }
             case 3 -> {
                 articolo3Label.setText("");
                 prezzo3Label.setText("");
                 quantita3Label.setText("");
+                articolo3VBox.setStyle(borderStyle);
+                articolo3InfoHBox.setStyle(borderStyle);
             }
             case 4 -> {
                 articolo4Label.setText("");
                 prezzo4Label.setText("");
                 quantita4Label.setText("");
+                articolo4VBox.setStyle(borderStyle);
+                articolo4InfoHBox.setStyle(borderStyle);
             }
             case 5 -> {
                 articolo5Label.setText("");
                 prezzo5Label.setText("");
                 quantita5Label.setText("");
+                articolo5VBox.setStyle(borderStyle);
+                articolo5InfoHBox.setStyle(borderStyle);
             }
+
             default -> throw new IllegalStateException("Unexpected value: " + row);
         }
     }

@@ -290,7 +290,7 @@
                         </VBox.margin>
                      </HBox>
                      <Pane prefHeight="217.0" prefWidth="248.0" />
-                     <VBox prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
+                     <VBox fx:id="articolo5VBox" prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
                         <children>
                            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
                               <children>
@@ -302,26 +302,28 @@
                                        <Insets />
                                     </HBox.margin>
                                  </Label>
-                                 <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" stylesheets="@market.css">
+                                 <HBox fx:id="articolo5InfoHBox" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" styleClass="ovalHBox" stylesheets="@market.css">
                                     <children>
                                        <Label fx:id="quantita5Label" prefHeight="42.0" prefWidth="52.0" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
+                                          <HBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </HBox.margin>
                                        </Label>
                                        <Label fx:id="prezzo5Label" prefHeight="20.0" prefWidth="75.0" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
+                                          <HBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </HBox.margin>
                                        </Label>
                                     </children>
                                     <HBox.margin>
                                        <Insets left="10.0" right="10.0" />
                                     </HBox.margin>
-                                    <styleClass>
-                                       <String fx:value="shadow" />
-                                       <String fx:value="ovalHBox" />
-                                    </styleClass>
                                  </HBox>
                               </children>
                               <VBox.margin>
@@ -333,7 +335,7 @@
                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                      </VBox>
-                     <VBox prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
+                     <VBox fx:id="articolo4VBox" prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
                         <children>
                            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
                               <children>
@@ -345,26 +347,28 @@
                                        <Insets />
                                     </HBox.margin>
                                  </Label>
-                                 <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" stylesheets="@market.css">
+                                 <HBox fx:id="articolo4InfoHBox" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" styleClass="ovalHBox" stylesheets="@market.css">
                                     <children>
                                        <Label fx:id="quantita4Label" prefHeight="42.0" prefWidth="52.0" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
+                                          <HBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </HBox.margin>
                                        </Label>
                                        <Label fx:id="prezzo4Label" prefHeight="20.0" prefWidth="75.0" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
+                                          <HBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </HBox.margin>
                                        </Label>
                                     </children>
                                     <HBox.margin>
                                        <Insets left="10.0" right="10.0" />
                                     </HBox.margin>
-                                    <styleClass>
-                                       <String fx:value="shadow" />
-                                       <String fx:value="ovalHBox" />
-                                    </styleClass>
                                  </HBox>
                               </children>
                               <VBox.margin>
@@ -376,7 +380,7 @@
                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                      </VBox>
-                     <VBox prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
+                     <VBox fx:id="articolo3VBox" prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
                         <children>
                            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
                               <children>
@@ -388,26 +392,28 @@
                                        <Insets />
                                     </HBox.margin>
                                  </Label>
-                                 <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" stylesheets="@market.css">
+                                 <HBox fx:id="articolo3InfoHBox" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" styleClass="ovalHBox" stylesheets="@market.css">
                                     <children>
                                        <Label fx:id="quantita3Label" prefHeight="42.0" prefWidth="52.0" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
+                                          <HBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </HBox.margin>
                                        </Label>
                                        <Label fx:id="prezzo3Label" prefHeight="20.0" prefWidth="75.0" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
+                                          <HBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </HBox.margin>
                                        </Label>
                                     </children>
                                     <HBox.margin>
                                        <Insets left="10.0" right="10.0" />
                                     </HBox.margin>
-                                    <styleClass>
-                                       <String fx:value="shadow" />
-                                       <String fx:value="ovalHBox" />
-                                    </styleClass>
                                  </HBox>
                               </children>
                               <VBox.margin>
@@ -419,7 +425,7 @@
                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                      </VBox>
-                     <VBox prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
+                     <VBox fx:id="articolo2VBox" prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
                         <children>
                            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
                               <children>
@@ -431,26 +437,28 @@
                                        <Insets />
                                     </HBox.margin>
                                  </Label>
-                                 <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" stylesheets="@market.css">
+                                 <HBox fx:id="articolo2InfoHBox" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" styleClass="ovalHBox" stylesheets="@market.css">
                                     <children>
                                        <Label fx:id="quantita2Label" prefHeight="42.0" prefWidth="52.0" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
+                                          <HBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </HBox.margin>
                                        </Label>
                                        <Label fx:id="prezzo2Label" prefHeight="20.0" prefWidth="75.0" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
+                                          <HBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </HBox.margin>
                                        </Label>
                                     </children>
                                     <HBox.margin>
                                        <Insets left="10.0" right="10.0" />
                                     </HBox.margin>
-                                    <styleClass>
-                                       <String fx:value="shadow" />
-                                       <String fx:value="ovalHBox" />
-                                    </styleClass>
                                  </HBox>
                               </children>
                               <VBox.margin>
@@ -462,7 +470,7 @@
                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                      </VBox>
-                     <VBox prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
+                     <VBox fx:id="articolo1VBox" prefHeight="35.0" prefWidth="250.0" styleClass="peachUnderline" stylesheets="@market.css">
                         <children>
                            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="448.0">
                               <children>
@@ -474,26 +482,28 @@
                                        <Insets />
                                     </HBox.margin>
                                  </Label>
-                                 <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" stylesheets="@market.css">
+                                 <HBox fx:id="articolo1InfoHBox" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="100.0" styleClass="ovalHBox" stylesheets="@market.css">
                                     <children>
                                        <Label fx:id="quantita1Label" prefHeight="42.0" prefWidth="52.0" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
+                                          <HBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </HBox.margin>
                                        </Label>
                                        <Label fx:id="prezzo1Label" prefHeight="20.0" prefWidth="75.0" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana" size="12.0" />
                                           </font>
+                                          <HBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </HBox.margin>
                                        </Label>
                                     </children>
                                     <HBox.margin>
                                        <Insets left="10.0" right="10.0" />
                                     </HBox.margin>
-                                    <styleClass>
-                                       <String fx:value="shadow" />
-                                       <String fx:value="ovalHBox" />
-                                    </styleClass>
                                  </HBox>
                               </children>
                               <VBox.margin>
