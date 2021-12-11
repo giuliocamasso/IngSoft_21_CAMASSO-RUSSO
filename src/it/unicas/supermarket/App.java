@@ -206,20 +206,30 @@ public class App {
         }
     }
 
-    public String getCodiceCarta(String codiceCarta){
-        return this.codiceCarta = codiceCarta;
+    public void setCodiceCarta(String codiceCarta){ this.codiceCarta = codiceCarta; }
+
+    public String getCodiceCarta(){
+        return codiceCarta;
     }
 
-    public String getCodiceCliente(String codiceCliente){
-        return this.codiceCliente = codiceCliente;
+    public void setCodiceCliente(String codiceCliente){
+        this.codiceCliente = codiceCliente;
     }
 
-    public String getMassimali(String massimali){
-        return this.massimali = massimali;
+    public String getCodiceCliente(){
+        return codiceCliente;
     }
 
-    public String getPuntiFedelta(String puntiFedelta){
-        return this.puntiFedelta = puntiFedelta;
+    public void setMassimali(String massimali) { this.massimali = massimali; }
+
+    public String getMassimali(){
+        return massimali;
+    }
+
+    public void setPuntiFedelta(String puntiFedelta) { this.puntiFedelta = puntiFedelta; }
+
+    public String getPuntiFedelta(){
+        return puntiFedelta;
     }
 
 

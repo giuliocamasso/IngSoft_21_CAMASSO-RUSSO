@@ -53,12 +53,12 @@ public class LoginLayoutController {
 
     @FXML
     private void handleConfirm() throws DAOException, SQLException {
+
         App.getInstance().initMarketSectionLayout();
         resetForm();
         boolean checcoJoni = true;
         if(checcoJoni)  return;
 
-        // debug per andare subito ai reparti
 
         if (cardAccepted) {
             App.getInstance().initMarketSectionLayout();
@@ -67,7 +67,7 @@ public class LoginLayoutController {
         }
         // else
         String codiceCarta = codiceCartaTextField.getText();
-        App.getInstance().getCodiceCarta(codiceCarta);
+        App.getInstance().setCodiceCarta(codiceCarta);
         String pin = pinPasswordField.getText();
 
         // checking data before accessing db
@@ -201,7 +201,7 @@ public class LoginLayoutController {
         DAOMySQLSettings.closeStatement(statement);
 
         if (result.size() == 1) {
-            App.getInstance().getCodiceCliente(result.get(0));
+            App.getInstance().setCodiceCliente(result.get(0));
             return result.get(0);
         }
 
@@ -218,7 +218,7 @@ public class LoginLayoutController {
         if( card.size() != 1)
             return "ERROR";
         else {
-            App.getInstance().getMassimali(card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €");
+            App.getInstance().setMassimali(card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €");
             return card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €";
         }
     }
@@ -230,7 +230,7 @@ public class LoginLayoutController {
         if( customer.size() != 1)
             return "ERROR";
         else {
-            App.getInstance().getPuntiFedelta(customer.get(0).getPuntiFedelta().toString());
+            App.getInstance().setPuntiFedelta(customer.get(0).getPuntiFedelta().toString());
             return customer.get(0).getPuntiFedelta().toString();
         }
     }

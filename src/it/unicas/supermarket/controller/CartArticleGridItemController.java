@@ -8,15 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class ChartArticleGridItemController {
+public class CartArticleGridItemController {
     @FXML
-    private Label chartArticleNameLabel;
+    private Label cartArticleNameLabel;
 
     @FXML
-    private Label chartArticlePriceLabel;
+    private Label cartArticlePriceLabel;
 
     @FXML
-    private ImageView chartArticleImage;
+    private ImageView cartArticleImage;
 
     private Fruit fruit;
     private ArticleSelectionListener articleSelectionListener;
@@ -24,10 +24,10 @@ public class ChartArticleGridItemController {
     public void setData(Fruit fruit, ArticleSelectionListener articleSelectionListener) {
         this.fruit = fruit;
         this.articleSelectionListener = articleSelectionListener;
-        chartArticleNameLabel.setText(fruit.getName());
-        chartArticlePriceLabel.setText(fruit.getPrice());
+        cartArticleNameLabel.setText(fruit.getName());
+        cartArticlePriceLabel.setText(fruit.getPrice());
         Image image = new Image("file:"+fruit.getImgSrc());
-        chartArticleImage.setImage(image);
+        cartArticleImage.setImage(image);
     }
 
 }
