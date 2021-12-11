@@ -17,8 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class App {
@@ -35,14 +34,16 @@ public class App {
 
     public String reparto = "INIT";
 
+    public LinkedHashMap<String, Integer> cartMap = new LinkedHashMap<>();
+
+
+    // nome articolo / quantita'?
+    // codiceArticolo / quantita'?
+    // capitalCities.put("England", "London");
+
     public HashMap<String, Integer> getCartMap() {
         return cartMap;
     }
-
-    public HashMap<String, Integer> cartMap = new HashMap<>();
-    // nome articolo / quantita'?
-    // codiceArticolo / quantita'?
-    //capitalCities.put("England", "London");
 
     public String getReparto()                   { return reparto; }
 
@@ -243,10 +244,16 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
+    public List<String> getCartListArticles() {
+       return new ArrayList<>(this.cartMap.keySet());
+    }
 
-
+    public List<Integer> getCartListQuantity() {
+        return new ArrayList<>(this.cartMap.values());
+    }
 
 
 
