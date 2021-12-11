@@ -219,7 +219,7 @@ public class App {
     /**
      * Opens a dialog to show the receipt
      */
-    public boolean showReceipt() {
+    public void showReceipt() {
         try {
             // Load the fxml file and create a new stage for the popup.
             FXMLLoader loader = new FXMLLoader();
@@ -240,11 +240,8 @@ public class App {
 
             dialogStage.showAndWait();
 
-            return controller.isBackClicked();
-
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
