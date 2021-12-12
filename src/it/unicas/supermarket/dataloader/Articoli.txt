@@ -15,7 +15,7 @@ Melanzane - 0.50 - 50 - 000_MELANZANA - Prodotto locale - Melanzana nostrana - 2
 Ciliegia - 3.50 - 100 - 0000_CILIEGIA - Prodotto locale - Ciliegie rosse - 250g - Ortofrutta
 Cocco - 2.50 - 100 - 0000000_COCCO - Coco - Cocchi sudamericani - 150g - Ortofrutta
 Uva - 2.50 - 50 - 000000000_UVA - Valfrutta - Uva di tremensuoli - 150g - Ortofrutta
-Cotto - 1.50 - 20 - 000000_COTTO - Prosciutto di Parma - Prosciutto cotto fresco - 100g - Alimentari
+Cotto - 1.50 - 20 - 0000000_COTTO - Prosciutto di Parma - Prosciutto cotto fresco - 100g - Alimentari
 Baguette - 0.99 - 10 - 0000_BAGUETTE - Forno Cassino1 - Baguette suprema di giornata - 300 g - Forno
 Cornetti - 0.99 - 20 - 000_CROISSANT - Prodotti da forno Unicas - Croissant gusti vari - 200g - Forno
 Pane - 4.99 - 40 - 00000000_PANE - Forno Cassino 1 - Filone pane varie tipologie - 2Kg - Forno
