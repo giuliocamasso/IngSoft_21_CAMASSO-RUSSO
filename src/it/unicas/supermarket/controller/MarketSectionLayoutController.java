@@ -109,6 +109,18 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private Label quantita5Label;
     @FXML private Label prezzo5Label;
 
+    @FXML private VBox articolo6VBox;
+    @FXML private HBox articolo6InfoHBox;
+    @FXML private Label articolo6Label;
+    @FXML private Label quantita6Label;
+    @FXML private Label prezzo6Label;
+
+    @FXML private VBox articolo7VBox;
+    @FXML private HBox articolo7InfoHBox;
+    @FXML private Label articolo7Label;
+    @FXML private Label quantita7Label;
+    @FXML private Label prezzo7Label;
+
     @FXML private Label rimanentiLabel;
     @FXML private Label totaleCarrelloLabel;
     @FXML private Label quantitaTotaleCarrelloLabel;
@@ -155,7 +167,7 @@ public class MarketSectionLayoutController implements Initializable {
         } catch (DAOException e) {
             e.printStackTrace();
         }
-        for (int i = 1; i < 6; i++)
+        for (int i = 1; i < 8; i++)
             clearRow(i);
     }
 
@@ -553,15 +565,13 @@ public class MarketSectionLayoutController implements Initializable {
         Integer cartSize = App.getInstance().getCartMap().size();
         System.out.println(cartSize);
 
-
-
         // aggiunto un nuovo articolo al carrello
         if (!cartSize.equals(this.cartSize)){
             // update che cartSize var
             this.cartSize = cartSize;
 
             // devo riempire per la prima volta il pannello
-            if (cartSize < 6) {
+            if (cartSize < 8) {
                 this.showedBarcodes.add(this.chosenArticle.getBarcode());
                 updateRow(cartSize);
             }
@@ -569,7 +579,7 @@ public class MarketSectionLayoutController implements Initializable {
                 // libero prima riga e aggiorno la 5
                 updateShowedArticles(this.chosenArticle.getBarcode());
                 shiftRows();
-                updateRow(5);
+                updateRow(7);
             }
 
         }
@@ -589,7 +599,7 @@ public class MarketSectionLayoutController implements Initializable {
             else{
                 updateShowedArticles(this.chosenArticle.getBarcode());
                 shiftRows();
-                updateRow(5);
+                updateRow(7);
             }
         }
 
@@ -609,7 +619,7 @@ public class MarketSectionLayoutController implements Initializable {
 
         // head
         if (cartSums.get(0) > 0)
-            quantitaTotaleCarrelloLabel.setText(cartSums.get(0).intValue() + " articoli");
+            quantitaTotaleCarrelloLabel.setText(cartSums.get(0).intValue() + " pezzi");
         else
             quantitaTotaleCarrelloLabel.setText("");
         if (cartSums.get(1) > 0)
@@ -618,10 +628,10 @@ public class MarketSectionLayoutController implements Initializable {
             totaleCarrelloLabel.setText("");
 
         // foot
-        if(cartSize > 5)
-            rimanentiLabel.setText("Altri " + (cartSize-5) + " elementi nel carrello...");
+        if(cartSize > 7)
+            rimanentiLabel.setText("Altri " + (cartSize-7) + " elementi nel carrello...");
         else
-            rimanentiLabel.setText("");
+            rimanentiLabel.setText("-------");
 
     }
 
@@ -648,7 +658,7 @@ public class MarketSectionLayoutController implements Initializable {
 
         // leggo la quantita' dal carrello
 
-        String quantita = String.valueOf(App.getInstance().getCartMap().get(this.chosenArticle.getBarcode()));
+        String quantita = String.valueOf(App.getInstance().getCartMap().get(this.chosenArticle.getBarcode()))+"x ";
 
         switch (row) {
             case 1 -> {
@@ -693,9 +703,33 @@ public class MarketSectionLayoutController implements Initializable {
                 quantita5Label.setText(quantita);
 
                 // nb. the clearAll function also resets the style
-                if(this.cartSize >= 5) {
+                if(this.cartSize == 5) {
                     articolo5VBox.setStyle(vBoxStyle);
                     articolo5InfoHBox.setStyle(hBoxStyle);
+                }
+            }
+
+            case 6 -> {
+                articolo6Label.setText(this.chosenArticle.getNome());
+                prezzo6Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita6Label.setText(quantita);
+
+                // nb. the clearAll function also resets the style
+                if(this.cartSize == 6) {
+                    articolo6VBox.setStyle(vBoxStyle);
+                    articolo6InfoHBox.setStyle(hBoxStyle);
+                }
+            }
+
+            case 7 -> {
+                articolo7Label.setText(this.chosenArticle.getNome());
+                prezzo7Label.setText(this.chosenArticle.getPrezzo() + " €");
+                quantita7Label.setText(quantita);
+
+                // nb. the clearAll function also resets the style
+                if(this.cartSize >= 7) {
+                    articolo7VBox.setStyle(vBoxStyle);
+                    articolo7InfoHBox.setStyle(hBoxStyle);
                 }
             }
             default -> throw new IllegalStateException("Unexpected value: " + row);
@@ -720,7 +754,15 @@ public class MarketSectionLayoutController implements Initializable {
         prezzo4Label.setText(prezzo5Label.getText());
         quantita4Label.setText(quantita5Label.getText());
 
-        clearRow(5);
+        articolo5Label.setText(articolo6Label.getText());
+        prezzo5Label.setText(prezzo6Label.getText());
+        quantita5Label.setText(quantita6Label.getText());
+
+        articolo6Label.setText(articolo7Label.getText());
+        prezzo6Label.setText(prezzo7Label.getText());
+        quantita6Label.setText(quantita7Label.getText());
+
+        clearRow(7);
 
     }
 
@@ -761,6 +803,20 @@ public class MarketSectionLayoutController implements Initializable {
                 quantita5Label.setText("");
                 articolo5VBox.setStyle(borderStyle);
                 articolo5InfoHBox.setStyle(borderStyle);
+            }
+            case 6 -> {
+                articolo6Label.setText("");
+                prezzo6Label.setText("");
+                quantita6Label.setText("");
+                articolo6VBox.setStyle(borderStyle);
+                articolo6InfoHBox.setStyle(borderStyle);
+            }
+            case 7 -> {
+                articolo7Label.setText("");
+                prezzo7Label.setText("");
+                quantita7Label.setText("");
+                articolo7VBox.setStyle(borderStyle);
+                articolo7InfoHBox.setStyle(borderStyle);
             }
 
             default -> throw new IllegalStateException("Unexpected value: " + row);
