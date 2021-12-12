@@ -60,8 +60,6 @@ public class LoginLayoutController {
         if(checcoJoni)  return;
 
 
-
-
         if (cardAccepted) {
             App.getInstance().initMarketSectionLayout();
             resetForm();

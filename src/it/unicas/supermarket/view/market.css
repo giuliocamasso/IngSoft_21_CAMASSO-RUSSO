@@ -1,3 +1,54 @@
+.background{
+    /*
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 50px;
+    */
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+
+    -fx-background-image: url('../../../../../resources/backgrounds/BGWhite.jpg');
+    /*
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/BGColor.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+    */
+
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane{
+    -fx-background-color: transparent;
+}
+
+.transparent{
+    -fx-background-color: transparent;
+}
+
+.SectionsPane{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+
+    -fx-border-width: 1 1 1 1;
+    -fx-border-color: rgb(240, 109, 139);
+    /*
+    -fx-border-width: 2;
+    -fx-border-color: rgb(240, 109, 139);
+    */
+
+}
+
 .LoginPane{
     -fx-background-color: rgba(14, 14, 14, 0.96);
     -fx-background-radius: 30, 30, 30, 30;
@@ -18,9 +69,7 @@
     -fx-background-color: rgb(255, 255, 255);
 }
 
-.transparent{
-    -fx-background-color: trasparent;
-}
+
 
 .peachUnderline{
     -fx-border-width: 0 0 1 0;
@@ -114,7 +163,6 @@
 }
 ---------------------------------------------------------------------------*/
 .departmentBox{
-
     -fx-border-width: 0 0 1 0;
     -fx-border-color: rgb(240, 109, 139);
 }
