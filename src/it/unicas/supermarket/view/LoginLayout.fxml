@@ -13,13 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.LoginLayoutController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="loginBackground" stylesheets="@market.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.LoginLayoutController">
    <children>
-      <ImageView fitHeight="1298.0" fitWidth="1298.0" layoutY="-229.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../resources/backgrounds/BGWhite.jpg" />
-         </image>
-      </ImageView>
       <AnchorPane layoutX="240.0" layoutY="135.0" prefHeight="330.0" prefWidth="800.0" styleClass="LoginPane" stylesheets="@market.css">
          <children>
             <VBox layoutX="11.0" layoutY="11.0" prefHeight="379.0" prefWidth="777.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">

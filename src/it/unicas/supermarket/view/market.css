@@ -1,9 +1,13 @@
-.background{
-    /*
+
+.loginBackground{
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 50px;
-    */
+    -fx-background-size: cover;
+
+    -fx-background-image: url('../../../../../resources/backgrounds/BGColor.jpg');
+}
+
+.background{
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
@@ -12,14 +16,14 @@
     /*
     -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
     -fx-background-image: url('../../../../../resources/backgrounds/BGColor.jpg');
-    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
-    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
-    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
-    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
-    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
-    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
-    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
-    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/BGWhite.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/black-abstract.jpg.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/black-cart-button.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/cart-keyboard.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/marketBG.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/OrangeGradient.png');
+    -fx-background-image: url('../../../../../resources/backgrounds/underwater.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/red-enter-cart.jpg');
     */
 
 }
