@@ -92,7 +92,6 @@ public class LoginLayoutController {
 
     }
 
-
     Boolean checkLoginData (String codiceCarta, String pin){
 
         if (codiceCarta.length() != 19 ||
@@ -109,7 +108,6 @@ public class LoginLayoutController {
         else return true;
     }
 
-
     void cardRejected(){
         messageLabel.setText("Carta non trovata.");
         messageLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
@@ -117,14 +115,12 @@ public class LoginLayoutController {
             this.cardAccepted= false;       // updating login-state
     }
 
-
     void pinRejected(){
         messageLabel.setText("PIN errato! Riprovare.");
         messageLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
         if (this.cardAccepted)
             this.cardAccepted= false;       // updating login-state
     }
-
 
     void loginSuccess(String codiceCarta, String codiceCliente) throws DAOException {
 
@@ -144,7 +140,6 @@ public class LoginLayoutController {
         codiceCartaLabel.setText(codiceCarta);
     }
 
-
     void resetForm(){
         codiceCartaTextField.setText("");
         pinPasswordField.setText("");
@@ -160,13 +155,11 @@ public class LoginLayoutController {
         cardAccepted = false;
     }
 
-
     // called by 'eject' button
     @FXML
     private void handleEject(){
         resetForm();
     }
-
 
     public String getPinFromCodiceCarta(String codiceCarta) throws DAOException {
         List<Carte> cardToBeChecked = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
@@ -174,7 +167,6 @@ public class LoginLayoutController {
             return cardToBeChecked.get(0).getPin();
         else return "ERROR";
     }
-
 
     public String getCodiceClienteFromCodiceCarta(String codiceCarta) throws SQLException {
 
@@ -213,7 +205,6 @@ public class LoginLayoutController {
         else return "ERROR";
     }
 
-
     public String getMassimaliFromCodiceCarta(String codiceCarta) throws DAOException {
         // select() function is codiceCarta-based
         List<Carte> card = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
@@ -224,7 +215,6 @@ public class LoginLayoutController {
             return card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €";
         }
     }
-
 
     public String getPuntiFedeltaFromCodiceCliente(String codiceCliente) throws DAOException {
         // select() function is codiceCliente-based

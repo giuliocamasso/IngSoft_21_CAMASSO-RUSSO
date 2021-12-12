@@ -190,7 +190,7 @@
             <children>
                <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="700.0" stylesheets="@market.css">
                   <children>
-                     <TextField prefHeight="40.0" prefWidth="473.0" promptText="Cerca..." style="-fx-background-color: trasparent;" styleClass="transparent" stylesheets="@market.css">
+                     <TextField fx:id="searchTextField" prefHeight="40.0" prefWidth="473.0" promptText="Cerca..." style="-fx-background-color: trasparent;" styleClass="transparent" stylesheets="@market.css">
                         <HBox.margin>
                            <Insets left="10.0" />
                         </HBox.margin>
@@ -198,7 +198,7 @@
                            <Font name="Verdana Italic" size="16.0" />
                         </font>
                      </TextField>
-                     <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="122.0" styleClass="searchButton" stylesheets="@market.css" text="Cerca">
+                     <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="32.0" prefWidth="122.0" styleClass="searchButton" stylesheets="@market.css" text="Cerca">
                         <font>
                            <Font name="Verdana" size="16.0" />
                         </font>

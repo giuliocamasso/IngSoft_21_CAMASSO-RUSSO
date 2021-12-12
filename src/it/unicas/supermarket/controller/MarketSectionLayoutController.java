@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -55,6 +56,10 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private Label benessereLabel;
     @FXML private Button casalinghiButton;
     @FXML private Label casalinghiLabel;
+
+    // search-bar
+    @FXML private TextField searchTextField;
+    @FXML private Button searchButton;
 
     // left-panel
     @FXML private Label articleNameLabel;
@@ -125,7 +130,6 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private Label totaleCarrelloLabel;
     @FXML private Label quantitaTotaleCarrelloLabel;
 
-
     @FXML private Button pagaOraButton;
 
     // logger for tracking queries
@@ -140,10 +144,10 @@ public class MarketSectionLayoutController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        App.getInstance().setReparto("All");
+        App.getInstance().setReparto("None");
 
         try {
-            gridPaneArticles.addAll(getArticles("Initialize"));
+            gridPaneArticles.addAll(getArticles("Initialize", false));
             loadImages();
         }
         catch (DAOException | SQLException | IOException e) {
@@ -171,16 +175,26 @@ public class MarketSectionLayoutController implements Initializable {
             clearRow(i);
     }
 
-    private List<Articoli> getArticles(String section) throws DAOException, SQLException, IOException {
+    private List<Articoli> getArticles(String filter, boolean isSection) throws DAOException, SQLException, IOException {
         // loading articles from db
         List<Articoli> articoli;
 
-        if (section.equals("Initialize"))
+        if(isSection)
+            articoli = filterBySection(filter);
+
+        else if (filter.equals("Initialize"))
             articoli = ArticoliDAOMySQL.getInstance().selectAll();
-        else
-            articoli = filterBySection(section);
+        else {
+            articoli = filterByName(filter);
+            if(articoli.size()==0)
+                searchTextField.setText("Nessun articolo trovato per \" " + filter + "\"!");
+        }
 
         return articoli;
+    }
+
+    private List<Articoli> filterByName(String name) throws DAOException {
+        return ArticoliDAOMySQL.getInstance().select(new Articoli(name,""));
     }
 
     private void setChosenArticle(Articoli articolo) {
@@ -212,7 +226,7 @@ public class MarketSectionLayoutController implements Initializable {
         gridPaneArticles.clear();
 
         try {
-            loadFilteredItems(section);
+            loadFilteredItems(section, true);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -255,11 +269,12 @@ public class MarketSectionLayoutController implements Initializable {
         GridPane.setMargin(anchorPane, new Insets(10, 10, 10, 10));
     }
 
-    public void loadFilteredItems(String section) throws IOException {
+    // the filter can be a section name, or an article name! (from the search bar)
+    public void loadFilteredItems(String filter, boolean isSection) throws IOException {
         clearGridItems();
 
         try {
-           gridPaneArticles.addAll(getArticles(section));
+           gridPaneArticles.addAll(getArticles(filter, isSection));
            loadImages();
        }
        catch (DAOException | SQLException | IOException e) {
@@ -413,7 +428,7 @@ public class MarketSectionLayoutController implements Initializable {
                 casalinghiButton.setStyle(prevStyle);
                 casalinghiLabel.setStyle(prevStyle);
                 break;
-            case "INIT"   :             // NB. it does nothing of first interaction!
+            case "None":             // NB. it does nothing of first interaction!
         }
 
         switch (section) {
@@ -469,6 +484,9 @@ public class MarketSectionLayoutController implements Initializable {
                 casalinghiButton.setStyle(newStyle);
                 casalinghiLabel.setStyle(newFontStyle);
             }
+            // no section is selected!
+            case "None" -> {}
+
         }
     }
 
@@ -649,8 +667,6 @@ public class MarketSectionLayoutController implements Initializable {
         this.showedBarcodes.add(newArticleBarcode);
     }
 
-
-    // isNewArticle means that i need to read the last added article...
     private void updateRow(Integer row){
 
         String vBoxStyle =  "-fx-border-width: 0 0 1 0;\n-fx-border-color: rgb(240, 109, 139);";
@@ -862,5 +878,27 @@ public class MarketSectionLayoutController implements Initializable {
         else
             return article.get(0).getPrezzo();
     }
+
+    @FXML public void handleSearch(){
+        System.out.println("Search Pressed: " + searchTextField.getText());
+
+        clearGridItems();
+        gridPaneArticles.clear();
+
+        try {
+            // filter by name!
+            loadFilteredItems(searchTextField.getText(), false);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // update graphics
+        updateSectionBar("None");
+
+        App.getInstance().setReparto("None");
+
+    }
+
 
 }
