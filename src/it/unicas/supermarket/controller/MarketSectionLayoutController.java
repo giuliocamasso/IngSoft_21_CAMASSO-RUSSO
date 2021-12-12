@@ -151,7 +151,7 @@ public class MarketSectionLayoutController implements Initializable {
 
         //clear right-pane
         try {
-            updateCartHeaderLabels();
+            updateCartLabels();
         } catch (DAOException e) {
             e.printStackTrace();
         }
@@ -553,7 +553,7 @@ public class MarketSectionLayoutController implements Initializable {
         Integer cartSize = App.getInstance().getCartMap().size();
         System.out.println(cartSize);
 
-        updateCartHeaderLabels();
+
 
         // aggiunto un nuovo articolo al carrello
         if (!cartSize.equals(this.cartSize)){
@@ -563,14 +563,15 @@ public class MarketSectionLayoutController implements Initializable {
             // devo riempire per la prima volta il pannello
             if (cartSize < 6) {
                 this.showedBarcodes.add(this.chosenArticle.getBarcode());
-                updateRow(cartSize, false);
+                updateRow(cartSize);
             }
             else{
                 // libero prima riga e aggiorno la 5
                 updateShowedArticles(this.chosenArticle.getBarcode());
                 shiftRows();
-                updateRow(5, true);
+                updateRow(5);
             }
+
         }
 
         // aggiorno quantita di articoli già visualizzati nel carrello
@@ -582,17 +583,25 @@ public class MarketSectionLayoutController implements Initializable {
             // se il barcode e' presente (cioe' se l'articolo e' mostrato...
             if(this.showedBarcodes.contains(newArticleBarcode))
                 // ...allora aggiorno la relativa riga
-                updateRow(showedBarcodes.indexOf(newArticleBarcode)+1, false);
+                updateRow(showedBarcodes.indexOf(newArticleBarcode)+1);
 
+            // e' nel carrello ma non e' visualizzato. Lo riporto in testa!
+            else{
+                updateShowedArticles(this.chosenArticle.getBarcode());
+                shiftRows();
+                updateRow(5);
+            }
         }
 
-        System.out.println(App.getInstance().getCartMap());
-        System.out.println(App.getInstance().getCartListArticles());
-        System.out.println(App.getInstance().getCartListQuantity());
+        updateCartLabels();
+
+        //System.out.println(App.getInstance().getCartMap());
+        //System.out.println(App.getInstance().getCartListArticles());
+        //System.out.println(App.getInstance().getCartListQuantity());
 
     }
 
-    private void updateCartHeaderLabels() throws DAOException {
+    private void updateCartLabels() throws DAOException {
 
         // cartSums.get(0) = quantità totali
         // cartSums.get(1) = importo totale
@@ -632,16 +641,20 @@ public class MarketSectionLayoutController implements Initializable {
 
 
     // isNewArticle means that i need to read the last added article...
-    private void updateRow(Integer row, boolean isNewArticle){
+    private void updateRow(Integer row){
 
         String vBoxStyle =  "-fx-border-width: 0 0 1 0;\n-fx-border-color: rgb(240, 109, 139);";
         String hBoxStyle =  "-fx-border-radius: 50;\n-fx-border-width: 1;\n-fx-border-color: rgb(240, 109, 139);";
+
+        // leggo la quantita' dal carrello
+
+        String quantita = String.valueOf(App.getInstance().getCartMap().get(this.chosenArticle.getBarcode()));
 
         switch (row) {
             case 1 -> {
                 articolo1Label.setText(this.chosenArticle.getNome());
                 prezzo1Label.setText(this.chosenArticle.getPrezzo() + " €");
-                quantita1Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(row-1)));
+                quantita1Label.setText(quantita);
                 if(this.cartSize == 1) {
                     articolo1VBox.setStyle(vBoxStyle);
                     articolo1InfoHBox.setStyle(hBoxStyle);
@@ -650,7 +663,7 @@ public class MarketSectionLayoutController implements Initializable {
             case 2 -> {
                 articolo2Label.setText(this.chosenArticle.getNome());
                 prezzo2Label.setText(this.chosenArticle.getPrezzo() + " €");
-                quantita2Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(row-1)));
+                quantita2Label.setText(quantita);
                 if(this.cartSize == 2) {
                     articolo2VBox.setStyle(vBoxStyle);
                     articolo2InfoHBox.setStyle(hBoxStyle);
@@ -659,7 +672,7 @@ public class MarketSectionLayoutController implements Initializable {
             case 3 -> {
                 articolo3Label.setText(this.chosenArticle.getNome());
                 prezzo3Label.setText(this.chosenArticle.getPrezzo() + " €");
-                quantita3Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(row-1)));
+                quantita3Label.setText(quantita);
                 if(this.cartSize == 3) {
                     articolo3VBox.setStyle(vBoxStyle);
                     articolo3InfoHBox.setStyle(hBoxStyle);
@@ -668,7 +681,7 @@ public class MarketSectionLayoutController implements Initializable {
             case 4 -> {
                 articolo4Label.setText(this.chosenArticle.getNome());
                 prezzo4Label.setText(this.chosenArticle.getPrezzo() + " €");
-                quantita4Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(row-1)));
+                quantita4Label.setText(quantita);
                 if(this.cartSize == 4) {
                     articolo4VBox.setStyle(vBoxStyle);
                     articolo4InfoHBox.setStyle(hBoxStyle);
@@ -677,11 +690,8 @@ public class MarketSectionLayoutController implements Initializable {
             case 5 -> {
                 articolo5Label.setText(this.chosenArticle.getNome());
                 prezzo5Label.setText(this.chosenArticle.getPrezzo() + " €");
-                // loads the last added article...
-                if(isNewArticle)
-                    quantita5Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(this.cartSize-1)));
-                else
-                    quantita5Label.setText(String.valueOf(App.getInstance().getCartListQuantity().get(row-1)));
+                quantita5Label.setText(quantita);
+
                 // nb. the clearAll function also resets the style
                 if(this.cartSize >= 5) {
                     articolo5VBox.setStyle(vBoxStyle);

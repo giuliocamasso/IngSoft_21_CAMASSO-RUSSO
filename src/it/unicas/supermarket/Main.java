@@ -75,7 +75,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        boolean initializeDB = true;
+        boolean initializeDB = false;
 
         try {
             if (initializeDB)
