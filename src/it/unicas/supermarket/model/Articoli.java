@@ -233,16 +233,45 @@ public class Articoli {
 
     public static String getURLfromCode(String barcode){
         return switch (barcode) {
+            // Macelleria
+            case "0000_MACINATO" -> "resources/images/Macelleria/macinato.png";
+            case "00000_FILETTO" -> "resources/images/Macelleria/filetto.png";
+            case "0000_BISTECCA" -> "resources/images/Macelleria/bistecca.png";
+            case "0000000_POLLO" -> "resources/images/Macelleria/pollo.png";
+
+            // Pescheria
+            case "0_MAZZANCOLLE" -> "resources/images/Pescheria/mazzancolle.png";
+            case "0000_MERLUZZO" -> "resources/images/Pescheria/merluzzo.png";
+            case "0000000_ORATA" -> "resources/images/Pescheria/orata.png";
+            case "00000_SALMONE" -> "resources/images/Pescheria/salmone.png";
+            case "0000_CALAMARO" -> "resources/images/Pescheria/calamaro.png";
+
             // Ortofrutta
             case "000000_BANANA" -> "resources/images/Ortofrutta/banana.png";
             case "000000_MELE01" -> "resources/images/Ortofrutta/yellowApples.png";
             case "000000_MELE02" -> "resources/images/Ortofrutta/red-apples.png";
             case "00000_ICEBERG" -> "resources/images/Ortofrutta/insalata.png";
+            case "0000_CILIEGIA" -> "resources/images/Ortofrutta/ciliegia.png";
+            case "0000000_COCCO" -> "resources/images/Ortofrutta/cocco.png";
+            case "000000000_UVA" -> "resources/images/Ortofrutta/uva.png";
+            case "000_MELANZANA" -> "resources/images/Ortofrutta/melanzana.png";
+
+            // Alimentari
+            /*
+            case "" -> "resources/images/Alimentari/";
+            case "" -> "resources/images/Alimentari/";
+            case "" -> "resources/images/Alimentari/";
+            case "" -> "resources/images/Alimentari/";
+            case "" -> "resources/images/Alimentari/";
+            case "" -> "resources/images/Alimentari/";
+            case "" -> "resources/images/Alimentari/";
+            */
 
             // Forno
             case "0000_BAGUETTE" -> "resources/images/Forno/baguette.png";
             case "000_CROISSANT" -> "resources/images/Forno/cornetto.png";
             case "00000000_PANE" -> "resources/images/Forno/pane.png";
+            case "00000_TARALLI" -> "resources/images/Forno/taralli.png";
 
             default -> "ERROR";
         };

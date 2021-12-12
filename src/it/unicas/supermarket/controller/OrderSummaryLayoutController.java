@@ -1,6 +1,7 @@
 package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.Main;
+import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.Fruit;
 import it.unicas.supermarket.model.dao.DAOException;
 import javafx.fxml.FXML;
@@ -20,43 +21,24 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class OrderSummaryLayoutController implements Initializable {
 
-    @FXML
-    private VBox cartArticleDetails;
+    // cart section
+    @FXML private ScrollPane cartArticleScrollPane;
+    @FXML private GridPane cartArticleGridPane;
 
-    @FXML
-    private Label cartArticleNameLabel;
+    private final List<Articoli> cartGridPaneArticles = new ArrayList<>();
 
-    @FXML
-    private Label cartArticlePriceLabel;
+    // payment section
+    @FXML private Label codiceCartaLabel;
+    @FXML private Label puntiFedeltaLabel;
+    @FXML private Label codiceClienteLabel;
+    @FXML private Label massimaliLabel;
 
-    @FXML
-    private ImageView cartArticleImage;
-
-    @FXML
-    private ScrollPane cartArticleScrollPane;
-
-    @FXML
-    private GridPane cartArticleGridPane;
-
-    @FXML
-    private Label codiceCartaLabel;
-
-    @FXML
-    private Label puntiFedeltaLabel;
-
-    @FXML
-    private Label codiceClienteLabel;
-
-    @FXML
-    private Label massimaliLabel;
-
-    private List<Fruit> fruits = new ArrayList<>();
-    private Image image;
     private ArticleSelectionListener articleSelectionListener;
 
     @FXML
@@ -70,125 +52,82 @@ public class OrderSummaryLayoutController implements Initializable {
         App.getInstance().showReceipt();
     }
 
-    /*
-    private List<Fruit> getData() {
-        List<Fruit> fruits = new ArrayList<>();
-        Fruit fruit;
-        fruit = new Fruit();
-        fruit.setName("Kiwi");
-        fruit.setPrice(2.99);
-        fruit.setImgSrc("resources/images/fruits/kiwi.png");
-        fruit.setColor("6A7324");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Coconut");
-        fruit.setPrice(3.99);
-        fruit.setImgSrc("resources/images/fruits/coconut.png");
-        fruit.setColor("A7745B");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Peach");
-        fruit.setPrice(1.50);
-
-        fruit.setImgSrc("resources/images/fruits/peach.png");
-        fruit.setColor("F16C31");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Grapes");
-        fruit.setPrice(0.99);
-        fruit.setImgSrc("resources/images/fruits/grapes.png");
-        fruit.setColor("291D36");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Watermelon");
-        fruit.setPrice(4.99);
-        fruit.setImgSrc("resources/images/fruits/watermelon.png");
-        fruit.setColor("22371D");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Orange");
-        fruit.setPrice(2.99);
-        fruit.setImgSrc("resources/images/fruits/orange.png");
-        fruit.setColor("FB5D03");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("StrawBerry");
-        fruit.setPrice(0.99);
-        fruit.setImgSrc("resources/images/fruits/strawberry.png");
-        fruit.setColor("80080C");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Mango");
-        fruit.setPrice(0.99);
-        fruit.setImgSrc("resources/images/fruits/mango.png");
-        fruit.setColor("FFB605");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Cherry");
-        fruit.setPrice(0.99);
-        fruit.setImgSrc("resources/images/fruits/cherry.png");
-        fruit.setColor("5F060E");
-        fruits.add(fruit);
-
-        fruit = new Fruit();
-        fruit.setName("Banana");
-        fruit.setPrice(1.99);
-        fruit.setImgSrc("resources/images/fruits/banana.png");
-        fruit.setColor("E7C00F");
-        fruits.add(fruit);
-
-        return fruits;
-    }
-*/
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    /*
-        fruits.addAll(getData());
-        int column = 0;
-        int row = 1;
+
+        loadImages();
+
         try {
-            for (int i = 0; i < fruits.size(); i++) {
-                FXMLLoader itemLoader = new FXMLLoader();
-                itemLoader.setLocation(Main.class.getResource("view/CartArticleGridItem.fxml"));
-                AnchorPane anchorPane = itemLoader.load();
-                CartArticleGridItemController cartArticleGridItemController = itemLoader.getController();
-
-                cartArticleGridItemController.setData(fruits.get(i), articleSelectionListener);
-
-                cartArticleGridPane.add(anchorPane, column, row++); //(child,column,row)
-
-                //set grid width
-                cartArticleGridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
-                cartArticleGridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                cartArticleGridPane.setMaxWidth(Region.USE_PREF_SIZE);
-
-                //set grid height
-                cartArticleGridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
-                cartArticleGridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                cartArticleGridPane.setMaxHeight(Region.USE_PREF_SIZE);
-
-                // margini all'interno del grid pane
-                GridPane.setMargin(anchorPane, new Insets(10, 10, 10 ,10));
-
-            }
-
-            paymentDetails(App.getInstance().getCodiceCarta(), App.getInstance().getCodiceCliente());
-
-        } catch (IOException | SQLException | DAOException e) {
+            fillCartGridPane(App.getInstance().getCartMap());
+        } catch (IOException | DAOException e) {
             e.printStackTrace();
         }
 
-    */
         paymentDetails();
+    }
+
+
+    public void fillCartGridPane(HashMap<String, Integer> cartMap) throws IOException, DAOException {
+
+        int column = 0;
+        int row = 1;
+/*
+        ArrayList<Float> resultItem = new ArrayList<>();
+
+        float articleQuantity = 0f;
+        float cartImport = 0f;
+
+        List<Integer> quantityList = App.getInstance().getCartListQuantity();
+        List<String> barcodeList = App.getInstance().getCartListArticles();
+
+        for (int i=0; i<App.getInstance().getCartMap().size(); i++){
+            Integer quantity = quantityList.get(i);
+            Float price = getPrezzoArticoloFromBarcode(barcodeList.get(i));
+            articleQuantity += quantity.floatValue();
+            cartImport += quantity*price;
+        }
+
+        resultItem.add(articleQuantity);
+        resultItem.add(cartImport);
+        */
+
+        for (int index=0; index<cartMap.size(); index++) {
+
+            FXMLLoader itemLoader = new FXMLLoader();
+            itemLoader.setLocation(Main.class.getResource("view/CartArticleGridItem.fxml"));
+            AnchorPane anchorPane = itemLoader.load();
+
+            CartArticleGridItemController cartArticleGridItemController = itemLoader.getController();
+            cartArticleGridItemController.loadItem(App.getInstance().getCartListArticles().get(index),
+                    App.getInstance().getCartListQuantity().get(index), articleSelectionListener);
+
+            row++;
+
+            cartArticleGridPane.add(anchorPane, column++, row); //(child,column,row)
+            setGridLayout(anchorPane);
+        }
+    }
+
+
+
+    private void loadImages(){
+        for (Articoli articoli : cartGridPaneArticles)
+            articoli.setImageURL(Articoli.getURLfromCode(articoli.getBarcode()));
+    }
+
+    public void setGridLayout(AnchorPane anchorPane){
+        // grid width
+        cartArticleGridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
+        cartArticleGridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        cartArticleGridPane.setMaxWidth(Region.USE_PREF_SIZE);
+
+        // grid height
+        cartArticleGridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
+        cartArticleGridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        cartArticleGridPane.setMaxHeight(Region.USE_PREF_SIZE);
+
+        // inset-margins
+        GridPane.setMargin(anchorPane, new Insets(10, 10, 10, 10));
     }
 
     private void paymentDetails() {
