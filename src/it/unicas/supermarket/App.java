@@ -259,6 +259,17 @@ public class App {
         return new ArrayList<>(this.cartMap.values());
     }
 
+    public int getCartListQuantityFromKey(String Key){
+        List<String> listKey = getCartListArticles();
+        List<Integer> listQuantity = getCartListQuantity();
+        Integer index = 0;
+        for (int i=0; i<listKey.size(); i++){
+            if(listKey.get(i) == Key)
+                index = i;
+        }
+        return listQuantity.get(index);
+    }
+
     public void printCart() throws DAOException {
         Integer size = this.cartMap.size();
         System.out.println("---Carrello---");

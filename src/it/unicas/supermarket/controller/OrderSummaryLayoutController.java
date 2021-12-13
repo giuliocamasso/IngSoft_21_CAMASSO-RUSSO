@@ -4,6 +4,7 @@ import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.Fruit;
 import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,13 +26,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static it.unicas.supermarket.controller.MarketSectionLayoutController.getPrezzoArticoloFromBarcode;
+
 public class OrderSummaryLayoutController implements Initializable {
 
     // cart section
     @FXML private ScrollPane cartArticleScrollPane;
     @FXML private GridPane cartArticleGridPane;
 
-    private final List<Articoli> cartGridPaneArticles = new ArrayList<>();
+    @FXML private static Label totalCostLabel;
+
+    static float totalImport = 0f;
 
     // payment section
     @FXML private Label codiceCartaLabel;
@@ -40,6 +45,13 @@ public class OrderSummaryLayoutController implements Initializable {
     @FXML private Label massimaliLabel;
 
     private ArticleSelectionListener articleSelectionListener;
+
+    public float getTotalImport() { return this.totalImport; }
+
+    public static void setTotalImport(float tot) {
+        totalImport = tot;
+        totalCostLabel.setText("€ "+totalImport);
+    }
 
     @FXML
     private void handleMarket() {
@@ -55,41 +67,25 @@ public class OrderSummaryLayoutController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        loadImages();
-
         try {
             fillCartGridPane(App.getInstance().getCartMap());
         } catch (IOException | DAOException e) {
             e.printStackTrace();
         }
 
+        try {
+            updateTotalCartCost();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+
         paymentDetails();
     }
-
 
     public void fillCartGridPane(HashMap<String, Integer> cartMap) throws IOException, DAOException {
 
         int column = 0;
         int row = 1;
-/*
-        ArrayList<Float> resultItem = new ArrayList<>();
-
-        float articleQuantity = 0f;
-        float cartImport = 0f;
-
-        List<Integer> quantityList = App.getInstance().getCartListQuantity();
-        List<String> barcodeList = App.getInstance().getCartListArticles();
-
-        for (int i=0; i<App.getInstance().getCartMap().size(); i++){
-            Integer quantity = quantityList.get(i);
-            Float price = getPrezzoArticoloFromBarcode(barcodeList.get(i));
-            articleQuantity += quantity.floatValue();
-            cartImport += quantity*price;
-        }
-
-        resultItem.add(articleQuantity);
-        resultItem.add(cartImport);
-        */
 
         for (int index=0; index<cartMap.size(); index++) {
 
@@ -101,18 +97,9 @@ public class OrderSummaryLayoutController implements Initializable {
             cartArticleGridItemController.loadItem(App.getInstance().getCartListArticles().get(index),
                     App.getInstance().getCartListQuantity().get(index), articleSelectionListener);
 
-            row++;
-
-            cartArticleGridPane.add(anchorPane, column++, row); //(child,column,row)
+            cartArticleGridPane.add(anchorPane, column, row++); //(child,column,row)
             setGridLayout(anchorPane);
         }
-    }
-
-
-
-    private void loadImages(){
-        for (Articoli articoli : cartGridPaneArticles)
-            articoli.setImageURL(Articoli.getURLfromCode(articoli.getBarcode()));
     }
 
     public void setGridLayout(AnchorPane anchorPane){
@@ -128,6 +115,48 @@ public class OrderSummaryLayoutController implements Initializable {
 
         // inset-margins
         GridPane.setMargin(anchorPane, new Insets(10, 10, 10, 10));
+    }
+
+    public static void updateTotalCartCost() throws DAOException {
+
+        List<Integer> quantityList = App.getInstance().getCartListQuantity();
+        List<String> barcodeList = App.getInstance().getCartListArticles();
+
+        Float sum = 0f;
+
+        for (int i=0; i<App.getInstance().getCartMap().size(); i++){
+            Integer quantity = quantityList.get(i);
+            Float price = getPrezzoArticoloFromBarcode(barcodeList.get(i));
+            sum += quantity*price;
+        }
+
+        setTotalImport(sum);
+    }
+
+    public static int handleDecrement(String barcode) throws DAOException {
+        System.out.println("Decrement Cart Pressed");
+
+        int oldCartQuantity = App.getInstance().getCartListQuantityFromKey(barcode);
+        int newCartQuantity = oldCartQuantity--;
+        System.out.println("new "+newCartQuantity);
+        System.out.println("old "+oldCartQuantity);
+        System.out.println("max "+getScorteFromBarcode(barcode));
+        System.out.println("ID "+barcode);
+
+        // chosen quantity must be > 0
+        if(newCartQuantity >= 0) {
+            App.getInstance().getCartMap().replace(barcode, oldCartQuantity, newCartQuantity);
+        }
+        return 1;
+    }
+
+    public static int getScorteFromBarcode(String barcode) throws DAOException {
+        // select() function is barcode-based
+        List<Articoli> article = ArticoliDAOMySQL.getInstance().select(new Articoli("", barcode));
+        if( article.size() != 1)
+            return -1;
+        else
+            return article.get(0).getScorteMagazzino();
     }
 
     private void paymentDetails() {

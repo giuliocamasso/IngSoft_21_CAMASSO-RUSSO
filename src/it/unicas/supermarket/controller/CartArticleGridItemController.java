@@ -13,6 +13,7 @@ import java.util.List;
 
 import static it.unicas.supermarket.controller.MarketSectionLayoutController.getNomeArticoloFromBarcode;
 import static it.unicas.supermarket.controller.MarketSectionLayoutController.getPrezzoArticoloFromBarcode;
+import static it.unicas.supermarket.controller.OrderSummaryLayoutController.*;
 
 public class CartArticleGridItemController {
 
@@ -21,9 +22,11 @@ public class CartArticleGridItemController {
     @FXML private ImageView cartArticleImage;
     @FXML private Label cartQuantityLabel;
 
+    private int scorteRimanenti;
+    private int quantita;
+
     private Articoli articolo;
     private ArticleSelectionListener articleSelectionListener;
-
 
     public void loadItem(String barcode, Integer quantity, ArticleSelectionListener articleSelectionListener) throws DAOException {
         System.out.println("load");
@@ -34,11 +37,30 @@ public class CartArticleGridItemController {
         this.articolo = result.get(0);
         this.articleSelectionListener = articleSelectionListener;
 
+        scorteRimanenti = getScorteFromBarcode(this.articolo.getBarcode());
+        quantita = quantity;
+
         cartArticleNameLabel.setText(getNomeArticoloFromBarcode(barcode));
-        cartQuantityLabel.setText(String.valueOf(quantity));
+        cartQuantityLabel.setText(String.valueOf(quantita));
         cartArticlePriceLabel.setText(getPrezzoArticoloFromBarcode(barcode)+" €");
-        Image image = new Image("file:" + articolo.getImageURL());
+        Image image = new Image("file:" + articolo.getURLfromCode(barcode));
         cartArticleImage.setImage(image);
+    }
+
+    // Add to cart buttons section
+    @FXML public void handleCartIncrement() throws DAOException {
+        if(scorteRimanenti<1)
+            return;
+
+        scorteRimanenti--;
+        quantita++;
+        App.getInstance().getCartMap().replace(this.articolo.getBarcode(), quantita);
+        cartQuantityLabel.setText(String.valueOf(quantita));
+        updateTotalCartCost();
+    }
+
+    @FXML public void handleCartDecrement() throws DAOException {
+        //cartQuantityLabel.setText(String.valueOf(handleIncrement(this.articolo.getBarcode())));
     }
 
 }

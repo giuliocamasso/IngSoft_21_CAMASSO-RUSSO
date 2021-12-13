@@ -50,7 +50,7 @@
                      <children>
                         <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="120.0" styleClass="ovalHBox" stylesheets="@market.css">
                            <children>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: trasparent;" text="-" textFill="#f06d8b">
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCartDecrement" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: trasparent;" text="-" textFill="#f06d8b">
                                  <font>
                                     <Font name="Verdana Bold" size="12.0" />
                                  </font>
@@ -60,7 +60,7 @@
                                     <Font name="Verdana Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: trasparent;" text="+" textFill="#f06d8b">
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCartIncrement" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: trasparent;" text="+" textFill="#f06d8b">
                                  <font>
                                     <Font name="Verdana Bold" size="12.0" />
                                  </font>
