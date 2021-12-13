@@ -2,27 +2,20 @@ package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.Articoli;
-import it.unicas.supermarket.model.Fruit;
 import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -51,9 +44,7 @@ public class OrderSummaryLayoutController implements Initializable {
 
     @FXML
     private void handleMarket() {
-
-        App.getInstance().getMainStage().setScene(App.getInstance().getMarketSectionScene());
-
+        App.getInstance().initMarketSectionLayout();
     }
 
     @FXML

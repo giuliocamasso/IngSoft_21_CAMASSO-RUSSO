@@ -30,6 +30,8 @@ public class App {
     private Stage mainStage;
 
     private Scene marketSectionScene;
+    private Scene paymentSectionScene;
+    private Scene loginSectionScene;
 
     private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
@@ -40,8 +42,37 @@ public class App {
 
     public String reparto = "INIT";
 
-    public LinkedHashMap<String, Integer> cartMap = new LinkedHashMap<>();
+    public boolean isPaymentVisited() {
+        return paymentVisited;
+    }
 
+    public void setPaymentVisited(boolean paymentVisited) {
+        this.paymentVisited = paymentVisited;
+    }
+
+    private boolean paymentVisited = false;
+
+    public boolean isMarketVisited() {
+        return marketVisited;
+    }
+
+    public void setMarketVisited(boolean marketVisited) {
+        this.marketVisited = marketVisited;
+    }
+
+    private boolean marketVisited = false;
+
+    public boolean isLoginVisited() {
+        return loginVisited;
+    }
+
+    public void setLoginVisited(boolean loginVisited) {
+        this.loginVisited = loginVisited;
+    }
+
+    private boolean loginVisited = false;
+
+    public LinkedHashMap<String, Integer> cartMap = new LinkedHashMap<>();
 
     // nome articolo / quantita'?
     // codiceArticolo / quantita'?
@@ -129,7 +160,13 @@ public class App {
 
 
     public void initLoginLayout() {
+
+        if (loginVisited){
+            mainStage.setScene(loginSectionScene);
+            return;
+        }
         try {
+            this.loginVisited = true;
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/LoginLayout.fxml"));
@@ -139,7 +176,7 @@ public class App {
             // Show the scene containing the root layout.
             Scene loginScene = new Scene(loginLayout);
             mainStage.setScene(loginScene);
-
+            this.loginSectionScene = loginScene;
 
             mainStage.setOnCloseRequest(event -> {
                 event.consume();
@@ -176,7 +213,13 @@ public class App {
 
 
     public void initMarketSectionLayout() {
+        if (this.paymentVisited){
+            mainStage.setScene(marketSectionScene);
+
+            return;
+        }
         try {
+            this.marketVisited = true;
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/MarketSectionLayout.fxml"));
@@ -204,7 +247,13 @@ public class App {
 
 
     public void initOrderSummaryLayout() {
+        if (paymentVisited){
+            mainStage.setScene(paymentSectionScene);
+            return;
+        }
+
         try {
+            paymentVisited = true;
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/OrderSummaryLayout.fxml"));
@@ -214,7 +263,7 @@ public class App {
             // Show the scene containing the root layout.
             Scene orderSummaryScene = new Scene(orderSummaryLayout);
             mainStage.setScene(orderSummaryScene);
-
+            this.paymentSectionScene = orderSummaryScene;
 
             mainStage.setOnCloseRequest(event -> {
                 event.consume();
