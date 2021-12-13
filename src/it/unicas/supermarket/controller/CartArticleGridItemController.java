@@ -24,31 +24,33 @@ public class CartArticleGridItemController {
 
     private int scorteRimanenti;
     private int quantita;
+    private Label totalCostLabelHandler;
 
     private Articoli articolo;
-    private ArticleSelectionListener articleSelectionListener;
 
-    public void loadItem(String barcode, Integer quantity, ArticleSelectionListener articleSelectionListener) throws DAOException {
+    public void loadItem(String barcode, Integer quantity, ArticleSelectionListener articleSelectionListener, Label totalCostLabel) throws DAOException {
+        totalCostLabelHandler = totalCostLabel;
+
         System.out.println("load");
         List<Articoli> result = ArticoliDAOMySQL.getInstance().select(new Articoli("", barcode));
         if (result.size()!=1){
             throw new DAOException("Trovato più di un articolo nella loadITem");
         }
         this.articolo = result.get(0);
-        this.articleSelectionListener = articleSelectionListener;
 
-        scorteRimanenti = getScorteFromBarcode(this.articolo.getBarcode());
         quantita = quantity;
+        scorteRimanenti = getScorteFromBarcode(this.articolo.getBarcode()) - quantita;
 
         cartArticleNameLabel.setText(getNomeArticoloFromBarcode(barcode));
         cartQuantityLabel.setText(String.valueOf(quantita));
         cartArticlePriceLabel.setText(getPrezzoArticoloFromBarcode(barcode)+" €");
-        Image image = new Image("file:" + articolo.getURLfromCode(barcode));
+        Image image = new Image("file:" + Articoli.getURLfromCode(barcode));
         cartArticleImage.setImage(image);
     }
 
     // Add to cart buttons section
     @FXML public void handleCartIncrement() throws DAOException {
+
         if(scorteRimanenti<1)
             return;
 
@@ -56,11 +58,18 @@ public class CartArticleGridItemController {
         quantita++;
         App.getInstance().getCartMap().replace(this.articolo.getBarcode(), quantita);
         cartQuantityLabel.setText(String.valueOf(quantita));
-        updateTotalCartCost();
+        updateTotalCartCost(this.totalCostLabelHandler);
     }
 
     @FXML public void handleCartDecrement() throws DAOException {
-        //cartQuantityLabel.setText(String.valueOf(handleIncrement(this.articolo.getBarcode())));
+        if(quantita < 1)
+            return;
+
+        scorteRimanenti++;
+        quantita--;
+        App.getInstance().getCartMap().replace(this.articolo.getBarcode(), quantita);
+        cartQuantityLabel.setText(String.valueOf(quantita));
+        updateTotalCartCost(this.totalCostLabelHandler);
     }
 
 }

@@ -29,6 +29,8 @@ public class App {
 
     private Stage mainStage;
 
+    private Scene marketSectionScene;
+
     private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
     public String codiceCarta;
@@ -48,6 +50,11 @@ public class App {
     public HashMap<String, Integer> getCartMap() {
         return cartMap;
     }
+
+    public Scene getMarketSectionScene() {
+        return marketSectionScene;
+    }
+
 
     public String getReparto()                   { return reparto; }
 
@@ -179,6 +186,7 @@ public class App {
             // Show the scene containing the root layout.
             Scene marketSectionScene = new Scene(marketSectionLayout);
             mainStage.setScene(marketSectionScene);
+            this.marketSectionScene = marketSectionScene;
 
 
             mainStage.setOnCloseRequest(event -> {

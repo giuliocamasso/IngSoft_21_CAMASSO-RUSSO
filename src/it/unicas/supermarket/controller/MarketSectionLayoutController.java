@@ -136,7 +136,6 @@ public class MarketSectionLayoutController implements Initializable {
     private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
     private Integer cartSize = 0;
-
     private final ArrayList<String> showedBarcodes = new ArrayList<>();
 
 

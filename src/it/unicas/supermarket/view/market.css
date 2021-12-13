@@ -1,3 +1,10 @@
+.paymentBackground{
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
+}
+
 
 .loginBackground{
     -fx-background-position: center;

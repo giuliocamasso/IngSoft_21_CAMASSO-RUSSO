@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -34,7 +35,7 @@ public class OrderSummaryLayoutController implements Initializable {
     @FXML private ScrollPane cartArticleScrollPane;
     @FXML private GridPane cartArticleGridPane;
 
-    @FXML private static Label totalCostLabel;
+    @FXML private Label totalCostLabel;
 
     static float totalImport = 0f;
 
@@ -48,14 +49,11 @@ public class OrderSummaryLayoutController implements Initializable {
 
     public float getTotalImport() { return this.totalImport; }
 
-    public static void setTotalImport(float tot) {
-        totalImport = tot;
-        totalCostLabel.setText("€ "+totalImport);
-    }
-
     @FXML
     private void handleMarket() {
-        App.getInstance().initMarketSectionLayout();
+
+        App.getInstance().getMainStage().setScene(App.getInstance().getMarketSectionScene());
+
     }
 
     @FXML
@@ -73,8 +71,10 @@ public class OrderSummaryLayoutController implements Initializable {
             e.printStackTrace();
         }
 
-        try {
-            updateTotalCartCost();
+        try
+        {
+            updateTotalCartCost(this.totalCostLabel);
+            totalCostLabel.setText("€ "+totalImport);
         } catch (DAOException e) {
             e.printStackTrace();
         }
@@ -95,7 +95,7 @@ public class OrderSummaryLayoutController implements Initializable {
 
             CartArticleGridItemController cartArticleGridItemController = itemLoader.getController();
             cartArticleGridItemController.loadItem(App.getInstance().getCartListArticles().get(index),
-                    App.getInstance().getCartListQuantity().get(index), articleSelectionListener);
+                    App.getInstance().getCartListQuantity().get(index), articleSelectionListener, totalCostLabel);
 
             cartArticleGridPane.add(anchorPane, column, row++); //(child,column,row)
             setGridLayout(anchorPane);
@@ -117,20 +117,22 @@ public class OrderSummaryLayoutController implements Initializable {
         GridPane.setMargin(anchorPane, new Insets(10, 10, 10, 10));
     }
 
-    public static void updateTotalCartCost() throws DAOException {
+    public static void updateTotalCartCost(Label totalCostLabelHandler) throws DAOException {
 
         List<Integer> quantityList = App.getInstance().getCartListQuantity();
         List<String> barcodeList = App.getInstance().getCartListArticles();
 
-        Float sum = 0f;
+        totalImport = 0f;
 
         for (int i=0; i<App.getInstance().getCartMap().size(); i++){
             Integer quantity = quantityList.get(i);
             Float price = getPrezzoArticoloFromBarcode(barcodeList.get(i));
-            sum += quantity*price;
+            totalImport += quantity*price;
         }
 
-        setTotalImport(sum);
+        totalCostLabelHandler.setText("€ "+totalImport);
+        System.out.println("Sum from updateTotale " + totalImport);
+
     }
 
     public static int handleDecrement(String barcode) throws DAOException {
