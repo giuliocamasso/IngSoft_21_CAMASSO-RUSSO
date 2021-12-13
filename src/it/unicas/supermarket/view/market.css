@@ -2,7 +2,7 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
-    -fx-background-image: url('../../../../../resources/backgrounds/black-abstract.jpg.jpg.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/black-abstract.jpg');
 }
 
 
@@ -11,7 +11,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 
-    -fx-background-image: url('../../../../../resources/backgrounds/BGColor.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/bestBG.jpg');
 }
 
 .background{
@@ -19,12 +19,12 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 
-    -fx-background-image: url('../../../../../resources/backgrounds/BGwhite.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/BGColor.jpg');
     /*
     -fx-background-image: url('../../../../../resources/backgrounds/BGwhite.jpg');
     -fx-background-image: url('../../../../../resources/backgrounds/BGColor.jpg');
     -fx-background-image: url('../../../../../resources/backgrounds/BGWhite.jpg');
-    -fx-background-image: url('../../../../../resources/backgrounds/black-abstract.jpg.jpg');
+    -fx-background-image: url('../../../../../resources/backgrounds/black-abstract.jpg');
     -fx-background-image: url('../../../../../resources/backgrounds/black-cart-button.jpg');
     -fx-background-image: url('../../../../../resources/backgrounds/cart-keyboard.jpg');
     -fx-background-image: url('../../../../../resources/backgrounds/marketBG.jpg');

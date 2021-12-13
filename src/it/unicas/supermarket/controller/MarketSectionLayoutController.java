@@ -138,7 +138,6 @@ public class MarketSectionLayoutController implements Initializable {
     private Integer cartSize = 0;
     private final ArrayList<String> showedBarcodes = new ArrayList<>();
 
-
     // by default, this loads and shows all the available articles
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -673,7 +672,7 @@ public class MarketSectionLayoutController implements Initializable {
 
         // leggo la quantita' dal carrello
 
-        String quantita = String.valueOf(App.getInstance().getCartMap().get(this.chosenArticle.getBarcode()))+"x ";
+        String quantita = App.getInstance().getCartMap().get(this.chosenArticle.getBarcode())+"x ";
 
         switch (row) {
             case 1 -> {

@@ -38,10 +38,6 @@ public class OrderSummaryLayoutController implements Initializable {
     @FXML private Label codiceClienteLabel;
     @FXML private Label massimaliLabel;
 
-    private ArticleSelectionListener articleSelectionListener;
-
-    public float getTotalImport() { return this.totalImport; }
-
     @FXML
     private void handleMarket() {
         App.getInstance().initMarketSectionLayout();
@@ -58,13 +54,14 @@ public class OrderSummaryLayoutController implements Initializable {
 
         try {
             fillCartGridPane(App.getInstance().getCartMap());
-        } catch (IOException | DAOException e) {
+        }
+        catch (IOException | DAOException e) {
             e.printStackTrace();
         }
 
         try
         {
-            updateTotalCartCost(this.totalCostLabel);
+            updateTotalCartCost();
             totalCostLabel.setText("€ "+totalImport);
         } catch (DAOException e) {
             e.printStackTrace();
@@ -86,7 +83,7 @@ public class OrderSummaryLayoutController implements Initializable {
 
             CartArticleGridItemController cartArticleGridItemController = itemLoader.getController();
             cartArticleGridItemController.loadItem(App.getInstance().getCartListArticles().get(index),
-                    App.getInstance().getCartListQuantity().get(index), articleSelectionListener, totalCostLabel);
+                    App.getInstance().getCartListQuantity().get(index));
 
             cartArticleGridPane.add(anchorPane, column, row++); //(child,column,row)
             setGridLayout(anchorPane);
@@ -108,7 +105,7 @@ public class OrderSummaryLayoutController implements Initializable {
         GridPane.setMargin(anchorPane, new Insets(10, 10, 10, 10));
     }
 
-    public static void updateTotalCartCost(Label totalCostLabelHandler) throws DAOException {
+    public void updateTotalCartCost() throws DAOException {
 
         List<Integer> quantityList = App.getInstance().getCartListQuantity();
         List<String> barcodeList = App.getInstance().getCartListArticles();
@@ -121,26 +118,9 @@ public class OrderSummaryLayoutController implements Initializable {
             totalImport += quantity*price;
         }
 
-        totalCostLabelHandler.setText("€ "+totalImport);
+        this.totalCostLabel.setText("€ "+totalImport);
         System.out.println("Sum from updateTotale " + totalImport);
 
-    }
-
-    public static int handleDecrement(String barcode) throws DAOException {
-        System.out.println("Decrement Cart Pressed");
-
-        int oldCartQuantity = App.getInstance().getCartListQuantityFromKey(barcode);
-        int newCartQuantity = oldCartQuantity--;
-        System.out.println("new "+newCartQuantity);
-        System.out.println("old "+oldCartQuantity);
-        System.out.println("max "+getScorteFromBarcode(barcode));
-        System.out.println("ID "+barcode);
-
-        // chosen quantity must be > 0
-        if(newCartQuantity >= 0) {
-            App.getInstance().getCartMap().replace(barcode, oldCartQuantity, newCartQuantity);
-        }
-        return 1;
     }
 
     public static int getScorteFromBarcode(String barcode) throws DAOException {

@@ -33,6 +33,23 @@ public class App {
     private Scene paymentSectionScene;
     private Scene loginSectionScene;
 
+    private LoginLayoutController loginController;
+    private OrderSummaryLayoutController orderSummaryLayoutController;
+
+    public LoginLayoutController getLoginController() {
+        return loginController;
+    }
+
+    public OrderSummaryLayoutController getOrderSummaryLayoutController() {
+        return orderSummaryLayoutController;
+    }
+
+    public MarketSectionLayoutController getMarketSectionLayoutController() {
+        return marketSectionLayoutController;
+    }
+
+    private MarketSectionLayoutController marketSectionLayoutController;
+
     private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
     public String codiceCarta;
@@ -40,7 +57,7 @@ public class App {
     public String massimali;
     public String puntiFedelta;
 
-    public String reparto = "INIT";
+    public String reparto = "None";
 
     public boolean isPaymentVisited() {
         return paymentVisited;
@@ -85,7 +102,6 @@ public class App {
     public Scene getMarketSectionScene() {
         return marketSectionScene;
     }
-
 
     public String getReparto()                   { return reparto; }
 
@@ -158,13 +174,13 @@ public class App {
         return mainStage;
     }
 
-
     public void initLoginLayout() {
-
+        /*
         if (loginVisited){
             mainStage.setScene(loginSectionScene);
             return;
         }
+        */
         try {
             this.loginVisited = true;
             // Load root layout from fxml file.
@@ -183,15 +199,14 @@ public class App {
                 handleExit();
             });
 
-
             // Give the controller access to the main app.
             LoginLayoutController controller = loader.getController();
+            this.loginController = controller;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
     public void handleExit() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -211,13 +226,13 @@ public class App {
 
     }
 
-
     public void initMarketSectionLayout() {
+        /*
         if (this.paymentVisited){
             mainStage.setScene(marketSectionScene);
-
             return;
         }
+        */
         try {
             this.marketVisited = true;
             // Load root layout from fxml file.
@@ -239,19 +254,20 @@ public class App {
 
             // Give the controller access to the main app.
             MarketSectionLayoutController controller = loader.getController();
+            this.marketSectionLayoutController = controller;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
     public void initOrderSummaryLayout() {
+        /*
         if (paymentVisited){
             mainStage.setScene(paymentSectionScene);
             return;
         }
-
+        */
         try {
             paymentVisited = true;
             // Load root layout from fxml file.
@@ -272,6 +288,7 @@ public class App {
 
             // Give the controller access to the main app.
             OrderSummaryLayoutController controller = loader.getController();
+            this.orderSummaryLayoutController = controller;
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -31,34 +31,31 @@ import java.util.logging.Logger;
  */
 public class LoginLayoutController {
 
-    @FXML private TextField codiceCartaTextField;
-    @FXML private PasswordField pinPasswordField;
-    @FXML private Label messageLabel;
-    @FXML private Label codiceCartaLabel;
-    @FXML private Label codiceClienteLabel;
-    @FXML private Label massimaliLabel;
+    @FXML public TextField codiceCartaTextField;
+    @FXML public PasswordField pinPasswordField;
+    @FXML public Label messageLabel;
+    @FXML public Label codiceCartaLabel;
+    @FXML public Label codiceClienteLabel;
+    @FXML public Label massimaliLabel;
 
-    @FXML
-    private Label puntiFedeltaLabel;
+    @FXML private Label puntiFedeltaLabel;
 
-    @FXML
-    private Button confirmButton;
+    @FXML private Button confirmButton;
 
-    @FXML
-    private Button ejectButton;
+    @FXML private Button ejectButton;
 
-    private Boolean cardAccepted = false;
+    private static Boolean cardAccepted = false;
 
-    private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
+    private static final Logger logger = Logger.getLogger(LoginLayoutController.class.getName());
 
     @FXML
     private void handleConfirm() throws DAOException, SQLException {
-
+        /*
         App.getInstance().initMarketSectionLayout();
         resetForm();
         boolean checcoJoni = true;
         if(checcoJoni)  return;
-
+        */
 
         if (cardAccepted) {
             App.getInstance().initMarketSectionLayout();
@@ -138,7 +135,7 @@ public class LoginLayoutController {
         codiceCartaLabel.setText(codiceCarta);
     }
 
-    void resetForm(){
+    public void resetForm(){
         codiceCartaTextField.setText("");
         pinPasswordField.setText("");
         codiceCartaLabel.setText("xxxx-xxxx-xxxx-xxxx");

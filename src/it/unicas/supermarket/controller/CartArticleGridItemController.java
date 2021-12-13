@@ -24,12 +24,10 @@ public class CartArticleGridItemController {
 
     private int scorteRimanenti;
     private int quantita;
-    private Label totalCostLabelHandler;
 
     private Articoli articolo;
 
-    public void loadItem(String barcode, Integer quantity, ArticleSelectionListener articleSelectionListener, Label totalCostLabel) throws DAOException {
-        totalCostLabelHandler = totalCostLabel;
+    public void loadItem(String barcode, Integer quantity) throws DAOException {
 
         System.out.println("load");
         List<Articoli> result = ArticoliDAOMySQL.getInstance().select(new Articoli("", barcode));
@@ -58,7 +56,8 @@ public class CartArticleGridItemController {
         quantita++;
         App.getInstance().getCartMap().replace(this.articolo.getBarcode(), quantita);
         cartQuantityLabel.setText(String.valueOf(quantita));
-        updateTotalCartCost(this.totalCostLabelHandler);
+
+        App.getInstance().getOrderSummaryLayoutController().updateTotalCartCost();
     }
 
     @FXML public void handleCartDecrement() throws DAOException {
@@ -69,7 +68,7 @@ public class CartArticleGridItemController {
         quantita--;
         App.getInstance().getCartMap().replace(this.articolo.getBarcode(), quantita);
         cartQuantityLabel.setText(String.valueOf(quantita));
-        updateTotalCartCost(this.totalCostLabelHandler);
+        App.getInstance().getOrderSummaryLayoutController().updateTotalCartCost();
     }
 
 }
