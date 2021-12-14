@@ -55,7 +55,8 @@ public class App {
     public String codiceCarta;
     public String codiceCliente;
     public String massimali;
-    public String puntiFedelta;
+    public int puntiFedelta;
+    public Float massimaleRimanente;
 
     public Float getMassimaleRimanente() {
         return massimaleRimanente;
@@ -64,8 +65,6 @@ public class App {
     public void setMassimaleRimanente(Float massimaleRimanente) {
         this.massimaleRimanente = massimaleRimanente;
     }
-
-    public Float massimaleRimanente;
 
     public String reparto = "None";
 
@@ -103,9 +102,9 @@ public class App {
         return massimali;
     }
 
-    public void setPuntiFedelta(String puntiFedelta) { this.puntiFedelta = puntiFedelta; }
+    public void setPuntiFedelta(int puntiFedelta) { this.puntiFedelta = puntiFedelta; }
 
-    public String getPuntiFedelta(){
+    public int getPuntiFedelta(){
         return puntiFedelta;
     }
 

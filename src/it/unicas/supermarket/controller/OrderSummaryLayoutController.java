@@ -52,9 +52,10 @@ public class OrderSummaryLayoutController implements Initializable {
     @FXML
     private void handlePayment() {
         System.out.println("Going to the Receipt section ...");
+
         if(totalImport > 0f) {
-            //App.getInstance().setMassimaleRimanente(App.getInstance().getMassimaleRimanente()-totalImport);
-            //System.out.println(App.getInstance().getMassimaleRimanente()-totalImport);
+            App.getInstance().setMassimaleRimanente(App.getInstance().getMassimaleRimanente()-totalImport);
+            System.out.println(App.getInstance().getMassimaleRimanente()-totalImport);
             App.getInstance().showReceipt();
         }
         else
@@ -153,7 +154,7 @@ public class OrderSummaryLayoutController implements Initializable {
             paymentCheckLabel.setText("Carrello vuoto");
             paymentCheckLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
         }
-        else if (totalImport <= App.getInstance().getLoginController().getMassimaleRimanenteFromCodiceCarta(App.getInstance().getCodiceCarta())){
+        else if (totalImport <= App.getInstance().getMassimaleRimanente()){
             paymentCheckLabel.setText("Massimale Sufficiente");
             paymentCheckLabel.setStyle("-fx-text-fill: rgb(0,255,0)");
         }
@@ -166,7 +167,7 @@ public class OrderSummaryLayoutController implements Initializable {
     private void paymentDetails() {
         codiceClienteLabel.setText(App.getInstance().getCodiceCliente());
         massimaliLabel.setText(App.getInstance().getMassimali());
-        puntiFedeltaLabel.setText(App.getInstance().getPuntiFedelta());
+        puntiFedeltaLabel.setText(String.valueOf(App.getInstance().getPuntiFedelta()));
         codiceCartaLabel.setText(App.getInstance().getCodiceCarta());
     }
 }

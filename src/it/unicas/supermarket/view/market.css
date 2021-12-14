@@ -241,6 +241,9 @@
 .articleItem{
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 30;
+    -fx-border-radius: 30, 30, 30, 30;
+    -fx-border-width: 1;
+    -fx-border-color: rgb(0, 0, 0);
 }
 
 .card{

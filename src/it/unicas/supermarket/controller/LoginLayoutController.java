@@ -38,6 +38,18 @@ public class LoginLayoutController {
     @FXML private Label codiceClienteLabel;
     @FXML private Label massimaliLabel;
 
+    public Label getMessageLabel() {
+        return messageLabel;
+    }
+
+    public Label getMassimaliLabel() {
+        return massimaliLabel;
+    }
+
+    public Label getPuntiFedeltaLabel() {
+        return puntiFedeltaLabel;
+    }
+
     @FXML
     private Label puntiFedeltaLabel;
 
@@ -63,7 +75,7 @@ public class LoginLayoutController {
 
         if (cardAccepted) {
             App.getInstance().initMarketSectionLayout();
-            resetForm();
+            // resetForm();
             return;
         }
         // else
@@ -123,9 +135,18 @@ public class LoginLayoutController {
 
     void loginSuccess(String codiceCarta, String codiceCliente) throws DAOException {
 
+        float massimaleRimanente = getMassimaleRimanenteFromCodiceCarta(codiceCarta);
+
+        App.getInstance().setMassimaleRimanente(massimaleRimanente);
+        App.getInstance().setCodiceCarta(codiceCarta);
+        App.getInstance().setCodiceCliente(codiceCliente);
+
         codiceClienteLabel.setText(codiceCliente);
         massimaliLabel.setText(getMassimaliFromCodiceCarta(codiceCarta));
-        puntiFedeltaLabel.setText(getPuntiFedeltaFromCodiceCliente(codiceCliente));
+        int fedelta = getPuntiFedeltaFromCodiceCliente(codiceCliente);
+        App.getInstance().setPuntiFedelta(fedelta);
+
+        puntiFedeltaLabel.setText(String.valueOf(fedelta));
 
         // updating login label
         messageLabel.setText("CARTA ACCETTATA!");
@@ -226,14 +247,13 @@ public class LoginLayoutController {
         }
     }
 
-    public String getPuntiFedeltaFromCodiceCliente(String codiceCliente) throws DAOException {
+    public int getPuntiFedeltaFromCodiceCliente(String codiceCliente) throws DAOException {
         // select() function is codiceCliente-based
         List<Clienti> customer = ClientiDAOMySQL.getInstance().select(new Clienti("","",codiceCliente));
         if( customer.size() != 1)
-            return "ERROR";
+            return -1;
         else {
-            App.getInstance().setPuntiFedelta(customer.get(0).getPuntiFedelta().toString());
-            return customer.get(0).getPuntiFedelta().toString();
+            return customer.get(0).getPuntiFedelta();
         }
     }
 
