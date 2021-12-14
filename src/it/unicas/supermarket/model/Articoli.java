@@ -279,15 +279,11 @@ public class Articoli {
             case "0000_FOCACCIA" -> "resources/images/Forno/focaccia.png";
 
             // Bevande
-            /*
-            case "" -> "resources/images/Bevande/";
-            case "" -> "resources/images/Bevande/";
-            case "" -> "resources/images/Bevande/";
-            case "" -> "resources/images/Bevande/";
-            case "" -> "resources/images/Bevande/";
-            case "" -> "resources/images/Bevande/";
-            case "" -> "resources/images/Bevande/";
-            */
+            case "0000000_ACQUA" -> "resources/images/Bevande/acqua.png";
+            case "000000_BIANCO" -> "resources/images/Bevande/bianco.png";
+            case "0000000_ROSSO" -> "resources/images/Bevande/rosso.png";
+            case "0000000_BIRRA" -> "resources/images/Bevande/birra.png";
+            case "0000_COCACOLA" -> "resources/images/Bevande/cola.png";
 
             // Surgelati
             /*
