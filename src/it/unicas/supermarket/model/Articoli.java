@@ -238,6 +238,7 @@ public class Articoli {
             case "00000_FILETTO" -> "resources/images/Macelleria/filetto.png";
             case "0000_BISTECCA" -> "resources/images/Macelleria/bistecca.png";
             case "0000000_POLLO" -> "resources/images/Macelleria/pollo.png";
+            // altri tre
 
             // Pescheria
             case "0_MAZZANCOLLE" -> "resources/images/Pescheria/mazzancolle.png";
@@ -245,6 +246,7 @@ public class Articoli {
             case "0000000_ORATA" -> "resources/images/Pescheria/orata.png";
             case "00000_SALMONE" -> "resources/images/Pescheria/salmone.png";
             case "0000_CALAMARO" -> "resources/images/Pescheria/calamaro.png";
+            // altri due
 
             // Ortofrutta
             case "000000_BANANA" -> "resources/images/Ortofrutta/banana.png";
@@ -272,6 +274,95 @@ public class Articoli {
             case "000_CROISSANT" -> "resources/images/Forno/cornetto.png";
             case "00000000_PANE" -> "resources/images/Forno/pane.png";
             case "00000_TARALLI" -> "resources/images/Forno/taralli.png";
+            // altri tre
+
+            // Bevande
+            /*
+            case "" -> "resources/images/Bevande/";
+            case "" -> "resources/images/Bevande/";
+            case "" -> "resources/images/Bevande/";
+            case "" -> "resources/images/Bevande/";
+            case "" -> "resources/images/Bevande/";
+            case "" -> "resources/images/Bevande/";
+            case "" -> "resources/images/Bevande/";
+            */
+
+            // Surgelati
+            /*
+            case "" -> "resources/images/Surgelati/";
+            case "" -> "resources/images/Surgelati/";
+            case "" -> "resources/images/Surgelati/";
+            case "" -> "resources/images/Surgelati/";
+            case "" -> "resources/images/Surgelati/";
+            case "" -> "resources/images/Surgelati/";
+            case "" -> "resources/images/Surgelati/";
+            */
+
+            // Snacks
+            /*
+            case "" -> "resources/images/Snacks/";
+            case "" -> "resources/images/Snacks/";
+            case "" -> "resources/images/Snacks/";
+            case "" -> "resources/images/Snacks/";
+            case "" -> "resources/images/Snacks/";
+            case "" -> "resources/images/Snacks/";
+            case "" -> "resources/images/Snacks/";
+            */
+
+            // Baby
+            /*
+            case "" -> "resources/images/Baby/";
+            case "" -> "resources/images/Baby/";
+            case "" -> "resources/images/Baby/";
+            case "" -> "resources/images/Baby/";
+            case "" -> "resources/images/Baby/";
+            case "" -> "resources/images/Baby/";
+            case "" -> "resources/images/Baby/";
+            */
+
+            // Cartoleria
+            /*
+            case "" -> "resources/images/Cartoleria/";
+            case "" -> "resources/images/Cartoleria/";
+            case "" -> "resources/images/Cartoleria/";
+            case "" -> "resources/images/Cartoleria/";
+            case "" -> "resources/images/Cartoleria/";
+            case "" -> "resources/images/Cartoleria/";
+            case "" -> "resources/images/Cartoleria/";
+            */
+
+            // Pet
+            /*
+            case "" -> "resources/images/Pet/";
+            case "" -> "resources/images/Pet/";
+            case "" -> "resources/images/Pet/";
+            case "" -> "resources/images/Pet/";
+            case "" -> "resources/images/Pet/";
+            case "" -> "resources/images/Pet/";
+            case "" -> "resources/images/Pet/";
+            */
+
+            // Benessere
+            /*
+            case "" -> "resources/images/Benessere/";
+            case "" -> "resources/images/Benessere/";
+            case "" -> "resources/images/Benessere/";
+            case "" -> "resources/images/Benessere/";
+            case "" -> "resources/images/Benessere/";
+            case "" -> "resources/images/Benessere/";
+            case "" -> "resources/images/Benessere/";
+            */
+
+            // Casalinghi
+            /*
+            case "" -> "resources/images/Casalinghi/";
+            case "" -> "resources/images/Casalinghi/";
+            case "" -> "resources/images/Casalinghi/";
+            case "" -> "resources/images/Casalinghi/";
+            case "" -> "resources/images/Casalinghi/";
+            case "" -> "resources/images/Casalinghi/";
+            case "" -> "resources/images/Casalinghi/";
+            */
 
             default -> "ERROR";
         };
