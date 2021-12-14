@@ -820,15 +820,15 @@
                   <padding>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>
-                  <styleClass>
-                     <String fx:value="shadow" />
-                     <String fx:value="SectionsPane" />
-                  </styleClass>
                </HBox>
             </children>
             <BorderPane.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </BorderPane.margin>
+            <styleClass>
+               <String fx:value="SectionsPane" />
+               <String fx:value="shadow" />
+            </styleClass>
          </VBox>
       </top>
     </BorderPane>
