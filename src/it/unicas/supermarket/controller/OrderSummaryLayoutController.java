@@ -1,10 +1,8 @@
 package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.Main;
-import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.model.dao.Util;
-import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -53,8 +51,8 @@ public class OrderSummaryLayoutController implements Initializable {
         System.out.println("Going to the Receipt section ...");
 
         if(totalImport > 0f && totalImport <= App.getInstance().getMassimaleRimanente()) {
-            App.getInstance().setMassimaleRimanente(totalImport-App.getInstance().getMassimaleRimanente());
-            System.out.println("Massimale Rimanente nuovo: " + (totalImport-App.getInstance().getMassimaleRimanente()));
+            App.getInstance().setMassimaleRimanente(App.getInstance().getMassimaleRimanente()-totalImport);
+            System.out.println("Massimale Rimanente nuovo: " + (App.getInstance().getMassimaleRimanente()-totalImport));
             App.getInstance().showReceipt();
         }
     }
@@ -154,7 +152,7 @@ public class OrderSummaryLayoutController implements Initializable {
 
     private void paymentDetails() {
         codiceClienteLabel.setText(App.getInstance().getCodiceCliente());
-        massimaliLabel.setText(App.getInstance().getMassimali());
+        massimaliLabel.setText(App.getInstance().getMassimaliString());
         puntiFedeltaLabel.setText(String.valueOf(App.getInstance().getPuntiFedelta()));
         codiceCartaLabel.setText(App.getInstance().getCodiceCarta());
     }

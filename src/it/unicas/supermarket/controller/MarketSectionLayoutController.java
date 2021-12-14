@@ -639,7 +639,7 @@ public class MarketSectionLayoutController implements Initializable {
         else
             quantitaTotaleCarrelloLabel.setText("");
         if (cartSums.get(1) > 0)
-            totaleCarrelloLabel.setText(cartSums.get(1) + " €");
+            totaleCarrelloLabel.setText(String.format("%.2f",cartSums.get(1)) + " €");
         else
             totaleCarrelloLabel.setText("");
 
@@ -677,7 +677,7 @@ public class MarketSectionLayoutController implements Initializable {
         switch (row) {
             case 1 -> {
                 articolo1Label.setText(this.chosenArticle.getNome());
-                prezzo1Label.setText(this.chosenArticle.getPrezzo() + " €");
+                prezzo1Label.setText(String.format("%.2f",this.chosenArticle.getPrezzo()) + " €");
                 quantita1Label.setText(quantita);
                 if(this.cartSize == 1) {
                     articolo1VBox.setStyle(vBoxStyle);
@@ -686,7 +686,7 @@ public class MarketSectionLayoutController implements Initializable {
             }
             case 2 -> {
                 articolo2Label.setText(this.chosenArticle.getNome());
-                prezzo2Label.setText(this.chosenArticle.getPrezzo() + " €");
+                prezzo2Label.setText(String.format("%.2f",this.chosenArticle.getPrezzo()) + " €");
                 quantita2Label.setText(quantita);
                 if(this.cartSize == 2) {
                     articolo2VBox.setStyle(vBoxStyle);
@@ -695,7 +695,7 @@ public class MarketSectionLayoutController implements Initializable {
             }
             case 3 -> {
                 articolo3Label.setText(this.chosenArticle.getNome());
-                prezzo3Label.setText(this.chosenArticle.getPrezzo() + " €");
+                prezzo3Label.setText(String.format("%.2f",this.chosenArticle.getPrezzo()) + " €");
                 quantita3Label.setText(quantita);
                 if(this.cartSize == 3) {
                     articolo3VBox.setStyle(vBoxStyle);
@@ -704,7 +704,7 @@ public class MarketSectionLayoutController implements Initializable {
             }
             case 4 -> {
                 articolo4Label.setText(this.chosenArticle.getNome());
-                prezzo4Label.setText(this.chosenArticle.getPrezzo() + " €");
+                prezzo4Label.setText(String.format("%.2f",this.chosenArticle.getPrezzo()) + " €");
                 quantita4Label.setText(quantita);
                 if(this.cartSize == 4) {
                     articolo4VBox.setStyle(vBoxStyle);
@@ -713,7 +713,7 @@ public class MarketSectionLayoutController implements Initializable {
             }
             case 5 -> {
                 articolo5Label.setText(this.chosenArticle.getNome());
-                prezzo5Label.setText(this.chosenArticle.getPrezzo() + " €");
+                prezzo5Label.setText(String.format("%.2f",this.chosenArticle.getPrezzo()) + " €");
                 quantita5Label.setText(quantita);
 
                 // nb. the clearAll function also resets the style
@@ -725,7 +725,7 @@ public class MarketSectionLayoutController implements Initializable {
 
             case 6 -> {
                 articolo6Label.setText(this.chosenArticle.getNome());
-                prezzo6Label.setText(this.chosenArticle.getPrezzo() + " €");
+                prezzo6Label.setText(String.format("%.2f",this.chosenArticle.getPrezzo()) + " €");
                 quantita6Label.setText(quantita);
 
                 // nb. the clearAll function also resets the style
@@ -737,7 +737,7 @@ public class MarketSectionLayoutController implements Initializable {
 
             case 7 -> {
                 articolo7Label.setText(this.chosenArticle.getNome());
-                prezzo7Label.setText(this.chosenArticle.getPrezzo() + " €");
+                prezzo7Label.setText(String.format("%.2f",this.chosenArticle.getPrezzo()) + " €");
                 quantita7Label.setText(quantita);
 
                 // nb. the clearAll function also resets the style

@@ -66,15 +66,13 @@ public class Util {
         else return "ERROR";
     }
 
-    public static String getMassimaliFromCodiceCarta(String codiceCarta) throws DAOException {
+    public static float getMassimaleMensileFromCodiceCarta(String codiceCarta) throws DAOException {
         // select() function is codiceCarta-based
         List<Carte> card = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
         if( card.size() != 1)
-            return "ERROR";
-        else {
-            App.getInstance().setMassimali(card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €");
-            return card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €";
-        }
+            return -1;
+        else
+            return card.get(0).getMassimaleMensile();
     }
 
     public static Float getMassimaleRimanenteFromCodiceCarta(String codiceCarta) throws DAOException {

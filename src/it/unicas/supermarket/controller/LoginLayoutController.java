@@ -126,16 +126,17 @@ public class LoginLayoutController {
     void loginSuccess(String codiceCarta, String codiceCliente) throws DAOException {
 
         float massimaleRimanente = Util.getMassimaleRimanenteFromCodiceCarta(codiceCarta);
+        float massimaleMensile = Util.getMassimaleMensileFromCodiceCarta(codiceCarta);
+        int fedelta = Util.getPuntiFedeltaFromCodiceCliente(codiceCliente);
 
         App.getInstance().setMassimaleRimanente(massimaleRimanente);
+        App.getInstance().setMassimaleMensile(massimaleMensile);
         App.getInstance().setCodiceCarta(codiceCarta);
         App.getInstance().setCodiceCliente(codiceCliente);
-
-        codiceClienteLabel.setText(codiceCliente);
-        massimaliLabel.setText(Util.getMassimaliFromCodiceCarta(codiceCarta));
-        int fedelta = Util.getPuntiFedeltaFromCodiceCliente(codiceCliente);
         App.getInstance().setPuntiFedelta(fedelta);
 
+        codiceClienteLabel.setText(codiceCliente);
+        massimaliLabel.setText(App.getInstance().getMassimaliString());
         puntiFedeltaLabel.setText(String.valueOf(fedelta));
 
         // updating login label

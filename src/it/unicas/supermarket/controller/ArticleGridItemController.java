@@ -25,7 +25,7 @@ public class ArticleGridItemController {
         this.articolo = articolo;
         this.articleSelectionListener = articleSelectionListener;
         articleNameLabel.setText(articolo.getNome());
-        articlePriceLabel.setText(articolo.getPrezzo() +" €");
+        articlePriceLabel.setText( String.format("%.2f",articolo.getPrezzo()) +" €");
         Image image = new Image("file:"+articolo.getImageURL());
         articleImage.setImage(image);
     }

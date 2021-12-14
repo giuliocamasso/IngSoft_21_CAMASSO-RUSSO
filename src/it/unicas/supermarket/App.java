@@ -52,17 +52,28 @@ public class App {
 
     public String codiceCarta;
     public String codiceCliente;
-    public String massimali;
-    public int puntiFedelta;
-    public Float massimaleRimanente;
 
-    public Float getMassimaleRimanente() {
+    public float massimaleMensile;
+
+    public float getMassimaleMensile() {
+        return massimaleMensile;
+    }
+
+    public void setMassimaleMensile(float massimaleMensile) {
+        this.massimaleMensile = massimaleMensile;
+    }
+
+    public float getMassimaleRimanente() {
         return massimaleRimanente;
     }
 
-    public void setMassimaleRimanente(Float massimaleRimanente) {
+    public void setMassimaleRimanente(float massimaleRimanente) {
         this.massimaleRimanente = massimaleRimanente;
     }
+
+    public float massimaleRimanente;
+
+    public int puntiFedelta;
 
     public String reparto = "None";
 
@@ -92,12 +103,6 @@ public class App {
 
     public String getCodiceCliente(){
         return codiceCliente;
-    }
-
-    public void setMassimali(String massimali) { this.massimali = massimali; }
-
-    public String getMassimali(){
-        return massimali;
     }
 
     public void setPuntiFedelta(int puntiFedelta) { this.puntiFedelta = puntiFedelta; }
@@ -333,10 +338,16 @@ public class App {
 
     public void ejectCardAfterPayment(){
         //loginController.getMassimaliLabel().setText(massimali);
-        loginController.getMassimaliLabel().setText("new massimali");
+        loginController.getMassimaliLabel().setText(getMassimaliString());
         //loginController.getPuntiFedeltaLabel().setText(puntiFedelta);
-        loginController.getPuntiFedeltaLabel().setText("new punti fedelta");
+        loginController.getPuntiFedeltaLabel().setText(String.valueOf(puntiFedelta));
         loginController.getMessageLabel().setText("Grazie per averci scelto!");
         mainStage.setScene(loginSectionScene);
     }
+
+    public String getMassimaliString(){
+        return  String.format("%.2f",massimaleRimanente) + " / " +  String.format("%.2f",massimaleMensile) + " €";
+    }
+
+
 }
