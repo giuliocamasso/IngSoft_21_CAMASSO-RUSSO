@@ -91,10 +91,6 @@ public class App {
 
     public LinkedHashMap<String, Integer> cartMap = new LinkedHashMap<>();
 
-    // nome articolo / quantita'?
-    // codiceArticolo / quantita'?
-    // capitalCities.put("England", "London");
-
     public HashMap<String, Integer> getCartMap() {
         return cartMap;
     }
@@ -175,12 +171,13 @@ public class App {
     }
 
     public void initLoginLayout() {
-        /*
+
         if (loginVisited){
+            loginController.resetForm();
             mainStage.setScene(loginSectionScene);
             return;
         }
-        */
+
         try {
             this.loginVisited = true;
             // Load root layout from fxml file.
@@ -227,13 +224,20 @@ public class App {
     }
 
     public void initMarketSectionLayout() {
-        /*
         if (this.paymentVisited){
+
+            try {
+                marketSectionLayoutController.syncCartPane();
+            } catch (DAOException e) {
+                e.printStackTrace();
+            }
             mainStage.setScene(marketSectionScene);
+
             return;
         }
-        */
+
         try {
+            System.out.println("Entrando nei reparti");
             this.marketVisited = true;
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -336,16 +340,16 @@ public class App {
     public int getCartListQuantityFromKey(String Key){
         List<String> listKey = getCartListArticles();
         List<Integer> listQuantity = getCartListQuantity();
-        Integer index = 0;
+        int index = 0;
         for (int i=0; i<listKey.size(); i++){
-            if(listKey.get(i) == Key)
+            if(listKey.get(i).equals(Key))
                 index = i;
         }
         return listQuantity.get(index);
     }
 
     public void printCart() throws DAOException {
-        Integer size = this.cartMap.size();
+        int size = this.cartMap.size();
         System.out.println("---Carrello---");
 
         List<String> articles = getCartListArticles();
@@ -359,7 +363,5 @@ public class App {
             System.out.println(articleName + " " +quantity + "x " + price + " € = " +quantity*price + " €\n");
         }
     }
-
-
 
 }

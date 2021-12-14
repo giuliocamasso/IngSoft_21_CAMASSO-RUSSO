@@ -576,7 +576,7 @@ public class MarketSectionLayoutController implements Initializable {
         else return storage;
     }
 
-    void updateCart() throws DAOException {
+    public void updateCart() throws DAOException {
 
         Integer cartSize = App.getInstance().getCartMap().size();
         System.out.println(cartSize);
@@ -620,14 +620,9 @@ public class MarketSectionLayoutController implements Initializable {
         }
 
         updateCartLabels();
-
-        //System.out.println(App.getInstance().getCartMap());
-        //System.out.println(App.getInstance().getCartListArticles());
-        //System.out.println(App.getInstance().getCartListQuantity());
-
     }
 
-    private void updateCartLabels() throws DAOException {
+    public void updateCartLabels() throws DAOException {
 
         // cartSums.get(0) = quantità totali
         // cartSums.get(1) = importo totale
@@ -898,5 +893,38 @@ public class MarketSectionLayoutController implements Initializable {
 
     }
 
+    public void syncCartPane() throws DAOException {
+        updateCartLabels();
 
+        int cartSize = this.showedBarcodes.size();
+
+        String quantita;
+
+        quantita = App.getInstance().getCartMap().get(showedBarcodes.get(0)) + "x ";
+        quantita1Label.setText(quantita);
+        if(cartSize==1) return;
+
+        quantita = App.getInstance().getCartMap().get(showedBarcodes.get(1)) + "x ";
+        quantita2Label.setText(quantita);
+        if(cartSize==2) return;
+
+        quantita = App.getInstance().getCartMap().get(showedBarcodes.get(2)) + "x ";
+        quantita3Label.setText(quantita);
+        if(cartSize==3) return;
+
+        quantita = App.getInstance().getCartMap().get(showedBarcodes.get(3)) + "x ";
+        quantita4Label.setText(quantita);
+        if(cartSize==4) return;
+
+        quantita = App.getInstance().getCartMap().get(showedBarcodes.get(4)) + "x ";
+        quantita5Label.setText(quantita);
+        if(cartSize==5) return;
+
+        quantita = App.getInstance().getCartMap().get(showedBarcodes.get(5)) + "x ";
+        quantita6Label.setText(quantita);
+        if(cartSize==6) return;
+
+        quantita = App.getInstance().getCartMap().get(showedBarcodes.get(6)) + "x ";
+        quantita7Label.setText(quantita);
+    }
 }
