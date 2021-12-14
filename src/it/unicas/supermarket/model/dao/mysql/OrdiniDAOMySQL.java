@@ -310,4 +310,21 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
         return ordiniList.get(0).getIdOrdine();
     }
 
+    /*
+    01) inserimento ordine in DB
+    es. ordine fatto da idCLiente in data 'data'...
+    INSERT INTO Ordini(idOrdine, idCliente, data, codiceOrdine, importoTotale) VALUES([...]);
+    -> inserimento articoli dell'ordine
+    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+
+    02) tutti gli articoli contenuti nell'ordine
+    SELECT Articoli.idArticolo, Composizioni.quantita
+    FROM Composizioni
+	JOIN Articoli ON Composizioni.idArticolo = Articolo.idArticolo
+    WHERE idOrdine = 1;
+    */
 }
