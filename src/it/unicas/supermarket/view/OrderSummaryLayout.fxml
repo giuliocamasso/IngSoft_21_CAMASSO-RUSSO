@@ -246,7 +246,7 @@
                         </VBox>
                         <HBox alignment="CENTER" prefHeight="257.0" prefWidth="374.0">
                            <children>
-                              <Label fx:id="paymentCheckLabel" alignment="CENTER" prefHeight="33.0" prefWidth="354.0" text="\@paymentCheck" textFill="WHITE">
+                              <Label fx:id="paymentCheckLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="141.0" prefWidth="354.0" text="\@paymentCheck" textFill="WHITE">
                                  <font>
                                     <Font size="22.0" />
                                  </font>

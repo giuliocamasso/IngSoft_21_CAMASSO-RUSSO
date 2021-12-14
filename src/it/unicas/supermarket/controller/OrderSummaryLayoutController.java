@@ -168,7 +168,7 @@ public class OrderSummaryLayoutController implements Initializable {
             paymentCheckLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
         }
         else if (totalImport <= App.getInstance().getMassimaleRimanente()){
-            paymentCheckLabel.setText("Massimale Sufficiente");
+            paymentCheckLabel.setText("Massimale Sufficiente\n" + "Saldo previsto: " + String.format("%.2f", (App.getInstance().getMassimaleRimanente()-totalImport)) + " €");
             paymentCheckLabel.setStyle("-fx-text-fill: rgb(0,255,0)");
         }
         else {
