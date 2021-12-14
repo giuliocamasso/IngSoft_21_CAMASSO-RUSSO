@@ -8,6 +8,8 @@ import it.unicas.supermarket.model.dao.mysql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -162,8 +164,18 @@ public class Util {
         int customerId = getIdClienteFromCodiceCliente(customerCode);
 
         //XX-XX-XXXX XX:XX
-        String data= "XX-XX-XXXX XX:XX";
-        String orderCode ="Ordine_011";
+        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        DateTimeFormatter dtfOrdine = DateTimeFormatter.ofPattern("ddMMHHmmss");
+        LocalDateTime now = LocalDateTime.now();
+
+        String data = dtf.format(now);
+        //String orderCode ="Ordine_011";
+        System.out.println("data: " + data);
+
+        String orderCode = dtfOrdine.format(now);
+        System.out.println("ordine: " + orderCode);
+
         Ordini newOrder = new Ordini(customerId, data, orderCode, totalImport, null);
         System.out.println("Ordine Creato");
         // 1 - inserisco nuovo ordine
