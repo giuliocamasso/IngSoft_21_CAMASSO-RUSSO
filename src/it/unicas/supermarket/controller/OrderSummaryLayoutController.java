@@ -52,11 +52,13 @@ public class OrderSummaryLayoutController implements Initializable {
     @FXML
     private void handlePayment() {
         System.out.println("Going to the Receipt section ...");
-        if(App.getInstance().getCartMap().size() == 0) {
-            return;
+        if(totalImport > 0f) {
+            //App.getInstance().setMassimaleRimanente(App.getInstance().getMassimaleRimanente()-totalImport);
+            //System.out.println(App.getInstance().getMassimaleRimanente()-totalImport);
+            App.getInstance().showReceipt();
         }
         else
-            App.getInstance().showReceipt();
+            return;
     }
 
     @Override
@@ -147,7 +149,7 @@ public class OrderSummaryLayoutController implements Initializable {
     }
 
     public void paymentCheck() throws DAOException {
-        if (App.getInstance().getCartMap().size() == 0){
+        if (totalImport == 0f){
             paymentCheckLabel.setText("Carrello vuoto");
             paymentCheckLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
         }

@@ -56,6 +56,15 @@ public class App {
     public String codiceCliente;
     public String massimali;
     public String puntiFedelta;
+
+    public Float getMassimaleRimanente() {
+        return massimaleRimanente;
+    }
+
+    public void setMassimaleRimanente(Float massimaleRimanente) {
+        this.massimaleRimanente = massimaleRimanente;
+    }
+
     public Float massimaleRimanente;
 
     public String reparto = "None";
