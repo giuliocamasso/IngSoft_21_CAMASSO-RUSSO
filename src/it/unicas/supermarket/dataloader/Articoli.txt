@@ -2,21 +2,34 @@ Macinato - 2.99 - 10 - 0000_MACINATO - Prodotto locale - Macinato locale di qual
 Filetto - 4.99 - 10 - 00000_FILETTO - Prodotto locale - Filetto di Pignataro - 100g - Macelleria
 Bistecca - 8.99 - 10 - 0000_BISTECCA - Prodotto locale - Bistecca argentina - 250g - Macelleria
 Pollo - 5.99 - 10 - 0000000_POLLO - Prodotto locale - Allevamento a terra - 150g - Macelleria
+Arrosticini - 3.99 - 10 - 0_ARROSTICINI - Abbruzzicini - Arrosticini Abbruzzeri - 200g - Macelleria
+Spiedini - 3.99 - 10 - 0000_SPIEDINI - Spiedispeedy - Spiedini di pollo - 150g - Macelleria
 Mazzancolle - 6.99 - 50 - 0_MAZZANCOLLE - Ittica Gaeta - Mar Tirreno - 250g - Pescheria
 Merluzzo - 4.99 - 20 - 0000_MERLUZZO - Sardomar - Filetto magro - 150g - Pescheria
 Orata - 4.99 - 10 - 0000000_ORATA - CassiFish - Filetto dorato - 140g - Pescheria
 Salmone - 5.99 - 10 - 00000_SALMONE - NigiriFish - Filetto di Salmone di Norvegia - 150g - Pescheria
 Calamaro - 6.99 - 10 - 0000_CALAMARO - SquidGameFish - Calamaro intero - 150g - Pescheria
+Tonno - 2.99 - 30 - 0000000_TONNO - RioMare - Tonno in barattolo - 150g - Pescheria
+Triglia - 3.99 - 50 - 00000_TRIGLIA - ArticaFish - Triglia di giornata - 70g - Pescheria
 Banane - 3.99 - 50 - 000000_BANANA - Chiquita - Banane filiera qualità - Casco da 6 - Ortofrutta
 Golden - 1.99 - 100 - 000000_MELE01 - Prodotto locale - Mele Golden Italia - 4 unità - Ortofrutta
 Mele Red - 2.99 - 100 - 000000_MELE02 - Melinda - Mele Red Delicious Italia - 4 unità - Ortofrutta
-Insalata - 0.50 - 50 - 00000_ICEBERG - Prodotto locale - Insalata tipo Iceberg - 200g - Ortofrutta
-Melanzane - 0.50 - 50 - 000_MELANZANA - Prodotto locale - Melanzana nostrana - 200g - Ortofrutta
-Ciliegia - 3.50 - 100 - 0000_CILIEGIA - Prodotto locale - Ciliegie rosse - 250g - Ortofrutta
-Cocco - 2.50 - 100 - 0000000_COCCO - Coco - Cocchi sudamericani - 150g - Ortofrutta
-Uva - 2.50 - 50 - 000000000_UVA - Valfrutta - Uva di tremensuoli - 150g - Ortofrutta
-Cotto - 1.50 - 20 - 0000000_COTTO - Prosciutto di Parma - Prosciutto cotto fresco - 100g - Alimentari
+Insalata - 0.99 - 50 - 00000_ICEBERG - Prodotto locale - Insalata tipo Iceberg - 200g - Ortofrutta
+Melanzane - 0.99 - 50 - 000_MELANZANA - Prodotto locale - Melanzana nostrana - 200g - Ortofrutta
+Ciliegia - 3.99 - 100 - 0000_CILIEGIA - Prodotto locale - Ciliegie rosse - 250g - Ortofrutta
+Cocco - 2.99 - 100 - 0000000_COCCO - Coco - Cocchi sudamericani - 150g - Ortofrutta
+Uva - 2.99 - 50 - 000000000_UVA - Valfrutta - Uva di tremensuoli - 150g - Ortofrutta
+Cotto - 1.99 - 20 - 0000000_COTTO - Prosciutto di Parma - Prosciutto cotto fresco - 100g - Alimentari
+Crudo - 1.99 - 20 - 0000000_CRUDO - Prosciutto Crudo Rovagnati - Prosciutto crudo magro - 100g - Alimentari
+Formaggio - 3.55 - 10 - 000_FORMAGGIO - Asiago - Formaggio stagionato - 150g - Alimentari
+Mozzarella - 2.55 - 20 - 00_MOZZARELLA - Santa Lucia - Mozzarella di Mucca - 150g - Alimentari
+Olive - 3.55 - 40 - 0000000_OLIVE - Santoliva - Olive di Gaeta - 75g - Alimentari
+Pasta - 2.55 - 20 - 0000000_PASTA - Barilla - Rigatoni integrali - 500g - Alimentari
+Uova - 0.55 - 20 - 00000000_UOVA - GalliGo - Uova nostrane - 200g - Alimentari
 Baguette - 0.99 - 10 - 0000_BAGUETTE - Forno Cassino1 - Baguette suprema di giornata - 300 g - Forno
 Cornetti - 0.99 - 20 - 000_CROISSANT - Prodotti da forno Unicas - Croissant gusti vari - 200g - Forno
 Pane - 4.99 - 40 - 00000000_PANE - Forno Cassino 1 - Filone pane varie tipologie - 2Kg - Forno
 Taralli - 1.99 - 30 - 00000_TARALLI - Forno della nonna - Taralli glutenfree - 250g - Forno
+Grissini - 1.99 - 10 - 0000_GRISSINI - DeMori - Grissini sottili e morbidi - 250g - Forno
+Crostatina - 0.99 - 20 - 00_CROSTATINA - Mulino Bianco - Crostatina al cioccolato - 60g - Forno
+Focaccia - 0.99 - 30 - 0000_FOCACCIA - Prodotto locale - Focaccia dorata - 100g - Forno

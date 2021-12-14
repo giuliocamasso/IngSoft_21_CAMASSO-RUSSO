@@ -238,7 +238,8 @@ public class Articoli {
             case "00000_FILETTO" -> "resources/images/Macelleria/filetto.png";
             case "0000_BISTECCA" -> "resources/images/Macelleria/bistecca.png";
             case "0000000_POLLO" -> "resources/images/Macelleria/pollo.png";
-            // altri tre
+            case "0_ARROSTICINI" -> "resources/images/Macelleria/arrosticini.png";
+            case "0000_SPIEDINI" -> "resources/images/Macelleria/spiedini.png";
 
             // Pescheria
             case "0_MAZZANCOLLE" -> "resources/images/Pescheria/mazzancolle.png";
@@ -246,7 +247,8 @@ public class Articoli {
             case "0000000_ORATA" -> "resources/images/Pescheria/orata.png";
             case "00000_SALMONE" -> "resources/images/Pescheria/salmone.png";
             case "0000_CALAMARO" -> "resources/images/Pescheria/calamaro.png";
-            // altri due
+            case "0000000_TONNO" -> "resources/images/Pescheria/tonno.png";
+            case "00000_TRIGLIA" -> "resources/images/Pescheria/triglia.png";
 
             // Ortofrutta
             case "000000_BANANA" -> "resources/images/Ortofrutta/banana.png";
@@ -259,22 +261,22 @@ public class Articoli {
             case "000_MELANZANA" -> "resources/images/Ortofrutta/melanzana.png";
 
             // Alimentari
-            /*
-            case "" -> "resources/images/Alimentari/";
-            case "" -> "resources/images/Alimentari/";
-            case "" -> "resources/images/Alimentari/";
-            case "" -> "resources/images/Alimentari/";
-            case "" -> "resources/images/Alimentari/";
-            case "" -> "resources/images/Alimentari/";
-            case "" -> "resources/images/Alimentari/";
-            */
+            case "0000000_COTTO" -> "resources/images/Alimentari/cotto.png";
+            case "0000000_CRUDO" -> "resources/images/Alimentari/crudo.png";
+            case "000_FORMAGGIO" -> "resources/images/Alimentari/formaggio.png";
+            case "00_MOZZARELLA" -> "resources/images/Alimentari/mozzarella.png";
+            case "0000000_OLIVE" -> "resources/images/Alimentari/olive.png";
+            case "0000000_PASTA" -> "resources/images/Alimentari/pasta.png";
+            case "00000000_UOVA" -> "resources/images/Alimentari/uova.png";
 
             // Forno
             case "0000_BAGUETTE" -> "resources/images/Forno/baguette.png";
             case "000_CROISSANT" -> "resources/images/Forno/cornetto.png";
             case "00000000_PANE" -> "resources/images/Forno/pane.png";
             case "00000_TARALLI" -> "resources/images/Forno/taralli.png";
-            // altri tre
+            case "0000_GRISSINI" -> "resources/images/Forno/grissini.png";
+            case "00_CROSTATINA" -> "resources/images/Forno/crostatina.png";
+            case "0000_FOCACCIA" -> "resources/images/Forno/focaccia.png";
 
             // Bevande
             /*
