@@ -105,7 +105,7 @@ public class App {
         return codiceCliente;
     }
 
-    public void setPuntiFedelta(int puntiFedelta) { this.puntiFedelta = puntiFedelta; }
+    public void setPuntiFedelta(int puntiFedelta) {this.puntiFedelta += puntiFedelta; }
 
     public int getPuntiFedelta(){
         return puntiFedelta;
@@ -350,4 +350,7 @@ public class App {
     }
 
 
+    public int computeFidelity(float totalImport) {
+        return (int)(totalImport/10);
+    }
 }

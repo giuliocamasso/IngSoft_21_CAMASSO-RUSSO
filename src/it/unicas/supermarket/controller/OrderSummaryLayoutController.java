@@ -47,12 +47,20 @@ public class OrderSummaryLayoutController implements Initializable {
     }
 
     @FXML
-    private void handlePayment() {
+    private void handlePayment() throws DAOException {
         System.out.println("Going to the Receipt section ...");
 
         if(totalImport > 0f && totalImport <= App.getInstance().getMassimaleRimanente()) {
             App.getInstance().setMassimaleRimanente(App.getInstance().getMassimaleRimanente()-totalImport);
             System.out.println("Massimale Rimanente nuovo: " + (App.getInstance().getMassimaleRimanente()-totalImport));
+            App.getInstance().setPuntiFedelta(App.getInstance().computeFidelity(totalImport));
+
+            Util.updateClienteAfterPayment(App.getInstance().getCodiceCarta(),
+                    App.getInstance().getCodiceCliente(),
+                    App.getInstance().getMassimaleRimanente(),
+                    App.getInstance().getPuntiFedelta()
+            );
+
             App.getInstance().showReceipt();
         }
     }

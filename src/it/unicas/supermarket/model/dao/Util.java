@@ -124,4 +124,24 @@ public class Util {
         else
             return article.get(0).getScorteMagazzino();
     }
+
+    public static void updateClienteAfterPayment(String codiceCarta, String codiceCliente, float newMassimaleRimanente, int newFidelity) throws DAOException {
+        //copio dettagli clienti da select from barcode
+        List<Clienti> customerToUpdate = ClientiDAOMySQL.getInstance().select(new Clienti("","",codiceCliente));
+        List<Carte> cardToUpdate = CarteDAOMySQL.getInstance().select(new Carte(-1,codiceCarta));
+
+        if(customerToUpdate.size()!=1)
+            throw new DAOException("Impossibile aggiornare i dati del cliente...");
+        else{
+            customerToUpdate.get(0).setPuntiFedelta(newFidelity);
+            ClientiDAOMySQL.getInstance().update(customerToUpdate.get(0));
+        }
+
+        if(cardToUpdate.size()!=1)
+            throw new DAOException("Impossibile aggiornare i dati della carta");
+        else{
+            cardToUpdate.get(0).setMassimaleRimanente(newMassimaleRimanente);
+            CarteDAOMySQL.getInstance().update(cardToUpdate.get(0));
+        }
+    }
 }
