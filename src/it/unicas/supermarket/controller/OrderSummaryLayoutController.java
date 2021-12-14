@@ -53,9 +53,9 @@ public class OrderSummaryLayoutController implements Initializable {
     private void handlePayment() {
         System.out.println("Going to the Receipt section ...");
 
-        if(totalImport > 0f) {
-            App.getInstance().setMassimaleRimanente(App.getInstance().getMassimaleRimanente()-totalImport);
-            System.out.println(App.getInstance().getMassimaleRimanente()-totalImport);
+        if(totalImport > 0f && totalImport <= App.getInstance().getMassimaleRimanente()) {
+            App.getInstance().setMassimaleRimanente(totalImport-App.getInstance().getMassimaleRimanente());
+            System.out.println("Massimale Rimanente nuovo: " + (totalImport-App.getInstance().getMassimaleRimanente()));
             App.getInstance().showReceipt();
         }
         else
