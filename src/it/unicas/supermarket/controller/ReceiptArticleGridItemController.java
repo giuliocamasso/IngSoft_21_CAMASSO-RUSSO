@@ -19,7 +19,7 @@ public class ReceiptArticleGridItemController {
     public void loadItem(String nome, Integer quantita, Float prezzo) throws DAOException {
         System.out.println("load");
 
-        receiptArticleLabel.setText(nome + " x" + quantita);
-        receiptCostLabel.setText(String.valueOf(prezzo));
+        receiptArticleLabel.setText(nome);
+        receiptCostLabel.setText(String.valueOf(quantita) + "x   " + String.valueOf(prezzo));
     }
 }
