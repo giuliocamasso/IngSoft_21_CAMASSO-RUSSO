@@ -213,7 +213,11 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML
     public void handleCart() {
         System.out.println("Going to Cart section...");
-        App.getInstance().initOrderSummaryLayout();
+        if (App.getInstance().cartMap.size() == 0)
+            return;
+        else {
+            App.getInstance().initOrderSummaryLayout();
+        }
     }
 
     public void loadSectionArticles(String section){
