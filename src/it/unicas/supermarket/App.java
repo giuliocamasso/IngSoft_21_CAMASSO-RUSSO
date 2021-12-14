@@ -226,6 +226,7 @@ public class App {
     }
 
     public void initOrderSummaryLayout() {
+        //@TODO: 14/12/2021   DA SISTEMARE
         /*
         if (paymentVisited){
             mainStage.setScene(paymentSectionScene);
