@@ -222,6 +222,7 @@ public class LoginLayoutController {
             return -1f;
         else {
             return card.get(0).getMassimaleRimanente();
+            // restituisco massimale
         }
     }
 
