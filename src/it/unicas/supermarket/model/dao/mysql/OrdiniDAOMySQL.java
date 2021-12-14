@@ -1,5 +1,6 @@
 package it.unicas.supermarket.model.dao.mysql;
 
+import it.unicas.supermarket.App;
 import it.unicas.supermarket.model.Carte;
 import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.Ordini;
@@ -20,10 +21,11 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
     private static DAO<Ordini> dao = null;
     private static Logger logger = null;
 
-    private OrdiniDAOMySQL() {}
+    private OrdiniDAOMySQL() {
+    }
 
-    public static DAO<Ordini> getInstance(){
-        if (dao == null){
+    public static DAO<Ordini> getInstance() {
+        if (dao == null) {
             dao = new OrdiniDAOMySQL();
             logger = Logger.getLogger(OrdiniDAOMySQL.class.getName());
         }
@@ -39,7 +41,7 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
         OrdiniDAOMySQL c = new OrdiniDAOMySQL();
 
-        if (initialize){
+        if (initialize) {
             c.deleteAll();
             c.initialize();
         }
@@ -54,9 +56,9 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
             clientiList.forEach(System.out::println);
 
             Integer idCliente = getIdClienteFromCode("codice_1");
-            c.insert(new Ordini(idCliente, "00-00-0000 00:00", "ordine___0",0f, null));
-            c.insert(new Ordini(idCliente, "11-11-1111 11:11", "ordine___1",1f, null));
-            c.insert(new Ordini(idCliente, "22-22-2222 22:22", "ordine___2",2f, null));
+            c.insert(new Ordini(idCliente, "00-00-0000 00:00", "ordine___0", 0f, null));
+            c.insert(new Ordini(idCliente, "11-11-1111 11:11", "ordine___1", 1f, null));
+            c.insert(new Ordini(idCliente, "22-22-2222 22:22", "ordine___2", 2f, null));
 
 
             // 2 - testing select all
@@ -73,14 +75,14 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
             // 3.2 delete
             idCliente = getIdClienteFromCode("codice_1");
-            c.insert(new Ordini(idCliente, "11-11-1111 11:11", "ordine___1",1f, null));
+            c.insert(new Ordini(idCliente, "11-11-1111 11:11", "ordine___1", 1f, null));
 
             idCliente = getIdClienteFromCode("codice_2");
-            c.insert(new Ordini(idCliente, "22-22-2222 22:22", "ordine___2",2f, null));
+            c.insert(new Ordini(idCliente, "22-22-2222 22:22", "ordine___2", 2f, null));
 
 
             idCliente = getIdClienteFromCode("codice_1");
-            Ordini toDelete = new Ordini(idCliente, "33-33-3333 33:33", "ordine___3",3f, null);
+            Ordini toDelete = new Ordini(idCliente, "33-33-3333 33:33", "ordine___3", 3f, null);
 
             c.delete(toDelete);
 
@@ -92,14 +94,14 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
             // 3.3 update
             idCliente = getIdClienteFromCode("codice_4");
-            Ordini toUpdate = new Ordini(idCliente, "44-44-4444 44:44", "ordine___4",4f, null);
+            Ordini toUpdate = new Ordini(idCliente, "44-44-4444 44:44", "ordine___4", 4f, null);
 
             c.insert(toUpdate);
 
             list = c.selectAll();
             list.forEach(System.out::println);
 
-            Ordini updated = new Ordini(idCliente, "44-44-4444 44:44", "ordine___4",40000000f, null);
+            Ordini updated = new Ordini(idCliente, "44-44-4444 44:44", "ordine___4", 40000000f, null);
 
             c.update(updated);
 
@@ -116,13 +118,14 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
         ArrayList<Ordini> lista;
 
-        if ( a==null )
+        if (a == null)
             throw new DAOException("In select: called select with a 'null' instance of Ordini");
 
-        try{
-            if (a.getIdOrdine()!= null)
+        try {
+            /*
+            if (a.getIdOrdine() != null)
                 throw new DAOException("In select: idOrdine must be null in select");
-
+            */
             Statement st = DAOMySQLSettings.getStatement();
 
             String sql = "select * from ordini where (codiceOrdine ='" + a.getCodiceOrdine() + "')";
@@ -133,7 +136,7 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
             DAOMySQLSettings.closeStatement(st);
 
-        } catch (SQLException sq){
+        } catch (SQLException sq) {
             throw new DAOException("In select(): " + sq.getMessage());
         }
 
@@ -144,10 +147,10 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
     @Override
     public void delete(Ordini a) throws DAOException {
 
-        if ( a == null ) {
+        if (a == null) {
             throw new DAOException("In delete: can't delete a null instance");
         }
-        if (a.getCodiceOrdine() == null){
+        if (a.getCodiceOrdine() == null) {
             throw new DAOException("In delete: codiceOrdine can't be null");
         }
 
@@ -164,7 +167,7 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
         ArrayList<Ordini> list = new ArrayList<>();
 
-        try{
+        try {
             Statement statement = DAOMySQLSettings.getStatement();
 
             String sql = "select * from ordini";
@@ -174,9 +177,7 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
             list = getQueryResult(statement, sql);
 
             DAOMySQLSettings.closeStatement(statement);
-        }
-
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -197,14 +198,14 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
     @Override
     public void initialize() throws DAOException {
 
-        for (int i = 0; i<10; i++){
+        for (int i = 0; i < 10; i++) {
 
             String codiceCliente_i = "codice_" + i;
             Integer id_cliente = getIdClienteFromCode(codiceCliente_i);
 
-            String data = ""+i+i+"-"+i+i+"-"+i+i+i+i+" "+i+i+":"+i+i;
+            String data = "" + i + i + "-" + i + i + "-" + i + i + i + i + " " + i + i + ":" + i + i;
             String codiceOrdine_i = "codice___" + i;
-            Float importoTotale = i*1000f;
+            Float importoTotale = i * 1000f;
             String pin = "pin_" + i;
 
             insert(new Ordini(id_cliente, data, codiceOrdine_i, importoTotale, null));
@@ -212,12 +213,12 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
         }
 
         // also shows the tuples
-        ArrayList<Ordini> list =  selectAll();
+        ArrayList<Ordini> list = selectAll();
         list.forEach(System.out::println);
     }
 
 
-    private void executeUpdate(String query) throws DAOException{
+    private void executeUpdate(String query) throws DAOException {
         try {
             Statement st = DAOMySQLSettings.getStatement();
             int n = st.executeUpdate(query);
@@ -233,10 +234,10 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
     @Override
     public void insert(Ordini a) throws DAOException {
 
-        if ( a == null)
+        if (a == null)
             throw new DAOException("Cannot insert a null instance of ordini");
 
-        //NB. idCarte = NULL (autoincrement in MySql)
+        // NB. idOrdine = NULL (autoincrement in MySql)
         String query = "INSERT INTO ordini (idOrdine, idCliente, data, codiceOrdine, importoTotale) VALUES (NULL, '" +
                 a.getIdCliente() + "', '" +
                 a.getData() + "', '" +
@@ -253,7 +254,7 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
     // ACTUALLY USELESS... updates data and import of the order
     public void update(Ordini a) throws DAOException {
 
-        if ( a == null)
+        if (a == null)
             throw new DAOException("cannot update with a null instance of ordini");
 
         String query = "UPDATE ordini SET data = '"
@@ -269,11 +270,10 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
     }
 
 
-    private void printQuery(String query){
-        try{
+    private void printQuery(String query) {
+        try {
             logger.info("SQL: " + query);
-        }
-        catch(NullPointerException nullPointerException){
+        } catch (NullPointerException nullPointerException) {
             System.out.println("SQL: " + query);
         }
     }
@@ -285,7 +285,7 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
         ResultSet rs = statement.executeQuery(query);
 
-        while(rs.next()){
+        while (rs.next()) {
             try {
                 list.add(new Ordini(
                         rs.getInt("idCliente"),
@@ -302,29 +302,4 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
         return list;
     }
 
-
-    public static Integer getIdOrdineFromCode(String codiceOrdine) throws DAOException {
-
-        List<Ordini> ordiniList = OrdiniDAOMySQL.getInstance().select(new Ordini(codiceOrdine));
-
-        return ordiniList.get(0).getIdOrdine();
-    }
-
-    /*
-    01) inserimento ordine in DB
-    es. ordine fatto da idCLiente in data 'data'...
-    INSERT INTO Ordini(idOrdine, idCliente, data, codiceOrdine, importoTotale) VALUES([...]);
-    -> inserimento articoli dell'ordine
-    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-
-    02) tutti gli articoli contenuti nell'ordine
-    SELECT Articoli.idArticolo, Composizioni.quantita
-    FROM Composizioni
-	JOIN Articoli ON Composizioni.idArticolo = Articolo.idArticolo
-    WHERE idOrdine = 1;
-    */
 }

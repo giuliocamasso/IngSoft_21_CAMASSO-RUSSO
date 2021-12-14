@@ -15,6 +15,7 @@ import javafx.scene.layout.Region;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -74,6 +75,11 @@ public class OrderSummaryLayoutController implements Initializable {
             );
 
             App.getInstance().showReceipt();
+            try {
+                Util.sendOrderToDB(totalImport);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
