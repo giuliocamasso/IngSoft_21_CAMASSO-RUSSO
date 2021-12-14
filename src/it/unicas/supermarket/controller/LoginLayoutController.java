@@ -31,53 +31,35 @@ import java.util.logging.Logger;
  */
 public class LoginLayoutController {
 
-    @FXML public TextField codiceCartaTextField;
-    @FXML public PasswordField pinPasswordField;
+    @FXML private TextField codiceCartaTextField;
+    @FXML private PasswordField pinPasswordField;
+    @FXML private Label messageLabel;
+    @FXML private Label codiceCartaLabel;
+    @FXML private Label codiceClienteLabel;
+    @FXML private Label massimaliLabel;
 
-    public Label getMessageLabel() {
-        return messageLabel;
-    }
+    @FXML
+    private Label puntiFedeltaLabel;
 
-    @FXML public Label messageLabel;
-    @FXML public Label codiceCartaLabel;
-    @FXML public Label codiceClienteLabel;
+    @FXML
+    private Button confirmButton;
 
-    public Label getMassimaliLabel() {
-        return massimaliLabel;
-    }
+    @FXML
+    private Button ejectButton;
 
-    public void setMassimaliLabel(Label massimaliLabel) {
-        this.massimaliLabel = massimaliLabel;
-    }
+    private Boolean cardAccepted = false;
 
-    public Label getPuntiFedeltaLabel() {
-        return puntiFedeltaLabel;
-    }
-
-    public void setPuntiFedeltaLabel(Label puntiFedeltaLabel) {
-        this.puntiFedeltaLabel = puntiFedeltaLabel;
-    }
-
-    @FXML public Label massimaliLabel;
-
-    @FXML private Label puntiFedeltaLabel;
-
-    @FXML private Button confirmButton;
-
-    @FXML private Button ejectButton;
-
-    private static Boolean cardAccepted = false;
-
-    private static final Logger logger = Logger.getLogger(LoginLayoutController.class.getName());
+    private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
     @FXML
     private void handleConfirm() throws DAOException, SQLException {
+
         /*
         App.getInstance().initMarketSectionLayout();
         resetForm();
         boolean checcoJoni = true;
         if(checcoJoni)  return;
-        */
+*/
 
         if (cardAccepted) {
             App.getInstance().initMarketSectionLayout();
@@ -230,6 +212,17 @@ public class LoginLayoutController {
         else {
             App.getInstance().setMassimali(card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €");
             return card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €";
+        }
+    }
+
+    public Float getMassimaleRimanenteFromCodiceCarta(String codiceCarta) throws DAOException {
+        // select() function is codiceCarta-based
+        List<Carte> card = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
+        if( card.size() != 1)
+            return -1f;
+        else {
+            return card.get(0).getMassimaleRimanente();
+            // restituisco massimale
         }
     }
 
