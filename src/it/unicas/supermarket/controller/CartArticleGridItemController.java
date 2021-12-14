@@ -58,6 +58,7 @@ public class CartArticleGridItemController {
         cartQuantityLabel.setText(String.valueOf(quantita));
 
         App.getInstance().getOrderSummaryLayoutController().updateTotalCartCost();
+        App.getInstance().getOrderSummaryLayoutController().paymentCheck();
     }
 
     @FXML public void handleCartDecrement() throws DAOException {
@@ -69,6 +70,7 @@ public class CartArticleGridItemController {
         App.getInstance().getCartMap().replace(this.articolo.getBarcode(), quantita);
         cartQuantityLabel.setText(String.valueOf(quantita));
         App.getInstance().getOrderSummaryLayoutController().updateTotalCartCost();
+        App.getInstance().getOrderSummaryLayoutController().paymentCheck();
     }
 
 }

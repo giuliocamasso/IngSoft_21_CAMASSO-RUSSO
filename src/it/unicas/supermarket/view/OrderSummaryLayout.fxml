@@ -244,7 +244,14 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <HBox prefHeight="257.0" prefWidth="374.0" />
+                        <HBox alignment="CENTER" prefHeight="257.0" prefWidth="374.0">
+                           <children>
+                              <Label fx:id="paymentCheckLabel" alignment="CENTER" prefHeight="33.0" prefWidth="184.0" text="\@paymentCheck" textFill="WHITE">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                           </children></HBox>
                         <VBox>
                            <children>
                               <HBox alignment="CENTER">
