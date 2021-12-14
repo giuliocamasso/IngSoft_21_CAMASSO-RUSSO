@@ -25,7 +25,23 @@ public class OrderSummaryLayoutController implements Initializable {
     @FXML private ScrollPane cartArticleScrollPane;
     @FXML private GridPane cartArticleGridPane;
 
+    public Label getTotalCostLabel() {
+        return totalCostLabel;
+    }
+
+    public void setTotalCostLabel(Label totalCostLabel) {
+        this.totalCostLabel = totalCostLabel;
+    }
+
     @FXML private Label totalCostLabel;
+
+    public static float getTotalImport() {
+        return totalImport;
+    }
+
+    public static void setTotalImport(float totalImport) {
+        OrderSummaryLayoutController.totalImport = totalImport;
+    }
 
     static float totalImport = 0f;
 
@@ -36,10 +52,6 @@ public class OrderSummaryLayoutController implements Initializable {
     @FXML private Label massimaliLabel;
 
     @FXML private Label paymentCheckLabel;
-
-    private ArticleSelectionListener articleSelectionListener;
-
-    public float getTotalImport() { return totalImport; }
 
     @FXML
     private void handleMarket() {
@@ -77,7 +89,7 @@ public class OrderSummaryLayoutController implements Initializable {
         try
         {
             updateTotalCartCost();
-            totalCostLabel.setText("€ "+totalImport);
+            totalCostLabel.setText("€ "+ String.format("%.2f",totalImport));
         } catch (DAOException e) {
             e.printStackTrace();
         }
@@ -130,14 +142,15 @@ public class OrderSummaryLayoutController implements Initializable {
         List<Integer> quantityList = App.getInstance().getCartListQuantity();
         List<String> barcodeList = App.getInstance().getCartListArticles();
 
-        totalImport = 0f;
+        float sum = 0f;
 
         for (int i=0; i<App.getInstance().getCartMap().size(); i++){
             Integer quantity = quantityList.get(i);
             Float price = Util.getPrezzoArticoloFromBarcode(barcodeList.get(i));
-            totalImport += quantity*price;
+            sum += quantity*price;
         }
 
+        setTotalImport(sum);
         totalCostLabel.setText("€ "+totalImport);
         System.out.println("Sum from updateTotale " + totalImport);
 

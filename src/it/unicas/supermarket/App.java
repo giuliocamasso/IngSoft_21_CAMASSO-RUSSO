@@ -270,6 +270,7 @@ public class App {
 
             dialogStage.setTitle("Receipt");
             dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initStyle(StageStyle.UNDECORATED);
             dialogStage.initOwner(mainStage);
 
             dialogStage.setScene(new Scene(loader.load()));

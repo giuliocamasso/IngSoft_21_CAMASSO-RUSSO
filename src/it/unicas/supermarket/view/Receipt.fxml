@@ -5,18 +5,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="800.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.ReceiptController">
+<AnchorPane prefHeight="717.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.ReceiptController">
    <children>
       <VBox prefHeight="800.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="173.0" prefWidth="400.0">
+            <VBox alignment="CENTER" prefHeight="194.0" prefWidth="400.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="97.0" prefWidth="400.0">
+                  <HBox alignment="CENTER" prefHeight="93.0" prefWidth="400.0">
                      <children>
                         <Label prefHeight="62.0" prefWidth="303.0" text="GG supermarket">
                            <font>
@@ -97,15 +98,19 @@
                         </HBox>
                      </children>
                      <padding>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                        <Insets left="30.0" right="30.0" top="30.0" />
                      </padding>
                   </HBox>
                </children>
             </VBox>
-            <ScrollPane prefHeight="463.0" prefWidth="400.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-              </content>
+            <ScrollPane prefHeight="341.0" prefWidth="400.0">
+               <content>
+                  <GridPane fx:id="receiptArticleGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="398.0">
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
             </ScrollPane>
             <HBox alignment="CENTER" prefHeight="66.0" prefWidth="400.0">
                <children>
@@ -121,7 +126,7 @@
                   <HBox prefHeight="19.0" prefWidth="176.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="\@totale">
+                        <Label fx:id="receiptTotalImportLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="\@totale">
                            <font>
                               <Font name="Monaco" size="14.0" />
                            </font>
