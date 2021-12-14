@@ -59,36 +59,6 @@ public class App {
 
     public String reparto = "None";
 
-    public boolean isPaymentVisited() {
-        return paymentVisited;
-    }
-
-    public void setPaymentVisited(boolean paymentVisited) {
-        this.paymentVisited = paymentVisited;
-    }
-
-    private boolean paymentVisited = false;
-
-    public boolean isMarketVisited() {
-        return marketVisited;
-    }
-
-    public void setMarketVisited(boolean marketVisited) {
-        this.marketVisited = marketVisited;
-    }
-
-    private boolean marketVisited = false;
-
-    public boolean isLoginVisited() {
-        return loginVisited;
-    }
-
-    public void setLoginVisited(boolean loginVisited) {
-        this.loginVisited = loginVisited;
-    }
-
-    private boolean loginVisited = false;
-
     public LinkedHashMap<String, Integer> cartMap = new LinkedHashMap<>();
 
     public HashMap<String, Integer> getCartMap() {
@@ -171,15 +141,7 @@ public class App {
     }
 
     public void initLoginLayout() {
-
-        if (loginVisited){
-            loginController.resetForm();
-            mainStage.setScene(loginSectionScene);
-            return;
-        }
-
         try {
-            this.loginVisited = true;
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/LoginLayout.fxml"));
@@ -224,21 +186,9 @@ public class App {
     }
 
     public void initMarketSectionLayout() {
-        if (this.paymentVisited){
-
-            try {
-                marketSectionLayoutController.syncCartPane();
-            } catch (DAOException e) {
-                e.printStackTrace();
-            }
-            mainStage.setScene(marketSectionScene);
-
-            return;
-        }
 
         try {
             System.out.println("Entrando nei reparti");
-            this.marketVisited = true;
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/MarketSectionLayout.fxml"));
@@ -273,7 +223,6 @@ public class App {
         }
         */
         try {
-            paymentVisited = true;
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/OrderSummaryLayout.fxml"));
@@ -364,4 +313,26 @@ public class App {
         }
     }
 
+    public void backToSectionsFromPayment() {
+        try {
+            marketSectionLayoutController.syncCartPane();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        mainStage.setScene(marketSectionScene);
+    }
+
+    public void ejectCard(){
+        loginController.resetForm();
+        mainStage.setScene(loginSectionScene);
+    }
+
+    public void ejectCardAfterPayment(){
+        //loginController.getMassimaliLabel().setText(massimali);
+        loginController.getMassimaliLabel().setText("new massimali");
+        //loginController.getPuntiFedeltaLabel().setText(puntiFedelta);
+        loginController.getPuntiFedeltaLabel().setText("new punti fedelta");
+        loginController.getMessageLabel().setText("Grazie per averci scelto!");
+        mainStage.setScene(loginSectionScene);
+    }
 }

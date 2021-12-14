@@ -33,9 +33,31 @@ public class LoginLayoutController {
 
     @FXML public TextField codiceCartaTextField;
     @FXML public PasswordField pinPasswordField;
+
+    public Label getMessageLabel() {
+        return messageLabel;
+    }
+
     @FXML public Label messageLabel;
     @FXML public Label codiceCartaLabel;
     @FXML public Label codiceClienteLabel;
+
+    public Label getMassimaliLabel() {
+        return massimaliLabel;
+    }
+
+    public void setMassimaliLabel(Label massimaliLabel) {
+        this.massimaliLabel = massimaliLabel;
+    }
+
+    public Label getPuntiFedeltaLabel() {
+        return puntiFedeltaLabel;
+    }
+
+    public void setPuntiFedeltaLabel(Label puntiFedeltaLabel) {
+        this.puntiFedeltaLabel = puntiFedeltaLabel;
+    }
+
     @FXML public Label massimaliLabel;
 
     @FXML private Label puntiFedeltaLabel;

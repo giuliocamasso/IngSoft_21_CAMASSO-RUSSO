@@ -7,8 +7,6 @@ import javafx.stage.Stage;
 
 public class ReceiptController {
 
-    private boolean backToLogin = false;
-
     private Stage dialogStage;
 
     @FXML
@@ -19,14 +17,9 @@ public class ReceiptController {
         this.dialogStage = dialogStage;
     }
 
-    public boolean isBackClicked() {
-        return backToLogin;
-    }
-
     @FXML
     public void handleLogin(){
-        App.getInstance().initLoginLayout();
-        backToLogin = true;
+        App.getInstance().ejectCardAfterPayment();
         dialogStage.close();
     }
 

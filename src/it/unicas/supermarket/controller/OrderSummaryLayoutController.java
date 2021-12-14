@@ -40,7 +40,7 @@ public class OrderSummaryLayoutController implements Initializable {
 
     @FXML
     private void handleMarket() {
-        App.getInstance().initMarketSectionLayout();
+        App.getInstance().backToSectionsFromPayment();
     }
 
     @FXML
