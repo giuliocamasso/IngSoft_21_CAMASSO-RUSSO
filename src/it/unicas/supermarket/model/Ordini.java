@@ -15,9 +15,6 @@ public class Ordini {
     private final StringProperty codiceOrdine;
     private FloatProperty importoTotale;
 
-
-
-
     // used to create tmp orders searching in select() by codiceOrdine
     public Ordini(String codiceOrdine) throws DAOException {
 
@@ -80,10 +77,10 @@ public class Ordini {
 
     // Getter setter and property: @idOrdine
     public Integer getIdOrdine() throws DAOException{
-        if (idOrdine != null){
-            throw new DAOException("idOrdine must be null");
-        }
-        else return null;
+       if(idOrdine == null)
+           throw new DAOException("idOrdine can't be null");
+       else
+           return idOrdine.getValue();
     }
 
     public void setIdOrdine(Integer idOrdine) {

@@ -2,13 +2,8 @@ package it.unicas.supermarket.model.dao;
 
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.controller.LoginLayoutController;
-import it.unicas.supermarket.model.Articoli;
-import it.unicas.supermarket.model.Carte;
-import it.unicas.supermarket.model.Clienti;
-import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.CarteDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.DAOMySQLSettings;
+import it.unicas.supermarket.model.*;
+import it.unicas.supermarket.model.dao.mysql.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -144,4 +139,135 @@ public class Util {
             CarteDAOMySQL.getInstance().update(cardToUpdate.get(0));
         }
     }
+
+    public static int getIdArticoloFromBarcode(String barcode) throws DAOException {
+        // select() function is barcode-based
+        List<Articoli> article = ArticoliDAOMySQL.getInstance().select(new Articoli("", barcode));
+        if( article.size() != 1)
+            throw new DAOException("Articolo non trovato");
+        else
+            return article.get(0).getIdArticolo();
+    }
+
+    public static Integer getIdOrdineFromCodiceOrdine(String codiceOrdine) throws DAOException {
+
+        List<Ordini> ordiniList = OrdiniDAOMySQL.getInstance().select(new Ordini(codiceOrdine));
+        System.out.println("getIdOrdine...");
+        return ordiniList.get(0).getIdOrdine();
+    }
+
+    public static void sendOrderToDB(float totalImport) throws DAOException, SQLException {
+
+        String customerCode = App.getInstance().getCodiceCliente();
+        int customerId = getIdClienteFromCodiceCliente(customerCode);
+
+        //XX-XX-XXXX XX:XX
+        String data= "XX-XX-XXXX XX:XX";
+        String orderCode ="Ordine_011";
+        Ordini newOrder = new Ordini(customerId, data, orderCode, totalImport, null);
+        System.out.println("Ordine Creato");
+        // 1 - inserisco nuovo ordine
+        OrdiniDAOMySQL.getInstance().insert(newOrder);
+        System.out.println("Ordine Inserito");
+
+        Integer idOrdine = getIdOrdineFromCodiceOrdine(orderCode);
+        System.out.println("idOrdine ottenuto: " + idOrdine);
+
+        // 2 - leggo idOrdine appena inserito (e' autoincrement)
+        // 3 - per ciascun elemento dell'ordine, lo inserisco in composizioni passando l'id dell'ordine
+        for (String barcode : App.getInstance().getCartMap().keySet() ){
+            int quantita = App.getInstance().getCartMap().get(barcode);
+            System.out.println("quantita:" + quantita);
+            if (quantita>0){
+
+                int idArticolo = getIdArticoloFromBarcode(barcode);
+                float prezzo = getPrezzoArticoloFromBarcode(barcode);
+
+                Composizioni articoloInOrdine = new Composizioni(idArticolo, idOrdine, prezzo, quantita);
+                ComposizioniDAOMySQL.getInstance().insert(articoloInOrdine);
+                System.out.println("Inserito in composizioni");
+            }
+        }
+
+        printOrderDetailsFromCodiceOrdine(orderCode);
+    }
+
+    public static int getIdClienteFromCodiceCliente(String codiceCliente) throws DAOException {
+        // select() function is barcode-based
+        List<Clienti> customer = ClientiDAOMySQL.getInstance().select(new Clienti("","",codiceCliente));
+        if( customer.size() != 1)
+            throw new DAOException("Cliente non trovato...");
+        else
+            return customer.get(0).getIdCliente();
+    }
+
+    public static void printOrderDetailsFromCodiceOrdine(String codiceOrdine) throws DAOException, SQLException {
+        /*
+        if (articoloInOrdine == null)
+            throw new DAOException("null instance of 'composizioni'...");
+        // INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+        String query = "INSERT INTO Composizioni (idArticolo, idOrdini, prezzo, quantita) VALUES (" +
+                articoloInOrdine.getIdArticolo() + ", " +
+                articoloInOrdine.getIdOrdine() + ", " +
+                articoloInOrdine.getPrezzo() + ", " +
+                articoloInOrdine.getQuantita() + ")";
+
+        printQuery(query);
+
+        executeUpdate(query);
+        */
+        int idOrdine = getIdOrdineFromCodiceOrdine(codiceOrdine);
+        System.out.println("IdOrdine =" + idOrdine);
+        Statement statement = DAOMySQLSettings.getStatement();
+
+        String query = "SELECT Articoli.nome, Articoli.prezzo, Composizioni.quantita" +
+                " FROM Composizioni JOIN Articoli" +
+                " ON Composizioni.idArticolo = Articoli.idArticolo" +
+                " WHERE idOrdine = " + idOrdine + ";";
+
+        // printQuery()
+        try {
+            logger.info("SQL: " + query);
+        } catch (NullPointerException nullPointerException) {
+            System.out.println("SQL: " + query);
+        }
+
+        ArrayList<String> articleNames = new ArrayList<>();
+        ArrayList<Float> articlePrices = new ArrayList<>();
+        ArrayList<Integer> articleQuantities = new ArrayList<>();
+
+        ResultSet rs = statement.executeQuery(query);
+
+        while(rs.next()){
+            articleNames.add(rs.getString("Articoli.nome"));
+            articlePrices.add(rs.getFloat("Articoli.prezzo"));
+            articleQuantities.add(rs.getInt("Composizioni.quantita"));
+        }
+
+        DAOMySQLSettings.closeStatement(statement);
+
+        System.out.println("--- ORDINE " + codiceOrdine + " ---");
+
+        for (int i = 0; i< articleNames.size(); i++){
+            System.out.println(articleNames.get(i) + "\t( " + articleQuantities.get(i) + "x " + articlePrices.get(i) + " €)");
+        }
+    }
+
+    /*
+    01) inserimento ordine in DB
+    es. ordine fatto da idCLiente in data 'data'...
+    INSERT INTO Ordini(idOrdine, idCliente, data, codiceOrdine, importoTotale) VALUES([...]);
+    -> inserimento articoli dell'ordine
+    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
+
+    02) tutti gli articoli contenuti nell'ordine
+    SELECT Articoli.idArticolo, Composizioni.quantita
+    FROM Composizioni
+	JOIN Articoli ON Composizioni.idArticolo = Articolo.idArticolo
+    WHERE idOrdine = 1;
+    */
 }

@@ -7,10 +7,7 @@ import it.unicas.supermarket.model.Carte;
 import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.Ordini;
 import it.unicas.supermarket.model.dao.DAOException;
-import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.CarteDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.OrdiniDAOMySQL;
+import it.unicas.supermarket.model.dao.mysql.*;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -33,6 +30,7 @@ public class Main extends Application {
         // delete order: cards/orders     ->  clients/articles
         // insert order: clients/articles ->  cards/orders
         CarteDAOMySQL.getInstance().deleteAll();
+        ComposizioniDAOMySQL.getInstance().deleteAll();
         OrdiniDAOMySQL.getInstance().deleteAll();
         ClientiDAOMySQL.getInstance().deleteAll();
         ArticoliDAOMySQL.getInstance().deleteAll();
@@ -75,7 +73,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        boolean initializeDB = false;
+        boolean initializeDB = true;
 
         try {
             if (initializeDB)
