@@ -56,6 +56,7 @@ public class App {
     public String codiceCliente;
     public String massimali;
     public String puntiFedelta;
+    public Float massimaleRimanente;
 
     public String reparto = "None";
 
@@ -360,7 +361,7 @@ public class App {
             Float price = getPrezzoArticoloFromBarcode(articles.get(i));
             Integer quantity = quantities.get(i);
 
-            System.out.println(articleName + " " +quantity + "x " + price + " € = " +quantity*price + " €\n");
+            System.out.println(articleName + " " +quantity + "x " + price + " € = " +quantity*price + " €");
         }
     }
 

@@ -38,6 +38,12 @@ public class OrderSummaryLayoutController implements Initializable {
     @FXML private Label codiceClienteLabel;
     @FXML private Label massimaliLabel;
 
+    @FXML private Label paymentCheckLabel;
+
+    private ArticleSelectionListener articleSelectionListener;
+
+    public float getTotalImport() { return this.totalImport; }
+
     @FXML
     private void handleMarket() {
         App.getInstance().initMarketSectionLayout();
@@ -46,7 +52,11 @@ public class OrderSummaryLayoutController implements Initializable {
     @FXML
     private void handlePayment() {
         System.out.println("Going to the Receipt section ...");
-        App.getInstance().showReceipt();
+        if(App.getInstance().getCartMap().size() == 0) {
+            return;
+        }
+        else
+            App.getInstance().showReceipt();
     }
 
     @Override
@@ -54,8 +64,7 @@ public class OrderSummaryLayoutController implements Initializable {
 
         try {
             fillCartGridPane(App.getInstance().getCartMap());
-        }
-        catch (IOException | DAOException e) {
+        } catch (IOException | DAOException e) {
             e.printStackTrace();
         }
 
@@ -63,6 +72,12 @@ public class OrderSummaryLayoutController implements Initializable {
         {
             updateTotalCartCost();
             totalCostLabel.setText("€ "+totalImport);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            paymentCheck();
         } catch (DAOException e) {
             e.printStackTrace();
         }
@@ -82,8 +97,7 @@ public class OrderSummaryLayoutController implements Initializable {
             AnchorPane anchorPane = itemLoader.load();
 
             CartArticleGridItemController cartArticleGridItemController = itemLoader.getController();
-            cartArticleGridItemController.loadItem(App.getInstance().getCartListArticles().get(index),
-                    App.getInstance().getCartListQuantity().get(index));
+            cartArticleGridItemController.loadItem(App.getInstance().getCartListArticles().get(index), App.getInstance().getCartListQuantity().get(index));
 
             cartArticleGridPane.add(anchorPane, column, row++); //(child,column,row)
             setGridLayout(anchorPane);
@@ -118,7 +132,7 @@ public class OrderSummaryLayoutController implements Initializable {
             totalImport += quantity*price;
         }
 
-        this.totalCostLabel.setText("€ "+totalImport);
+        totalCostLabel.setText("€ "+totalImport);
         System.out.println("Sum from updateTotale " + totalImport);
 
     }
@@ -130,6 +144,21 @@ public class OrderSummaryLayoutController implements Initializable {
             return -1;
         else
             return article.get(0).getScorteMagazzino();
+    }
+
+    public void paymentCheck() throws DAOException {
+        if (App.getInstance().getCartMap().size() == 0){
+            paymentCheckLabel.setText("Carrello vuoto");
+            paymentCheckLabel.setStyle("-fx-text-fill: rgb(255,255,0)");
+        }
+        else if (totalImport <= App.getInstance().getLoginController().getMassimaleRimanenteFromCodiceCarta(App.getInstance().getCodiceCarta())){
+            paymentCheckLabel.setText("Massimale Sufficiente");
+            paymentCheckLabel.setStyle("-fx-text-fill: rgb(0,255,0)");
+        }
+        else {
+            paymentCheckLabel.setText("Massimale Insufficiente");
+            paymentCheckLabel.setStyle("-fx-text-fill: rgb(255,0,0)");
+        }
     }
 
     private void paymentDetails() {
