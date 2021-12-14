@@ -1,12 +1,8 @@
 package it.unicas.supermarket.controller;
 
 import it.unicas.supermarket.App;
-import it.unicas.supermarket.model.Carte;
-import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.dao.DAOException;
-import it.unicas.supermarket.model.dao.mysql.CarteDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
-import it.unicas.supermarket.model.dao.mysql.DAOMySQLSettings;
+import it.unicas.supermarket.model.dao.Util;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,11 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -61,8 +53,6 @@ public class LoginLayoutController {
 
     private Boolean cardAccepted = false;
 
-    private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
-
     @FXML
     private void handleConfirm() throws DAOException, SQLException {
 
@@ -88,7 +78,7 @@ public class LoginLayoutController {
             return;
 
         // checking PIN
-        String pinFromDB = getPinFromCodiceCarta(codiceCarta);
+        String pinFromDB = Util.getPinFromCodiceCarta(codiceCarta);
 
         if (pinFromDB.equals("ERROR"))
            cardRejected();
@@ -98,7 +88,7 @@ public class LoginLayoutController {
 
         // pin.equals(pinFromDB))
         else{
-           loginSuccess(codiceCarta, getCodiceClienteFromCodiceCarta(codiceCarta));
+           loginSuccess(codiceCarta, Util.getCodiceClienteFromCodiceCarta(codiceCarta));
         }
 
     }
@@ -135,15 +125,15 @@ public class LoginLayoutController {
 
     void loginSuccess(String codiceCarta, String codiceCliente) throws DAOException {
 
-        float massimaleRimanente = getMassimaleRimanenteFromCodiceCarta(codiceCarta);
+        float massimaleRimanente = Util.getMassimaleRimanenteFromCodiceCarta(codiceCarta);
 
         App.getInstance().setMassimaleRimanente(massimaleRimanente);
         App.getInstance().setCodiceCarta(codiceCarta);
         App.getInstance().setCodiceCliente(codiceCliente);
 
         codiceClienteLabel.setText(codiceCliente);
-        massimaliLabel.setText(getMassimaliFromCodiceCarta(codiceCarta));
-        int fedelta = getPuntiFedeltaFromCodiceCliente(codiceCliente);
+        massimaliLabel.setText(Util.getMassimaliFromCodiceCarta(codiceCarta));
+        int fedelta = Util.getPuntiFedeltaFromCodiceCliente(codiceCliente);
         App.getInstance().setPuntiFedelta(fedelta);
 
         puntiFedeltaLabel.setText(String.valueOf(fedelta));
@@ -179,82 +169,6 @@ public class LoginLayoutController {
     @FXML
     private void handleEject(){
         resetForm();
-    }
-
-    public String getPinFromCodiceCarta(String codiceCarta) throws DAOException {
-        List<Carte> cardToBeChecked = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
-        if (cardToBeChecked.size() == 1)
-            return cardToBeChecked.get(0).getPin();
-        else return "ERROR";
-    }
-
-    public String getCodiceClienteFromCodiceCarta(String codiceCarta) throws SQLException {
-
-        Statement statement = DAOMySQLSettings.getStatement();
-
-        String query = "SELECT clienti.codiceCliente " +
-                "FROM Clienti JOIN Carte " +
-                "ON Clienti.idCliente = Carte.idCliente " +
-                "WHERE codiceCarta = '" + codiceCarta + "';";
-
-        try{
-            logger.info("SQL: " + query);
-        }
-        catch(NullPointerException nullPointerException){
-            System.out.println("SQL: " + query);
-        }
-
-        ArrayList<String> result = new ArrayList<>();
-
-        ResultSet rs = statement.executeQuery(query);
-
-        while(rs.next()){
-            result.add(rs.getString("codiceCliente"));
-        }
-
-        DAOMySQLSettings.closeStatement(statement);
-
-        if (result.size() == 1) {
-            App.getInstance().setCodiceCliente(result.get(0));
-            return result.get(0);
-        }
-
-            // 1 - more than one client is correlated to the given card
-            // OR
-            // 2 - client not found (db error, something went wrong)
-        else return "ERROR";
-    }
-
-    public String getMassimaliFromCodiceCarta(String codiceCarta) throws DAOException {
-        // select() function is codiceCarta-based
-        List<Carte> card = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
-        if( card.size() != 1)
-            return "ERROR";
-        else {
-            App.getInstance().setMassimali(card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €");
-            return card.get(0).getMassimaleRimanente().toString() + " / " + card.get(0).getMassimaleRimanente().toString() + " €";
-        }
-    }
-
-    public Float getMassimaleRimanenteFromCodiceCarta(String codiceCarta) throws DAOException {
-        // select() function is codiceCarta-based
-        List<Carte> card = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
-        if( card.size() != 1)
-            return -1f;
-        else {
-            return card.get(0).getMassimaleRimanente();
-            // restituisco massimale
-        }
-    }
-
-    public int getPuntiFedeltaFromCodiceCliente(String codiceCliente) throws DAOException {
-        // select() function is codiceCliente-based
-        List<Clienti> customer = ClientiDAOMySQL.getInstance().select(new Clienti("","",codiceCliente));
-        if( customer.size() != 1)
-            return -1;
-        else {
-            return customer.get(0).getPuntiFedelta();
-        }
     }
 
 }

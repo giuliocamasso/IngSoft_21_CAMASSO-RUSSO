@@ -3,6 +3,7 @@ import it.unicas.supermarket.App;
 import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.model.dao.Util;
 import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.DAOMySQLSettings;
 import javafx.fxml.FXML;
@@ -847,7 +848,7 @@ public class MarketSectionLayoutController implements Initializable {
 
         for (int i=0; i<App.getInstance().getCartMap().size(); i++){
             Integer quantity = quantityList.get(i);
-            Float price = getPrezzoArticoloFromBarcode(barcodeList.get(i));
+            Float price = Util.getPrezzoArticoloFromBarcode(barcodeList.get(i));
             articleQuantity += quantity.floatValue();
             cartImport += quantity*price;
         }
@@ -856,24 +857,6 @@ public class MarketSectionLayoutController implements Initializable {
         resultItem.add(cartImport);
 
         return resultItem;
-    }
-
-    public static String getNomeArticoloFromBarcode(String barcode) throws DAOException {
-        // select() function is barcode-based
-        List<Articoli> article = ArticoliDAOMySQL.getInstance().select(new Articoli("", barcode));
-        if( article.size() != 1)
-            return "ERROR";
-        else
-            return article.get(0).getNome();
-    }
-
-    public static Float getPrezzoArticoloFromBarcode(String barcode) throws DAOException {
-        // select() function is barcode-based
-        List<Articoli> article = ArticoliDAOMySQL.getInstance().select(new Articoli("", barcode));
-        if( article.size() != 1)
-            return -1f;
-        else
-            return article.get(0).getPrezzo();
     }
 
     @FXML public void handleSearch(){

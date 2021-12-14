@@ -3,6 +3,7 @@ package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.model.dao.Util;
 import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,10 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.List;
-
-import static it.unicas.supermarket.controller.MarketSectionLayoutController.getNomeArticoloFromBarcode;
-import static it.unicas.supermarket.controller.MarketSectionLayoutController.getPrezzoArticoloFromBarcode;
-import static it.unicas.supermarket.controller.OrderSummaryLayoutController.*;
 
 public class CartArticleGridItemController {
 
@@ -37,11 +34,11 @@ public class CartArticleGridItemController {
         this.articolo = result.get(0);
 
         quantita = quantity;
-        scorteRimanenti = getScorteFromBarcode(this.articolo.getBarcode()) - quantita;
+        scorteRimanenti = Util.getScorteFromBarcode(this.articolo.getBarcode()) - quantita;
 
-        cartArticleNameLabel.setText(getNomeArticoloFromBarcode(barcode));
+        cartArticleNameLabel.setText(Util.getNomeArticoloFromBarcode(barcode));
         cartQuantityLabel.setText(String.valueOf(quantita));
-        cartArticlePriceLabel.setText(getPrezzoArticoloFromBarcode(barcode)+" €");
+        cartArticlePriceLabel.setText(Util.getPrezzoArticoloFromBarcode(barcode)+" €");
         Image image = new Image("file:" + Articoli.getURLfromCode(barcode));
         cartArticleImage.setImage(image);
     }

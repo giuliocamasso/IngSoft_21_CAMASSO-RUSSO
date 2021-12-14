@@ -3,6 +3,7 @@ import it.unicas.supermarket.App;
 import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.model.dao.Util;
 import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +20,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import static it.unicas.supermarket.controller.MarketSectionLayoutController.getPrezzoArticoloFromBarcode;
 
 public class OrderSummaryLayoutController implements Initializable {
 
@@ -42,7 +41,7 @@ public class OrderSummaryLayoutController implements Initializable {
 
     private ArticleSelectionListener articleSelectionListener;
 
-    public float getTotalImport() { return this.totalImport; }
+    public float getTotalImport() { return totalImport; }
 
     @FXML
     private void handleMarket() {
@@ -58,8 +57,6 @@ public class OrderSummaryLayoutController implements Initializable {
             System.out.println("Massimale Rimanente nuovo: " + (totalImport-App.getInstance().getMassimaleRimanente()));
             App.getInstance().showReceipt();
         }
-        else
-            return;
     }
 
     @Override
@@ -131,22 +128,13 @@ public class OrderSummaryLayoutController implements Initializable {
 
         for (int i=0; i<App.getInstance().getCartMap().size(); i++){
             Integer quantity = quantityList.get(i);
-            Float price = getPrezzoArticoloFromBarcode(barcodeList.get(i));
+            Float price = Util.getPrezzoArticoloFromBarcode(barcodeList.get(i));
             totalImport += quantity*price;
         }
 
         totalCostLabel.setText("€ "+totalImport);
         System.out.println("Sum from updateTotale " + totalImport);
 
-    }
-
-    public static int getScorteFromBarcode(String barcode) throws DAOException {
-        // select() function is barcode-based
-        List<Articoli> article = ArticoliDAOMySQL.getInstance().select(new Articoli("", barcode));
-        if( article.size() != 1)
-            return -1;
-        else
-            return article.get(0).getScorteMagazzino();
     }
 
     public void paymentCheck() throws DAOException {

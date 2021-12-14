@@ -6,6 +6,7 @@ import it.unicas.supermarket.controller.OrderSummaryLayoutController;
 
 import it.unicas.supermarket.controller.ReceiptController;
 import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.model.dao.Util;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -20,9 +21,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.*;
 import java.util.logging.Logger;
-
-import static it.unicas.supermarket.controller.MarketSectionLayoutController.getNomeArticoloFromBarcode;
-import static it.unicas.supermarket.controller.MarketSectionLayoutController.getPrezzoArticoloFromBarcode;
 
 public class App {
     private static App app = null;
@@ -168,8 +166,7 @@ public class App {
             });
 
             // Give the controller access to the main app.
-            LoginLayoutController controller = loader.getController();
-            this.loginController = controller;
+            this.loginController = loader.getController();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -216,8 +213,7 @@ public class App {
             });
 
             // Give the controller access to the main app.
-            MarketSectionLayoutController controller = loader.getController();
-            this.marketSectionLayoutController = controller;
+            this.marketSectionLayoutController = loader.getController();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -249,8 +245,7 @@ public class App {
             });
 
             // Give the controller access to the main app.
-            OrderSummaryLayoutController controller = loader.getController();
-            this.orderSummaryLayoutController = controller;
+            this.orderSummaryLayoutController = loader.getController();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -314,8 +309,8 @@ public class App {
         List<Integer> quantities = getCartListQuantity();
 
         for (int i = 0; i<size; i++){
-            String articleName = getNomeArticoloFromBarcode(articles.get(i));
-            Float price = getPrezzoArticoloFromBarcode(articles.get(i));
+            String articleName = Util.getNomeArticoloFromBarcode(articles.get(i));
+            Float price = Util.getPrezzoArticoloFromBarcode(articles.get(i));
             Integer quantity = quantities.get(i);
 
             System.out.println(articleName + " " +quantity + "x " + price + " € = " +quantity*price + " €");
