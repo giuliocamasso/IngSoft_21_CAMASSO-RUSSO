@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.unicas.supermarket"},{"l":"it.unicas.supermarket.controller"},{"l":"it.unicas.supermarket.dataloader"},{"l":"it.unicas.supermarket.model"},{"l":"it.unicas.supermarket.model.dao"},{"l":"it.unicas.supermarket.model.dao.mysql"}];updateSearchResults();

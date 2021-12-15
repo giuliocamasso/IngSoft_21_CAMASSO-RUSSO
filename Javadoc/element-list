@@ -1,0 +1,6 @@
+it.unicas.supermarket
+it.unicas.supermarket.controller
+it.unicas.supermarket.dataloader
+it.unicas.supermarket.model
+it.unicas.supermarket.model.dao
+it.unicas.supermarket.model.dao.mysql

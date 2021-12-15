@@ -1,23 +1,22 @@
 package it.unicas.supermarket;
-
 import it.unicas.supermarket.dataloader.Dataloader;
-
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.Carte;
 import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.Ordini;
 import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.model.dao.mysql.*;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.List;
 
 
 public class Main extends Application {
-
+    /**
+     * prova JavaDoc main
+     * @author GC-GR
+     */
     public Main() {}
 
     private void initializeDB() throws DAOException, IOException {
