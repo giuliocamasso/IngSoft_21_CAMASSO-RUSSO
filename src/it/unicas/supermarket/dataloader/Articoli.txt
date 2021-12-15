@@ -68,7 +68,7 @@ Abbronzante - 2.99 - 50 - 0_ABBRONZANTE - Bilboa - Abbronzante 50+ - 150g - Bene
 Crema - 3.99 - 30 - 0000000_CREMA - Bionell - Crema idratante - 170g - Benessere
 Dentifricio - 2.99 - 40 - 0_DENTIFRICIO - Colgate - Dentifricio per denti sensibili - 150g - Benessere
 Profumo - 2.99 - 50 - 00000_PROFUMO - Armani - Profumo numero 5 - 100ml - Benessere
-Shampoo - 2.99 - 50 - 00000_SHAMPOO - Dove - Shampoo antiforfora - 200ml - Benessere
+Shampoo - 30.99 - 50 - 00000_SHAMPOO - Dove - Shampoo antiforfora - 200ml - Benessere
 Detersivo - 4.99 - 30 - 000_DETERSIVO - Dash - Detersivo per bianchi e colorati - 2l - Casalinghi
 Sapone - 2.99 - 30 - 000000_SAPONE - Nemo - Sapone per le mani - 200g - Casalinghi
 Scopa - 3.99 - 50 - 0000000_SCOPA - Vileda - Scopa con setole - 1pz - Casalinghi

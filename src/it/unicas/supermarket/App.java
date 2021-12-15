@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Logger;
 
 /*
  * @param incomingDamage the amount of incoming damage
@@ -34,14 +33,17 @@ public class App {
 
     private Stage mainStage;
 
+    // scene
     private Scene marketSectionScene;
     private Scene paymentSectionScene;
     private Scene loginSectionScene;
 
+    // controller
     private LoginLayoutController loginController;
     private OrderSummaryLayoutController orderSummaryLayoutController;
     private MarketSectionLayoutController marketSectionLayoutController;
 
+    // attributi
     public String codiceCarta;
     public String codiceCliente;
     public float massimaleMensile;
@@ -57,8 +59,6 @@ public class App {
      * di inserimento dei prodotti nel carrello
      */
     public LinkedHashMap<String, Integer> cartMap = new LinkedHashMap<>();
-
-    private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
     // design-pattern Singleton
     public static App getInstance(){
@@ -201,8 +201,11 @@ public class App {
         }
     }
 
+    //@TODO: 14/12/2021   DA SISTEMARE
+    /**
+     * Prepara la scena di riepilogo del carrello e dei dettagli di pagamento
+     */
     public void initOrderSummaryLayout() {
-        //@TODO: 14/12/2021   DA SISTEMARE
         /*
         if (paymentVisited){
             mainStage.setScene(paymentSectionScene);
@@ -210,23 +213,26 @@ public class App {
         }
         */
         try {
-            // Load root layout from fxml file.
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/OrderSummaryLayout.fxml"));
 
             AnchorPane orderSummaryLayout = loader.load();
 
-            // Show the scene containing the root layout.
+            // inizializzo la nuova scena
             Scene orderSummaryScene = new Scene(orderSummaryLayout);
+
+            // imposto la scena sul mainStage e aggiorno l'handler della scena di App
             mainStage.setScene(orderSummaryScene);
             this.paymentSectionScene = orderSummaryScene;
 
+            // gestione chiusura finestra
             mainStage.setOnCloseRequest(event -> {
                 event.consume();
                 handleExit();
             });
 
-            // Give the controller access to the main app.
+            // aggiorno l'handler del controller
             this.orderSummaryLayoutController = loader.getController();
 
         } catch (IOException e) {
@@ -234,11 +240,15 @@ public class App {
         }
     }
 
+    /**
+     * Il metodo è chiamato per mostrare lo scontrino dopo la finalizzazione di un ordine
+     */
     public void showReceipt() {
         try {
-            // Load the fxml file and create a new stage for the popup.
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("view/Receipt.fxml"));
+
             Stage dialogStage = new Stage();
 
             dialogStage.setTitle("Receipt");
@@ -248,11 +258,8 @@ public class App {
 
             dialogStage.setScene(new Scene(loader.load()));
 
-            // Set the Colleghis into the controller.
             ReceiptController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            // Set the dialog icon.
-            // dialogStage.getIcons().add(new Image("file:resources/images/calendar.png"));
 
             dialogStage.showAndWait();
 
@@ -261,7 +268,6 @@ public class App {
         }
 
     }
-
 
     public void printCart() throws DAOException {
         int size = this.cartMap.size();

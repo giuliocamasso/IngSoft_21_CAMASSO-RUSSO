@@ -318,7 +318,7 @@ public class Articoli {
             // Pet
             case "0000000_CORDA" -> "resources/images/Pet/corda.png";
             case "0_CROCCANTINI" -> "resources/images/Pet/croccantini.png";
-            case "0000000_PALLA" -> "resources/images/Pet/corda.png";
+            case "0000000_PALLA" -> "resources/images/Pet/palla.png";
             case "00_TIRAGRAFFI" -> "resources/images/Pet/tiragraffi.png";
 
             // Benessere
