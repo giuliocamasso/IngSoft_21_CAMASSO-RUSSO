@@ -189,9 +189,11 @@ public class MarketSectionLayoutController implements Initializable {
         updateArticlePane();
     }
 
+    /**
+     * Il metodo porta al riepilogo dell'ordine in corso
+     */
     @FXML
     public void handleCart() throws DAOException, IOException {
-        //TODO isEmpty() in APP
         if (App.getInstance().cartMap.size() == 0)
             return;
         else if (!App.getInstance().isOrderSummaryVisited())

@@ -1,13 +1,9 @@
 package it.unicas.supermarket.model;
-
 import it.unicas.supermarket.model.dao.DAOException;
 import javafx.beans.property.*;
 
-import java.util.Objects;
-
 /**
- * Model class for clients.
- * @author GC-GR
+ * Classe per la tabella Articoli con idArticolo chiave primaria autoincrementale
  */
 public class Articoli {
 
@@ -23,6 +19,9 @@ public class Articoli {
 
     private String imageURL = null;
 
+    /**
+     * Costruttore a partire dal Nome e dal Barcode
+     */
     public Articoli(String nome, String barcode) throws DAOException {
 
         this.idArticolo = null;
@@ -58,7 +57,9 @@ public class Articoli {
             throw new DAOException("barcode or nome must be ''");
     }
 
-
+    /**
+     * Costruttore a partire da tutti i campi
+     */
     public Articoli(String nome, Float prezzo, Integer scorteMagazzino, String barcode, String reparto, String produttore, String descrizioneProdotto, String descrizioneQuantita, Integer idArticolo) throws DAOException {
 
         if (idArticolo != null)
@@ -100,137 +101,85 @@ public class Articoli {
     }
 
 
-    // Getter setter and property: @idArticolo
+    // Getter setter e property: idArticolo
     public Integer getIdArticolo() throws DAOException              {
         if (idArticolo == null){
             throw new DAOException("idArticolo is null");
         }
         else return idArticolo.getValue();
     }
-
     public void setIdArticolo(Integer idArticolo)                   {
         if (this.idArticolo == null){
             this.idArticolo = new SimpleIntegerProperty(idArticolo);
         }
         this.idArticolo.set(idArticolo);
     }
-
     public IntegerProperty idArticoloProperty()                     { return idArticolo; }
 
 
-    // Getter setter and property: @nome
+    // Getter setter e property: nome
     public String getNome()                                         { return nome.get(); }
-
     public void setNome(String nome)                                { this.nome.set(nome); }
-
     public StringProperty nomeProperty()                            { return nome; }
 
 
-    // Getter setter and property: @prezzo
+    // Getter setter e property: prezzo
     public Float getPrezzo()                                        { return prezzo.get(); }
-
     public void setPrezzo(Float prezzo)                             {
         if (this.prezzo == null) {
             this.prezzo = new SimpleFloatProperty();
         }
         this.prezzo.set(prezzo);
     }
-
     public FloatProperty prezzoProperty()                           { return prezzo; }
 
 
-    // Getter setter and property: @scorteMagazzino
+    // Getter setter e property: scorteMagazzino
     public Integer getScorteMagazzino()                             { return scorteMagazzino.get(); }
-
     public void setScorteMagazzino(Integer scorteMagazzino)         {
         if (this.scorteMagazzino == null) {
             this.scorteMagazzino = new SimpleIntegerProperty();
         }
         this.scorteMagazzino.set(scorteMagazzino);
     }
-
     public IntegerProperty scorteMagazzinoProperty()                { return scorteMagazzino; }
 
 
-    // Getter setter and property: @barcode
+    // Getter setter e property: barcode
     public String getBarcode()                                      { return barcode.get(); }
-
     public void setBarcode(String nome)                             { this.barcode.set(nome); }
-
     public StringProperty barcodeProperty()                         { return barcode; }
 
-    // Getter setter and property: @produttore
+    // Getter setter e property: produttore
     public String getProduttore()                                   { return produttore.get(); }
-
     public void setProduttore(String produttore)                    { this.produttore.set(produttore); }
-
     public StringProperty produttoreProperty()                      { return produttore; }
 
-    // Getter setter and property: @reparto
+    // Getter setter e property: reparto
     public String getReparto()                                      { return reparto.get(); }
-
     public void setReparto(String reparto)                          { this.reparto.set(reparto); }
-
     public StringProperty repartoProperty()                         { return reparto; }
 
-    // Getter setter and property: @descrizioneProdotto
+    // Getter setter e property: descrizioneProdotto
     public String getDescrizioneProdotto()                          { return descrizioneProdotto.get(); }
-
     public void setDescrizioneProdotto(String descrizioneProdotto)  { this.descrizioneProdotto.set(descrizioneProdotto); }
-
     public StringProperty descrizioneProdottoProperty()             { return descrizioneProdotto; }
 
-    // Getter setter and property: @descrizioneQuantita
+    // Getter setter e property: descrizioneQuantita
     public String getDescrizioneQuantita()                          { return descrizioneQuantita.get(); }
-
     public void setDescrizioneQuantita(String descrizioneQuantita)  { this.descrizioneQuantita.set(descrizioneQuantita); }
-
     public StringProperty descrizioneQuantitaProperty()             { return descrizioneQuantita; }
 
 
+    // Getter setter: ImageURL
     public String getImageURL()                                     { return imageURL; }
-    public void setImageURL(String imageURL)                        { this.imageURL = imageURL; };
+    public void setImageURL(String imageURL)                        { this.imageURL = imageURL; }
 
-    // toString() method
-    public String toString(){
-        String id;
-
-        if (idArticoloProperty()==null)
-            id = "null";
-
-        else id = idArticolo.getValue().toString();
-
-        return "id: " + id + " - barcode: " + barcode.getValue() + "\n" +
-                nome.getValue() + " - " + prezzo.getValue() + " - " + scorteMagazzino.getValue() + "\n" +
-                "produttore: " + produttore.getValue() + "  reparto: " + reparto.getValue() + "\n";
-    }
-
-    public static void main(String[] args) {
-
-        try {
-            Articoli test1 = new Articoli("nome", 1000f, 10, "1234567890123","Macelleria", "CONAD", "Bistecca suino", "500g", null);
-
-            System.out.println(test1);
-
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    boolean controlloReparti(String reparto){
-        if (    reparto.equals("Macelleria") || reparto.equals("Pescheria")  ||
-                reparto.equals("Ortofrutta") || reparto.equals("Alimentari") ||
-                reparto.equals("Forno")      || reparto.equals("Bevande")    ||
-                reparto.equals("Surgelati")  || reparto.equals("Snacks")     ||
-                reparto.equals("Baby")       || reparto.equals("Cartoleria") ||
-                reparto.equals("Pet")        || reparto.equals("Benessere")  ||
-                reparto.equals("Casalinghi")
-        )
-            return true;
-        else
-            return false;
-    }
-
+    /**
+     * Il metodo restituisce il path dell'immagine associata al barcode del prodotto
+     * @param barcode Barcode del prodotto di cui si vuole ottenere il path
+     * @return path dell'immagine associata al prodotto
+     */
     public static String getURLfromCode(String barcode){
         return switch (barcode) {
             // Macelleria
@@ -338,6 +287,36 @@ public class Articoli {
             default -> "ERROR";
         };
     }
+
+
+    // toString()
+    public String toString(){
+        String id;
+
+        if (idArticoloProperty()==null)
+            id = "null";
+
+        else id = idArticolo.getValue().toString();
+
+        return "id: " + id + " - barcode: " + barcode.getValue() + "\n" +
+                nome.getValue() + " - " + prezzo.getValue() + " - " + scorteMagazzino.getValue() + "\n" +
+                "produttore: " + produttore.getValue() + "  reparto: " + reparto.getValue() + "\n";
+    }
+
+
+    /**
+     * Classe di test per i costruttori
+     */
+    public static void main(String[] args) {
+
+        try {
+            Articoli test1 = new Articoli("nome", 1000f, 10, "1234567890123","Macelleria", "CONAD", "Bistecca suino", "500g", null);
+
+            System.out.println(test1);
+
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
-
-

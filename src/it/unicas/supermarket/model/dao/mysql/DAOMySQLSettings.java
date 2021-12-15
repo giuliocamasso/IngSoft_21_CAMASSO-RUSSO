@@ -1,19 +1,14 @@
 package it.unicas.supermarket.model.dao.mysql;
-
-import it.unicas.supermarket.model.Carte;
-import it.unicas.supermarket.model.dao.DAOException;
-
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 
+/**
+ * Classe delle impostazioni della DAO
+ */
 public class DAOMySQLSettings {
 
-    // Default settings
+    // impostazioni di default
     public final static String DRIVERNAME = "com.mysql.cj.jdbc.Driver";
     public final static String HOST = "localhost";
     public final static String USERNAME = "market_user";
@@ -21,34 +16,39 @@ public class DAOMySQLSettings {
     public final static String SCHEMA = "market";
     public final static String PARAMETERS = "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 
-    // local DB data
     private String host = "localhost";
-    // private String host = "127.0.0.1";
     private String username = "market_user";
     private String password = "ROOT";
     private String schema = "market";
 
-    private static Logger logger = null;
+    private static DAOMySQLSettings currentDAOMySQLSettings = null;
 
-    // getter and setter: @Host
+    // getter e setter: Host
     public String getHost()                                 { return host; }
-
     public void setHost(String host)                        { this.host = host; }
 
-    // getter and setter: @Username
+    // getter e setter: Username
     public String getUsername()                             { return username; }
-
     public void setUsername(String username)                { this.username = username; }
 
-    // getter and setter: @Password
+    // getter e setter: Password
     public String getPassword()                             { return password; }
-
     public void setPassword(String password)                { this.password = password; }
 
-    // getter and setter: @schema
+    // getter e setter: Schema
     public String getSchema()                               { return schema; }
-
     public void setSchema(String schema)                    { this.schema = schema; }
+
+    // getter e setter impostazioni
+    public static DAOMySQLSettings getCurrentDAOMySQLSettings(){
+        if (currentDAOMySQLSettings == null){
+            currentDAOMySQLSettings = getDefaultDAOSettings();
+        }
+        return currentDAOMySQLSettings;
+    }
+    public static void setCurrentDAOMySQLSettings(DAOMySQLSettings daoMySQLSettings){
+        currentDAOMySQLSettings = daoMySQLSettings;
+    }
 
     static{
         try {
@@ -58,14 +58,6 @@ public class DAOMySQLSettings {
         }
     }
 
-    private static DAOMySQLSettings currentDAOMySQLSettings = null;
-
-    public static DAOMySQLSettings getCurrentDAOMySQLSettings(){
-        if (currentDAOMySQLSettings == null){
-            currentDAOMySQLSettings = getDefaultDAOSettings();
-        }
-        return currentDAOMySQLSettings;
-    }
 
     public static DAOMySQLSettings getDefaultDAOSettings(){
         DAOMySQLSettings daoMySQLSettings = new DAOMySQLSettings();
@@ -76,9 +68,6 @@ public class DAOMySQLSettings {
         return daoMySQLSettings;
     }
 
-    public static void setCurrentDAOMySQLSettings(DAOMySQLSettings daoMySQLSettings){
-        currentDAOMySQLSettings = daoMySQLSettings;
-    }
 
     public static Statement getStatement() throws SQLException{
         if (currentDAOMySQLSettings == null){
@@ -86,6 +75,7 @@ public class DAOMySQLSettings {
         }
         return DriverManager.getConnection("jdbc:mysql://" + currentDAOMySQLSettings.host  + "/" + currentDAOMySQLSettings.schema + PARAMETERS, currentDAOMySQLSettings.username, currentDAOMySQLSettings.password).createStatement();
     }
+
 
     public static void closeStatement(Statement st) throws SQLException{
         st.getConnection().close();

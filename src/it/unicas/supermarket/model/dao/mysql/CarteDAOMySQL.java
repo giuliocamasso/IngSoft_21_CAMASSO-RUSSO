@@ -1,19 +1,19 @@
 package it.unicas.supermarket.model.dao.mysql;
-
 import it.unicas.supermarket.model.Carte;
 import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.dao.DAO;
 import it.unicas.supermarket.model.dao.DAOException;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
 import static it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL.getIdClienteFromCode;
 
+/**
+ * Classe DAO della tabella Carte
+ */
 public class CarteDAOMySQL implements DAO<Carte> {
 
     private static DAO<Carte> dao = null;
@@ -29,8 +29,34 @@ public class CarteDAOMySQL implements DAO<Carte> {
         return dao;
     }
 
+    /**
+     * Il metodo inizializza la tabella per poter eseguire dei test
+     */
+    @Override
+    public void initialize() throws DAOException {
 
-    // Testing Class
+        for (int i = 0; i<10; i++){
+            Integer id_carta = i;
+            Float massimaleMensile = i*1000f;
+            Float massimaleRimanente = i*100f;
+            String codiceCliente_i = "codice_" + i;
+            Integer id_cliente = getIdClienteFromCode(codiceCliente_i);
+            String pin = "pin_" + i;
+            String seed4_i = ""+ i + i + i + i;
+
+            insert(new Carte( massimaleMensile, massimaleRimanente, id_cliente, pin, Carte.ghostCardCode(seed4_i), null));
+
+        }
+
+        // also shows the tuples
+        ArrayList<Carte> list =  selectAll();
+        list.forEach(System.out::println);
+    }
+
+
+    /**
+     * Metodo di test per le CRUD della classe Articoli
+     */
     public static void main(String[] args) throws DAOException {
 
         boolean initialize = false;
@@ -121,6 +147,11 @@ public class CarteDAOMySQL implements DAO<Carte> {
     }
 
 
+    /**
+     * Select
+     * @param a Carta da cui estrarre i campi di selezione
+     * @return Lista di carte estratti dalla query
+     */
     @Override
     public List<Carte> select(Carte a) throws DAOException {
 
@@ -151,26 +182,10 @@ public class CarteDAOMySQL implements DAO<Carte> {
     }
 
 
-    @Override
-    // delete key-based
-    public void delete(Carte a) throws DAOException {
-
-        if (a == null) {
-            throw new DAOException("In delete: can't delete a null instance");
-        }
-        if (a.getCodiceCarta() == null){
-            throw new DAOException("In delete: codiceCarta can't be null");
-        }
-
-        String query = "DELETE FROM carte WHERE codiceCarta='" + a.getCodiceCarta() + "';";
-
-        printQuery(query);
-
-        executeUpdate(query);
-
-    }
-
-
+    /**
+     * Select di tutta la tabella Carte
+     * @return
+     */
     public ArrayList<Carte> selectAll() {
 
         ArrayList<Carte> list = new ArrayList<>();
@@ -195,6 +210,32 @@ public class CarteDAOMySQL implements DAO<Carte> {
     }
 
 
+    /**
+     * Delete
+     * @param a Carta da cui estrarre i campi per l'eliminazione
+     */
+    @Override
+    public void delete(Carte a) throws DAOException {
+
+        if (a == null) {
+            throw new DAOException("In delete: can't delete a null instance");
+        }
+        if (a.getCodiceCarta() == null){
+            throw new DAOException("In delete: codiceCarta can't be null");
+        }
+
+        String query = "DELETE FROM carte WHERE codiceCarta='" + a.getCodiceCarta() + "';";
+
+        printQuery(query);
+
+        executeUpdate(query);
+
+    }
+
+
+    /**
+     * Delete di tutta la tabella Carte
+     */
     public void deleteAll() throws DAOException {
 
         String query = "delete from carte";
@@ -205,41 +246,10 @@ public class CarteDAOMySQL implements DAO<Carte> {
     }
 
 
-    @Override
-    public void initialize() throws DAOException {
-
-        for (int i = 0; i<10; i++){
-            Integer id_carta = i;
-            Float massimaleMensile = i*1000f;
-            Float massimaleRimanente = i*100f;
-            String codiceCliente_i = "codice_" + i;
-            Integer id_cliente = getIdClienteFromCode(codiceCliente_i);
-            String pin = "pin_" + i;
-            String seed4_i = ""+ i + i + i + i;
-
-            insert(new Carte( massimaleMensile, massimaleRimanente, id_cliente, pin, Carte.ghostCardCode(seed4_i), null));
-
-        }
-
-        // also shows the tuples
-        ArrayList<Carte> list =  selectAll();
-        list.forEach(System.out::println);
-    }
-
-
-    private void executeUpdate(String query) throws DAOException{
-        try {
-            Statement st = DAOMySQLSettings.getStatement();
-            int n = st.executeUpdate(query);
-
-            DAOMySQLSettings.closeStatement(st);
-
-        } catch (SQLException e) {
-            throw new DAOException("In insert(): " + e.getMessage());
-        }
-    }
-
-
+    /**
+     * Insert
+     * @param a Carta da cui estrarre i campi per l'inserimento
+     */
     @Override
     public void insert(Carte a) throws DAOException {
 
@@ -260,8 +270,11 @@ public class CarteDAOMySQL implements DAO<Carte> {
     }
 
 
+    /**
+     * Alter Tabel
+     * @param a Carta da cui estrarre i campi per la modifica della tabella. Basata sul codice della carta
+     */
     @Override
-    // update key-based
     public void update(Carte a) throws DAOException {
 
         if ( a == null)
@@ -283,6 +296,19 @@ public class CarteDAOMySQL implements DAO<Carte> {
     }
 
 
+    private void executeUpdate(String query) throws DAOException{
+        try {
+            Statement st = DAOMySQLSettings.getStatement();
+            int n = st.executeUpdate(query);
+
+            DAOMySQLSettings.closeStatement(st);
+
+        } catch (SQLException e) {
+            throw new DAOException("In insert(): " + e.getMessage());
+        }
+    }
+
+
     private void printQuery(String query){
         try{
             logger.info("SQL: " + query);
@@ -291,6 +317,7 @@ public class CarteDAOMySQL implements DAO<Carte> {
             System.out.println("SQL: " + query);
         }
     }
+
 
     private ArrayList<Carte> getQueryResult(Statement statement, String query) throws SQLException {
 
@@ -315,6 +342,5 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
         return list;
     }
-
 
 }

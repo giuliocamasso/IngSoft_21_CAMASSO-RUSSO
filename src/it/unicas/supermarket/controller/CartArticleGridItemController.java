@@ -1,5 +1,4 @@
 package it.unicas.supermarket.controller;
-
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.dao.DAOException;
@@ -9,9 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.util.List;
 
+/**
+ * Controller del singolo articolo presente nel Carrello
+ */
 public class CartArticleGridItemController {
 
     @FXML private Label cartArticleNameLabel;
@@ -20,53 +21,77 @@ public class CartArticleGridItemController {
     @FXML private Label cartQuantityLabel;
 
     private int scorteRimanenti;
-    private int quantita;
+    private int quantitaSelezionata;
 
     private Articoli articolo;
 
-    public void loadItem(String barcode, Integer quantity) throws DAOException {
+    /**
+     * Il metodo carica il singolo articolo sul Carrello
+     * @param barcode Codice dell'articolo da caricare nel Carrello
+     * @param quantita Quantita' dell'articolo da caricare nel Carrello
+     */
+    public void loadItem(String barcode, Integer quantita) throws DAOException {
 
-        System.out.println("load");
+        // ottengo l'oggetto di tipo Articolo a partire dal barcode
         List<Articoli> result = ArticoliDAOMySQL.getInstance().select(new Articoli("", barcode));
         if (result.size()!=1){
             throw new DAOException("Trovato più di un articolo nella loadITem");
         }
         this.articolo = result.get(0);
 
-        quantita = quantity;
-        scorteRimanenti = Util.getScorteFromBarcode(this.articolo.getBarcode()) - quantita;
+        // aggiorno quantità e consequenziali scorte
+        quantitaSelezionata = quantita;
+        scorteRimanenti = Util.getScorteFromBarcode(this.articolo.getBarcode()) - quantitaSelezionata;
 
+        // aggiorno le Label e l'immagine dell'articolo
         cartArticleNameLabel.setText(Util.getNomeArticoloFromBarcode(barcode));
-        cartQuantityLabel.setText(String.valueOf(quantita));
+        cartQuantityLabel.setText(String.valueOf(quantitaSelezionata));
         cartArticlePriceLabel.setText(Util.getPrezzoArticoloFromBarcode(barcode)+" €");
         Image image = new Image("file:" + Articoli.getURLfromCode(barcode));
         cartArticleImage.setImage(image);
     }
 
-    // Add to cart buttons section
+    /**
+     * Il metodo incrementa la quantità dell'articolo selezionato e contestualmente aggiorna l'importo totale e il saldo previsto
+     */
     @FXML public void handleCartIncrement() throws DAOException {
-
+        // se non ho scorte, non posso incrementare
         if(scorteRimanenti<1)
             return;
 
+        // incremento la quantità selezionata
+        quantitaSelezionata++;
+        // decremento le scorte rimanenti
         scorteRimanenti--;
-        quantita++;
-        App.getInstance().getCartMap().replace(this.articolo.getBarcode(), quantita);
-        cartQuantityLabel.setText(String.valueOf(quantita));
-
+        // aggiorno la struttura del carrello
+        App.getInstance().getCartMap().replace(this.articolo.getBarcode(), quantitaSelezionata);
+        // aggiorno la Label del singolo articolo
+        cartQuantityLabel.setText(String.valueOf(quantitaSelezionata));
+        // aggiorno il costo totale dell'ordine
         App.getInstance().getOrderSummaryLayoutController().updateTotalCartCost();
+        // verifico la fattibilità del mio ordine
         App.getInstance().getOrderSummaryLayoutController().paymentCheck();
     }
 
+    /**
+     * Il metodo decrementa la quantità dell'articolo selezionato e contestualmente aggiorna l'importo totale e il saldo previsto
+     */
     @FXML public void handleCartDecrement() throws DAOException {
-        if(quantita < 1)
+        // se la quantità è nulla, non posso decrementare
+        if(quantitaSelezionata < 1)
             return;
 
+        // incremento la quantità selezionata
+        quantitaSelezionata--;
+        // decremento le scorte rimanenti
         scorteRimanenti++;
-        quantita--;
-        App.getInstance().getCartMap().replace(this.articolo.getBarcode(), quantita);
-        cartQuantityLabel.setText(String.valueOf(quantita));
+        // aggiorno la struttura del carrello
+        App.getInstance().getCartMap().replace(this.articolo.getBarcode(), quantitaSelezionata);
+        // aggiorno la Label del singolo articolo
+        cartQuantityLabel.setText(String.valueOf(quantitaSelezionata));
+        // aggiorno il costo totale dell'ordine
         App.getInstance().getOrderSummaryLayoutController().updateTotalCartCost();
+        // verifico la fattibilità del mio ordine
         App.getInstance().getOrderSummaryLayoutController().paymentCheck();
     }
 

@@ -1,9 +1,7 @@
 package it.unicas.supermarket.model.dao.mysql;
-
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.dao.DAO;
 import it.unicas.supermarket.model.dao.DAOException;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-
+/**
+ * Classe DAO della tabella Articoli
+ */
 public class ArticoliDAOMySQL implements DAO<Articoli> {
 
     private static DAO<Articoli> dao = null;
@@ -27,7 +27,33 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
         return dao;
     }
 
-    // Testing Class
+    /**
+     * Il metodo inizializza la tabella per poter eseguire dei test
+     */
+    @Override
+    public void initialize() throws DAOException {
+
+        for (int i = 0; i<10; i++){
+            String nome_i = "nome_" + i;
+            Float prezzo_i = 100f*i;
+            Integer scorteMagazzino_i = 100*i;
+            String barcode_i = "barcode_____" + i;
+            String reparto_i = "Macelleria";
+            String produttore_i = "produttore_____" + i;
+            String descrizioneProdotto_i = "DescrizioneProdotto_____" + i;
+            String descrizioneQuantita_i = "DescrizioneQuantita_____" + i;
+            insert(new Articoli(nome_i, prezzo_i, scorteMagazzino_i, barcode_i,reparto_i, produttore_i,
+                    descrizioneProdotto_i, descrizioneQuantita_i, null));
+        }
+
+        ArrayList<Articoli> list =  selectAll();
+        list.forEach(System.out::println);
+    }
+
+
+    /**
+     * Metodo di test per le CRUD della classe Articoli
+     */
     public static void main(String[] args) throws DAOException {
 
         boolean initialize = false;
@@ -105,6 +131,11 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
     }
 
 
+    /**
+     * Select
+     * @param a Articolo da cui estrarre i campi di selezione
+     * @return Lista di articoli estratti dalla query
+     */
     @Override
     public List<Articoli> select(Articoli a) throws DAOException {
 
@@ -114,7 +145,6 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
             throw new DAOException("In select: called select with a 'null' instance of Articoli");
 
         try{
-            //else if (a.getNome()     == null || a.getCognome()       == null ||
             if (a.getNome()     == null || a.getBarcode()       == null) {
                 throw new DAOException("In select: fields can be null");
             }
@@ -122,12 +152,12 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
             Statement st = DAOMySQLSettings.getStatement();
             String sql = "select * from articoli where ";
 
-            // SEARCH BY NAME
+            // Ricerca per nome
             if(a.getBarcode().equals("             ")){
                 sql += "(nome like '" + a.getNome() +"%')";
             }
 
-            // SEARCH BY BARCODE
+            // Ricerca per barcode
             else{
                 sql += "(barcode = '" + a.getBarcode() + "')";
             }
@@ -146,27 +176,10 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
     }
 
 
-    @Override
-    // delete barcode-based
-    public void delete(Articoli a) throws DAOException {
-
-        if (a == null) {
-            throw new DAOException("In delete: can't delete a null instance of articoli");
-        }
-
-        if (a.getBarcode() == null){
-            throw new DAOException("In delete: barcode cannot be null");
-        }
-
-        String query = "DELETE FROM articoli WHERE barcode='" + a.getBarcode() + "';";
-
-        printQuery(query);
-
-        executeUpdate(query);
-
-    }
-
-
+    /**
+     * Select di tutta la tabella Articoli
+     * @return
+     */
     public ArrayList<Articoli> selectAll() {
 
         ArrayList<Articoli> list = new ArrayList<>();
@@ -191,6 +204,33 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
     }
 
 
+    /**
+     * Delete
+     * @param a Articolo da cui estrarre i campi per l'eliminazione
+     */
+    @Override
+    public void delete(Articoli a) throws DAOException {
+
+        if (a == null) {
+            throw new DAOException("In delete: can't delete a null instance of articoli");
+        }
+
+        if (a.getBarcode() == null){
+            throw new DAOException("In delete: barcode cannot be null");
+        }
+
+        String query = "DELETE FROM articoli WHERE barcode='" + a.getBarcode() + "';";
+
+        printQuery(query);
+
+        executeUpdate(query);
+
+    }
+
+
+    /**
+     * Delete di tutta la tabella Articoli
+     */
     public void deleteAll() throws DAOException {
 
         String query = "delete from articoli";
@@ -201,42 +241,10 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
     }
 
 
-    @Override
-    public void initialize() throws DAOException {
-
-        for (int i = 0; i<10; i++){
-            String nome_i = "nome_" + i;
-            Float prezzo_i = 100f*i;
-            Integer scorteMagazzino_i = 100*i;
-            String barcode_i = "barcode_____" + i;
-            String reparto_i = "Macelleria";
-            String produttore_i = "produttore_____" + i;
-            String descrizioneProdotto_i = "DescrizioneProdotto_____" + i;
-            String descrizioneQuantita_i = "DescrizioneQuantita_____" + i;
-            insert(new Articoli(nome_i, prezzo_i, scorteMagazzino_i, barcode_i,reparto_i, produttore_i,
-                    descrizioneProdotto_i, descrizioneQuantita_i, null));
-
-        }
-
-        // also shows the tuples
-        ArrayList<Articoli> list =  selectAll();
-        list.forEach(System.out::println);
-    }
-
-
-    private void executeUpdate(String query) throws DAOException{
-        try {
-            Statement st = DAOMySQLSettings.getStatement();
-            int n = st.executeUpdate(query);
-
-            DAOMySQLSettings.closeStatement(st);
-
-        } catch (SQLException e) {
-            throw new DAOException("executeUpdate(): DAOException " + e.getMessage());
-        }
-    }
-
-
+    /**
+     * Insert
+     * @param a Articolo da cui estrarre i campi per l'inserimento
+     */
     @Override
     public void insert(Articoli a) throws DAOException {
 
@@ -261,8 +269,11 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
     }
 
 
+    /**
+     * Alter Tabel
+     * @param a Articolo da cui estrarre i campi per la modifica della tabella. Basata sul barcode
+     */
     @Override
-    // update barcode-based
     public void update(Articoli a) throws DAOException {
 
         if (a == null)
@@ -282,6 +293,19 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
 
         executeUpdate(query);
 
+    }
+
+
+    private void executeUpdate(String query) throws DAOException{
+        try {
+            Statement st = DAOMySQLSettings.getStatement();
+            int n = st.executeUpdate(query);
+
+            DAOMySQLSettings.closeStatement(st);
+
+        } catch (SQLException e) {
+            throw new DAOException("executeUpdate(): DAOException " + e.getMessage());
+        }
     }
 
 
@@ -323,29 +347,4 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
         return list;
     }
 
-
-    public Integer getIdArticoloFromBarcode(String barcode) throws DAOException {
-
-        List<Articoli> articoliList = select(new Articoli("", barcode));
-
-        return articoliList.get(0).getIdArticolo();
-    }
-
-    public List<Articoli> filterBySection(String section) throws DAOException {
-
-        ArrayList<Articoli> filteredList;
-
-        try{
-            Statement st = DAOMySQLSettings.getStatement();
-            String sql = "select * from articoli where (reparto = '" + section +"');" ;
-            printQuery(sql);
-            filteredList = getQueryResult(st, sql);
-            DAOMySQLSettings.closeStatement(st);
-
-        } catch (SQLException sq){
-            throw new DAOException("In filterBySection(): " + sq.getMessage());
-        }
-
-        return filteredList;
-    }
 }

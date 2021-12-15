@@ -1,11 +1,9 @@
 package it.unicas.supermarket.model;
-
 import it.unicas.supermarket.model.dao.DAOException;
 import javafx.beans.property.*;
 
 /**
- * Model class for client cards.
- * @author GC-GR
+ * Classe per la tabella Carte con idCarta chiave primaria autoincrementale
  */
 public class Carte {
 
@@ -16,7 +14,9 @@ public class Carte {
     private StringProperty pin;
     private StringProperty codiceCarta;
 
-
+    /**
+     * Costruttore basato sull'idCliente e il codice della Carta
+     */
     public Carte(Integer idCliente, String codiceCarta) throws DAOException {
 
         this.idCarta = null;
@@ -36,6 +36,9 @@ public class Carte {
     }
 
 
+    /**
+     * Costruttore a partire da tutti i campi
+     */
     public Carte(Float massimaleMensile, Float massimaleRimanente, Integer idCliente, String pin, String codiceCarta, Integer idCarta) throws DAOException {
 
         if (idCarta != null)
@@ -71,85 +74,73 @@ public class Carte {
     }
 
 
-    // Getter and setter: @idCarta
-    public Integer getIdCarta() throws DAOException{
+    // Getter e setter: idCarta
+    public Integer getIdCarta() throws DAOException                 {
         if (idCarta != null){
             throw new DAOException("idCarta must be null");
         }
         else return null;
     }
-
-    public void setIdCarta(Integer idCarta) {
+    public void setIdCarta(Integer idCarta)                         {
         if (this.idCarta == null){
             this.idCarta = new SimpleIntegerProperty();
         }
         this.idCarta.set(idCarta);
     }
-
     public IntegerProperty idCartaProperty()                        { return idCarta; }
 
 
-    // Getter setter and property: @massimaleMensile
+    // Getter setter e property: massimaleMensile
     public Float getMassimaleMensile()                              { return massimaleMensile.get(); }
-
-    public void setMassimaleMensile(Float massimaleMensile)   {
+    public void setMassimaleMensile(Float massimaleMensile)         {
         if (this.massimaleMensile == null)
             this.massimaleMensile = new SimpleFloatProperty();
 
         this.massimaleMensile.set(massimaleMensile);
     }
-
     public FloatProperty massimaleMensileProperty()                 { return massimaleMensile; }
 
 
-    // Getter setter and property: @massimaleRimanente
+    // Getter setter e property: massimaleRimanente
     public Float getMassimaleRimanente()                            { return massimaleRimanente.get(); }
-
-    public void setMassimaleRimanente(Float massimaleRimanente){
+    public void setMassimaleRimanente(Float massimaleRimanente)     {
         if (this.massimaleRimanente == null)
             this.massimaleRimanente = new SimpleFloatProperty();
 
         this.massimaleRimanente.set(massimaleRimanente);
     }
-
     public FloatProperty massimaleRimanenteProperty()               { return massimaleRimanente; }
 
 
-    // Getter setter and property: @idCliente
-    public Integer getIdCliente() throws DAOException {
+    // Getter setter e property: idCliente
+    public Integer getIdCliente() throws DAOException               {
         if (idCliente == null){
             throw new DAOException("idCliente is null");
         }
         else return idCliente.get();
     }
-
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(Integer idCliente)                     {
         if (this.idCliente == null){
             this.idCliente = new SimpleIntegerProperty();
         }
         this.idCliente.set(idCliente);
     }
-
     public IntegerProperty idClienteProperty()                      { return idCliente; }
 
 
-    // Getter setter and property: @pin
+    // Getter setter e property: pin
     public String getPin()                                          { return pin.get(); }
-
     public void setPin(String pin)                                  { this.pin.set(pin); }
-
     public StringProperty pinProperty()                             { return pin; }
 
 
-    // Getter setter and property: @codiceCarta
+    // Getter setter e property: codiceCarta
     public String getCodiceCarta()                                  { return codiceCarta.get(); }
-
     public void setCodiceCarta(String codiceCarta)                  { this.codiceCarta.set(codiceCarta); }
-
     public StringProperty codiceCartaProperty()                     { return codiceCarta; }
 
 
-    // toString() method
+    // toString()
     public String toString(){
         String id;
 
@@ -162,9 +153,16 @@ public class Carte {
                 "codice: " + codiceCarta.getValue() + " - pin: " + pin.getValue() + "\n";
     }
 
-    // 8 spaces long
+
+    /**
+     * Per semplicita' di test, il metodo crea un codice carta fittizio
+     */
     public static String ghostCardCode(String seed4)         { return "****-****-****-" + seed4; }
 
+
+    /**
+     * Classe di test per i costruttori
+     */
     public static void main(String[] args) {
 
         try {
@@ -183,4 +181,3 @@ public class Carte {
     }
 
 }
-

@@ -205,7 +205,7 @@ public class App {
     }
 
     /**
-     * Prepara la scena di riepilogo del carrello e dei dettagli di pagamento
+     * Inizializza la scena di riepilogo del carrello e dei dettagli di pagamento
      */
     public void initOrderSummaryLayout() {
         try {
@@ -288,6 +288,9 @@ public class App {
         mainStage.setScene(marketSectionScene);
     }
 
+    /**
+     * Il metodo resetta la scena quando dalla sezione pagamento si ritorna ai reparti e di nuovo alla sezione pagamento
+     */
     public void backToPaymentFromSections() throws DAOException, IOException {
         orderSummaryLayoutController.syncProducts();
         mainStage.setScene(paymentSectionScene);
@@ -345,10 +348,25 @@ public class App {
         return  String.format("%.2f",massimaleRimanente) + " / " +  String.format("%.2f",massimaleMensile) + " €";
     }
 
+    /**
+     * Il metodo mostra informazioni sugli autori del progetto
+     */
     public void aboutUs() {
-        System.out.println("About us");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        alert.setTitle("GG Supermarket Info");
+        alert.setHeaderText("About");
+        alert.setContentText("Autori: Camasso Giulio, Russo Giulio\nGitHub: https://github.com/giuliocamasso/IngSoft_21_CAMASSO-RUSSO");
+
+        ButtonType buttonBackToMarketApp = new ButtonType("Torna al supermercato", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonBackToMarketApp);
+
+        alert.showAndWait();
     }
 
+    /**
+     * Il metodo elimina gli articoli rimasti nell'anteprima del Carrello nella sezione dei Reparti
+     */
     public void loadNewUserMarketSection() {
         marketSectionLayoutController.clearShowedCart();
         marketSectionLayoutController.resetMarketSection();

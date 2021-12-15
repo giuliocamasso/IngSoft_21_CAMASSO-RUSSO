@@ -1,5 +1,4 @@
 package it.unicas.supermarket.dataloader;
-
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.Carte;
 import it.unicas.supermarket.model.Clienti;
@@ -9,7 +8,6 @@ import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.CarteDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.OrdiniDAOMySQL;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

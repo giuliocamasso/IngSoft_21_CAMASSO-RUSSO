@@ -222,23 +222,31 @@ public class OrderSummaryLayoutController implements Initializable {
     }
 
     /**
-     *
+     * Il metodo e' chiamato per settare gli elementi del carrello e dei dettagli pagamento
      */
     public void syncProducts() throws DAOException, IOException {
+        // pulisco il carrello
         clearGridItems();
+        // riempio il carrello con i nuovi articoli
         fillCartGridPane(App.getInstance().getCartMap());
+        // aggiorno le Label di costo totale
         updateTotalCartCost();
+        // aggiorno i dettagli pagamento
         paymentDetails();
+        // verifico la fattibilità del mio ordine
         paymentCheck();
     }
 
     /**
-     *
+     * Il metodo elimina tutti gli articoli presenti nella grid pane del carrello
      */
     private void clearGridItems() {
         cartArticleGridPane.getChildren().clear();
     }
 
+    /**
+     * Il metodo porta alla rimozione della carta dell'utente
+     */
     @FXML
     public void handleLogout(){
         App.getInstance().logout();

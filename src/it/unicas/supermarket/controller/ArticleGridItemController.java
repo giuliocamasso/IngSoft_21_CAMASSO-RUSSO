@@ -1,7 +1,5 @@
 package it.unicas.supermarket.controller;
-
 import it.unicas.supermarket.model.Articoli;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

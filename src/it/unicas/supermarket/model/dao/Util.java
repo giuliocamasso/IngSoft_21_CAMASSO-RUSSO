@@ -1,10 +1,8 @@
 package it.unicas.supermarket.model.dao;
-
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.controller.LoginLayoutController;
 import it.unicas.supermarket.model.*;
 import it.unicas.supermarket.model.dao.mysql.*;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ *
+ */
 public class Util {
 
     private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
@@ -266,21 +267,4 @@ public class Util {
         }
     }
 
-    /*
-    01) inserimento ordine in DB
-    es. ordine fatto da idCLiente in data 'data'...
-    INSERT INTO Ordini(idOrdine, idCliente, data, codiceOrdine, importoTotale) VALUES([...]);
-    -> inserimento articoli dell'ordine
-    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-    INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-
-    02) tutti gli articoli contenuti nell'ordine
-    SELECT Articoli.idArticolo, Composizioni.quantita
-    FROM Composizioni
-	JOIN Articoli ON Composizioni.idArticolo = Articolo.idArticolo
-    WHERE idOrdine = 1;
-    */
 }
