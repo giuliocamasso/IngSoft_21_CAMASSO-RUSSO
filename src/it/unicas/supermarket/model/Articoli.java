@@ -296,48 +296,30 @@ public class Articoli {
             case "00000_SPINACI" -> "resources/images/Surgelati/spinaci.png";
 
             // Snacks
-            /*
-            case "" -> "resources/images/Snacks/";
-            case "" -> "resources/images/Snacks/";
-            case "" -> "resources/images/Snacks/";
-            case "" -> "resources/images/Snacks/";
-            case "" -> "resources/images/Snacks/";
-            case "" -> "resources/images/Snacks/";
-            case "" -> "resources/images/Snacks/";
-            */
+            case "0000_BARRETTA" -> "resources/images/Snacks/barretta.png";
+            case "0000000_BUENO" -> "resources/images/Snacks/bueno.png";
+            case "0000_GALLETTE" -> "resources/images/Snacks/gallette.png";
+            case "000000_KITKAT" -> "resources/images/Snacks/kitkat.png";
+            case "000000_POCKET" -> "resources/images/Snacks/pocket.png";
+            case "0_FRUTTASECCA" -> "resources/images/Snacks/secca.png";
 
             // Baby
-            /*
-            case "" -> "resources/images/Baby/";
-            case "" -> "resources/images/Baby/";
-            case "" -> "resources/images/Baby/";
-            case "" -> "resources/images/Baby/";
-            case "" -> "resources/images/Baby/";
-            case "" -> "resources/images/Baby/";
-            case "" -> "resources/images/Baby/";
-            */
+            case "00000000_LEGO" -> "resources/images/Baby/lego.png";
+            case "000_HOTWHEELS" -> "resources/images/Baby/macchina.png";
+            case "00_PASSEGGINO" -> "resources/images/Baby/passeggino.png";
 
             // Cartoleria
-            /*
-            case "" -> "resources/images/Cartoleria/";
-            case "" -> "resources/images/Cartoleria/";
-            case "" -> "resources/images/Cartoleria/";
-            case "" -> "resources/images/Cartoleria/";
-            case "" -> "resources/images/Cartoleria/";
-            case "" -> "resources/images/Cartoleria/";
-            case "" -> "resources/images/Cartoleria/";
-            */
+            case "0000_PENNABIC" -> "resources/images/Cartoleria/bic.png";
+            case "000000_MATITA" -> "resources/images/Cartoleria/matita.png";
+            case "0000_QUADERNO" -> "resources/images/Cartoleria/quaderno.png";
+            case "0000_RIGHELLO" -> "resources/images/Cartoleria/righello.png";
+            case "000_TEMPERINO" -> "resources/images/Cartoleria/temperino.png";
 
             // Pet
-            /*
-            case "" -> "resources/images/Pet/";
-            case "" -> "resources/images/Pet/";
-            case "" -> "resources/images/Pet/";
-            case "" -> "resources/images/Pet/";
-            case "" -> "resources/images/Pet/";
-            case "" -> "resources/images/Pet/";
-            case "" -> "resources/images/Pet/";
-            */
+            case "0000000_CORDA" -> "resources/images/Pet/corda.png";
+            case "0_CROCCANTINI" -> "resources/images/Pet/croccantini.png";
+            case "0000000_PALLA" -> "resources/images/Pet/corda.png";
+            case "00_TIRAGRAFFI" -> "resources/images/Pet/tiragraffi.png";
 
             // Benessere
             /*

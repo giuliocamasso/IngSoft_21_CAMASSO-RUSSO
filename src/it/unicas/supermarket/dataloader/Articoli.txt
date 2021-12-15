@@ -46,3 +46,21 @@ Minestorne - 3.99 - 20 - 00_MINESTRONE - Orogel - Minestrone varie verdure - 150
 Patate - 3.99 - 10 - 000000_PATATE - Orogel - Patate prefritte - 2500g - Surgelati
 Pesce Spada - 6.99 - 20 - 0000000_SPADA - Pescanova - Pesce spada surgelato - 500g - Surgelati
 Spinaci - 3.99 - 10 - 00000_SPINACI - Zio Gigi - Spinaci surgelati - 1000g - Surgelati
+Barretta - 1.99 - 20 - 0000_BARRETTA - Misura - Barretta di cereali - 50g - Snacks
+Kinder Bueno - 1.99 - 20 - 0000000_BUENO - Kinder - Kinder bueno white - 50g - Snacks
+Gallette - 0.99 - 40 - 0000_GALLETTE - Fiorentini - Gallette di riso - 150g - Snacks
+KitKat - 2.99 - 20 - 000000_KITKAT - KitKat - KitKat Dark - 80g - Snacks
+Pocket Coffee - 0.99 - 20 - 000000_POCKET - Pocket Coffee - Cioccolato e caffe - 20g - Snacks
+Frutta Secca - 1.99 - 30 - 0_FRUTTASECCA - Fruttica - Frutta secca varia - 80g - Snacks
+Lego - 2.99 - 20 - 00000000_LEGO - Lego - Mattoncini - 100pz - Baby
+Hotwheels - 1.99 - 20 - 000_HOTWHEELS - Hotwheels - Macchinina - 3pz - Baby
+Passeggino - 50.99 - 10 - 00_PASSEGGINO - TechInc - Passeggino multi posizione - 3kg - Baby
+Penna - 1.99 - 40 - 0000_PENNABIC - Bic - Penna Nera - 1pz - Cartoleria
+Matita - 0.99 - 40 - 000000_MATITA - Staedtler - Matita HB - 1pz - Cartoleria
+Quaderno - 9.99 - 20 - 0000_QUADERNO - Monocromo - Quaderno a quadretti - 12pz - Cartoleria
+Righello - 0.99 - 40 - 0000_RIGHELLO - ColourBook - Righello trasparente - 1pz - Cartoleria
+Temperino - 0.99 - 40 - 000_TEMPERINO - Bic - Temperino metallizzato - 1pz - Cartoleria
+Corda - 0.99 - 10 - 0000000_CORDA - PetPlay - Corda da gioco - 1m - Pet
+Croccantini - 4.99 - 50 - 0_CROCCANTINI - PetPlay - Croccantini morbidi - 250g - Pet
+Palla - 2.99 - 10 - 0000000_PALLA - PetPlay - Palla da gioco - 1pz - Pet
+Tiragraffi - 5.99 - 5 - 00_TIRAGRAFFI - PetPlay - Tiragraffi per gatti - 1m - Pet
