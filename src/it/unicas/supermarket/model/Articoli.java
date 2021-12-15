@@ -286,15 +286,14 @@ public class Articoli {
             case "0000_COCACOLA" -> "resources/images/Bevande/cola.png";
 
             // Surgelati
-            /*
-            case "" -> "resources/images/Surgelati/";
-            case "" -> "resources/images/Surgelati/";
-            case "" -> "resources/images/Surgelati/";
-            case "" -> "resources/images/Surgelati/";
-            case "" -> "resources/images/Surgelati/";
-            case "" -> "resources/images/Surgelati/";
-            case "" -> "resources/images/Surgelati/";
-            */
+            case "00_BASTONCINI" -> "resources/images/Surgelati/bastoncini.png";
+            case "0000_BROCCOLI" -> "resources/images/Surgelati/broccoli.png";
+            case "000000_CAROTE" -> "resources/images/Surgelati/carote.png";
+            case "000000_GELATO" -> "resources/images/Surgelati/gelato.png";
+            case "00_MINESTRONE" -> "resources/images/Surgelati/minestrone.png";
+            case "000000_PATATE" -> "resources/images/Surgelati/patate.png";
+            case "0000000_SPADA" -> "resources/images/Surgelati/spada.png";
+            case "00000_SPINACI" -> "resources/images/Surgelati/spinaci.png";
 
             // Snacks
             /*

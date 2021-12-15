@@ -38,3 +38,11 @@ Vino Bianco - 7.99 - 10 - 000000_BIANCO - Contrada Blanca - Bianco frizzante - 0
 Vino Rosso - 7.99 - 10 - 0000000_ROSSO - Colle Rosso - Rosso fruttato - 0.75l - Bevande
 Birra - 0.79 - 30 - 0000000_BIRRA - Heineken - Bionda amara - 0.5l - Bevande
 Coca Cola - 0.99 - 50 - 0000_COCACOLA - Coca Cola - Coca cola ghiacciata - 0.5l - Bevande
+Bastoncini - 2.99 - 20 - 00_BASTONCINI - Findus - Bastoncini di pesce - 150g - Surgelati
+Broccoli - 3.99 - 10 - 0000_BROCCOLI - Orogel - Broccoli surgelati - 400g - Surgelati
+Carote - 2.99 - 10 - 000000_CAROTE - Orogel - Carote surgelati - 2500g - Surgelati
+Gelato - 5.99 - 10 - 000000_GELATO - Orogel - Broccoli surgelati - 150g - Surgelati
+Minestorne - 3.99 - 20 - 00_MINESTRONE - Orogel - Minestrone varie verdure - 150g - Surgelati
+Patate - 3.99 - 10 - 000000_PATATE - Orogel - Patate prefritte - 2500g - Surgelati
+Pesce Spada - 6.99 - 20 - 0000000_SPADA - Pescanova - Pesce spada surgelato - 500g - Surgelati
+Spinaci - 3.99 - 10 - 00000_SPINACI - Zio Gigi - Spinaci surgelati - 1000g - Surgelati
