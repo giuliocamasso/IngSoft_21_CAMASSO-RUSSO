@@ -322,26 +322,18 @@ public class Articoli {
             case "00_TIRAGRAFFI" -> "resources/images/Pet/tiragraffi.png";
 
             // Benessere
-            /*
-            case "" -> "resources/images/Benessere/";
-            case "" -> "resources/images/Benessere/";
-            case "" -> "resources/images/Benessere/";
-            case "" -> "resources/images/Benessere/";
-            case "" -> "resources/images/Benessere/";
-            case "" -> "resources/images/Benessere/";
-            case "" -> "resources/images/Benessere/";
-            */
+            case "0_ABBRONZANTE" -> "resources/images/Benessere/abbronzante.png";
+            case "0000000_CREMA" -> "resources/images/Benessere/crema.png";
+            case "0_DENTIFRICIO" -> "resources/images/Benessere/dentifricio.png";
+            case "00000_PROFUMO" -> "resources/images/Benessere/profumo.png";
+            case "00000_SHAMPOO" -> "resources/images/Benessere/shampoo.png";
 
             // Casalinghi
-            /*
-            case "" -> "resources/images/Casalinghi/";
-            case "" -> "resources/images/Casalinghi/";
-            case "" -> "resources/images/Casalinghi/";
-            case "" -> "resources/images/Casalinghi/";
-            case "" -> "resources/images/Casalinghi/";
-            case "" -> "resources/images/Casalinghi/";
-            case "" -> "resources/images/Casalinghi/";
-            */
+            case "000_DETERSIVO" -> "resources/images/Casalinghi/detersivo.png";
+            case "000000_SAPONE" -> "resources/images/Casalinghi/sapone.png";
+            case "0000000_SCOPA" -> "resources/images/Casalinghi/scopa.png";
+            case "0_STROFINACCI" -> "resources/images/Casalinghi/strofinacci.png";
+            case "0000_TOVAGLIA" -> "resources/images/Casalinghi/tovaglia.png";
 
             default -> "ERROR";
         };
