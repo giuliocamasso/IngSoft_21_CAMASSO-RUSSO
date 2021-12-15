@@ -58,6 +58,12 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private Button casalinghiButton;
     @FXML private Label casalinghiLabel;
 
+    @FXML private Button logoutButton;
+    @FXML private Label logoutLabel;
+
+    @FXML private Button aboutUsButton;
+    @FXML private Label aboutUsLabel;
+
     // search-bar
     @FXML private TextField searchTextField;
     @FXML private Button searchButton;
@@ -134,7 +140,7 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private Button pagaOraButton;
 
     // logger for tracking queries
-    private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
+    private static final Logger logger = Logger.getLogger(LoginLayoutController.class.getName());
 
     private Integer cartSize = 0;
     private final ArrayList<String> showedBarcodes = new ArrayList<>();
@@ -142,36 +148,7 @@ public class MarketSectionLayoutController implements Initializable {
     // by default, this loads and shows all the available articles
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        App.getInstance().setReparto("None");
-
-        try {
-            gridPaneArticles.addAll(getArticles("Initialize", false));
-            loadImages();
-        }
-        catch (DAOException | SQLException | IOException e) {
-            e.printStackTrace();
-        }
-
-        if (gridPaneArticles.size() > 0) {
-            setChosenArticle(gridPaneArticles.get(0));
-            articleSelectionListener = this::setChosenArticle;
-        }
-
-        try {
-            fillGridPane(gridPaneArticles);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //clear right-pane
-        try {
-            updateCartLabels();
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-        for (int i = 1; i < 8; i++)
-            clearRow(i);
+        resetMarketSection();
     }
 
     private List<Articoli> getArticles(String filter, boolean isSection) throws DAOException, SQLException, IOException {
@@ -187,6 +164,7 @@ public class MarketSectionLayoutController implements Initializable {
             articoli = filterByName(filter);
             if(articoli.size()==0)
                 searchTextField.setText("Nessun articolo trovato per \" " + filter + "\"!");
+            updateSectionBar("None");
         }
 
         return articoli;
@@ -216,7 +194,7 @@ public class MarketSectionLayoutController implements Initializable {
         //TODO isEmpty() in APP
         if (App.getInstance().cartMap.size() == 0)
             return;
-        else if (App.getInstance().isOrderSummaryVisited() == false)
+        else if (!App.getInstance().isOrderSummaryVisited())
                 App.getInstance().initOrderSummaryLayout();
         else
             App.getInstance().backToPaymentFromSections();
@@ -432,7 +410,34 @@ public class MarketSectionLayoutController implements Initializable {
                 casalinghiButton.setStyle(prevStyle);
                 casalinghiLabel.setStyle(prevStyle);
                 break;
-            case "None":             // NB. it does nothing of first interaction!
+            case "None":
+                macelleriaButton.setStyle(prevStyle);
+                macelleriaLabel.setStyle(prevStyle);
+                pescheriaButton.setStyle(prevStyle);
+                pescheriaLabel.setStyle(prevStyle);
+                ortofruttaButton.setStyle(prevStyle);
+                ortofruttaLabel.setStyle(prevStyle);
+                alimentariButton.setStyle(prevStyle);
+                alimentariLabel.setStyle(prevStyle);
+                fornoButton.setStyle(prevStyle);
+                fornoLabel.setStyle(prevStyle);
+                bevandeButton.setStyle(prevStyle);
+                bevandeLabel.setStyle(prevStyle);
+                surgelatiButton.setStyle(prevStyle);
+                surgelatiLabel.setStyle(prevStyle);
+                snacksButton.setStyle(prevStyle);
+                snacksLabel.setStyle(prevStyle);
+                babyButton.setStyle(prevStyle);
+                babyLabel.setStyle(prevStyle);
+                cartoleriaButton.setStyle(prevStyle);
+                cartoleriaLabel.setStyle(prevStyle);
+                petButton.setStyle(prevStyle);
+                petLabel.setStyle(prevStyle);
+                benessereButton.setStyle(prevStyle);
+                benessereLabel.setStyle(prevStyle);
+                casalinghiButton.setStyle(prevStyle);
+                casalinghiLabel.setStyle(prevStyle);
+                break;
         }
 
         switch (section) {
@@ -914,5 +919,57 @@ public class MarketSectionLayoutController implements Initializable {
 
         quantita = App.getInstance().getCartMap().get(showedBarcodes.get(6)) + "x ";
         quantita7Label.setText(quantita);
+    }
+
+    @FXML
+    void handleLogout(){
+        App.getInstance().logout();
+    }
+
+    @FXML
+    void handleAboutUs(){
+        App.getInstance().aboutUs();
+    }
+
+    public void clearShowedCart(){
+        cartSize = 0;
+        showedBarcodes.clear();
+    }
+
+    public void resetMarketSection() {
+        if(gridPaneArticles.size() != 0)
+            gridPaneArticles.clear();
+
+        try {
+            gridPaneArticles.addAll(getArticles("Initialize", false));
+            loadImages();
+        }
+        catch (DAOException | SQLException | IOException e) {
+            e.printStackTrace();
+        }
+
+        if (gridPaneArticles.size() > 0) {
+            setChosenArticle(gridPaneArticles.get(0));
+            articleSelectionListener = this::setChosenArticle;
+        }
+
+        try {
+            fillGridPane(gridPaneArticles);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //clear right-pane
+        try {
+            updateCartLabels();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 1; i < 8; i++)
+            clearRow(i);
+
+        // update section bar
+        App.getInstance().setReparto("None");
+        updateSectionBar(App.getInstance().getReparto());
     }
 }

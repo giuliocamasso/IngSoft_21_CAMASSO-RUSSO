@@ -48,6 +48,7 @@ public class App {
 
     // flag
     boolean orderSummaryVisited = false;
+    boolean marketSectionsVisited = false;
 
     /**
      * Il carrello e' una LinkedHashMap avente come keys (String)
@@ -97,6 +98,7 @@ public class App {
     public boolean isOrderSummaryVisited()                                      { return orderSummaryVisited; }
     public void setOrderSummaryVisited(boolean orderSummaryVisited)             { this.orderSummaryVisited = orderSummaryVisited;}
 
+    public boolean getMarketSectionsVisited()                                    { return marketSectionsVisited; }
     /**
      * Il metodo launch() e' chiamato dallo start() di Main
      * @param primaryStage lo stage principale dell'applicazione
@@ -174,7 +176,7 @@ public class App {
     }
 
     public void initMarketSectionLayout() {
-
+        marketSectionsVisited = true;
         try {
             System.out.println("Entrando nei reparti");
             // Load root layout from fxml file.
@@ -246,10 +248,8 @@ public class App {
      */
     public void showReceipt() {
         try {
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("view/Receipt.fxml"));
-
             Stage dialogStage = new Stage();
 
             dialogStage.setTitle("Receipt");
@@ -302,15 +302,23 @@ public class App {
 
     public void ejectCard(){
         loginController.resetForm();
+        cartMap.clear();
+        marketSectionLayoutController.clearShowedCart();
+        mainStage.setScene(loginSectionScene);
+    }
+
+    public void logout(){
+        ejectCard();
         mainStage.setScene(loginSectionScene);
     }
 
     public void ejectCardAfterPayment(){
-        //loginController.getMassimaliLabel().setText(massimali);
+
         loginController.getMassimaliLabel().setText(getMassimaliString());
-        //loginController.getPuntiFedeltaLabel().setText(puntiFedelta);
+
         loginController.getPuntiFedeltaLabel().setText(String.valueOf(puntiFedelta));
         loginController.getMessageLabel().setText("Grazie per averci scelto!");
+        loginController.getConfirmButton().setText("Confirm");
         mainStage.setScene(loginSectionScene);
     }
 
@@ -344,4 +352,14 @@ public class App {
         return  String.format("%.2f",massimaleRimanente) + " / " +  String.format("%.2f",massimaleMensile) + " €";
     }
 
+    public void aboutUs() {
+        System.out.println("About us");
+    }
+
+    public void loadNewUserMarketSection() {
+        marketSectionLayoutController.clearShowedCart();
+        marketSectionLayoutController.resetMarketSection();
+
+        mainStage.setScene(marketSectionScene);
+    }
 }

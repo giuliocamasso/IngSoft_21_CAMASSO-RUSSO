@@ -142,7 +142,8 @@ public class OrderSummaryLayoutController implements Initializable {
 
             // i dati del cliente vengono salvati se necessiterà di effettuare un'altra spesa dopo aver visto
             // lo scontrino, senza bisogno di fare l'eject della carta
-            Util.updateClienteAfterPayment(App.getInstance().getCodiceCarta(),
+            Util.updateClienteAfterPayment(
+                    App.getInstance().getCodiceCarta(),
                     App.getInstance().getCodiceCliente(),
                     App.getInstance().getMassimaleRimanente(),
                     App.getInstance().getPuntiFedelta()
@@ -154,6 +155,8 @@ public class OrderSummaryLayoutController implements Initializable {
             // invio l'ordine effettuato al database
             try {
                 Util.sendOrderToDB(totalImport);
+                App.getInstance().getCartMap().clear();
+                App.getInstance().getLoginController().setCardAccepted(false);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -225,6 +228,7 @@ public class OrderSummaryLayoutController implements Initializable {
         clearGridItems();
         fillCartGridPane(App.getInstance().getCartMap());
         updateTotalCartCost();
+        paymentDetails();
         paymentCheck();
     }
 

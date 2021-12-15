@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 
 
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 /**
  * [ ! MUST UPDATE THIS______________________________________________________________________________]
@@ -45,11 +44,23 @@ public class LoginLayoutController {
     @FXML
     private Label puntiFedeltaLabel;
 
+    public Button getConfirmButton() {
+        return confirmButton;
+    }
+
     @FXML
     private Button confirmButton;
 
     @FXML
     private Button ejectButton;
+
+    public Boolean getCardAccepted() {
+        return cardAccepted;
+    }
+
+    public void setCardAccepted(Boolean cardAccepted) {
+        this.cardAccepted = cardAccepted;
+    }
 
     private Boolean cardAccepted = false;
 
@@ -61,12 +72,16 @@ public class LoginLayoutController {
         resetForm();
         boolean checcoJoni = true;
         if(checcoJoni)  return;
-*/
+        */
 
         if (cardAccepted) {
-            App.getInstance().initMarketSectionLayout();
-            // resetForm();
-            return;
+            if(!App.getInstance().getMarketSectionsVisited()) {
+                App.getInstance().initMarketSectionLayout();
+                return;
+            }
+            else{
+                App.getInstance().loadNewUserMarketSection();
+            }
         }
         // else
         String codiceCarta = codiceCartaTextField.getText();
@@ -134,6 +149,7 @@ public class LoginLayoutController {
         App.getInstance().setCodiceCarta(codiceCarta);
         App.getInstance().setCodiceCliente(codiceCliente);
         App.getInstance().setPuntiFedelta(fedelta);
+        App.getInstance().setReparto("None");
 
         codiceClienteLabel.setText(codiceCliente);
         massimaliLabel.setText(App.getInstance().getMassimaliString());
@@ -161,6 +177,8 @@ public class LoginLayoutController {
 
         messageLabel.setText("Inserite la vostra carta...");
         messageLabel.setStyle("-fx-text-fill: rgb(0,255,43)");
+
+        confirmButton.setText("Confirm");
 
         // also resets the card-state!
         cardAccepted = false;

@@ -202,6 +202,7 @@ public class Util {
         }
 
         printOrderDetailsFromCodiceOrdine(orderCode);
+
     }
 
     public static int getIdClienteFromCodiceCliente(String codiceCliente) throws DAOException {
