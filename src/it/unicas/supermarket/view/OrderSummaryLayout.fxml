@@ -59,44 +59,30 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
                         </Button>
-                        <HBox prefHeight="89.0" prefWidth="318.0" />
-                        <HBox alignment="CENTER_RIGHT" prefHeight="89.0" prefWidth="220.0">
+                        <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="45.0" prefWidth="306.0" styleClass="addToCartButton" stylesheets="@market.css" text="Logout" textFill="#828282">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Button>
+                        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="276.0" styleClass="addToCartButton" stylesheets="@market.css">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="212.0" styleClass="peachUnderline" stylesheets="@market.css">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="85.0">
-                                       <children>
-                                          <Label alignment="CENTER" prefHeight="20.0" prefWidth="86.0" text="Totale">
-                                             <font>
-                                                <Font name="Verdana Bold" size="16.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                             <padding>
-                                                <Insets right="30.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="78.0" prefWidth="104.0">
-                                       <children>
-                                          <Label fx:id="totalCostLabel" text="\@0.00">
-                                             <font>
-                                                <Font name="Verdana" size="16.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets right="30.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                 </children>
+                              <Label contentDisplay="CENTER" prefHeight="20.0" prefWidth="78.0" text="Totale">
+                                 <font>
+                                    <Font name="Verdana Bold" size="16.0" />
+                                 </font>
                                  <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    <Insets />
                                  </HBox.margin>
-                              </HBox>
+                              </Label>
+                              <Label fx:id="totalCostLabel" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="108.0" text="\@0.00">
+                                 <font>
+                                    <Font name="Verdana" size="16.0" />
+                                 </font>
+                              </Label>
                            </children>
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </HBox.margin>
                         </HBox>
                      </children>
                      <VBox.margin>

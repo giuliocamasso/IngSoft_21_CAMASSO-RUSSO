@@ -33,7 +33,7 @@ public class App {
     private Scene loginSectionScene;
 
     // controller
-    private LoginLayoutController loginController;
+    private LoginLayoutController loginLayoutController;
     private OrderSummaryLayoutController orderSummaryLayoutController;
     private MarketSectionLayoutController marketSectionLayoutController;
 
@@ -67,7 +67,7 @@ public class App {
     }
 
     // getter dei controller
-    public LoginLayoutController getLoginController()                           { return loginController; }
+    public LoginLayoutController getLoginLayoutController()                           { return loginLayoutController; }
     public OrderSummaryLayoutController getOrderSummaryLayoutController()       { return orderSummaryLayoutController; }
     public MarketSectionLayoutController getMarketSectionLayoutController()     { return marketSectionLayoutController; }
 
@@ -145,7 +145,7 @@ public class App {
             });
 
             // aggiorno l'handler del controller
-            this.loginController = loader.getController();
+            this.loginLayoutController = loader.getController();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -204,17 +204,10 @@ public class App {
         }
     }
 
-    //@TODO: 14/12/2021   DA SISTEMARE
     /**
      * Prepara la scena di riepilogo del carrello e dei dettagli di pagamento
      */
     public void initOrderSummaryLayout() {
-        /*
-        if (paymentVisited){
-            mainStage.setScene(paymentSectionScene);
-            return;
-        }
-        */
         try {
 
             FXMLLoader loader = new FXMLLoader();
@@ -301,7 +294,7 @@ public class App {
     }
 
     public void ejectCard(){
-        loginController.resetForm();
+        loginLayoutController.resetForm();
         cartMap.clear();
         marketSectionLayoutController.clearShowedCart();
         mainStage.setScene(loginSectionScene);
@@ -314,11 +307,11 @@ public class App {
 
     public void ejectCardAfterPayment(){
 
-        loginController.getMassimaliLabel().setText(getMassimaliString());
+        loginLayoutController.getMassimaliLabel().setText(getMassimaliString());
 
-        loginController.getPuntiFedeltaLabel().setText(String.valueOf(puntiFedelta));
-        loginController.getMessageLabel().setText("Grazie per averci scelto!");
-        loginController.getConfirmButton().setText("Confirm");
+        loginLayoutController.getPuntiFedeltaLabel().setText(String.valueOf(puntiFedelta));
+        loginLayoutController.getMessageLabel().setText("Grazie per averci scelto!");
+        loginLayoutController.getConfirmButton().setText("Confirm");
         mainStage.setScene(loginSectionScene);
     }
 

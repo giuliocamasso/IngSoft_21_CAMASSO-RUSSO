@@ -156,7 +156,7 @@ public class OrderSummaryLayoutController implements Initializable {
             try {
                 Util.sendOrderToDB(totalImport);
                 App.getInstance().getCartMap().clear();
-                App.getInstance().getLoginController().setCardAccepted(false);
+                App.getInstance().getLoginLayoutController().setCardAccepted(false);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -237,6 +237,11 @@ public class OrderSummaryLayoutController implements Initializable {
      */
     private void clearGridItems() {
         cartArticleGridPane.getChildren().clear();
+    }
+
+    @FXML
+    public void handleLogout(){
+        App.getInstance().logout();
     }
 
 }
