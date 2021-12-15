@@ -13,15 +13,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="loginBackground" stylesheets="@market.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.LoginLayoutController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="loginBackground" stylesheets="@test.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.LoginLayoutController">
    <children>
-      <AnchorPane layoutX="240.0" layoutY="135.0" prefHeight="330.0" prefWidth="800.0" styleClass="LoginPane" stylesheets="@market.css">
+      <AnchorPane layoutX="240.0" layoutY="135.0" prefHeight="330.0" prefWidth="800.0" styleClass="LoginPane">
          <children>
             <VBox layoutX="11.0" layoutY="11.0" prefHeight="379.0" prefWidth="777.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">
                <children>
                   <HBox prefHeight="80.0" prefWidth="778.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="78.0" prefWidth="778.0" text="Benvenuti nel nostro supermercato!" textFill="WHITE">
+                        <Label alignment="CENTER" prefHeight="78.0" prefWidth="778.0" text="Benvenuti nel nostro supermercato!">
                            <font>
                               <Font name="Verdana" size="18.0" />
                            </font>
@@ -53,7 +53,7 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="480.0" prefWidth="420.0">
                            <children>
-                              <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="258.0" prefWidth="414.0" styleClass="card" stylesheets="@market.css">
+                              <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="258.0" prefWidth="414.0" styleClass="card">
                                  <children>
                                     <VBox prefHeight="258.0" prefWidth="576.0">
                                        <children>
@@ -88,7 +88,7 @@
                                                    <children>
                                                       <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="305.0">
                                                          <children>
-                                                            <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="125.0" text="Codice cliente" textAlignment="CENTER">
+                                                            <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="125.0" styleClass="LoginLabel" text="Codice cliente" textAlignment="CENTER">
                                                                <font>
                                                                   <Font name="Verdana Bold" size="14.0" />
                                                                </font>
@@ -108,7 +108,7 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="305.0">
                                                          <children>
-                                                            <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="125.0" text="Massimali" textAlignment="CENTER">
+                                                            <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="125.0" styleClass="LoginLabel" text="Massimali" textAlignment="CENTER">
                                                                <font>
                                                                   <Font name="Verdana Bold" size="14.0" />
                                                                </font>
@@ -128,7 +128,7 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="305.0">
                                                          <children>
-                                                            <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="125.0" text="Punti fedelta'" textAlignment="CENTER">
+                                                            <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="125.0" styleClass="LoginLabel" text="Punti fedelta'" textAlignment="CENTER">
                                                                <font>
                                                                   <Font name="Verdana Bold" size="14.0" />
                                                                </font>
@@ -169,19 +169,19 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="328.0" prefWidth="327.0">
                            <children>
-                              <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="286.0" stylesheets="@market.css">
+                              <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="286.0">
                                  <children>
-                                    <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="140.0" text="Codice Carta" textFill="WHITE">
+                                    <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="140.0" styleClass="LoginLabel" text="Codice Carta">
                                        <font>
                                           <Font name="Verdana" size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="codiceCartaTextField" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="170.0" promptText="xxxx-xxxx-xxxx-xxxx" style="-fx-background-color: trasparent;" stylesheets="@market.css">
+                                    <TextField fx:id="codiceCartaTextField" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="170.0" promptText="xxxx-xxxx-xxxx-xxxx">
                                        <font>
                                           <Font name="Verdana" size="12.0" />
                                        </font>
                                        <styleClass>
-                                          <String fx:value="loginFields" />
+                                          <String fx:value="loginTextField" />
                                           <String fx:value="transparent" />
                                        </styleClass>
                                     </TextField>
@@ -190,26 +190,26 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <styleClass>
-                                    <String fx:value="peachUnderline" />
+                                    <String fx:value="colorUnderline" />
                                     <String fx:value="transparent" />
                                  </styleClass>
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="286.0" stylesheets="@market.css">
+                              <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="286.0">
                                  <children>
-                                    <Label prefHeight="30.0" prefWidth="140.0" text="PIN" textFill="WHITE">
+                                    <Label prefHeight="30.0" prefWidth="140.0" styleClass="LoginLabel" text="PIN">
                                        <font>
                                           <Font name="Verdana" size="18.0" />
                                        </font>
                                     </Label>
-                                    <PasswordField fx:id="pinPasswordField" alignment="CENTER" prefHeight="30.0" prefWidth="170.0" promptText="*****" style="-fx-background-color: trasparent;" stylesheets="@market.css">
+                                    <PasswordField fx:id="pinPasswordField" alignment="CENTER" prefHeight="30.0" prefWidth="170.0" promptText="*****">
                                        <font>
                                           <Font name="Verdana" size="12.0" />
                                        </font>
                                        <styleClass>
-                                          <String fx:value="loginFields" />
+                                          <String fx:value="loginPin" />
                                           <String fx:value="transparent" />
                                        </styleClass>
                                     </PasswordField>
@@ -218,29 +218,29 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <styleClass>
-                                    <String fx:value="peachUnderline" />
+                                    <String fx:value="colorUnderline" />
                                     <String fx:value="transparent" />
                                  </styleClass>
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="249.0" prefWidth="322.0" stylesheets="@market.css">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="249.0" prefWidth="322.0">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="35.0" prefWidth="323.0" spacing="50.0" stylesheets="@market.css">
+                              <HBox alignment="CENTER" prefHeight="35.0" prefWidth="323.0" spacing="50.0">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
                                  <children>
-                                    <Button fx:id="confirmButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="30.0" prefWidth="90.0" styleClass="searchButton" stylesheets="@market.css" text="Confirm">
+                                    <Button fx:id="confirmButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="30.0" prefWidth="90.0" styleClass="loginButtons" text="Confirm">
                                        <font>
                                           <Font name="Verdana" size="11.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="ejectButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEject" prefHeight="30.0" prefWidth="90.0" styleClass="searchButton" stylesheets="@market.css" text="Eject">
+                                    <Button fx:id="ejectButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEject" prefHeight="30.0" prefWidth="90.0" styleClass="loginButtons" text="Eject">
                                        <font>
                                           <Font name="Verdana" size="11.0" />
                                        </font>

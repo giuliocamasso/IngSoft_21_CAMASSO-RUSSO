@@ -12,11 +12,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#click" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.ArticleGridItemController">
    <children>
-      <VBox alignment="CENTER" layoutX="63.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" stylesheets="@market.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="63.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="articleNameLabel" prefHeight="32.0" prefWidth="139.0" text="Cherry">
+                  <Label fx:id="articleNameLabel" prefHeight="32.0" prefWidth="139.0" styleClass="blackText" text="Cherry">
                      <font>
                         <Font name="Verdana" size="15.0" />
                      </font>
@@ -24,7 +24,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="articlePriceLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="120.0" text="\$0.99">
+                  <Label fx:id="articlePriceLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="120.0" styleClass="colorText" text="\$0.99">
                      <font>
                         <Font name="Verdana Bold" size="15.0" />
                      </font>
@@ -45,7 +45,7 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <ImageView fx:id="articleImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" styleClass="articleItem">
+                  <ImageView fx:id="articleImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../resources/images/Ortofrutta/ciliegia.png" />
                      </image>

@@ -67,12 +67,12 @@ public class LoginLayoutController {
     @FXML
     private void handleConfirm() throws DAOException, SQLException {
 
-        /*
+
         App.getInstance().initMarketSectionLayout();
         resetForm();
         boolean checcoJoni = true;
         if(checcoJoni)  return;
-        */
+
 
         if (cardAccepted) {
             if(!App.getInstance().getMarketSectionsVisited()) {

@@ -153,7 +153,7 @@
                         <Insets bottom="10.0" />
                      </padding>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#handleLogin" stylesheets="@market.css" text="Torna al Login">
+                  <Button mnemonicParsing="false" onAction="#handleLogin" stylesheets="@../model/market.css" text="Torna al Login">
                      <font>
                         <Font name="Verdana Bold" size="13.0" />
                      </font>

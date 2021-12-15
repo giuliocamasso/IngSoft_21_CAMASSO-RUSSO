@@ -31,6 +31,13 @@ import java.util.logging.Logger;
 public class MarketSectionLayoutController implements Initializable {
 
     // Section Buttons
+
+    private final String SelectionStyle =   "-fx-border-width: 1;" +
+                                            "-fx-border-color: rgb(79, 172, 254);" +
+                                            "-fx-effect: dropshadow( three-pass-box , rgb(44, 109, 161), 5, 0.0 , 0 , 1 );";
+    private final String vBoxStyle = "-fx-border-width: 0 0 1 0;\n-fx-border-color: rgb(79,172,254);";
+    private final String hBoxStyle = "-fx-border-radius: 50;\n-fx-border-width: 1;\n-fx-border-color: rgb(79,172,254);";
+
     @FXML private Button macelleriaButton;
     @FXML private Label macelleriaLabel;
     @FXML private Button pescheriaButton;
@@ -351,11 +358,6 @@ public class MarketSectionLayoutController implements Initializable {
 
     void updateSectionBar(String section){
         String prevStyle = "";
-
-        String newStyle = "    -fx-border-width: 1;\n" +
-                          "    -fx-border-color: rgb(240, 109, 139);" +
-                          "    -fx-effect: dropshadow( three-pass-box , rgba(240, 109, 139, 0.6), 5, 0.0 , 0 , 1 );";
-
         String newFontStyle = "-fx-font-weight: bold";
 
         // restoring prev selected one
@@ -444,55 +446,55 @@ public class MarketSectionLayoutController implements Initializable {
 
         switch (section) {
             case "Macelleria" -> {
-                macelleriaButton.setStyle(newStyle);
+                macelleriaButton.setStyle(SelectionStyle);
                 macelleriaLabel.setStyle(newFontStyle);
             }
             case "Pescheria" -> {
-                pescheriaButton.setStyle(newStyle);
+                pescheriaButton.setStyle(SelectionStyle);
                 pescheriaLabel.setStyle(newFontStyle);
             }
             case "Ortofrutta" -> {
-                ortofruttaButton.setStyle(newStyle);
+                ortofruttaButton.setStyle(SelectionStyle);
                 ortofruttaLabel.setStyle(newFontStyle);
             }
             case "Alimentari" -> {
-                alimentariButton.setStyle(newStyle);
+                alimentariButton.setStyle(SelectionStyle);
                 alimentariLabel.setStyle(newFontStyle);
             }
             case "Forno" -> {
-                fornoButton.setStyle(newStyle);
+                fornoButton.setStyle(SelectionStyle);
                 fornoLabel.setStyle(newFontStyle);
             }
             case "Bevande" -> {
-                bevandeButton.setStyle(newStyle);
+                bevandeButton.setStyle(SelectionStyle);
                 bevandeLabel.setStyle(newFontStyle);
             }
             case "Surgelati" -> {
-                surgelatiButton.setStyle(newStyle);
+                surgelatiButton.setStyle(SelectionStyle);
                 surgelatiLabel.setStyle(newFontStyle);
             }
             case "Snacks" -> {
-                snacksButton.setStyle(newStyle);
+                snacksButton.setStyle(SelectionStyle);
                 snacksLabel.setStyle(newFontStyle);
             }
             case "Baby" -> {
-                babyButton.setStyle(newStyle);
+                babyButton.setStyle(SelectionStyle);
                 babyLabel.setStyle(newFontStyle);
             }
             case "Cartoleria" -> {
-                cartoleriaButton.setStyle(newStyle);
+                cartoleriaButton.setStyle(SelectionStyle);
                 cartoleriaLabel.setStyle(newFontStyle);
             }
             case "Pet" -> {
-                petButton.setStyle(newStyle);
+                petButton.setStyle(SelectionStyle);
                 petLabel.setStyle(newFontStyle);
             }
             case "Benessere" -> {
-                benessereButton.setStyle(newStyle);
+                benessereButton.setStyle(SelectionStyle);
                 benessereLabel.setStyle(newFontStyle);
             }
             case "Casalinghi" -> {
-                casalinghiButton.setStyle(newStyle);
+                casalinghiButton.setStyle(SelectionStyle);
                 casalinghiLabel.setStyle(newFontStyle);
             }
             // no section is selected!
@@ -515,10 +517,6 @@ public class MarketSectionLayoutController implements Initializable {
 
         // also set quantityLabel to zero
         quantityLabel.setText(String.valueOf(chosenArticleQuantity));
-        /*
-        articleDetails.setStyle("-fx-background-color: #" + fruit.getColor() + ";\n" +
-                "    -fx-background-radius: 30;");
-        */
     }
 
     // Add to cart buttons section
@@ -674,9 +672,6 @@ public class MarketSectionLayoutController implements Initializable {
     }
 
     private void updateRow(Integer row){
-
-        String vBoxStyle =  "-fx-border-width: 0 0 1 0;\n-fx-border-color: rgb(240, 109, 139);";
-        String hBoxStyle =  "-fx-border-radius: 50;\n-fx-border-width: 1;\n-fx-border-color: rgb(240, 109, 139);";
 
         // leggo la quantita' dal carrello
 
