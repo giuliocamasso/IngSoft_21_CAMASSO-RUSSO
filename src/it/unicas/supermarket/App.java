@@ -1,9 +1,7 @@
 package it.unicas.supermarket;
-
 import it.unicas.supermarket.controller.LoginLayoutController;
 import it.unicas.supermarket.controller.MarketSectionLayoutController;
 import it.unicas.supermarket.controller.OrderSummaryLayoutController;
-
 import it.unicas.supermarket.controller.ReceiptController;
 import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.model.dao.Util;
@@ -17,12 +15,21 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.util.*;
 import java.util.logging.Logger;
 
+/*
+ * @param incomingDamage the amount of incoming damage
+ * @return the amount of health hero has after attack
+ * @author Captain America
+ * */
+
+/**
+ * Il singleton che gestisce le scene e e la logica dell'applicazione
+ */
 public class App {
+
     private static App app = null;
 
     private Stage mainStage;
@@ -33,84 +40,27 @@ public class App {
 
     private LoginLayoutController loginController;
     private OrderSummaryLayoutController orderSummaryLayoutController;
-
-    public LoginLayoutController getLoginController() {
-        return loginController;
-    }
-
-    public OrderSummaryLayoutController getOrderSummaryLayoutController() {
-        return orderSummaryLayoutController;
-    }
-
-    public MarketSectionLayoutController getMarketSectionLayoutController() {
-        return marketSectionLayoutController;
-    }
-
     private MarketSectionLayoutController marketSectionLayoutController;
-
-    private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
     public String codiceCarta;
     public String codiceCliente;
-
     public float massimaleMensile;
-
-    public float getMassimaleMensile() {
-        return massimaleMensile;
-    }
-
-    public void setMassimaleMensile(float massimaleMensile) {
-        this.massimaleMensile = massimaleMensile;
-    }
-
-    public float getMassimaleRimanente() {
-        return massimaleRimanente;
-    }
-
-    public void setMassimaleRimanente(float massimaleRimanente) {
-        this.massimaleRimanente = massimaleRimanente;
-    }
-
     public float massimaleRimanente;
-
     public int puntiFedelta;
 
     public String reparto = "None";
 
+    /**
+     * Il carrello e' una LinkedHashMap avente come keys (String)
+     * il barcode degli articoli e come values(Integer) le relative quantita'<br>
+     * E' stata usata una LinkedHashMap perche' consente di memorizzare l'ordine
+     * di inserimento dei prodotti nel carrello
+     */
     public LinkedHashMap<String, Integer> cartMap = new LinkedHashMap<>();
 
-    public HashMap<String, Integer> getCartMap() {
-        return cartMap;
-    }
+    private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
-    public Scene getMarketSectionScene() {
-        return marketSectionScene;
-    }
-
-    public String getReparto()                   { return reparto; }
-
-    public void setReparto(String reparto)       { this.reparto = reparto; }
-
-    public void setCodiceCarta(String codiceCarta){ this.codiceCarta = codiceCarta; }
-
-    public String getCodiceCarta(){
-        return codiceCarta;
-    }
-
-    public void setCodiceCliente(String codiceCliente){
-        this.codiceCliente = codiceCliente;
-    }
-
-    public String getCodiceCliente(){
-        return codiceCliente;
-    }
-
-    public void setPuntiFedelta(int puntiFedelta) {this.puntiFedelta += puntiFedelta; }
-
-    public int getPuntiFedelta(){
-        return puntiFedelta;
-    }
-
+    // design-pattern Singleton
     public static App getInstance(){
         if (app == null){
             app = new App();
@@ -118,59 +68,80 @@ public class App {
         return app;
     }
 
+    // getter dei controller
+    public LoginLayoutController getLoginController()                           { return loginController; }
+    public OrderSummaryLayoutController getOrderSummaryLayoutController()       { return orderSummaryLayoutController; }
+    public MarketSectionLayoutController getMarketSectionLayoutController()     { return marketSectionLayoutController; }
+
+    // getter e setter delle variabili associate al cliente corrente
+    public void setCodiceCarta(String codiceCarta)                              { this.codiceCarta = codiceCarta; }
+    public String getCodiceCarta()                                              { return codiceCarta; }
+
+    public String getCodiceCliente()                                            { return codiceCliente;}
+    public void setCodiceCliente(String codiceCliente)                          { this.codiceCliente = codiceCliente; }
+
+    public float getMassimaleMensile()                                          { return massimaleMensile; }
+    public void setMassimaleMensile(float massimaleMensile)                     { this.massimaleMensile = massimaleMensile; }
+
+    public float getMassimaleRimanente()                                        { return massimaleRimanente; }
+    public void setMassimaleRimanente(float massimaleRimanente)                 { this.massimaleRimanente = massimaleRimanente; }
+
+    public int getPuntiFedelta()                                                { return puntiFedelta; }
+    public void setPuntiFedelta(int puntiFedelta)                               {this.puntiFedelta += puntiFedelta; }
+
+    // getter e setter del reparto selezionato
+    public String getReparto()                                                  { return reparto; }
+    public void setReparto(String reparto)                                      { this.reparto = reparto; }
+
+    // getter del carrello
+    public HashMap<String, Integer> getCartMap()                                { return cartMap; }
+
+    /**
+     * Il metodo launch() e' chiamato dallo start() di Main
+     * @param primaryStage lo stage principale dell'applicazione
+     */
     public void launch(Stage primaryStage){
-        System.out.println("Starting...");
-
+        // main stage settings
         mainStage = primaryStage;
-        mainStage.setTitle("Market app");
 
-        // mainStage.initStyle(StageStyle.DECORATED);       // default
-        // mainStage.initStyle(StageStyle.UNDECORATED);     // only content, without OS-style windows
-        // mainStage.initStyle(StageStyle.TRANSPARENT);     // useless//
-        // mainStage.initStyle(StageStyle.UTILITY);         // orribile
-        // mainStage.initStyle(StageStyle.UNIFIED);         // solves the 'white border' glitch
-
-        // ("A unified Stage is like a decorated stage, except it has no border between the decoration area and the main content area."
+        mainStage.setTitle("GG Supermarket");
         mainStage.initStyle(StageStyle.UNIFIED);
-
-        // mainStage.setWidth(1280.0);
-        // mainStage.setHeight(720.0);
-
         mainStage.setResizable(false);
 
-        // Set the application icon.
+        // icona dell'applicazione
         mainStage.getIcons().add(new Image("file:resources/images/shopping-cart.png"));
 
+        // carico la scena del login
         initLoginLayout();
 
-        // mainStage.setFullScreen(true);
         mainStage.show();
-
     }
 
-    public Stage getMainStage() {
-        return mainStage;
-    }
-
+    /**
+     * Prepara la scena del login all'avvio dell'applicazione
+     */
     public void initLoginLayout() {
         try {
-            // Load root layout from fxml file.
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/LoginLayout.fxml"));
 
             AnchorPane loginLayout = loader.load();
 
-            // Show the scene containing the root layout.
+            // inizializzo la nuova scena
             Scene loginScene = new Scene(loginLayout);
+
+            // imposto la scena sul mainStage e aggiorno l'handler della scena di App
             mainStage.setScene(loginScene);
             this.loginSectionScene = loginScene;
 
+            // gestione chiusura finestra
             mainStage.setOnCloseRequest(event -> {
                 event.consume();
                 handleExit();
             });
 
-            // Give the controller access to the main app.
+            // aggiorno l'handler del controller
             this.loginController = loader.getController();
 
         } catch (IOException e) {
@@ -178,19 +149,24 @@ public class App {
         }
     }
 
+    /**
+     * Chiamato cliccando sulla 'x' della finestra
+     */
     public void handleExit() {
+
         Alert alert = new Alert(Alert.AlertType.ERROR);
+
         alert.setTitle("Uscita");
         alert.setHeaderText("Vuoi uscire dal supermercato?");
         alert.setContentText("Grazie per averci scelto.");
 
-        ButtonType buttonTypeOne = new ButtonType("Si");
-        ButtonType buttonTypeCancel = new ButtonType("Torna al supermercato", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonYes = new ButtonType("Si");
+        ButtonType buttonBackToMarketApp = new ButtonType("Torna al supermercato", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+        alert.getButtonTypes().setAll(buttonYes, buttonBackToMarketApp);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == buttonTypeOne){
+        if (result.isPresent() && result.get() == buttonYes){
             System.exit(0);
         }
 
@@ -258,9 +234,6 @@ public class App {
         }
     }
 
-    /**
-     * Opens a dialog to show the receipt
-     */
     public void showReceipt() {
         try {
             // Load the fxml file and create a new stage for the popup.
@@ -289,24 +262,6 @@ public class App {
 
     }
 
-    public List<String> getCartListArticles() {
-       return new ArrayList<>(this.cartMap.keySet());
-    }
-
-    public List<Integer> getCartListQuantity() {
-        return new ArrayList<>(this.cartMap.values());
-    }
-
-    public int getCartListQuantityFromKey(String Key){
-        List<String> listKey = getCartListArticles();
-        List<Integer> listQuantity = getCartListQuantity();
-        int index = 0;
-        for (int i=0; i<listKey.size(); i++){
-            if(listKey.get(i).equals(Key))
-                index = i;
-        }
-        return listQuantity.get(index);
-    }
 
     public void printCart() throws DAOException {
         int size = this.cartMap.size();
@@ -347,12 +302,35 @@ public class App {
         mainStage.setScene(loginSectionScene);
     }
 
+    // metodi di utilità
+
+    /**
+     * @return Restituisce la lista con le chiavi della mappa Carrello
+     */
+    public List<String> getCartListArticles()                           { return new ArrayList<>(this.cartMap.keySet()); }
+
+    /**
+     * @return Restituisce la lista con le quantita' della mappa Carrello
+     */
+    public List<Integer> getCartListQuantity()                          { return new ArrayList<>(this.cartMap.values()); }
+
+    /**
+     * Il metodo e' chiamato dopo la finalizzazione di un ordine e aggiorna la fedelta' del cliente
+     * secondo questa politica: 1 punto fedelta' ogni 10 euro di spesa<br>
+     * es. 5 euro -> 0 fedelta'<br>
+     * es. 19 euro -> 1 fedelta'<br>
+     * es. 21 euro -> 2 fedelta'
+     * @param totalImport l'importo totale dell'ordine effettuto
+     * @return  Restituisce la fedelta' del cliente aggiornata dopo il pagamento
+     */
+    public int computeFidelity(float totalImport)                       { return (int)(totalImport/10); }
+
+    /**
+     * @return Resituisce la stringa contenente il massimale rimanente / massimale mensile
+     */
     public String getMassimaliString(){
         return  String.format("%.2f",massimaleRimanente) + " / " +  String.format("%.2f",massimaleMensile) + " €";
     }
 
 
-    public int computeFidelity(float totalImport) {
-        return (int)(totalImport/10);
-    }
 }
