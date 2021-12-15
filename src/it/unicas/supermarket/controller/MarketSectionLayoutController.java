@@ -212,13 +212,14 @@ public class MarketSectionLayoutController implements Initializable {
     }
 
     @FXML
-    public void handleCart() {
-        System.out.println("Going to Cart section...");
+    public void handleCart() throws DAOException, IOException {
+        //TODO isEmpty() in APP
         if (App.getInstance().cartMap.size() == 0)
             return;
-        else {
-            App.getInstance().initOrderSummaryLayout();
-        }
+        else if (App.getInstance().isOrderSummaryVisited() == false)
+                App.getInstance().initOrderSummaryLayout();
+        else
+            App.getInstance().backToPaymentFromSections();
     }
 
     public void loadSectionArticles(String section){

@@ -45,6 +45,8 @@ public class OrderSummaryLayoutController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        App.getInstance().setOrderSummaryVisited(true);
+
         // riempio il carrello con i prodotti correnti
         try {
             fillCartGridPane(App.getInstance().getCartMap());
@@ -87,7 +89,7 @@ public class OrderSummaryLayoutController implements Initializable {
     }
 
     /**
-     * Il metodo riempie la Grid Pane nel riepilogo dell'ordine associato al carrello
+     * Il metodo riempie la Grid Pane nel riepilogo dell'ordine "Carrello"
      * @param cartMap HashMap del carrello
      */
     public void fillCartGridPane(HashMap<String, Integer> cartMap) throws IOException, DAOException {
@@ -111,7 +113,10 @@ public class OrderSummaryLayoutController implements Initializable {
     }
 
     /**
-     * Il metodo riporta alla sezione dei reparti per aggiungere nuovi prodotti al carrello
+     * <p>
+     *      Il metodo associato al bottone "Torna ai reparti" riporta alla sezione dei reparti <br>
+     *      per aggiungere nuovi prodotti al carrello
+     * </p>
      */
     @FXML
     private void handleMarket() {
@@ -121,7 +126,9 @@ public class OrderSummaryLayoutController implements Initializable {
     /**
      * <p>
      *     Il metodo porta a termine il pagamento mostrando lo scontrino dell'ordine effettuato <br>
-     *     Se il carrello è vuoto non posso pagare per nessun prodotto
+     *     Se il carrello e' vuoto non posso pagare per nessun prodotto <br>
+     *     Se il carrello non e' vuoto e ho abbastanza massimale, posso pagare con "Paga Ora" <br>
+     *     Se il carrello non e' vuoto ma non ho abbastanza massimale, non posso pagare
      * </p>
      */
     @FXML
@@ -178,9 +185,9 @@ public class OrderSummaryLayoutController implements Initializable {
     /**
      * <p>
      *     Il metodo mostra lo status di pagamento possibile in base ai prodotti nel carrello e al massimale <br>
-     *     Carrello vuoto -> non ci sono prodotti nel carrello <br>
-     *     Massimale Sufficiente + Saldo Previsto -> se ho abbastanza massimale, posso vedere il futuro saldo <br>
-     *     Massimale Insufficiente -> se non ho abbastanza massimale
+     *     Carrello vuoto: non ci sono prodotti nel carrello <br>
+     *     Massimale Sufficiente + Saldo Previsto: se ho abbastanza massimale, posso vedere il futuro saldo <br>
+     *     Massimale Insufficiente: se non ho abbastanza massimale, il cliente viene informato
      * </p>
      */
     public void paymentCheck() throws DAOException {
@@ -202,7 +209,7 @@ public class OrderSummaryLayoutController implements Initializable {
     }
 
     /**
-     *
+     * Il metodo mostra i dettagli del cliente e della carta nella sezione "Dettagli Pagamento"
      */
     private void paymentDetails() {
         codiceClienteLabel.setText(App.getInstance().getCodiceCliente());
@@ -210,5 +217,23 @@ public class OrderSummaryLayoutController implements Initializable {
         puntiFedeltaLabel.setText(String.valueOf(App.getInstance().getPuntiFedelta()));
         codiceCartaLabel.setText(App.getInstance().getCodiceCarta());
     }
+
+    /**
+     *
+     */
+    public void syncProducts() throws DAOException, IOException {
+        clearGridItems();
+        fillCartGridPane(App.getInstance().getCartMap());
+        updateTotalCartCost();
+        paymentCheck();
+    }
+
+    /**
+     *
+     */
+    private void clearGridItems() {
+        cartArticleGridPane.getChildren().clear();
+    }
+
 }
 

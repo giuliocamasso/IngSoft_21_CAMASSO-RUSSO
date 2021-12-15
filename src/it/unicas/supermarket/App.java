@@ -18,12 +18,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.*;
 
-/*
- * @param incomingDamage the amount of incoming damage
- * @return the amount of health hero has after attack
- * @author Captain America
- * */
-
 /**
  * Il singleton che gestisce le scene e e la logica dell'applicazione
  */
@@ -51,6 +45,9 @@ public class App {
     public int puntiFedelta;
 
     public String reparto = "None";
+
+    // flag
+    boolean orderSummaryVisited = false;
 
     /**
      * Il carrello e' una LinkedHashMap avente come keys (String)
@@ -95,6 +92,10 @@ public class App {
 
     // getter del carrello
     public HashMap<String, Integer> getCartMap()                                { return cartMap; }
+
+    // setter flag
+    public boolean isOrderSummaryVisited()                                      { return orderSummaryVisited; }
+    public void setOrderSummaryVisited(boolean orderSummaryVisited)             { this.orderSummaryVisited = orderSummaryVisited;}
 
     /**
      * Il metodo launch() e' chiamato dallo start() di Main
@@ -294,6 +295,11 @@ public class App {
         mainStage.setScene(marketSectionScene);
     }
 
+    public void backToPaymentFromSections() throws DAOException, IOException {
+        orderSummaryLayoutController.syncProducts();
+        mainStage.setScene(paymentSectionScene);
+    }
+
     public void ejectCard(){
         loginController.resetForm();
         mainStage.setScene(loginSectionScene);
@@ -337,6 +343,5 @@ public class App {
     public String getMassimaliString(){
         return  String.format("%.2f",massimaleRimanente) + " / " +  String.format("%.2f",massimaleMensile) + " €";
     }
-
 
 }
