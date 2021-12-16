@@ -284,8 +284,10 @@
 .searchTextField{
     -fx-text-fill: rgb(79, 172, 254);
 }
-.searchBox{
 
+.receiptButton{}
+.receiptButton:hover{
+    -fx-underline: true;
 }
 
 #windows7 {

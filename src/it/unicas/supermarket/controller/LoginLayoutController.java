@@ -82,6 +82,8 @@ public class LoginLayoutController {
             else{
                 App.getInstance().loadNewUserMarketSection();
             }
+            codiceCartaTextField.setEditable(true);
+            pinPasswordField.setEditable(true);
         }
         // else
         String codiceCarta = codiceCartaTextField.getText();
@@ -164,6 +166,8 @@ public class LoginLayoutController {
 
         // updating navigation button
         confirmButton.setText("AI REPARTI");
+        codiceCartaTextField.setEditable(false);
+        pinPasswordField.setEditable(false);
         codiceCartaLabel.setText(codiceCarta);
     }
 
@@ -179,6 +183,9 @@ public class LoginLayoutController {
         messageLabel.setStyle("-fx-text-fill: rgb(0,255,43)");
 
         confirmButton.setText("Confirm");
+
+        codiceCartaTextField.setEditable(true);
+        pinPasswordField.setEditable(true);
 
         // also resets the card-state!
         cardAccepted = false;
