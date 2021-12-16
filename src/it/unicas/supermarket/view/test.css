@@ -1,8 +1,8 @@
 .paymentBackground{
     -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
-    -fx-background-image: url('../../../../../resources/backgrounds/OrangeGradient.png');
+        -fx-background-repeat: no-repeat;
+        -fx-background-size: auto;
+        -fx-background-image: url('../../../../../resources/backgrounds/black-abstract.jpg');
 }
 /*
 .loginBackground{
@@ -104,6 +104,13 @@
     -fx-text-fill: rgb(255, 255, 255);
 }
 .ovalHBoxButtons:hover{
+    -fx-text-fill: rgb(79, 172, 254);
+}
+
+.ovalHBoxCartButtons{
+    -fx-text-fill: rgb(0, 0, 0);
+}
+.ovalHBoxCartButtons:hover{
     -fx-text-fill: rgb(79, 172, 254);
 }
 

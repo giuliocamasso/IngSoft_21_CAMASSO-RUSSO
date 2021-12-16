@@ -105,7 +105,7 @@
             </VBox>
             <ScrollPane prefHeight="341.0" prefWidth="400.0">
                <content>
-                  <GridPane fx:id="receiptArticleGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="398.0">
+                  <GridPane fx:id="receiptArticleGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="397.0">
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
@@ -153,7 +153,7 @@
                         <Insets bottom="10.0" />
                      </padding>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#handleLogin" stylesheets="@../../../../../resources/market.css" text="Torna al Login">
+                  <Button mnemonicParsing="false" onAction="#handleLogin" styleClass="transparent" text="Torna al Login">
                      <font>
                         <Font name="Verdana Bold" size="13.0" />
                      </font>
