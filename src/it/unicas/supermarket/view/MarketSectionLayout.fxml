@@ -179,7 +179,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="Verdana Bold" size="18.0" />
                      </font>
                   </Button>
                </children>
@@ -622,7 +622,7 @@
                               <children>
                                  <Button fx:id="pagaOraButton" mnemonicParsing="false" onAction="#handleCart" prefHeight="2.0" prefWidth="310.0" styleClass="loginButtons" text="Paga ora" textFill="#828282">
                                     <font>
-                                       <Font name="System Bold" size="18.0" />
+                                       <Font name="Verdana Bold" size="18.0" />
                                     </font>
                                  </Button>
                               </children>

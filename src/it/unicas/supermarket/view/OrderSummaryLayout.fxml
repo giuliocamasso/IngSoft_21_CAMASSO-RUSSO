@@ -53,7 +53,7 @@
                      <children>
                         <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleMarket" prefHeight="45.0" prefWidth="250.0" styleClass="addToCartButton" text="Torna ai Reparti" textFill="#828282">
                            <font>
-                              <Font name="System Bold" size="22.0" />
+                              <Font name="Verdana Bold" size="22.0" />
                            </font>
                            <HBox.margin>
                               <Insets />
@@ -61,7 +61,7 @@
                         </Button>
                         <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLogout" prefHeight="45.0" prefWidth="250.0" styleClass="addToCartButton" text="Logout" textFill="#828282">
                            <font>
-                              <Font name="System Bold" size="22.0" />
+                              <Font name="Verdana Bold" size="22.0" />
                            </font>
                         </Button>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="250.0" styleClass="addToCartButton">
@@ -250,7 +250,7 @@
                                  <children>
                                     <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePayment" prefHeight="45.0" prefWidth="143.0" styleClass="loginButtons" text="Paga ora" textFill="#828282">
                                        <font>
-                                          <Font name="System Bold" size="22.0" />
+                                          <Font name="Verdana Bold" size="22.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets />
