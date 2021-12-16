@@ -242,7 +242,7 @@
 }
 
 .card{
-    -fx-background-color:linear-gradient(to top, #fdfbfb 0%, #ebedee 100%);
+    -fx-background-color: linear-gradient(to left, #a1c4fd 0%, #c2e9fb 100%);
     background-blend-mode: screen;
     -fx-background-radius: 30, 30, 30, 30;
 

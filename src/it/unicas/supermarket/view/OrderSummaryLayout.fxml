@@ -51,30 +51,30 @@
                   </ScrollPane>
                   <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="799.0" spacing="20.0">
                      <children>
-                        <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleMarket" prefHeight="45.0" prefWidth="250.0" styleClass="addToCartButton" text="Torna ai Reparti" textFill="#828282">
+                        <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleMarket" prefHeight="45.0" prefWidth="250.0" styleClass="loginButtons" text="Torna ai Reparti" textFill="#828282">
                            <font>
-                              <Font name="Verdana Bold" size="22.0" />
+                              <Font name="Verdana Bold" size="18.0" />
                            </font>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLogout" prefHeight="45.0" prefWidth="250.0" styleClass="addToCartButton" text="Logout" textFill="#828282">
+                        <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLogout" prefHeight="45.0" prefWidth="250.0" styleClass="loginButtons" text="Logout" textFill="#828282">
                            <font>
-                              <Font name="Verdana Bold" size="22.0" />
+                              <Font name="Verdana Bold" size="18.0" />
                            </font>
                         </Button>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="250.0" styleClass="addToCartButton">
                            <children>
-                              <Label contentDisplay="CENTER" prefHeight="20.0" prefWidth="78.0" styleClass="colorText" text="Totale">
+                              <Label contentDisplay="CENTER" prefHeight="20.0" prefWidth="78.0" styleClass="blackText" text="Totale">
                                  <font>
-                                    <Font name="Verdana Bold" size="16.0" />
+                                    <Font name="Verdana Bold" size="18.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                               </Label>
-                              <Label fx:id="totalCostLabel" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="108.0" styleClass="blackText" text="\@0.00">
+                              <Label fx:id="totalCostLabel" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="108.0" styleClass="colorText" text="\@0.00">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -248,9 +248,9 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePayment" prefHeight="45.0" prefWidth="143.0" styleClass="loginButtons" text="Paga ora" textFill="#828282">
+                                    <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePayment" prefHeight="45.0" prefWidth="143.0" styleClass="loginButtons" text="Paga ora">
                                        <font>
-                                          <Font name="Verdana Bold" size="22.0" />
+                                          <Font name="Verdana Bold" size="18.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets />
