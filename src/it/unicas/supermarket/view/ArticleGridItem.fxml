@@ -24,7 +24,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="articlePriceLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="120.0" styleClass="colorText" text="\$0.99">
+                  <Label fx:id="articlePriceLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="120.0" styleClass="blackText" text="\$0.99">
                      <font>
                         <Font name="Verdana Bold" size="15.0" />
                      </font>

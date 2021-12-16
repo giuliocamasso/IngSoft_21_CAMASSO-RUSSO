@@ -34,7 +34,7 @@ public class MarketSectionLayoutController implements Initializable {
 
     private final String SelectionStyle =   "-fx-border-width: 1;" +
                                             "-fx-border-color: rgb(79, 172, 254);" +
-                                            "-fx-effect: dropshadow( three-pass-box , rgb(44, 109, 161), 5, 0.0 , 0 , 1 );";
+                                            "-fx-effect: dropshadow( three-pass-box , rgb(79,172,254), 5, 0.0 , 0 , 1 );";
     private final String vBoxStyle = "-fx-border-width: 0 0 1 0;\n-fx-border-color: rgb(79,172,254);";
     private final String hBoxStyle = "-fx-border-radius: 50;\n-fx-border-width: 1;\n-fx-border-color: rgb(79,172,254);";
 

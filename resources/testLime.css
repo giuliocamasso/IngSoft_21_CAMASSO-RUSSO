@@ -2,7 +2,7 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
-    -fx-background-image: url('../../../../../resources/backgrounds/OrangeGradient.png');
+    -fx-background-image: url('backgrounds/OrangeGradient.png');
 }
 /*
 .loginBackground{
@@ -12,7 +12,7 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: auto;
-    -fx-background-image: url('../../../../../resources/backgrounds/black-abstract.jpg');
+    -fx-background-image: url('backgrounds/black-abstract.jpg');
 }
 /*
 .background{
@@ -22,7 +22,7 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: auto;
-    -fx-background-image: url('../../../../../resources/backgrounds/black-abstract.jpg');
+    -fx-background-image: url('backgrounds/black-abstract.jpg');
 }
 
 .unicasButton{
@@ -30,7 +30,7 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
-    -fx-background-image: url('../../../../../resources/images/unicas.png');
+    -fx-background-image: url('images/unicas.png');
 }
 
 .scroll-pane > .viewport {
@@ -49,7 +49,7 @@
     -fx-background-radius: 30;
     -fx-border-radius: 30;
     -fx-border-width: 1 1 1 1;
-    -fx-border-color: rgb(79, 172, 254);
+    -fx-border-color: rgb(64, 255, 0);
 }
 
 .LoginPane{
@@ -70,7 +70,7 @@
 }
 
  .colorText{
-     -fx-text-fill: rgb(79, 172, 254);
+     -fx-text-fill: rgb(64, 255, 0);
  }
 
 .radius{
@@ -83,28 +83,28 @@
 
 .colorUnderline{
     -fx-border-width: 0 0 1 0;
-    -fx-border-color: rgb(79, 172, 254);
+    -fx-border-color: rgb(64, 255, 0);
 }
 
 .loginTextField{
-    -fx-text-fill: rgb(79, 172, 254);
+    -fx-text-fill: rgb(64, 255, 0);
 }
 
 .loginPin{
-    -fx-text-fill: rgb(79, 172, 254);
+    -fx-text-fill: rgb(64, 255, 0);
 }
 
 #ovalHBox{
     -fx-border-radius: 50;
     -fx-border-width: 1;
-    -fx-border-color: rgb(79, 172, 254);
+    -fx-border-color: rgb(64, 255, 0);
 }
 
 .ovalHBoxButtons{
     -fx-text-fill: rgb(255, 255, 255);
 }
 .ovalHBoxButtons:hover{
-    -fx-text-fill: rgb(79, 172, 254);
+    -fx-text-fill: rgb(64, 255, 0);
 }
 
 .shadow{
@@ -124,7 +124,7 @@
     -fx-background-radius: 30;
     -fx-border-radius: 30;
     -fx-border-width: 1;
-    -fx-border-color: rgb(79, 172, 254);
+    -fx-border-color: rgb(64, 255, 0);
     -fx-text-fill: rgb(255, 255, 255);
 }
 
@@ -141,7 +141,7 @@
 ---------------------------------------------------------------------------*/
 .departmentBox{
     -fx-border-width: 0 0 1 0;
-    -fx-border-color: rgb(79, 172, 254);
+    -fx-border-color: rgb(64, 255, 0);
 }
 
 .departmentButton{
@@ -154,48 +154,48 @@
 
 .departmentButton:hover{
     -fx-border-width: 1;
-    -fx-border-color: rgb(79, 172, 254);
-    -fx-effect: dropshadow( three-pass-box , rgb(79, 172, 254), 5, 0.0 , 0 , 1 );
+    -fx-border-color: rgb(64, 255, 0);
+    -fx-effect: dropshadow( three-pass-box , rgb(64, 255, 0), 5, 0.0 , 0 , 1 );
 }
 
 #meatButton {
-    -fx-background-image: url('../../../../../resources/icons/01-meat.png');
+    -fx-background-image: url('icons/01-meat.png');
 }
 #fishButton {
-    -fx-background-image: url('../../../../../resources/icons/02-fish.png');
+    -fx-background-image: url('icons/02-fish.png');
 }
 #fruitButton {
-    -fx-background-image: url('../../../../../resources/icons/03-fruit.png');
+    -fx-background-image: url('icons/03-fruit.png');
 }
 #groceryButton {
-    -fx-background-image: url('../../../../../resources/icons/04-grocery.png');
+    -fx-background-image: url('icons/04-grocery.png');
 }
 #breadButton {
-    -fx-background-image: url('../../../../../resources/icons/05-bread.png');
+    -fx-background-image: url('icons/05-bread.png');
 }
 #beerButton {
-    -fx-background-image: url('../../../../../resources/icons/06-beer.png');
+    -fx-background-image: url('icons/06-beer.png');
 }
 #healthcareButton {
-    -fx-background-image: url('../../../../../resources/icons/07-healthcare.png');
+    -fx-background-image: url('icons/07-healthcare.png');
 }
 #ice-creamButton {
-    -fx-background-image: url('../../../../../resources/icons/08-ice-cream.png');
+    -fx-background-image: url('icons/08-ice-cream.png');
 }
 #housekeepingButton {
-    -fx-background-image: url('../../../../../resources/icons/09-housekeeping.png');
+    -fx-background-image: url('icons/09-housekeeping.png');
 }
 #petButton {
-    -fx-background-image: url('../../../../../resources/icons/10-pet2.png');
+    -fx-background-image: url('icons/10-pet2.png');
 }
 #babyButton {
-    -fx-background-image: url('../../../../../resources/icons/11-baby.png');
+    -fx-background-image: url('icons/11-baby.png');
 }
 #stationeryButton {
-    -fx-background-image: url('../../../../../resources/icons/12-stationery.png');
+    -fx-background-image: url('icons/12-stationery.png');
 }
 #snackButton {
-    -fx-background-image: url('../../../../../resources/icons/13-snack.png');
+    -fx-background-image: url('icons/13-snack.png');
 }
 
 #logoutButton {
@@ -204,10 +204,10 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: 50px;
     -fx-border-radius: 10, 10, 10, 10;
-    -fx-background-image: url('../../../../../resources/icons/logout.png');
+    -fx-background-image: url('icons/logout.png');
 }
 #logoutButton:hover{
-     -fx-effect: dropshadow( three-pass-box , rgb(79, 172, 254), 5, 0.0 , 0 , 1 );
+     -fx-effect: dropshadow( three-pass-box , rgb(64, 255, 0), 5, 0.0 , 0 , 1 );
  }
 
 #aboutUsButton {
@@ -216,10 +216,10 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: 50px;
     -fx-border-radius: 10, 10, 10, 10;
-    -fx-background-image: url('../../../../../resources/icons/aboutUs.png');
+    -fx-background-image: url('icons/aboutUs.png');
 }
 #aboutUsButton:hover{
-    -fx-effect: dropshadow( three-pass-box , rgb(79, 172, 254), 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow( three-pass-box , rgb(64, 255, 0), 5, 0.0 , 0 , 1 );
 }
 
 .articleItem{
@@ -231,7 +231,7 @@
 }
 .articleItem:hover{
     -fx-background-color: rgba(255, 255, 255, 1);
-    -fx-border-color: rgb(79, 172, 254);
+    -fx-border-color: rgb(64, 255, 0);
 }
 
 .card{
@@ -246,7 +246,7 @@
 }
 
 .loginButtons {
-    -fx-background-color: rgb(79, 172, 254);
+    -fx-background-color: rgb(64, 255, 0);
     -fx-background-radius: 30;
     -fx-border-radius: 30;
     -fx-text-fill: rgb(0, 0, 0);
@@ -254,8 +254,8 @@
 }
 
 .loginButtons:hover {
-    -fx-background-color: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
-    -fx-effect: dropshadow(three-pass-box, rgb(31, 162, 255), 2, 0.0, 0, 1);
+    -fx-background-color: linear-gradient(to right, #40ff00 0%, #f0ff00 51%, #40ff00 100%);
+    -fx-effect: dropshadow(three-pass-box, rgb(64, 255, 0), 2, 0.0, 0, 1);
 
 }
 
@@ -275,7 +275,7 @@
     -fx-border-color: rgb(0, 0, 0);
 }
 .searchTextField{
-    -fx-text-fill: rgb(79, 172, 254);
+    -fx-text-fill: rgb(64, 255, 0);
 }
 .searchBox{
 

@@ -21,7 +21,7 @@
                <children>
                   <HBox prefHeight="80.0" prefWidth="778.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="78.0" prefWidth="778.0" text="Benvenuti nel nostro supermercato!">
+                        <Label alignment="CENTER" prefHeight="78.0" prefWidth="778.0" styleClass="whiteText" text="Benvenuti nel nostro supermercato!">
                            <font>
                               <Font name="Verdana" size="18.0" />
                            </font>
@@ -171,7 +171,7 @@
                            <children>
                               <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="286.0">
                                  <children>
-                                    <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="140.0" styleClass="LoginLabel" text="Codice Carta">
+                                    <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="140.0" styleClass="whiteText" text="Codice Carta">
                                        <font>
                                           <Font name="Verdana" size="18.0" />
                                        </font>
@@ -199,7 +199,7 @@
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="286.0">
                                  <children>
-                                    <Label prefHeight="30.0" prefWidth="140.0" styleClass="LoginLabel" text="PIN">
+                                    <Label prefHeight="30.0" prefWidth="140.0" styleClass="whiteText" text="PIN">
                                        <font>
                                           <Font name="Verdana" size="18.0" />
                                        </font>

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="background" stylesheets="@../view/test.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.MarketSectionLayoutController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="background" stylesheets="@test.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.MarketSectionLayoutController">
     <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
       <left>
          <VBox prefHeight="558.0" prefWidth="250.0" BorderPane.alignment="CENTER">
@@ -46,7 +46,7 @@
                <children>
                   <HBox alignment="TOP_CENTER" fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="34.0" prefWidth="228.0">
                      <children>
-                        <Label fx:id="articleNameLabel" prefHeight="74.0" prefWidth="149.0" styleClass="loginLabels" text="\@nome articolo" textFill="WHITE">
+                        <Label fx:id="articleNameLabel" prefHeight="74.0" prefWidth="149.0" styleClass="whiteText" text="\@nome articolo" textFill="WHITE">
                            <font>
                               <Font name="Verdana" size="16.0" />
                            </font>
@@ -54,7 +54,7 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <Label fx:id="articlePriceLabel" alignment="CENTER_RIGHT" prefHeight="85.0" prefWidth="103.0" styleClass="loginLabels" text="\@$2.99" textFill="WHITE">
+                        <Label fx:id="articlePriceLabel" alignment="CENTER_RIGHT" prefHeight="85.0" prefWidth="103.0" styleClass="colorText" text="\@$2.99" textFill="WHITE">
                            <font>
                               <Font name="Verdana Bold" size="16.0" />
                            </font>
@@ -84,7 +84,7 @@
                      <children>
                         <HBox prefHeight="1.0" prefWidth="249.0">
                            <children>
-                              <Label fx:id="articleProducerLabel" alignment="CENTER" prefHeight="48.0" prefWidth="229.0" styleClass="loginLabels" text="\@Marca" textFill="WHITE">
+                              <Label fx:id="articleProducerLabel" alignment="CENTER" prefHeight="48.0" prefWidth="229.0" styleClass="whiteText" text="\@Marca" textFill="WHITE">
                                  <font>
                                     <Font name="Verdana Bold Italic" size="16.0" />
                                  </font>
@@ -99,7 +99,7 @@
                         </HBox>
                         <HBox prefHeight="6.0" prefWidth="249.0">
                            <children>
-                              <Label fx:id="articleDescription1Label" prefHeight="48.0" prefWidth="248.0" styleClass="loginLabels" text="\@descrizione" textFill="WHITE">
+                              <Label fx:id="articleDescription1Label" prefHeight="48.0" prefWidth="248.0" styleClass="whiteText" text="\@descrizione" textFill="WHITE">
                                  <font>
                                     <Font name="Verdana Italic" size="14.0" />
                                  </font>
@@ -114,7 +114,7 @@
                         </HBox>
                         <HBox prefHeight="2.0" prefWidth="249.0">
                            <children>
-                              <Label fx:id="articleDescription2Label" prefHeight="48.0" prefWidth="248.0" styleClass="loginLabels" text="\@quantita" textFill="WHITE">
+                              <Label fx:id="articleDescription2Label" prefHeight="48.0" prefWidth="248.0" styleClass="whiteText" text="\@quantita" textFill="WHITE">
                                  <font>
                                     <Font name="Verdana Italic" size="14.0" />
                                  </font>
@@ -134,7 +134,7 @@
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="33.0" prefWidth="228.0">
                      <children>
-                        <Label prefHeight="82.0" prefWidth="109.0" styleClass="loginLabels" text="Quantità" textFill="WHITE">
+                        <Label prefHeight="82.0" prefWidth="109.0" styleClass="whiteText" text="Quantità" textFill="WHITE">
                            <font>
                               <Font name="Verdana" size="16.0" />
                            </font>
@@ -142,7 +142,7 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <HBox id="ovalHBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="120.0" styleClass="whiteBG">
+                        <HBox id="ovalHBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="120.0">
                            <children>
                               <Button fx:id="decrementButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleDecrement" prefHeight="60.0" prefWidth="39.0" text="-" textFill="#4facfe">
                                  <font>
@@ -206,7 +206,7 @@
                            <Font name="Verdana Italic" size="16.0" />
                         </font>
                         <styleClass>
-                           <String fx:value="loginTextField" />
+                           <String fx:value="searchTextField" />
                            <String fx:value="transparent" />
                         </styleClass>
                      </TextField>
@@ -278,7 +278,7 @@
                   <children>
                      <VBox alignment="CENTER" prefHeight="155.0" prefWidth="248.0">
                         <children>
-                           <Label fx:id="quantitaTotaleCarrelloLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="248.0" styleClass="loginLabels" text="\@tot articoli" textAlignment="CENTER" textFill="WHITE">
+                           <Label fx:id="quantitaTotaleCarrelloLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="248.0" styleClass="whiteText" text="\@tot articoli" textAlignment="CENTER" textFill="WHITE">
                               <font>
                                  <Font name="Verdana" size="14.0" />
                               </font>
@@ -297,7 +297,7 @@
                         <children>
                            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="448.0">
                               <children>
-                                 <Label fx:id="articolo7Label" prefHeight="53.0" prefWidth="167.0" styleClass="blackText" text="articolo 1" textFill="WHITE">
+                                 <Label fx:id="articolo7Label" prefHeight="53.0" prefWidth="167.0" styleClass="whiteText" text="articolo 1" textFill="WHITE">
                                     <font>
                                        <Font name="Verdana" size="14.0" />
                                     </font>
@@ -307,7 +307,7 @@
                                  </Label>
                                  <HBox id="ovalHBox" fx:id="articolo7InfoHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0">
                                     <children>
-                                       <Label fx:id="quantita7Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="40.0" styleClass="blackText" text="\@1x" textFill="WHITE">
+                                       <Label fx:id="quantita7Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="40.0" styleClass="whiteText" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -315,7 +315,7 @@
                                              <Insets left="10.0" />
                                           </HBox.margin>
                                        </Label>
-                                       <Label fx:id="prezzo7Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="60.0" styleClass="blackText" text="\@prezzo" textFill="WHITE">
+                                       <Label fx:id="prezzo7Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="60.0" styleClass="whiteText" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -342,7 +342,7 @@
                         <children>
                            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="448.0">
                               <children>
-                                 <Label fx:id="articolo6Label" prefHeight="53.0" prefWidth="167.0" styleClass="blackText" text="articolo 1" textFill="WHITE">
+                                 <Label fx:id="articolo6Label" prefHeight="53.0" prefWidth="167.0" styleClass="whiteText" text="articolo 1" textFill="WHITE">
                                     <font>
                                        <Font name="Verdana" size="14.0" />
                                     </font>
@@ -352,7 +352,7 @@
                                  </Label>
                                  <HBox id="ovalHBox" fx:id="articolo6InfoHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0">
                                     <children>
-                                       <Label fx:id="quantita6Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="40.0" styleClass="blackText" text="\@1x" textFill="WHITE">
+                                       <Label fx:id="quantita6Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="40.0" styleClass="whiteText" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -360,7 +360,7 @@
                                              <Insets left="10.0" />
                                           </HBox.margin>
                                        </Label>
-                                       <Label fx:id="prezzo6Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="60.0" styleClass="blackText" text="\@prezzo" textFill="WHITE">
+                                       <Label fx:id="prezzo6Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="60.0" styleClass="whiteText" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -387,7 +387,7 @@
                         <children>
                            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="448.0">
                               <children>
-                                 <Label fx:id="articolo5Label" prefHeight="53.0" prefWidth="167.0" styleClass="blackText" text="articolo 1" textFill="WHITE">
+                                 <Label fx:id="articolo5Label" prefHeight="53.0" prefWidth="167.0" styleClass="whiteText" text="articolo 1" textFill="WHITE">
                                     <font>
                                        <Font name="Verdana" size="14.0" />
                                     </font>
@@ -397,7 +397,7 @@
                                  </Label>
                                  <HBox id="ovalHBox" fx:id="articolo5InfoHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0">
                                     <children>
-                                       <Label fx:id="quantita5Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="40.0" styleClass="blackText" text="\@1x" textFill="WHITE">
+                                       <Label fx:id="quantita5Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="40.0" styleClass="whiteText" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -405,7 +405,7 @@
                                              <Insets left="10.0" />
                                           </HBox.margin>
                                        </Label>
-                                       <Label fx:id="prezzo5Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="60.0" styleClass="blackText" text="\@prezzo" textFill="WHITE">
+                                       <Label fx:id="prezzo5Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="60.0" styleClass="whiteText" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -432,7 +432,7 @@
                         <children>
                            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="228.0">
                               <children>
-                                 <Label fx:id="articolo4Label" prefHeight="53.0" prefWidth="167.0" styleClass="blackText" text="articolo 1" textFill="WHITE">
+                                 <Label fx:id="articolo4Label" prefHeight="53.0" prefWidth="167.0" styleClass="whiteText" text="articolo 1" textFill="WHITE">
                                     <font>
                                        <Font name="Verdana" size="14.0" />
                                     </font>
@@ -442,7 +442,7 @@
                                  </Label>
                                  <HBox id="ovalHBox" fx:id="articolo4InfoHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0">
                                     <children>
-                                       <Label fx:id="quantita4Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="40.0" styleClass="blackText" text="\@1x" textFill="WHITE">
+                                       <Label fx:id="quantita4Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="40.0" styleClass="whiteText" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -450,7 +450,7 @@
                                              <Insets left="10.0" />
                                           </HBox.margin>
                                        </Label>
-                                       <Label fx:id="prezzo4Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="60.0" styleClass="blackText" text="\@prezzo" textFill="WHITE">
+                                       <Label fx:id="prezzo4Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="60.0" styleClass="whiteText" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -477,7 +477,7 @@
                         <children>
                            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="448.0">
                               <children>
-                                 <Label fx:id="articolo3Label" prefHeight="53.0" prefWidth="167.0" styleClass="blackText" text="articolo 1" textFill="WHITE">
+                                 <Label fx:id="articolo3Label" prefHeight="53.0" prefWidth="167.0" styleClass="whiteText" text="articolo 1" textFill="WHITE">
                                     <font>
                                        <Font name="Verdana" size="14.0" />
                                     </font>
@@ -487,7 +487,7 @@
                                  </Label>
                                  <HBox id="ovalHBox" fx:id="articolo3InfoHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0">
                                     <children>
-                                       <Label fx:id="quantita3Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="40.0" styleClass="blackText" text="\@1x" textFill="WHITE">
+                                       <Label fx:id="quantita3Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="40.0" styleClass="whiteText" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -495,7 +495,7 @@
                                              <Insets left="10.0" />
                                           </HBox.margin>
                                        </Label>
-                                       <Label fx:id="prezzo3Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="60.0" styleClass="blackText" text="\@prezzo" textFill="WHITE">
+                                       <Label fx:id="prezzo3Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="60.0" styleClass="whiteText" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -522,7 +522,7 @@
                         <children>
                            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="448.0">
                               <children>
-                                 <Label fx:id="articolo2Label" prefHeight="53.0" prefWidth="167.0" styleClass="blackText" text="articolo 1" textFill="WHITE">
+                                 <Label fx:id="articolo2Label" prefHeight="53.0" prefWidth="167.0" styleClass="whiteText" text="articolo 1" textFill="WHITE">
                                     <font>
                                        <Font name="Verdana" size="14.0" />
                                     </font>
@@ -532,7 +532,7 @@
                                  </Label>
                                  <HBox id="ovalHBox" fx:id="articolo2InfoHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0">
                                     <children>
-                                       <Label fx:id="quantita2Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="40.0" styleClass="blackText" text="\@1x" textFill="WHITE">
+                                       <Label fx:id="quantita2Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="40.0" styleClass="whiteText" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -540,7 +540,7 @@
                                              <Insets left="10.0" />
                                           </HBox.margin>
                                        </Label>
-                                       <Label fx:id="prezzo2Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="60.0" styleClass="blackText" text="\@prezzo" textFill="WHITE">
+                                       <Label fx:id="prezzo2Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="60.0" styleClass="whiteText" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -567,7 +567,7 @@
                         <children>
                            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="448.0">
                               <children>
-                                 <Label fx:id="articolo1Label" prefHeight="53.0" prefWidth="167.0" styleClass="blackText" text="articolo 1" textFill="WHITE">
+                                 <Label fx:id="articolo1Label" prefHeight="53.0" prefWidth="167.0" styleClass="whiteText" text="articolo 1" textFill="WHITE">
                                     <font>
                                        <Font name="Verdana" size="14.0" />
                                     </font>
@@ -577,7 +577,7 @@
                                  </Label>
                                  <HBox id="ovalHBox" fx:id="articolo1InfoHBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="120.0">
                                     <children>
-                                       <Label fx:id="quantita1Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="40.0" styleClass="blackText" text="\@1x" textFill="WHITE">
+                                       <Label fx:id="quantita1Label" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="40.0" styleClass="whiteText" text="\@1x" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -585,7 +585,7 @@
                                              <Insets left="10.0" />
                                           </HBox.margin>
                                        </Label>
-                                       <Label fx:id="prezzo1Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="60.0" styleClass="blackText" text="\@prezzo" textFill="WHITE">
+                                       <Label fx:id="prezzo1Label" alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="60.0" styleClass="whiteText" text="\@prezzo" textFill="WHITE">
                                           <font>
                                              <Font name="Verdana Bold" size="12.0" />
                                           </font>
@@ -610,7 +610,7 @@
                      </VBox>
                      <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="248.0">
                         <children>
-                           <Label fx:id="rimanentiLabel" alignment="CENTER" prefHeight="60.0" prefWidth="248.0" styleClass="loginLabels" textAlignment="CENTER" textFill="WHITE">
+                           <Label fx:id="rimanentiLabel" alignment="CENTER" prefHeight="60.0" prefWidth="248.0" styleClass="colorText" textAlignment="CENTER" textFill="WHITE">
                               <font>
                                  <Font name="Verdana Italic" size="12.0" />
                               </font>

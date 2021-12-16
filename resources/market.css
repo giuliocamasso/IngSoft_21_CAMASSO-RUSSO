@@ -2,7 +2,7 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
-    -fx-background-image: url('../../../../../resources/backgrounds/OrangeGradient.png');
+    -fx-background-image: url('backgrounds/OrangeGradient.png');
 }
 
 .loginBackground{
@@ -32,7 +32,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 
-    -fx-background-image: url('../../../../../resources/images/unicas.png');
+    -fx-background-image: url('images/unicas.png');
 }
 
 .scroll-pane > .viewport {
@@ -197,43 +197,43 @@
 }
 
 #meatButton {
-    -fx-background-image: url('../../../../../resources/icons/01-meat.png');
+    -fx-background-image: url('icons/01-meat.png');
 }
 #fishButton {
-    -fx-background-image: url('../../../../../resources/icons/02-fish.png');
+    -fx-background-image: url('icons/02-fish.png');
 }
 #fruitButton {
-     -fx-background-image: url('../../../../../resources/icons/03-fruit.png');
+     -fx-background-image: url('icons/03-fruit.png');
  }
 #groceryButton {
-    -fx-background-image: url('../../../../../resources/icons/04-grocery.png');
+    -fx-background-image: url('icons/04-grocery.png');
 }
 #breadButton {
-    -fx-background-image: url('../../../../../resources/icons/05-bread.png');
+    -fx-background-image: url('icons/05-bread.png');
 }
 #beerButton {
-    -fx-background-image: url('../../../../../resources/icons/06-beer.png');
+    -fx-background-image: url('icons/06-beer.png');
 }
 #healthcareButton {
-    -fx-background-image: url('../../../../../resources/icons/07-healthcare.png');
+    -fx-background-image: url('icons/07-healthcare.png');
 }
 #ice-creamButton {
-    -fx-background-image: url('../../../../../resources/icons/08-ice-cream.png');
+    -fx-background-image: url('icons/08-ice-cream.png');
 }
 #housekeepingButton {
-    -fx-background-image: url('../../../../../resources/icons/09-housekeeping.png');
+    -fx-background-image: url('icons/09-housekeeping.png');
 }
 #petButton {
-    -fx-background-image: url('../../../../../resources/icons/10-pet2.png');
+    -fx-background-image: url('icons/10-pet2.png');
 }
 #babyButton {
-    -fx-background-image: url('../../../../../resources/icons/11-baby.png');
+    -fx-background-image: url('icons/11-baby.png');
 }
 #stationeryButton {
-    -fx-background-image: url('../../../../../resources/icons/12-stationery.png');
+    -fx-background-image: url('icons/12-stationery.png');
 }
 #snackButton {
-    -fx-background-image: url('../../../../../resources/icons/13-snack.png');
+    -fx-background-image: url('icons/13-snack.png');
 }
 
 #logoutButton {
@@ -242,7 +242,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: 50px;
     -fx-border-radius: 10, 10, 10, 10;
-    -fx-background-image: url('../../../../../resources/icons/logout.png');
+    -fx-background-image: url('icons/logout.png');
 }
 
 #aboutUsButton {
@@ -251,7 +251,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: 50px;
     -fx-border-radius: 10, 10, 10, 10;
-    -fx-background-image: url('../../../../../resources/icons/aboutUs.png');
+    -fx-background-image: url('icons/aboutUs.png');
 }
 /*---------------------------------------------------------------------------*/
 
