@@ -608,7 +608,7 @@
                         <children>
                            <Label fx:id="rimanentiLabel" alignment="CENTER" prefHeight="60.0" prefWidth="248.0" styleClass="colorText" textAlignment="CENTER" textFill="WHITE">
                               <font>
-                                 <Font name="Verdana Italic" size="12.0" />
+                                 <Font name="Verdana Bold" size="12.0" />
                               </font>
                            </Label>
                         </children>
