@@ -1,4 +1,5 @@
 package it.unicas.supermarket;
+
 import it.unicas.supermarket.controller.LoginLayoutController;
 import it.unicas.supermarket.controller.MarketSectionLayoutController;
 import it.unicas.supermarket.controller.OrderSummaryLayoutController;
@@ -10,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -31,6 +34,9 @@ public class App {
     private Scene marketSectionScene;
     private Scene paymentSectionScene;
     private Scene loginSectionScene;
+
+    // to enable blur while showing receipt
+    private AnchorPane orderSummaryLayoutPane;
 
     // controller
     private LoginLayoutController loginLayoutController;
@@ -213,10 +219,10 @@ public class App {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/OrderSummaryLayout.fxml"));
 
-            AnchorPane orderSummaryLayout = loader.load();
+            this.orderSummaryLayoutPane = loader.load();
 
             // inizializzo la nuova scena
-            Scene orderSummaryScene = new Scene(orderSummaryLayout);
+            Scene orderSummaryScene = new Scene(orderSummaryLayoutPane);
 
             // imposto la scena sul mainStage e aggiorno l'handler della scena di App
             mainStage.setScene(orderSummaryScene);
@@ -241,6 +247,9 @@ public class App {
      */
     public void showReceipt() {
         try {
+
+            setBlur(true);
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("view/Receipt.fxml"));
             Stage dialogStage = new Stage();
@@ -314,7 +323,9 @@ public class App {
 
         loginLayoutController.getPuntiFedeltaLabel().setText(String.valueOf(puntiFedelta));
         loginLayoutController.getMessageLabel().setText("Grazie per averci scelto!");
-        loginLayoutController.getConfirmButton().setText("Confirm");
+        loginLayoutController.getConfirmButton().setText("Conferma");
+        loginLayoutController.getCodiceCartaTextField().setEditable(false);
+        loginLayoutController.getPinPasswordField().setEditable(false);
         mainStage.setScene(loginSectionScene);
     }
 
@@ -353,7 +364,7 @@ public class App {
      */
     public void aboutUs() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
+        alert.setWidth(500);
         alert.setTitle("GG Supermarket Info");
         alert.setHeaderText("About");
         alert.setContentText("Autori: Camasso Giulio, Russo Giulio\nGitHub: https://github.com/giuliocamasso/IngSoft_21_CAMASSO-RUSSO");
@@ -372,5 +383,13 @@ public class App {
         marketSectionLayoutController.resetMarketSection();
 
         mainStage.setScene(marketSectionScene);
+    }
+
+    public void setBlur(boolean enable) {
+
+        if(enable)
+            orderSummaryLayoutPane.setEffect(new GaussianBlur(10));
+        else
+            orderSummaryLayoutPane.setEffect(new GaussianBlur(-10));
     }
 }

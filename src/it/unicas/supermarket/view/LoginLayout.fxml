@@ -235,14 +235,14 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <children>
-                                    <Button fx:id="confirmButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="30.0" prefWidth="90.0" styleClass="loginButtons" text="Confirm">
+                                    <Button fx:id="confirmButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="30.0" prefWidth="120.0" styleClass="loginButtons" text="Conferma">
                                        <font>
-                                          <Font name="Verdana" size="11.0" />
+                                          <Font name="Verdana Bold" size="12.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="ejectButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEject" prefHeight="30.0" prefWidth="90.0" styleClass="loginButtons" text="Eject">
+                                    <Button fx:id="ejectButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEject" prefHeight="30.0" prefWidth="120.0" styleClass="loginButtons" text="Rimuovi">
                                        <font>
-                                          <Font name="Verdana" size="11.0" />
+                                          <Font name="Verdana Bold" size="12.0" />
                                        </font>
                                     </Button>
                                  </children>

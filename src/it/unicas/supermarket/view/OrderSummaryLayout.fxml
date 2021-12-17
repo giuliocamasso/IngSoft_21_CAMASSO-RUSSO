@@ -51,7 +51,7 @@
                   </ScrollPane>
                   <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="799.0" spacing="20.0">
                      <children>
-                        <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleMarket" prefHeight="45.0" prefWidth="250.0" styleClass="loginButtons" text="Torna ai Reparti" textFill="#828282">
+                        <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleMarket" prefHeight="45.0" prefWidth="250.0" styleClass="loginButtons" text="Torna ai reparti" textFill="#828282">
                            <font>
                               <Font name="Verdana Bold" size="18.0" />
                            </font>

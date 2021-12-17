@@ -23,11 +23,22 @@ import java.sql.SQLException;
 public class LoginLayoutController {
 
     @FXML private TextField codiceCartaTextField;
+
+
+
     @FXML private PasswordField pinPasswordField;
     @FXML private Label messageLabel;
     @FXML private Label codiceCartaLabel;
     @FXML private Label codiceClienteLabel;
     @FXML private Label massimaliLabel;
+
+    public TextField getCodiceCartaTextField() {
+        return codiceCartaTextField;
+    }
+
+    public PasswordField getPinPasswordField() {
+        return pinPasswordField;
+    }
 
     public Label getMessageLabel() {
         return messageLabel;
@@ -165,7 +176,7 @@ public class LoginLayoutController {
         this.cardAccepted = true;
 
         // updating navigation button
-        confirmButton.setText("AI REPARTI");
+        confirmButton.setText("Vai ai reparti");
         codiceCartaTextField.setEditable(false);
         pinPasswordField.setEditable(false);
         codiceCartaLabel.setText(codiceCarta);
@@ -182,7 +193,7 @@ public class LoginLayoutController {
         messageLabel.setText("Inserite la vostra carta...");
         messageLabel.setStyle("-fx-text-fill: rgb(0,255,43)");
 
-        confirmButton.setText("Confirm");
+        confirmButton.setText("Conferma");
 
         codiceCartaTextField.setEditable(true);
         pinPasswordField.setEditable(true);

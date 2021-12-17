@@ -97,6 +97,8 @@ public class ReceiptController {
      */
     @FXML
     public void handleLogin(){
+        // disable background blur
+        App.getInstance().setBlur(false);
         App.getInstance().ejectCardAfterPayment();
         dialogStage.close();
     }
