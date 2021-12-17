@@ -39,7 +39,8 @@ public class Util {
         List<Carte> cardToBeChecked = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
         if (cardToBeChecked.size() == 1)
             return cardToBeChecked.get(0).getPin();
-        else throw new DAOException("Error");
+        else
+            return "ERROR";
     }
 
     /**

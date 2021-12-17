@@ -6,6 +6,7 @@ import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.Util;
 import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.DAOMySQLSettings;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,48 +21,77 @@ import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Il controller che gestisce la schermata di navigazione tra i reparti del supermercato
+ */
 public class MarketSectionLayoutController implements Initializable {
 
-    // Section Buttons
+    // articoli mostrati sulla grid pane
+    private final List<Articoli> gridPaneArticles = new ArrayList<>();
+    // listener per mostrare i dettagli dell'articolo selezionato sul pannello 'Dettagli'
+    private ArticleSelectionListener articleSelectionListener;
 
-    private final String SelectionStyle =   "-fx-border-width: 1;" +
-                                            "-fx-border-color: rgb(79, 172, 254);" +
-                                            "-fx-effect: dropshadow( three-pass-box , rgb(79,172,254), 5, 0.0 , 0 , 1 );";
-    private final String vBoxStyle = "-fx-border-width: 0 0 1 0;\n-fx-border-color: rgb(79,172,254);";
-    private final String hBoxStyle = "-fx-border-radius: 50;\n-fx-border-width: 1;\n-fx-border-color: rgb(79,172,254);";
+    // articolo selezionato
+    private Articoli chosenArticle;
 
+    // variabili per l'aggiunta al carrello
+    private Integer chosenArticleQuantity;      // quantita' corrente da aggiungere al carrello
+    private Integer chosenArticleStorage;       // scorte articolo selezionato
+
+    // logger per tracciamento query
+    private static final Logger logger = Logger.getLogger(LoginLayoutController.class.getName());
+
+    // variabili gestione preview carrello - (pannello laterale destro)
+    private Integer cartSize = 0;
+    private final ArrayList<String> showedBarcodes = new ArrayList<>();
+
+    // barra superiore dei reparti
     @FXML private Button macelleriaButton;
     @FXML private Label macelleriaLabel;
+
     @FXML private Button pescheriaButton;
     @FXML private Label pescheriaLabel;
+
     @FXML private Button ortofruttaButton;
     @FXML private Label ortofruttaLabel;
+
     @FXML private Button alimentariButton;
     @FXML private Label alimentariLabel;
+
     @FXML private Button fornoButton;
     @FXML private Label fornoLabel;
+
     @FXML private Button bevandeButton;
     @FXML private Label bevandeLabel;
+
     @FXML private Button surgelatiButton;
     @FXML private Label surgelatiLabel;
+
     @FXML private Button snacksButton;
     @FXML private Label snacksLabel;
+
     @FXML private Button babyButton;
     @FXML private Label babyLabel;
+
     @FXML private Button cartoleriaButton;
     @FXML private Label cartoleriaLabel;
+
     @FXML private Button petButton;
     @FXML private Label petLabel;
+
     @FXML private Button benessereButton;
     @FXML private Label benessereLabel;
+
     @FXML private Button casalinghiButton;
     @FXML private Label casalinghiLabel;
 
@@ -71,18 +101,20 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private Button aboutUsButton;
     @FXML private Label aboutUsLabel;
 
-    // search-bar
+    // barra di ricerca
     @FXML private TextField searchTextField;
     @FXML private Button searchButton;
 
-    // left-panel
-    @FXML private Label articleNameLabel;
-    @FXML private Label articlePriceLabel;
-    @FXML private ImageView articleImageView;
-    @FXML private Label articleProducerLabel;
-    @FXML private Label articleDescription1Label;
-    @FXML private Label articleDescription2Label;
+    // Dettagli articolo - pannello laterale sinistro
+    @FXML private Label articleNameLabel;               // nome articolo
+    @FXML private Label articlePriceLabel;              // prezzo articolo
+    @FXML private ImageView articleImageView;           // immagine dell'articolo
+    @FXML private Label articleProducerLabel;           // produttore
+    @FXML private Label articleDescription1Label;       // descrizione estesa
+    @FXML private Label articleDescription2Label;       // descrizione quantita' articolo
     @FXML private Label quantityLabel;
+
+    // bottoni aggiunta al carrello
     @FXML private Button incrementButton;
     @FXML private Button decrementButton;
     @FXML private Button addToCartButton;
@@ -91,13 +123,7 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private ScrollPane articleScrollPane;
     @FXML private GridPane articleGridPane;
 
-    private final List<Articoli> gridPaneArticles = new ArrayList<>();
-    private ArticleSelectionListener articleSelectionListener;
-    private Articoli chosenArticle;
-    private Integer chosenArticleQuantity;
-    private Integer chosenArticleStorage;
-
-    // right-panel
+    // Carrello - pannello laterale destro
     @FXML private VBox articolo1VBox;
     @FXML private HBox articolo1InfoHBox;
     @FXML private Label articolo1Label;
@@ -144,150 +170,69 @@ public class MarketSectionLayoutController implements Initializable {
     @FXML private Label totaleCarrelloLabel;
     @FXML private Label quantitaTotaleCarrelloLabel;
 
+    // bottone navigazione alla sezione pagamenti
     @FXML private Button pagaOraButton;
 
-    // logger for tracking queries
-    private static final Logger logger = Logger.getLogger(LoginLayoutController.class.getName());
-
-    private Integer cartSize = 0;
-    private final ArrayList<String> showedBarcodes = new ArrayList<>();
-
-    // by default, this loads and shows all the available articles
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    /**
+     * Metodo di inizializzazione del controller (implements Initializable)
+     * Per default vengono mostrati TUTTI gli articoli presenti nel supermercato
+     */
+    @Override public void initialize(URL location, ResourceBundle resources) {
         resetMarketSection();
     }
 
+    /**
+     * Il metodo restituisce gli articoli presenti nel database secondo la metrica 'filter'<br>
+     * Puo' cercare gli articoli di un determinato reparto, oppure effettuare una ricerca per nome
+     * @param filter Il nome del reparto(eventuale) di cui si vogliono ottenere gli articoli,
+     *               oppure la radice del nome da cercare
+     * @param isSection Indica se il il 'filter' passato in ingresso e' un reparto oppure la radice di un articolo da ricercare
+     * @return Restituisce la lista degli articoli filtrati
+     */
     private List<Articoli> getArticles(String filter, boolean isSection) throws DAOException, SQLException, IOException {
-        // loading articles from db
-        List<Articoli> articoli;
 
+        List<Articoli> articoli;
+        // se filter indica un reparto, leggo gli articoli di tale reparto
         if(isSection)
             articoli = filterBySection(filter);
 
+        // carico tutti gli articoli presenti nel supermercato
         else if (filter.equals("Initialize"))
             articoli = ArticoliDAOMySQL.getInstance().selectAll();
+
+        // altrimenti ricerco per nome
         else {
             articoli = filterByName(filter);
             if(articoli.size()==0)
                 searchTextField.setText("Nessun articolo trovato per \" " + filter + "\"!");
+
+            // deseleziono l'eventuale reparto selezionato ( grafica )
             updateSectionBar("None");
         }
 
         return articoli;
     }
 
+    /**
+     * Il metodo esegue una ricerca tra gli articoli nel db per nome<br>
+     * NB. Nel caso di passaggio di stringa vuota, si restiuiscono tutti gli articoli del supermercato
+     * @param name La radice dell'articolo da ricercare
+     * @return Restituisce gli eventuali articoli cercati
+     */
     private List<Articoli> filterByName(String name) throws DAOException {
         return ArticoliDAOMySQL.getInstance().select(new Articoli(name,""));
     }
 
-    private void setChosenArticle(Articoli articolo) {
-        // updates the left-panel
-        this.chosenArticle = articolo;
-        this.chosenArticleQuantity = 0;
-        try {
-            this.chosenArticleStorage = checkStock(this.chosenArticle.getBarcode());
-        }
-        catch (DAOException e) {
-            e.printStackTrace();
-        }
-
-        updateArticlePane();
-    }
-
     /**
-     * Il metodo porta al riepilogo dell'ordine in corso
+     * Il metodo cerca gli articoli filtrando per reparto<br>
+     * Di fatto specializza la select() di ArticoliDAOMySQL ricercando per reparti
+     * @param section Il reparto di cui voglio leggere gli articoli
+     * @return Restituisce gli articoli del reparto selezionato
      */
-    @FXML
-    public void handleCart() throws DAOException, IOException {
-        if (App.getInstance().cartMap.size() == 0)
-            return;
-        else if (!App.getInstance().isOrderSummaryVisited())
-                App.getInstance().initOrderSummaryLayout();
-        else
-            App.getInstance().backToPaymentFromSections();
-    }
-
-    public void loadSectionArticles(String section){
-
-        clearGridItems();
-        gridPaneArticles.clear();
-
-        try {
-            loadFilteredItems(section, true);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // update graphics
-        updateSectionBar(section);
-
-        App.getInstance().setReparto(section);
-
-    }
-
-    // section buttons
-    @FXML public void handleButchery()              { loadSectionArticles("Macelleria"); }
-    @FXML public void handleFishmonger()            { loadSectionArticles("Pescheria");  }
-    @FXML public void handleFruitAndVegetables()    { loadSectionArticles("Ortofrutta"); }
-    @FXML public void handleGrocery()               { loadSectionArticles("Alimentari"); }
-    @FXML public void handleBackery()               { loadSectionArticles("Forno");      }
-    @FXML public void handleDrinks()                { loadSectionArticles("Bevande");    }
-    @FXML public void handleFrozen()                { loadSectionArticles("Surgelati");  }
-    @FXML public void handleSnacks()                { loadSectionArticles("Snacks");     }
-    @FXML public void handleBaby()                  { loadSectionArticles("Baby");       }
-    @FXML public void handleStationery()            { loadSectionArticles("Cartoleria"); }
-    @FXML public void handlePet()                   { loadSectionArticles("Pet");        }
-    @FXML public void handleWellness()              { loadSectionArticles("Benessere");  }
-    @FXML public void handleHousehold()             { loadSectionArticles("Casalinghi"); }
-
-    public void setGridLayout(AnchorPane anchorPane){
-        // grid width
-        articleGridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
-        articleGridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
-        articleGridPane.setMaxWidth(Region.USE_PREF_SIZE);
-
-        // grid height
-        articleGridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
-        articleGridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        articleGridPane.setMaxHeight(Region.USE_PREF_SIZE);
-
-        // inset-margins
-        GridPane.setMargin(anchorPane, new Insets(10, 10, 10, 10));
-    }
-
-    // the filter can be a section name, or an article name! (from the search bar)
-    public void loadFilteredItems(String filter, boolean isSection) throws IOException {
-        clearGridItems();
-
-        try {
-           gridPaneArticles.addAll(getArticles(filter, isSection));
-           loadImages();
-       }
-       catch (DAOException | SQLException | IOException e) {
-           e.printStackTrace();
-       }
-
-       if (gridPaneArticles.size() > 0) {
-           setChosenArticle(gridPaneArticles.get(0));
-           articleSelectionListener = this::setChosenArticle;
-       }
-
-       try {
-           fillGridPane(gridPaneArticles);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-        loadImages();
-   }
-
-    public void clearGridItems(){
-        articleGridPane.getChildren().clear();
-    }
-
     public ArrayList<Articoli> filterBySection(String section) throws SQLException {
+
         Statement statement = DAOMySQLSettings.getStatement();
+
         String query = "select * from articoli where (reparto = '" + section +"');" ;
 
         if (Util.isQueryPrintingEnabled()){
@@ -325,11 +270,53 @@ public class MarketSectionLayoutController implements Initializable {
         return filteredArticles;
     }
 
+    /**
+     * Il metodo carica e mostra gli articoli filtrati per nome o sezione
+     * @param filter Indica il reparto o il nome degli articoli da caricare
+     * @param isSection Indica se il filtro passato e' un reparto (true) oppure un nome(false)
+     */
+    public void loadFilteredItems(String filter, boolean isSection) throws IOException {
+        // pulisco la griglia
+        clearGridItems();
+
+        // aggiungo gli articoli selezionati alla griglia, e ne carico le immagini
+        try {
+            gridPaneArticles.addAll(getArticles(filter, isSection));
+            loadImages();
+        }
+        catch (DAOException | SQLException | IOException e) {
+            e.printStackTrace();
+        }
+
+        // se viene caricato almeno un articolo, imposto il primo come articolo selezionato e ne mostro i dettagli
+        if (gridPaneArticles.size() > 0) {
+            setChosenArticle(gridPaneArticles.get(0));
+            //NB. aggiorno il listener corrente del controller con quello posseduto dal articolo selezionato
+            articleSelectionListener = this::setChosenArticle;
+        }
+
+        // aggiorno la grafica della griglia
+        try {
+            fillGridPane(gridPaneArticles);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // carico e immagini degli articoli della griglia
+        loadImages();
+    }
+
+    /**
+     * Il metodo aggiorna la grafica del grid pane, mostrando gli articoli passati
+     * @param articoli La lista degli articoli con cui riempire la griglia
+     */
     public void fillGridPane(List<Articoli> articoli) throws IOException {
+        // carico le immagini
         loadImages();
 
         int column = 0;
         int row = 1;
+        // per ciascun articolo da mostrare, carico fxml e controller
         for (Articoli articolo : articoli) {
 
             FXMLLoader itemLoader = new FXMLLoader();
@@ -339,81 +326,124 @@ public class MarketSectionLayoutController implements Initializable {
             ArticleGridItemController articleGridItemController = itemLoader.getController();
             articleGridItemController.loadItem(articolo, articleSelectionListener);
 
-            // filling gridPane
+            // ogni riga contiene 3 articoli
             if (column == 3) {
                 column = 0;
                 row++;
             }
 
-            articleGridPane.add(anchorPane, column++, row); //(child,column,row)
+            articleGridPane.add(anchorPane, column++, row);     //(child,column,row)
             setGridLayout(anchorPane);
         }
     }
 
+    /**
+     * Il metodo imposta l'URL dell'immagine di ciascun articolo<br>
+     * NB. l'URL dell'immagine degli articoli non e' inserita nel database,
+     * pertanto ogni volta che voglio mostrae un articolo devo prima leggerlo dal db,
+     * e poi assegnargli l'URL dell'immagine da mostrare
+     */
     private void loadImages(){
         for (Articoli articoli : gridPaneArticles)
             articoli.setImageURL(Articoli.getURLfromCode(articoli.getBarcode()));
     }
 
+    /**
+     * Il metodo definisce il layout della grid-pane che mostra gli articoli
+     * @param anchorPane Il pannello di cui si vogliono definire le proprieta'
+     */
+    public void setGridLayout(AnchorPane anchorPane){
+        // grid width
+        articleGridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
+        articleGridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        articleGridPane.setMaxWidth(Region.USE_PREF_SIZE);
+
+        // grid height
+        articleGridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
+        articleGridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        articleGridPane.setMaxHeight(Region.USE_PREF_SIZE);
+
+        // inset-margins
+        GridPane.setMargin(anchorPane, new Insets(10, 10, 10, 10));
+    }
+
+    /**
+     * Il metodo svuota il contenuto del grid pane
+     */
+    public void clearGridItems(){
+        articleGridPane.getChildren().clear();
+    }
+
+    /**
+     * Il metodo gestisce la grafica della barra dei reparti, disegnando il contorno del reparto selezionato
+     * e mettendone il nome in grassetto
+     * @param section Il reparto da selezionare
+     */
     void updateSectionBar(String section){
+
+        // css da applicare
         String prevStyle = "";
         String newFontStyle = "-fx-font-weight: bold";
+        // Section Buttons
+        String selectionStyle = "-fx-border-width: 1;" +
+                                "-fx-border-color: rgb(79, 172, 254);" +
+                                "-fx-effect: dropshadow( three-pass-box , rgb(79,172,254), 5, 0.0 , 0 , 1 );";
 
-        // restoring prev selected one
+        // Prima di aggiornare il reparto appena selezionato, resetto la grafica del precedente
         switch (App.getInstance().getReparto()) {
-            case "Macelleria":
+            case "Macelleria" -> {
                 macelleriaButton.setStyle(prevStyle);
                 macelleriaLabel.setStyle(prevStyle);
-                break;
-            case "Pescheria":
+            }
+            case "Pescheria" -> {
                 pescheriaButton.setStyle(prevStyle);
                 pescheriaLabel.setStyle(prevStyle);
-                break;
-            case "Ortofrutta":
+            }
+            case "Ortofrutta" -> {
                 ortofruttaButton.setStyle(prevStyle);
                 ortofruttaLabel.setStyle(prevStyle);
-                break;
-            case "Alimentari":
+            }
+            case "Alimentari" -> {
                 alimentariButton.setStyle(prevStyle);
                 alimentariLabel.setStyle(prevStyle);
-                break;
-            case "Forno":
+            }
+            case "Forno" -> {
                 fornoButton.setStyle(prevStyle);
                 fornoLabel.setStyle(prevStyle);
-                break;
-            case "Bevande":
+            }
+            case "Bevande" -> {
                 bevandeButton.setStyle(prevStyle);
                 bevandeLabel.setStyle(prevStyle);
-                break;
-            case "Surgelati":
+            }
+            case "Surgelati" -> {
                 surgelatiButton.setStyle(prevStyle);
                 surgelatiLabel.setStyle(prevStyle);
-                break;
-            case "Snacks":
+            }
+            case "Snacks" -> {
                 snacksButton.setStyle(prevStyle);
                 snacksLabel.setStyle(prevStyle);
-                break;
-            case "Baby":
+            }
+            case "Baby" -> {
                 babyButton.setStyle(prevStyle);
                 babyLabel.setStyle(prevStyle);
-                break;
-            case "Cartoleria":
+            }
+            case "Cartoleria" -> {
                 cartoleriaButton.setStyle(prevStyle);
                 cartoleriaLabel.setStyle(prevStyle);
-                break;
-            case "Pet":
+            }
+            case "Pet" -> {
                 petButton.setStyle(prevStyle);
                 petLabel.setStyle(prevStyle);
-                break;
-            case "Benessere":
+            }
+            case "Benessere" -> {
                 benessereButton.setStyle(prevStyle);
                 benessereLabel.setStyle(prevStyle);
-                break;
-            case "Casalinghi":
+            }
+            case "Casalinghi" -> {
                 casalinghiButton.setStyle(prevStyle);
                 casalinghiLabel.setStyle(prevStyle);
-                break;
-            case "None":
+            }
+            case "None" -> {
                 macelleriaButton.setStyle(prevStyle);
                 macelleriaLabel.setStyle(prevStyle);
                 pescheriaButton.setStyle(prevStyle);
@@ -440,179 +470,270 @@ public class MarketSectionLayoutController implements Initializable {
                 benessereLabel.setStyle(prevStyle);
                 casalinghiButton.setStyle(prevStyle);
                 casalinghiLabel.setStyle(prevStyle);
-                break;
+            }
         }
 
+        // aggiorno la grafica del reparto appena selezionato
         switch (section) {
             case "Macelleria" -> {
-                macelleriaButton.setStyle(SelectionStyle);
+                macelleriaButton.setStyle(selectionStyle);
                 macelleriaLabel.setStyle(newFontStyle);
             }
             case "Pescheria" -> {
-                pescheriaButton.setStyle(SelectionStyle);
+                pescheriaButton.setStyle(selectionStyle);
                 pescheriaLabel.setStyle(newFontStyle);
             }
             case "Ortofrutta" -> {
-                ortofruttaButton.setStyle(SelectionStyle);
+                ortofruttaButton.setStyle(selectionStyle);
                 ortofruttaLabel.setStyle(newFontStyle);
             }
             case "Alimentari" -> {
-                alimentariButton.setStyle(SelectionStyle);
+                alimentariButton.setStyle(selectionStyle);
                 alimentariLabel.setStyle(newFontStyle);
             }
             case "Forno" -> {
-                fornoButton.setStyle(SelectionStyle);
+                fornoButton.setStyle(selectionStyle);
                 fornoLabel.setStyle(newFontStyle);
             }
             case "Bevande" -> {
-                bevandeButton.setStyle(SelectionStyle);
+                bevandeButton.setStyle(selectionStyle);
                 bevandeLabel.setStyle(newFontStyle);
             }
             case "Surgelati" -> {
-                surgelatiButton.setStyle(SelectionStyle);
+                surgelatiButton.setStyle(selectionStyle);
                 surgelatiLabel.setStyle(newFontStyle);
             }
             case "Snacks" -> {
-                snacksButton.setStyle(SelectionStyle);
+                snacksButton.setStyle(selectionStyle);
                 snacksLabel.setStyle(newFontStyle);
             }
             case "Baby" -> {
-                babyButton.setStyle(SelectionStyle);
+                babyButton.setStyle(selectionStyle);
                 babyLabel.setStyle(newFontStyle);
             }
             case "Cartoleria" -> {
-                cartoleriaButton.setStyle(SelectionStyle);
+                cartoleriaButton.setStyle(selectionStyle);
                 cartoleriaLabel.setStyle(newFontStyle);
             }
             case "Pet" -> {
-                petButton.setStyle(SelectionStyle);
+                petButton.setStyle(selectionStyle);
                 petLabel.setStyle(newFontStyle);
             }
             case "Benessere" -> {
-                benessereButton.setStyle(SelectionStyle);
+                benessereButton.setStyle(selectionStyle);
                 benessereLabel.setStyle(newFontStyle);
             }
             case "Casalinghi" -> {
-                casalinghiButton.setStyle(SelectionStyle);
+                casalinghiButton.setStyle(selectionStyle);
                 casalinghiLabel.setStyle(newFontStyle);
             }
-            // no section is selected!
+            // caso nessun reparto selezionato
             case "None" -> {}
-
         }
     }
 
+    /**
+     * Il metodo gestisce la grid-pane della schermata, mostrando gli articoli del reparto(eventuale) selezionato
+     * @param section Il reparto di cui si volgiono mostrare gli articoli
+     */
+    public void loadSectionArticles(String section){
+        // svuoto la griglia
+        clearGridItems();
+        gridPaneArticles.clear();
+
+        // carico gli articoli da mostrare
+        try {
+            loadFilteredItems(section, true);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // aggiorno la grafica della barra dei reparti
+        updateSectionBar(section);
+
+        // infine, salvo il reparto selezionato in App
+        App.getInstance().setReparto(section);
+
+    }
+
+    /**
+     * Il metodo imposta l'articolo come 'selezionato', salvandone i dati nel controller e mostrandone i dettagli nel pannello Dettagli
+     * @param articolo L'articolo selezionato da impostare
+     */
+    private void setChosenArticle(Articoli articolo) {
+        // aggiorno il controller
+        this.chosenArticle = articolo;
+        this.chosenArticleQuantity = 0;
+
+        // controllo la quantita' presente in magazzino
+        try {
+            this.chosenArticleStorage = checkStock(this.chosenArticle.getBarcode());
+        }
+        catch (DAOException e) {
+            e.printStackTrace();
+        }
+
+        // aggiorno il pannello Dettagli
+        updateArticlePane();
+    }
+
+    /**
+     * Il metodo gestisce la grafica del pannello 'Dettagli articolo'
+     */
     void updateArticlePane(){
 
+        // nome e prezzo
         articleNameLabel.setText(this.chosenArticle.getNome());
         articlePriceLabel.setText(this.chosenArticle.getPrezzo()+" €");
 
+        // immagine
         Image image = new Image("file:" + this.chosenArticle.getImageURL());
         articleImageView.setImage(image);
 
+        // descrizioni
         articleProducerLabel.setText(this.chosenArticle.getProduttore());
         articleDescription1Label.setText(this.chosenArticle.getDescrizioneProdotto());
         articleDescription2Label.setText(this.chosenArticle.getDescrizioneQuantita());
 
-        // also set quantityLabel to zero
+        // di default la quantita' corrente selezionata e' zero
         quantityLabel.setText(String.valueOf(chosenArticleQuantity));
     }
 
-    // Add to cart buttons section
+    /**
+     * Il metodo gestisce il bottone '+' del selettore quantita' nel pannello dei dettagli articolo
+     */
     @FXML public void handleIncrement() {
 
         Integer cartQuantity = 0;
-        String cartMapKey = this.chosenArticle.getBarcode();
 
-        // chosen quantity + already in the cart quantity must be < than the available articles
+        // verifico la quantita' gia' aggiunta al carrello
+        String cartMapKey = this.chosenArticle.getBarcode();
         if(App.getInstance().getCartMap().containsKey(cartMapKey))
             cartQuantity = App.getInstance().getCartMap().get(cartMapKey);
 
+        // controllo se le scorte sono sufficienti
         if(this.chosenArticleQuantity + cartQuantity < this.chosenArticleStorage) {
             this.chosenArticleQuantity++;
             quantityLabel.setText(String.valueOf(chosenArticleQuantity));
         }
     }
 
+    /**
+     * Il metodo gestisce il bottone '-' del selettore quantita' nel pannello dei dettagli articolo
+     */
     @FXML public void handleDecrement(){
+        // posso diminuire solo se la quantita' corrente e' >= 1
         if(this.chosenArticleQuantity > 0) {
             this.chosenArticleQuantity--;
             quantityLabel.setText(String.valueOf(chosenArticleQuantity));
         }
     }
 
+    /**
+     * Il metodo gestisce l'aggiunta al carrello dell'articolo con la relativa quantita' selezionata
+     */
     @FXML public void handleAddToCart() throws DAOException {
 
-        // nothing to do in this case
         if(this.chosenArticleQuantity == 0)
             return;
 
         String cartMapKey = this.chosenArticle.getBarcode();
 
-        // the article is already in the cart
+        // caso articolo gia' nel carrello -> aggiorno la quantita'
         if(App.getInstance().getCartMap().containsKey(cartMapKey)) {
             Integer oldQuantity = App.getInstance().getCartMap().get(cartMapKey);
             App.getInstance().getCartMap().replace(cartMapKey, oldQuantity + this.chosenArticleQuantity);
         }
+        // altrimento lo inserisco nella mappa
         else{
             App.getInstance().getCartMap().put(cartMapKey, this.chosenArticleQuantity);
         }
 
-        // resets the current article quantity
+        // resetto la quantita' corrente a 0 aggiornando anche la label
         this.chosenArticleQuantity = 0;
         quantityLabel.setText(String.valueOf(0));
 
+        // infine aggiorno la grafica della preview del carrello
         updateCart();
     }
 
+    /**
+     * Il metodo porta al riepilogo dell'ordine corrente
+     */
+    @FXML
+    public void handleCart() throws DAOException, IOException {
+        if (App.getInstance().cartMap.size() != 0) {
+            if (!App.getInstance().isOrderSummaryVisited())
+                App.getInstance().initOrderSummaryLayout();
+            else
+                App.getInstance().backToPaymentFromSections();
+        }
+    }
+
+    /**
+     * il metodo restituisce la quantita' dell'articolo selezionato presente in magazzino<br>
+     * NB la quantita nel magazzino viene aggiornata solo dopo aver finalizzato con successo il pagamento di un ordine
+     * @param codiceArticolo il codice dell'articolo di cui si vuole ottenere la scorta in magazzino
+     * @return Restituisce le scorte disponibili del dato articolo
+     */
     Integer checkStock(String codiceArticolo) throws DAOException {
+
         List<Articoli> result = ArticoliDAOMySQL.getInstance().select(new Articoli("", codiceArticolo));
+
         if (result.size() != 1)
             throw new DAOException("checkStock() error. Article not found.");
+
         Integer storage = result.get(0).getScorteMagazzino();
 
+        // articolo non disponibile
         if(storage < 1) {
-            //articolo non disponibile
             return 0;
         }
         else return storage;
     }
 
+    /**
+     * Il metodo aggiorna la grafica del pannello laterale destro, contenente la preview del carrello<br>
+     * Sono mostrati sinteticamente gli ultimi articoli inseriti in ordine cronologico
+     */
     public void updateCart() throws DAOException {
 
         Integer cartSize = App.getInstance().getCartMap().size();
 
-        // aggiunto un nuovo articolo al carrello
+        // nuovo articolo aggiunto al carrello
         if (!cartSize.equals(this.cartSize)){
-            // update che cartSize var
+
+            // aggiorno la dimensione della preview del carrello
             this.cartSize = cartSize;
 
-            // devo riempire per la prima volta il pannello
+            // ci sono 7 slot disponibili: se ho ancora spazio...
             if (cartSize < 8) {
                 this.showedBarcodes.add(this.chosenArticle.getBarcode());
                 updateRow(cartSize);
             }
+            // sto gia' mostrando 7 articoli diversi
             else{
-                // libero prima riga e aggiorno la 5
+                // aggiorno la lista degli articoli mostrati nella preview del carrello
                 updateShowedArticles(this.chosenArticle.getBarcode());
+                // shift verso il basso degli articoli
                 shiftRows();
+                // aggiornamento della rifa superiore (ultimo articolo inserito)
                 updateRow(7);
             }
-
         }
 
-        // aggiorno quantita di articoli già visualizzati nel carrello
-        else{
+        // aggiorno quantita di articoli già aggiunti al carrello
+        else{ //cartSize.equals(this.cartSize)
 
             String newArticleBarcode = this.chosenArticle.getBarcode();
-            // raccolgo i barcode degli articoli mostrati
 
-            // se il barcode e' presente (cioe' se l'articolo e' mostrato...
+            // caso articolo gia' mostrato nella preview: aggiorno la relativa riga
             if(this.showedBarcodes.contains(newArticleBarcode))
-                // ...allora aggiorno la relativa riga
                 updateRow(showedBarcodes.indexOf(newArticleBarcode)+1);
 
-            // e' nel carrello ma non e' visualizzato. Lo riporto in testa!
+            // caso articolo non mostrato nella preview: shift verso il basso,
+            // e lo mostro in testa con la quantita' aggiornata
             else{
                 updateShowedArticles(this.chosenArticle.getBarcode());
                 shiftRows();
@@ -620,16 +741,24 @@ public class MarketSectionLayoutController implements Initializable {
             }
         }
 
+        // infine aggiorno le label della preview del carrello ossia:
+        // - totale pezzi(in alto)
+        // - importo totale
+        // - numero articoli presenti nel carrello ma NON mostrati nella preview (in basso)
         updateCartLabels();
     }
 
+    /**
+     * Il metodo aggiorna le labels del pannello laterale destro (numero pezzi,
+     * importo totale corrente e numero articoli non visualizzati nella preview)
+     */
     public void updateCartLabels() throws DAOException {
 
         // cartSums.get(0) = quantità totali
         // cartSums.get(1) = importo totale
         ArrayList<Float> cartSums = getCartSums();
 
-        // head
+        // top
         if (cartSums.get(0) > 0)
             quantitaTotaleCarrelloLabel.setText(cartSums.get(0).intValue() + " pezzi");
         else
@@ -639,18 +768,22 @@ public class MarketSectionLayoutController implements Initializable {
         else
             totaleCarrelloLabel.setText("");
 
-        // foot
+        // bottom
         if(cartSize > 7)
             rimanentiLabel.setText("Altri " + (cartSize-7) + " elementi nel carrello...");
         else
             rimanentiLabel.setText("-------");
-
     }
 
+    /**
+     * Il metodo aggiorna la lista contenente i codici degli articoli mostrati nella preview del carrello<br>
+     * Elimina il piu' vecchio con uno shift e inserisce in coda l'ultimo aggiunto
+     * @param newArticleBarcode Il codice del nuovo articolo da inserire nella lista
+     */
     private void updateShowedArticles(String newArticleBarcode) {
         ArrayList<String> tmpList = new ArrayList<>();
 
-        // nb. copio solo gli ultimi size-1 elementi!
+        // nb. copio solo gli ultimi size-1 elementi
         for(int i=1; i<this.showedBarcodes.size(); i++)
             tmpList.add(this.showedBarcodes.get(i));
 
@@ -661,11 +794,20 @@ public class MarketSectionLayoutController implements Initializable {
         this.showedBarcodes.add(newArticleBarcode);
     }
 
+    /**
+     * Il metodo aggiorna una riga del pannello laterale destro
+     * @param row La riga da aggiornare
+     */
     private void updateRow(Integer row){
 
         // leggo la quantita' dal carrello
-
         String quantita = App.getInstance().getCartMap().get(this.chosenArticle.getBarcode())+"x ";
+
+        // css
+        // underline della vBox
+        String vBoxStyle = "-fx-border-width: 0 0 1 0;\n-fx-border-color: rgb(79,172,254);";
+        // ovalBox per quantita' e prezzo
+        String hBoxStyle = "-fx-border-radius: 50;\n-fx-border-width: 1;\n-fx-border-color: rgb(79,172,254);";
 
         switch (row) {
             case 1 -> {
@@ -743,6 +885,10 @@ public class MarketSectionLayoutController implements Initializable {
         }
     }
 
+    /**
+     * Il metodo aggiorna la grafica del pannello laterale destro eseguendo uno shift verso il basso<br>
+     * La riga in testa (settimo articolo) viene svuotata, predisponendo l'inserimento di un nuovo articolo
+     */
     private void shiftRows(){
 
         articolo1Label.setText(articolo2Label.getText());
@@ -773,8 +919,14 @@ public class MarketSectionLayoutController implements Initializable {
 
     }
 
+    /**
+     * Il metodo svuota una riga del pannello laterale destro (contenuto e grafica)
+     * @param row La riga da eliminare (NB. 1-7)
+     */
     private void clearRow(Integer row){
+        // empty style
         String borderStyle = "-fx-border-width: 0";
+
         switch (row) {
             case 1 -> {
                 articolo1Label.setText("");
@@ -830,7 +982,14 @@ public class MarketSectionLayoutController implements Initializable {
         }
     }
 
+    /**
+     * Il metodo calcola l'importo totale dell'ordine corrente, e il numero complessivo di pezzi nel carrello<br>
+     * NB il numero totale di articoli si ricava facilmente dalla size() del carrello
+     * @return restituisce un ArrayList, salvando in posizione 0 il numero di pezzi e in posizione 1 l'importo totale
+     */
     private ArrayList<Float> getCartSums() throws DAOException {
+
+        // la struttura da restituire
         ArrayList<Float> resultItem = new ArrayList<>();
 
         float articleQuantity = 0f;
@@ -852,33 +1011,20 @@ public class MarketSectionLayoutController implements Initializable {
         return resultItem;
     }
 
-    @FXML public void handleSearch(){
-
-        clearGridItems();
-        gridPaneArticles.clear();
-
-        try {
-            // filter by name!
-            loadFilteredItems(searchTextField.getText(), false);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // update graphics
-        updateSectionBar("None");
-
-        App.getInstance().setReparto("None");
-
-    }
-
+    /**
+     * Il metodo e' usato per aggiornare gli articoli mostrati nella preview del carrello tornando dalla sezione pagamenti<br>
+     * Es. Nella sezione pagamenti modifico la quantita' di uno o piu' articoli presenti nel carrello -> conseguentemente devo aggiornare
+     * le stesse quantita anche nella scena della navigazione tra i reparti, nella preview del carrello
+     */
     public void syncCartPane() throws DAOException {
+
+        // aggiorno le label #pezzi, importo totale e #articoli non mostrati nella preview del carrello
         updateCartLabels();
 
         int cartSize = this.showedBarcodes.size();
-
         String quantita;
 
+        // essendo solo 7 quelli mostrati nella preview, li aggiorno direttamente tutti (se presenti)
         quantita = App.getInstance().getCartMap().get(showedBarcodes.get(0)) + "x ";
         quantita1Label.setText(quantita);
         if(cartSize==1) return;
@@ -907,22 +1053,62 @@ public class MarketSectionLayoutController implements Initializable {
         quantita7Label.setText(quantita);
     }
 
-    @FXML
-    void handleLogout(){
+    /**
+     * Il metodo che gestisce la ricerca per nome<br>
+     * Svuota la griglia, ottiene gli oggetti da visualizzare con una query e le mostra sul grid pane
+     */
+    @FXML public void handleSearch(){
+
+        // svuoto la griglia
+        clearGridItems();
+        gridPaneArticles.clear();
+
+        // ricerco per nome
+        try {
+            loadFilteredItems(searchTextField.getText(), false);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
+        // aggiorno la barra dei reparti e la variabile in App
+        updateSectionBar("None");
+        App.getInstance().setReparto("None");
+    }
+
+    /**
+     * Il metodo riporta alla sezione di login ed esegue un logout, svuotando il form e predisponendo un nuovo login<br>
+     * E' chiamato cliccando il bottone logout in alto a sinistra nella barra dei reparti
+     */
+    @FXML void handleLogout(){
         App.getInstance().logout();
     }
 
-    @FXML
-    void handleAboutUs(){
+    /**
+     * Il metodo mostra i nomi degli autori e il link al repository GitHub<br>
+     * E' chiamato dall'omonimo button nella barra dei reparti, in alto a destra
+     */
+    @FXML void handleAboutUs(){
         App.getInstance().aboutUs();
     }
 
+    /**
+     * Il metodo svuota la preview (logica) del carrello, svuotando la lista 'showedBarcodes'
+     */
     public void clearShowedCart(){
         cartSize = 0;
         showedBarcodes.clear();
     }
 
+    /**
+     * Il metodo resetta completamente la scena dei reparti<br>
+     * Svuotando la griglia e la preview del carrello
+     * Ricarica tutti gli articoli e li mostra
+     * Resetta la grafica del pannello laterale destro e setta come articolo selezionato il primo mostrato sulla griglia
+     */
     public void resetMarketSection() {
+
+        // reset della griglia e del pannello sinistro
         if(gridPaneArticles.size() != 0)
             gridPaneArticles.clear();
 
@@ -945,7 +1131,7 @@ public class MarketSectionLayoutController implements Initializable {
             e.printStackTrace();
         }
 
-        //clear right-pane
+        // reset pannello destro
         try {
             updateCartLabels();
         } catch (DAOException e) {
@@ -954,8 +1140,23 @@ public class MarketSectionLayoutController implements Initializable {
         for (int i = 1; i < 8; i++)
             clearRow(i);
 
-        // update section bar
+        // reset barra dei reparti
         App.getInstance().setReparto("None");
         updateSectionBar(App.getInstance().getReparto());
     }
+
+    // Gestione dei bottoni associati ai vari reparti
+    @FXML public void handleButchery()              { loadSectionArticles("Macelleria"); }
+    @FXML public void handleFishmonger()            { loadSectionArticles("Pescheria");  }
+    @FXML public void handleFruitAndVegetables()    { loadSectionArticles("Ortofrutta"); }
+    @FXML public void handleGrocery()               { loadSectionArticles("Alimentari"); }
+    @FXML public void handleBackery()               { loadSectionArticles("Forno");      }
+    @FXML public void handleDrinks()                { loadSectionArticles("Bevande");    }
+    @FXML public void handleFrozen()                { loadSectionArticles("Surgelati");  }
+    @FXML public void handleSnacks()                { loadSectionArticles("Snacks");     }
+    @FXML public void handleBaby()                  { loadSectionArticles("Baby");       }
+    @FXML public void handleStationery()            { loadSectionArticles("Cartoleria"); }
+    @FXML public void handlePet()                   { loadSectionArticles("Pet");        }
+    @FXML public void handleWellness()              { loadSectionArticles("Benessere");  }
+    @FXML public void handleHousehold()             { loadSectionArticles("Casalinghi"); }
 }
