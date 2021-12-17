@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * Il singleton che gestisce le scene e e la logica dell'applicazione
+ * Il singleton che gestisce le scene e la logica dell'applicazione
  */
 public class App {
 
@@ -32,7 +32,7 @@ public class App {
     private Scene paymentSectionScene;
     private Scene loginSectionScene;
 
-    // to enable blur while showing receipt
+    // handler usato per abilitare il blur
     private AnchorPane orderSummaryLayoutPane;
 
     // controller
@@ -40,7 +40,7 @@ public class App {
     private OrderSummaryLayoutController orderSummaryLayoutController;
     private MarketSectionLayoutController marketSectionLayoutController;
 
-    // attributi
+    // attributi utente corrente
     public String codiceCarta;
     public String codiceCliente;
     public float massimaleMensile;
@@ -49,7 +49,7 @@ public class App {
 
     public String reparto = "None";
 
-    // flag
+    // flag per la gestione delle scene
     boolean orderSummaryVisited = false;
     boolean marketSectionsVisited = false;
 
@@ -70,38 +70,38 @@ public class App {
     }
 
     // getter dei controller
-    public LoginLayoutController getLoginLayoutController()                           { return loginLayoutController; }
-    public OrderSummaryLayoutController getOrderSummaryLayoutController()       { return orderSummaryLayoutController; }
-    public MarketSectionLayoutController getMarketSectionLayoutController()     { return marketSectionLayoutController; }
+    public LoginLayoutController getLoginLayoutController()                 { return loginLayoutController;                 }
+    public OrderSummaryLayoutController getOrderSummaryLayoutController()   { return orderSummaryLayoutController;          }
+    public MarketSectionLayoutController getMarketSectionLayoutController() { return marketSectionLayoutController;         }
 
     // getter e setter delle variabili associate al cliente corrente
-    public void setCodiceCarta(String codiceCarta)                              { this.codiceCarta = codiceCarta; }
-    public String getCodiceCarta()                                              { return codiceCarta; }
+    public void setCodiceCarta(String codiceCarta)                          { this.codiceCarta = codiceCarta;               }
+    public String getCodiceCarta()                                          { return codiceCarta;                           }
 
-    public String getCodiceCliente()                                            { return codiceCliente;}
-    public void setCodiceCliente(String codiceCliente)                          { this.codiceCliente = codiceCliente; }
+    public String getCodiceCliente()                                        { return codiceCliente;                         }
+    public void setCodiceCliente(String codiceCliente)                      { this.codiceCliente = codiceCliente;           }
 
-    public float getMassimaleMensile()                                          { return massimaleMensile; }
-    public void setMassimaleMensile(float massimaleMensile)                     { this.massimaleMensile = massimaleMensile; }
+    public float getMassimaleMensile()                                      { return massimaleMensile;                      }
+    public void setMassimaleMensile(float massimaleMensile)                 { this.massimaleMensile = massimaleMensile;     }
 
-    public float getMassimaleRimanente()                                        { return massimaleRimanente; }
-    public void setMassimaleRimanente(float massimaleRimanente)                 { this.massimaleRimanente = massimaleRimanente; }
+    public float getMassimaleRimanente()                                    { return massimaleRimanente;                    }
+    public void setMassimaleRimanente(float massimaleRimanente)             { this.massimaleRimanente = massimaleRimanente; }
 
-    public int getPuntiFedelta()                                                { return puntiFedelta; }
-    public void setPuntiFedelta(int puntiFedelta)                               {this.puntiFedelta += puntiFedelta; }
+    public int getPuntiFedelta()                                            { return puntiFedelta;                          }
+    public void setPuntiFedelta(int puntiFedelta)                           { this.puntiFedelta += puntiFedelta;            }
 
     // getter e setter del reparto selezionato
-    public String getReparto()                                                  { return reparto; }
-    public void setReparto(String reparto)                                      { this.reparto = reparto; }
+    public String getReparto()                                              { return reparto;                               }
+    public void setReparto(String reparto)                                  { this.reparto = reparto;                       }
 
     // getter del carrello
-    public HashMap<String, Integer> getCartMap()                                { return cartMap; }
+    public HashMap<String, Integer> getCartMap()                            { return cartMap;                                }
 
-    // setter flag
-    public boolean isOrderSummaryVisited()                                      { return orderSummaryVisited; }
-    public void setOrderSummaryVisited(boolean orderSummaryVisited)             { this.orderSummaryVisited = orderSummaryVisited;}
+    // getter e setter dei flag
+    public boolean isOrderSummaryVisited()                                  { return orderSummaryVisited;                    }
+    public void setOrderSummaryVisited(boolean orderSummaryVisited)         { this.orderSummaryVisited = orderSummaryVisited;}
+    public boolean getMarketSectionsVisited()                               { return marketSectionsVisited;                  }
 
-    public boolean getMarketSectionsVisited()                                    { return marketSectionsVisited; }
     /**
      * Il metodo launch() e' chiamato dallo start() di Main
      * @param primaryStage lo stage principale dell'applicazione
@@ -128,7 +128,6 @@ public class App {
      */
     public void initLoginLayout() {
         try {
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/LoginLayout.fxml"));
 
@@ -150,7 +149,8 @@ public class App {
             // aggiorno l'handler del controller
             this.loginLayoutController = loader.getController();
 
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -177,31 +177,34 @@ public class App {
         }
 
     }
-
+    /**
+     * Chiamato alla prima apertura della schermata reparti <br>
+     * Prepara la scena mostrando tutti gli articoli disponibili nel supermercato
+     */
     public void initMarketSectionLayout() {
+
+        // alle chiamate successive viene solo aggiornata e settata la scena
         marketSectionsVisited = true;
+
         try {
-            // Load root layout from fxml file.
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/MarketSectionLayout.fxml"));
 
             AnchorPane marketSectionLayout = loader.load();
 
-            // Show the scene containing the root layout.
-            Scene marketSectionScene = new Scene(marketSectionLayout);
+            this.marketSectionScene  = new Scene(marketSectionLayout);
             mainStage.setScene(marketSectionScene);
-            this.marketSectionScene = marketSectionScene;
-
 
             mainStage.setOnCloseRequest(event -> {
                 event.consume();
                 handleExit();
             });
 
-            // Give the controller access to the main app.
             this.marketSectionLayoutController = loader.getController();
 
-        } catch (IOException e) {
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
     }
@@ -268,6 +271,9 @@ public class App {
 
     }
 
+    /**
+     * Metodo di utilita' in fase di debug, usato per la stampa del carrello
+     */
     public void printCart() throws DAOException {
         int size = this.cartMap.size();
         System.out.println("--- Ordine ---");
@@ -284,10 +290,17 @@ public class App {
         }
     }
 
+    /**
+     * Il metodo e' chiamato per aggiornare la sezione dei reparti
+     * tornando indietro dalla sezione di pagamento<br>
+     * Aggiorna la scena dei reparti sincronizzando gli articoli nel carrello
+     * e setta la scena sul main stage
+     */
     public void backToSectionsFromPayment() {
         try {
             marketSectionLayoutController.syncCartPane();
-        } catch (DAOException e) {
+        }
+        catch (DAOException e) {
             e.printStackTrace();
         }
         mainStage.setScene(marketSectionScene);
@@ -301,41 +314,45 @@ public class App {
         mainStage.setScene(paymentSectionScene);
     }
 
+    /**
+     * Il metodo chiamato quando si rimuove una carta dal lettore<br>
+     * Si svuota il carrello, si resetta il form di benvenuto e si setta la scena di login aggiornata
+     */
     public void ejectCard(){
         loginLayoutController.resetForm();
+
         cartMap.clear();
         marketSectionLayoutController.clearShowedCart();
+
         mainStage.setScene(loginSectionScene);
     }
 
+    /**
+     * Chiamato dal bottone di logout nella sezione dei reparti<Br>
+     * Riporta al form del login
+     */
     public void logout(){
         ejectCard();
         mainStage.setScene(loginSectionScene);
     }
 
+    /**
+     * Il metodo e' chiamato dopo aver effettuato un pagamento<br>
+     * Reindirizza al login mostrando i dati dell'acquirente aggiornati
+     * Consente di continuare con gli acquisti, oppure di rimuovere la carta e iniziare una spesa con un nuovo utente
+     */
     public void ejectCardAfterPayment(){
-
+        // aggiornamento label
         loginLayoutController.getMassimaliLabel().setText(getMassimaliString());
-
         loginLayoutController.getPuntiFedeltaLabel().setText(String.valueOf(puntiFedelta));
         loginLayoutController.getMessageLabel().setText("Grazie per averci scelto!");
+        // aggiornamento del form
         loginLayoutController.getConfirmButton().setText("Conferma");
         loginLayoutController.getCodiceCartaTextField().setEditable(false);
         loginLayoutController.getPinPasswordField().setEditable(false);
+
         mainStage.setScene(loginSectionScene);
     }
-
-    // metodi di utilità
-
-    /**
-     * @return Restituisce la lista con le chiavi della mappa Carrello
-     */
-    public List<String> getCartListArticles()                           { return new ArrayList<>(this.cartMap.keySet()); }
-
-    /**
-     * @return Restituisce la lista con le quantita' della mappa Carrello
-     */
-    public List<Integer> getCartListQuantity()                          { return new ArrayList<>(this.cartMap.values()); }
 
     /**
      * Il metodo e' chiamato dopo la finalizzazione di un ordine e aggiorna la fedelta' del cliente
@@ -347,13 +364,6 @@ public class App {
      * @return  Restituisce la fedelta' del cliente aggiornata dopo il pagamento
      */
     public int computeFidelity(float totalImport)                       { return (int)(totalImport/10); }
-
-    /**
-     * @return Resituisce la stringa contenente il massimale rimanente / massimale mensile
-     */
-    public String getMassimaliString(){
-        return  String.format("%.2f",massimaleRimanente) + " / " +  String.format("%.2f",massimaleMensile) + " €";
-    }
 
     /**
      * Il metodo mostra informazioni sugli autori del progetto
@@ -371,7 +381,8 @@ public class App {
     }
 
     /**
-     * Il metodo elimina gli articoli rimasti nell'anteprima del Carrello nella sezione dei Reparti
+     * Il metodo e' chiamato quando un nuovo utente si logga nella stessa sessione<br>
+     * Resetta la scena dei reparti e la setta sul main stage
      */
     public void loadNewUserMarketSection() {
         marketSectionLayoutController.clearShowedCart();
@@ -380,11 +391,35 @@ public class App {
         mainStage.setScene(marketSectionScene);
     }
 
+    /**
+     * Il metodo e' chiamato sia quando viene mostrato lo scontrino che quando si torna al login cliccando il bottone in esso contenuto<br>
+     * Applica/rimuove un filtro di blurring gaussiano sulla scena in background(la sezione dei pagamenti) per enfatizzare lo scontrino in sovraimpressione
+     * @param enable applica/rimuove il filtro sulla scena in background
+     */
     public void setBlur(boolean enable) {
 
         if(enable)
             orderSummaryLayoutPane.setEffect(new GaussianBlur(10));
         else
             orderSummaryLayoutPane.setEffect(new GaussianBlur(-10));
+    }
+
+    // metodi di utilità
+
+    /**
+     * @return Restituisce la lista contenente le chiavi della mappa Carrello
+     */
+    public List<String> getCartListArticles()                           { return new ArrayList<>(this.cartMap.keySet()); }
+
+    /**
+     * @return Restituisce la lista contenente le quantita' della mappa Carrello
+     */
+    public List<Integer> getCartListQuantity()                          { return new ArrayList<>(this.cartMap.values()); }
+
+    /**
+     * @return Resituisce la stringa contenente il massimale rimanente / massimale mensile
+     */
+    public String getMassimaliString(){
+        return  String.format("%.2f",massimaleRimanente) + " / " +  String.format("%.2f",massimaleMensile) + " €";
     }
 }
