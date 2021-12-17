@@ -364,10 +364,9 @@ public class App {
      */
     public void aboutUs() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setWidth(500);
         alert.setTitle("GG Supermarket Info");
         alert.setHeaderText("About");
-        alert.setContentText("Autori: Camasso Giulio, Russo Giulio\nGitHub: https://github.com/giuliocamasso/IngSoft_21_CAMASSO-RUSSO");
+        alert.setContentText("Autori:\nCamasso Giulio, Russo Giulio\n\nGitHub:\ngiuliocamasso/IngSoft_21_CAMASSO-RUSSO\n");
 
         ButtonType buttonBackToMarketApp = new ButtonType("Torna al supermercato", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(buttonBackToMarketApp);
