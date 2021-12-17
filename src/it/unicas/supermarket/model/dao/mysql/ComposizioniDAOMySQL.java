@@ -2,6 +2,7 @@ package it.unicas.supermarket.model.dao.mysql;
 import it.unicas.supermarket.model.Composizioni;
 import it.unicas.supermarket.model.dao.DAO;
 import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.Util;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,7 +46,8 @@ public class ComposizioniDAOMySQL implements DAO<Composizioni> {
                 articoloInOrdine.getPrezzo() + ", " +
                 articoloInOrdine.getQuantita() + ")";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
     }
@@ -64,7 +66,8 @@ public class ComposizioniDAOMySQL implements DAO<Composizioni> {
     public void deleteAll() throws DAOException {
         String query = "delete from Composizioni";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
     }

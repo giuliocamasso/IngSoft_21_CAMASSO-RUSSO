@@ -12,163 +12,132 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="717.0" prefWidth="400.0" stylesheets="@test.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.ReceiptController">
-   <children>
-      <VBox prefHeight="800.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <VBox alignment="CENTER" prefHeight="194.0" prefWidth="400.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="93.0" prefWidth="400.0">
-                     <children>
-                        <Label prefHeight="62.0" prefWidth="303.0" text="GG supermarket">
-                           <font>
-                              <Font name="Monaco" size="36.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="400.0">
-                     <children>
-                        <Label text="Camasso - Russo">
-                           <font>
-                              <Font name="Monaco" size="13.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="400.0">
-                     <children>
-                        <Label text="P.Iva: 1234567890">
-                           <font>
-                              <Font name="Monaco" size="13.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="86.0" prefHeight="15.0" prefWidth="400.0">
-                     <children>
-                        <Label text="Via Gaetano di Biasio, 43">
-                           <font>
-                              <Font name="Monaco" size="13.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="134.0" prefHeight="15.0" prefWidth="400.0">
-                     <children>
-                        <Label text="03043 Cassino (FR)">
-                           <font>
-                              <Font name="Monaco" size="13.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="133.0" prefHeight="15.0" prefWidth="400.0">
-                     <children>
-                        <Label text="Tel. 333 3333333">
-                           <font>
-                              <Font name="Monaco" size="13.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox prefHeight="61.0" prefWidth="400.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="66.0" prefWidth="400.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label text="PRODOTTI">
-                                 <font>
-                                    <Font name="Monaco" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="19.0" prefWidth="325.0" />
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="EURO">
-                                 <font>
-                                    <Font name="Monaco" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets left="30.0" right="30.0" top="30.0" />
-                     </padding>
-                  </HBox>
-               </children>
-            </VBox>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="341.0" prefWidth="400.0" vbarPolicy="NEVER">
-               <content>
-                  <GridPane fx:id="receiptArticleGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="397.0">
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-               </content>
-            </ScrollPane>
-            <HBox alignment="CENTER" prefHeight="66.0" prefWidth="400.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="17.0" prefWidth="102.0" text="TOTALE EURO">
-                           <font>
-                              <Font name="Monaco" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="19.0" prefWidth="176.0" />
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="receiptTotalImportLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="\@totale">
-                           <font>
-                              <Font name="Monaco" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-               </padding>
-            </HBox>
-            <VBox alignment="CENTER" prefHeight="43.0" prefWidth="400.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="15.0" prefWidth="215.0" text="Grazie e Arrivederci!">
-                     <font>
-                        <Font name="Monaco" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="9.0" prefWidth="248.0" text="Non gettarmi, differenziami">
-                     <font>
-                        <Font name="Monaco" size="8.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="10.0" />
-                     </padding>
-                  </Label>
-                  <Button mnemonicParsing="false" onAction="#handleLogin" text="Torna al Login">
-                     <font>
-                        <Font name="Verdana Bold" size="13.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="transparent" />
-                        <String fx:value="receiptButton" />
-                     </styleClass>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" />
-               </padding>
-            </VBox>
-         </children>
+<AnchorPane prefHeight="717.0" prefWidth="400.0" stylesheets="@test.css" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml" fx:controller="it.unicas.supermarket.controller.ReceiptController">
+   <VBox prefHeight="800.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="194.0" prefWidth="400.0">
+         <HBox alignment="CENTER" prefHeight="93.0" prefWidth="400.0">
+            <Label prefHeight="62.0" prefWidth="303.0" text="GG supermarket">
+               <font>
+                  <Font name="Monaco" size="36.0"/>
+               </font>
+            </Label>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="26.0" prefWidth="400.0">
+            <Label text="Camasso - Russo">
+               <font>
+                  <Font name="Monaco" size="13.0"/>
+               </font>
+            </Label>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="26.0" prefWidth="400.0">
+            <Label text="P.Iva: 1234567890">
+               <font>
+                  <Font name="Monaco" size="13.0"/>
+               </font>
+            </Label>
+         </HBox>
+         <HBox alignment="CENTER" layoutX="10.0" layoutY="86.0" prefHeight="15.0" prefWidth="400.0">
+            <Label text="Via Gaetano di Biasio, 43">
+               <font>
+                  <Font name="Monaco" size="13.0"/>
+               </font>
+            </Label>
+         </HBox>
+         <HBox alignment="CENTER" layoutX="10.0" layoutY="134.0" prefHeight="15.0" prefWidth="400.0">
+            <Label text="03043 Cassino (FR)">
+               <font>
+                  <Font name="Monaco" size="13.0"/>
+               </font>
+            </Label>
+         </HBox>
+         <HBox alignment="CENTER" layoutX="10.0" layoutY="133.0" prefHeight="15.0" prefWidth="400.0">
+            <Label text="Tel. 333 3333333">
+               <font>
+                  <Font name="Monaco" size="13.0"/>
+               </font>
+            </Label>
+         </HBox>
       </VBox>
-   </children>
+      <VBox prefHeight="61.0" prefWidth="400.0">
+         <HBox alignment="CENTER" prefHeight="66.0" prefWidth="400.0">
+            <padding>
+               <Insets left="30.0" right="30.0" top="30.0"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <Label text="PRODOTTI">
+                  <font>
+                     <Font name="Monaco" size="14.0"/>
+                  </font>
+               </Label>
+            </HBox>
+            <HBox prefHeight="19.0" prefWidth="325.0"/>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="EURO">
+                  <font>
+                     <Font name="Monaco" size="14.0"/>
+                  </font>
+               </Label>
+            </HBox>
+         </HBox>
+      </VBox>
+      <ScrollPane hbarPolicy="NEVER" prefHeight="341.0" prefWidth="400.0" vbarPolicy="NEVER">
+         <GridPane fx:id="receiptArticleGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="397.0">
+            <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+         </GridPane>
+      </ScrollPane>
+      <HBox alignment="CENTER" prefHeight="66.0" prefWidth="400.0">
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
+         </padding>
+         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+            <Label prefHeight="17.0" prefWidth="102.0" text="TOTALE EURO">
+               <font>
+                  <Font name="Monaco" size="14.0"/>
+               </font>
+            </Label>
+         </HBox>
+         <HBox prefHeight="19.0" prefWidth="176.0"/>
+         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+            <Label fx:id="receiptTotalImportLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT"
+                   text="\@totale">
+               <font>
+                  <Font name="Monaco" size="14.0"/>
+               </font>
+            </Label>
+         </HBox>
+      </HBox>
+      <VBox alignment="CENTER" prefHeight="43.0" prefWidth="400.0">
+         <padding>
+            <Insets bottom="5.0"/>
+         </padding>
+         <Label alignment="CENTER" prefHeight="15.0" prefWidth="215.0" text="Grazie e Arrivederci!">
+            <font>
+               <Font name="Monaco" size="14.0"/>
+            </font>
+         </Label>
+         <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="9.0" prefWidth="248.0"
+                text="Non gettarmi, differenziami">
+            <font>
+               <Font name="Monaco" size="8.0"/>
+            </font>
+            <padding>
+               <Insets bottom="10.0"/>
+            </padding>
+         </Label>
+         <Button mnemonicParsing="false" onAction="#handleLogin" text="Torna al Login">
+            <font>
+               <Font name="Verdana Bold" size="13.0"/>
+            </font>
+            <styleClass>
+               <String fx:value="transparent"/>
+               <String fx:value="receiptButton"/>
+            </styleClass>
+         </Button>
+      </VBox>
+   </VBox>
 </AnchorPane>

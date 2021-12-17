@@ -1,17 +1,14 @@
 package it.unicas.supermarket;
-
 import it.unicas.supermarket.controller.LoginLayoutController;
 import it.unicas.supermarket.controller.MarketSectionLayoutController;
 import it.unicas.supermarket.controller.OrderSummaryLayoutController;
 import it.unicas.supermarket.controller.ReceiptController;
 import it.unicas.supermarket.model.dao.DAOException;
-import it.unicas.supermarket.model.dao.Util;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -184,7 +181,6 @@ public class App {
     public void initMarketSectionLayout() {
         marketSectionsVisited = true;
         try {
-            System.out.println("Entrando nei reparti");
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/MarketSectionLayout.fxml"));
@@ -274,7 +270,7 @@ public class App {
 
     public void printCart() throws DAOException {
         int size = this.cartMap.size();
-        System.out.println("---Carrello---");
+        System.out.println("--- Ordine ---");
 
         List<String> articles = getCartListArticles();
         List<Integer> quantities = getCartListQuantity();

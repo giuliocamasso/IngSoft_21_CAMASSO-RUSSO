@@ -2,7 +2,7 @@ package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.dao.DAOException;
-import it.unicas.supermarket.model.dao.Util;
+import it.unicas.supermarket.Util;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -37,9 +37,7 @@ public class ReceiptController {
         // riempio la grid pane
         try {
             fillReceiptGridPane(App.getInstance().getCartMap());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (DAOException e) {
+        } catch (IOException | DAOException e) {
             e.printStackTrace();
         }
 

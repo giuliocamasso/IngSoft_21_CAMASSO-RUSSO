@@ -3,6 +3,8 @@ import it.unicas.supermarket.model.Carte;
 import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.dao.DAO;
 import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.Util;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -168,7 +170,8 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
             String sql = "select * from carte where (codiceCarta ='" + a.getCodiceCarta() + "')";
 
-            printQuery(sql);
+            if(Util.isQueryPrintingEnabled())
+                printQuery(sql);
 
             lista = getQueryResult(st, sql);
 
@@ -195,7 +198,8 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
             String sql = "select * from carte";
 
-            printQuery(sql);
+            if (Util.isQueryPrintingEnabled())
+                printQuery(sql);
 
             list = getQueryResult(statement, sql);
 
@@ -226,7 +230,8 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
         String query = "DELETE FROM carte WHERE codiceCarta='" + a.getCodiceCarta() + "';";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
 
@@ -240,7 +245,8 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
         String query = "delete from carte";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
     }
@@ -263,8 +269,8 @@ public class CarteDAOMySQL implements DAO<Carte> {
                 a.getIdCliente() + ", '" +
                 a.getPin() + "', '" +
                 a.getCodiceCarta() + "')";
-
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
     }
@@ -289,7 +295,8 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
         query = query + " WHERE codiceCarta = '" + a.getCodiceCarta() + "';";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
 

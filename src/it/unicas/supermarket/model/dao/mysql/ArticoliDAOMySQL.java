@@ -2,6 +2,8 @@ package it.unicas.supermarket.model.dao.mysql;
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.dao.DAO;
 import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.Util;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -161,8 +163,8 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
             else{
                 sql += "(barcode = '" + a.getBarcode() + "')";
             }
-
-            printQuery(sql);
+            if (Util.isQueryPrintingEnabled())
+                printQuery(sql);
 
             lista = getQueryResult(st, sql);
 
@@ -189,7 +191,8 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
 
             String sql = "select * from articoli";
 
-            printQuery(sql);
+            if (Util.isQueryPrintingEnabled())
+                printQuery(sql);
 
             list = getQueryResult(statement, sql);
 
@@ -221,7 +224,8 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
 
         String query = "DELETE FROM articoli WHERE barcode='" + a.getBarcode() + "';";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
 
@@ -234,8 +238,8 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
     public void deleteAll() throws DAOException {
 
         String query = "delete from articoli";
-
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
     }
@@ -263,7 +267,8 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
                 a.getDescrizioneQuantita() + "', '" +
                 a.getReparto() + "')";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
     }
@@ -289,7 +294,8 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
 
         query = query + " WHERE barcode = '" + a.getBarcode() + "';";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
 

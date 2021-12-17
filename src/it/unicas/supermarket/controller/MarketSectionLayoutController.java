@@ -3,7 +3,7 @@ import it.unicas.supermarket.App;
 import it.unicas.supermarket.Main;
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.dao.DAOException;
-import it.unicas.supermarket.model.dao.Util;
+import it.unicas.supermarket.Util;
 import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.DAOMySQLSettings;
 import javafx.fxml.FXML;
@@ -187,7 +187,6 @@ public class MarketSectionLayoutController implements Initializable {
         this.chosenArticleQuantity = 0;
         try {
             this.chosenArticleStorage = checkStock(this.chosenArticle.getBarcode());
-            System.out.println("Articoli disponibili: " + this.chosenArticleStorage);
         }
         catch (DAOException e) {
             e.printStackTrace();
@@ -210,8 +209,6 @@ public class MarketSectionLayoutController implements Initializable {
     }
 
     public void loadSectionArticles(String section){
-
-        System.out.println("Loading" + section);
 
         clearGridItems();
         gridPaneArticles.clear();
@@ -292,11 +289,13 @@ public class MarketSectionLayoutController implements Initializable {
     public ArrayList<Articoli> filterBySection(String section) throws SQLException {
         Statement statement = DAOMySQLSettings.getStatement();
         String query = "select * from articoli where (reparto = '" + section +"');" ;
-        try{
-            logger.info("SQL: " + query);
-        }
-        catch(NullPointerException nullPointerException){
-            System.out.println("SQL: " + query);
+
+        if (Util.isQueryPrintingEnabled()){
+            try {
+                logger.info("SQL: " + query);
+            } catch (NullPointerException nullPointerException) {
+                System.out.println("SQL: " + query);
+            }
         }
 
         ArrayList<Articoli> filteredArticles = new ArrayList<>();
@@ -521,7 +520,6 @@ public class MarketSectionLayoutController implements Initializable {
 
     // Add to cart buttons section
     @FXML public void handleIncrement() {
-        System.out.println("Increment Pressed");
 
         Integer cartQuantity = 0;
         String cartMapKey = this.chosenArticle.getBarcode();
@@ -537,7 +535,6 @@ public class MarketSectionLayoutController implements Initializable {
     }
 
     @FXML public void handleDecrement(){
-        System.out.println("Decrement Pressed");
         if(this.chosenArticleQuantity > 0) {
             this.chosenArticleQuantity--;
             quantityLabel.setText(String.valueOf(chosenArticleQuantity));
@@ -545,7 +542,6 @@ public class MarketSectionLayoutController implements Initializable {
     }
 
     @FXML public void handleAddToCart() throws DAOException {
-        System.out.println("AddToCart Pressed with quantity: " + this.chosenArticleQuantity);
 
         // nothing to do in this case
         if(this.chosenArticleQuantity == 0)
@@ -556,9 +552,7 @@ public class MarketSectionLayoutController implements Initializable {
         // the article is already in the cart
         if(App.getInstance().getCartMap().containsKey(cartMapKey)) {
             Integer oldQuantity = App.getInstance().getCartMap().get(cartMapKey);
-            System.out.println("oldQuantity: " + oldQuantity);
             App.getInstance().getCartMap().replace(cartMapKey, oldQuantity + this.chosenArticleQuantity);
-            System.out.println("newQuantity: " + App.getInstance().getCartMap().get(cartMapKey));
         }
         else{
             App.getInstance().getCartMap().put(cartMapKey, this.chosenArticleQuantity);
@@ -569,8 +563,6 @@ public class MarketSectionLayoutController implements Initializable {
         quantityLabel.setText(String.valueOf(0));
 
         updateCart();
-
-        App.getInstance().printCart();
     }
 
     Integer checkStock(String codiceArticolo) throws DAOException {
@@ -581,7 +573,6 @@ public class MarketSectionLayoutController implements Initializable {
 
         if(storage < 1) {
             //articolo non disponibile
-            System.out.println("Articolo non disponibile.");
             return 0;
         }
         else return storage;
@@ -590,7 +581,6 @@ public class MarketSectionLayoutController implements Initializable {
     public void updateCart() throws DAOException {
 
         Integer cartSize = App.getInstance().getCartMap().size();
-        System.out.println(cartSize);
 
         // aggiunto un nuovo articolo al carrello
         if (!cartSize.equals(this.cartSize)){
@@ -863,7 +853,6 @@ public class MarketSectionLayoutController implements Initializable {
     }
 
     @FXML public void handleSearch(){
-        System.out.println("Search Pressed: " + searchTextField.getText());
 
         clearGridItems();
         gridPaneArticles.clear();

@@ -2,7 +2,7 @@ package it.unicas.supermarket.controller;
 
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.model.dao.DAOException;
-import it.unicas.supermarket.model.dao.Util;
+import it.unicas.supermarket.Util;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

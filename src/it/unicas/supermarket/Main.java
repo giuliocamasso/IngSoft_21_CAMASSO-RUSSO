@@ -48,13 +48,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Inizializzo il db [opzionale]
-        /*
-        try {
-            initializeDB();
-        } catch (DAOException | IOException e) {
-            e.printStackTrace();
+
+        if(Util.isDbInitializationEnabled()) {
+            try {
+                initializeDB();
+            } catch (DAOException | IOException e) {
+                e.printStackTrace();
+            }
         }
-        */
 
         App.getInstance().launch(primaryStage);
     }

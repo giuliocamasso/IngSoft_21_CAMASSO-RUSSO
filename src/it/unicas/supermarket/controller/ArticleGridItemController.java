@@ -19,7 +19,6 @@ public class ArticleGridItemController {
     private ArticleSelectionListener articleSelectionListener;
 
     public void loadItem(Articoli articolo, ArticleSelectionListener articleSelectionListener) {
-        System.out.println("load");
         this.articolo = articolo;
         this.articleSelectionListener = articleSelectionListener;
         articleNameLabel.setText(articolo.getNome());

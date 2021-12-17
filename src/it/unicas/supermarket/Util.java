@@ -1,7 +1,7 @@
-package it.unicas.supermarket.model.dao;
-import it.unicas.supermarket.App;
+package it.unicas.supermarket;
 import it.unicas.supermarket.controller.LoginLayoutController;
 import it.unicas.supermarket.model.*;
+import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.model.dao.mysql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +16,16 @@ import java.util.logging.Logger;
  *
  */
 public class Util {
+
+    private static final boolean queryPrintingEnabled = false;
+    private static final boolean dbInitializationEnabled = false;
+
+    public static boolean isQueryPrintingEnabled() {
+        return queryPrintingEnabled;
+    }
+    public static boolean isDbInitializationEnabled() {
+        return dbInitializationEnabled;
+    }
 
     private static final Logger logger =  Logger.getLogger(LoginLayoutController.class.getName());
 
@@ -36,13 +46,13 @@ public class Util {
                 "ON Clienti.idCliente = Carte.idCliente " +
                 "WHERE codiceCarta = '" + codiceCarta + "';";
 
-        try{
-            logger.info("SQL: " + query);
+        if (queryPrintingEnabled){
+            try {
+                logger.info("SQL: " + query);
+            } catch (NullPointerException nullPointerException) {
+                System.out.println("SQL: " + query);
+            }
         }
-        catch(NullPointerException nullPointerException){
-            System.out.println("SQL: " + query);
-        }
-
         ArrayList<String> result = new ArrayList<>();
 
         ResultSet rs = statement.executeQuery(query);
@@ -155,7 +165,6 @@ public class Util {
     public static Integer getIdOrdineFromCodiceOrdine(String codiceOrdine) throws DAOException {
 
         List<Ordini> ordiniList = OrdiniDAOMySQL.getInstance().select(new Ordini(codiceOrdine));
-        System.out.println("getIdOrdine...");
         return ordiniList.get(0).getIdOrdine();
     }
 
@@ -171,26 +180,20 @@ public class Util {
         LocalDateTime now = LocalDateTime.now();
 
         String data = dtf.format(now);
-        //String orderCode ="Ordine_011";
-        System.out.println("data: " + data);
-
         String orderCode = dtfOrdine.format(now);
-        System.out.println("ordine: " + orderCode);
 
         Ordini newOrder = new Ordini(customerId, data, orderCode, totalImport, null);
-        System.out.println("Ordine Creato");
+
         // 1 - inserisco nuovo ordine
         OrdiniDAOMySQL.getInstance().insert(newOrder);
-        System.out.println("Ordine Inserito");
 
         Integer idOrdine = getIdOrdineFromCodiceOrdine(orderCode);
-        System.out.println("idOrdine ottenuto: " + idOrdine);
 
         // 2 - leggo idOrdine appena inserito (e' autoincrement)
         // 3 - per ciascun elemento dell'ordine, lo inserisco in composizioni passando l'id dell'ordine
         for (String barcode : App.getInstance().getCartMap().keySet() ){
             int quantita = App.getInstance().getCartMap().get(barcode);
-            System.out.println("quantita:" + quantita);
+
             if (quantita>0){
 
                 int idArticolo = getIdArticoloFromBarcode(barcode);
@@ -198,7 +201,6 @@ public class Util {
 
                 Composizioni articoloInOrdine = new Composizioni(idArticolo, idOrdine, prezzo, quantita);
                 ComposizioniDAOMySQL.getInstance().insert(articoloInOrdine);
-                System.out.println("Inserito in composizioni");
             }
         }
 
@@ -216,22 +218,9 @@ public class Util {
     }
 
     public static void printOrderDetailsFromCodiceOrdine(String codiceOrdine) throws DAOException, SQLException {
-        /*
-        if (articoloInOrdine == null)
-            throw new DAOException("null instance of 'composizioni'...");
-        // INSERT INTO Composizioni(idArticolo, idOrdini, prezzo, quantita) VALUES([...]);
-        String query = "INSERT INTO Composizioni (idArticolo, idOrdini, prezzo, quantita) VALUES (" +
-                articoloInOrdine.getIdArticolo() + ", " +
-                articoloInOrdine.getIdOrdine() + ", " +
-                articoloInOrdine.getPrezzo() + ", " +
-                articoloInOrdine.getQuantita() + ")";
 
-        printQuery(query);
-
-        executeUpdate(query);
-        */
         int idOrdine = getIdOrdineFromCodiceOrdine(codiceOrdine);
-        System.out.println("IdOrdine =" + idOrdine);
+
         Statement statement = DAOMySQLSettings.getStatement();
 
         String query = "SELECT Articoli.nome, Articoli.prezzo, Composizioni.quantita" +
@@ -239,13 +228,13 @@ public class Util {
                 " ON Composizioni.idArticolo = Articoli.idArticolo" +
                 " WHERE idOrdine = " + idOrdine + ";";
 
-        // printQuery()
-        try {
-            logger.info("SQL: " + query);
-        } catch (NullPointerException nullPointerException) {
-            System.out.println("SQL: " + query);
+        if(queryPrintingEnabled) {
+            try {
+                logger.info("SQL: " + query);
+            } catch (NullPointerException nullPointerException) {
+                System.out.println("SQL: " + query);
+            }
         }
-
         ArrayList<String> articleNames = new ArrayList<>();
         ArrayList<Float> articlePrices = new ArrayList<>();
         ArrayList<Integer> articleQuantities = new ArrayList<>();
@@ -258,13 +247,39 @@ public class Util {
             articleQuantities.add(rs.getInt("Composizioni.quantita"));
         }
 
+        query = "SELECT Clienti.codiceCliente, Clienti.iban" +
+                " FROM Ordini JOIN Clienti" +
+                " ON Ordini.idCliente = CLienti.idCliente" +
+                " WHERE idOrdine = " + idOrdine + ";";
+
+        if(queryPrintingEnabled) {
+            try {
+                logger.info("SQL: " + query);
+            } catch (NullPointerException nullPointerException) {
+                System.out.println("SQL: " + query);
+            }
+        }
+
+        ArrayList<String> codiceCliente = new ArrayList<>();
+        ArrayList<String> ibanCliente = new ArrayList<>();
+
+        rs = statement.executeQuery(query);
+
+        while(rs.next()){
+            codiceCliente.add(rs.getString("Clienti.codiceCliente"));
+            ibanCliente.add(rs.getString("Clienti.iban"));
+        }
+
         DAOMySQLSettings.closeStatement(statement);
 
-        System.out.println("--- ORDINE " + codiceOrdine + " ---");
+        System.out.println("--- FATTURA ---");
+        System.out.println("Ordine N. " + codiceOrdine);
+        System.out.println("Cliente " + codiceCliente.get(0) + "\n");
 
         for (int i = 0; i< articleNames.size(); i++){
             System.out.println(articleNames.get(i) + "\t( " + articleQuantities.get(i) + "x " + articlePrices.get(i) + " €)");
         }
+        System.out.println("\n --- Ordine di pagamento inviato a " + ibanCliente.get(0) + " ---\n");
     }
 
 }

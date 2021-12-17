@@ -5,36 +5,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="17.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicas.supermarket.controller.ReceiptArticleGridItemController">
-   <children>
-      <HBox prefHeight="100.0" prefWidth="390.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label fx:id="receiptArticleLabel" prefHeight="17.0" prefWidth="115.0" text="\@Articolo x quantita">
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin></Label>
-               </children>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label fx:id="receiptCostLabel" text="\@prezzo" />
-               </children>
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </HBox>
-         </children>
+<AnchorPane prefHeight="17.0" prefWidth="356.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="it.unicas.supermarket.controller.ReceiptArticleGridItemController">
+   <HBox prefHeight="100.0" prefWidth="390.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+         <padding>
+            <Insets left="10.0"/>
+         </padding>
+         <opaqueInsets>
+            <Insets/>
+         </opaqueInsets>
+         <HBox.margin>
+            <Insets left="10.0"/>
+         </HBox.margin>
+         <Label fx:id="receiptArticleLabel" prefHeight="17.0" prefWidth="115.0" text="\@Articolo x quantita">
+            <HBox.margin>
+               <Insets left="5.0"/>
+            </HBox.margin>
+         </Label>
       </HBox>
-   </children>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+         <padding>
+            <Insets right="10.0"/>
+         </padding>
+         <Label fx:id="receiptCostLabel" text="\@prezzo"/>
+      </HBox>
+   </HBox>
 </AnchorPane>

@@ -4,20 +4,14 @@
         -fx-background-size: auto;
         -fx-background-image: url('../../../../../resources/backgrounds/black-abstract.jpg');
 }
-/*
-.loginBackground{
-    -fx-background-color: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
-}*/
+
 .loginBackground {
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: auto;
     -fx-background-image: url('../../../../../resources/backgrounds/black-abstract.jpg');
 }
-/*
-.background{
-    -fx-background-color: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
-}*/
+
 .background {
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -59,7 +53,6 @@
     -fx-border-width: 1;
     -fx-border-color: rgb(0, 0, 0);
 }
-
 
 .whiteText{
     -fx-text-fill: #ffffff;
@@ -265,14 +258,6 @@
     -fx-effect: dropshadow(three-pass-box, rgb(31, 162, 255), 2, 0.0, 0, 1);
 }
 
-/*
-#SectionsLateralPanes{
-    -fx-background-color: white;
-    -fx-background-radius: 30;
-    -fx-border-radius: 30;
-    -fx-border-width: 5;
-    -fx-border-color: rgb(236, 236, 236);
-}*/
 #SectionsLateralPanes{
     -fx-background-color: rgba(16, 16, 16, 0.84);
     -fx-background-radius: 30;
@@ -284,7 +269,8 @@
     -fx-text-fill: rgb(79, 172, 254);
 }
 
-.receiptButton{}
+.receiptButton{ }
+
 .receiptButton:hover{
     -fx-underline: true;
 }

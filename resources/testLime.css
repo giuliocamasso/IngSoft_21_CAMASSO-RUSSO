@@ -259,14 +259,6 @@
 
 }
 
-/*
-#SectionsLateralPanes{
-    -fx-background-color: white;
-    -fx-background-radius: 30;
-    -fx-border-radius: 30;
-    -fx-border-width: 5;
-    -fx-border-color: rgb(236, 236, 236);
-}*/
 #SectionsLateralPanes{
     -fx-background-color: rgba(16, 16, 16, 0.84);
     -fx-background-radius: 30;

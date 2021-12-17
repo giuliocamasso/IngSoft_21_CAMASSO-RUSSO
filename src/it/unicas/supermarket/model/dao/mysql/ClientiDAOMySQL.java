@@ -3,6 +3,7 @@ package it.unicas.supermarket.model.dao.mysql;
 import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.dao.DAO;
 import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.Util;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -115,11 +116,6 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
             throw new DAOException("In select: called select with a 'null' instance of Clienti");
 
         try{
-            /*
-            if (a.getIdCliente()!= null)
-                throw new DAOException("In select: idCliente must be null");
-            */
-
             //else if (a.getNome()     == null || a.getCognome()       == null ||
             if (     a.getNome()     == null || a.getCognome()       == null ||
                      a.getTelefono() == null || a.getPuntiFedelta()  == null ||
@@ -128,15 +124,11 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
             }
 
             Statement st = DAOMySQLSettings.getStatement();
-            /*
-            String sql = "select * from clienti where (cognome like '";
-            sql += a.getCognome() + "%' and nome like '" + a.getNome()
-                +   "%' and telefono like '" + a.getTelefono() + "%' "
-                +   "and iban like '" + a.getIban() + "%' "
-                +   "and codiceCliente like '" + a.getCodiceCliente() + "%')";
-            */
+
             String sql = "select * from clienti where (codiceCliente= '"+ a.getCodiceCliente() + "')";
-            printQuery(sql);
+
+            if(Util.isQueryPrintingEnabled())
+                printQuery(sql);
 
             lista = getQueryResult(st, sql);
 
@@ -163,7 +155,8 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
         String query = "DELETE FROM clienti WHERE codiceCliente='" + a.getCodiceCliente() + "';";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
 
@@ -179,7 +172,8 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
             String sql = "select * from clienti";
 
-            printQuery(sql);
+            if (Util.isQueryPrintingEnabled())
+                printQuery(sql);
 
             list = getQueryResult(statement, sql);
 
@@ -198,7 +192,8 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
         String query = "delete from clienti";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
     }
@@ -252,8 +247,8 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
                 a.getPuntiFedelta() + ", '" +
                 a.getIban() + "', '" +
                 a.getCodiceCliente() + "')";
-
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
     }
@@ -278,7 +273,8 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
         query = query + " WHERE codiceCliente = '" + a.getCodiceCliente() + "';";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
 

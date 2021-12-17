@@ -1,11 +1,10 @@
 package it.unicas.supermarket.model.dao.mysql;
 
-import it.unicas.supermarket.App;
-import it.unicas.supermarket.model.Carte;
 import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.Ordini;
 import it.unicas.supermarket.model.dao.DAO;
 import it.unicas.supermarket.model.dao.DAOException;
+import it.unicas.supermarket.Util;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -130,7 +129,8 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
             String sql = "select * from ordini where (codiceOrdine ='" + a.getCodiceOrdine() + "')";
 
-            printQuery(sql);
+            if (Util.isQueryPrintingEnabled())
+                printQuery(sql);
 
             lista = getQueryResult(st, sql);
 
@@ -156,7 +156,8 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
         String query = "DELETE FROM ordini WHERE codiceOrdine='" + a.getCodiceOrdine() + "';";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
 
@@ -172,7 +173,8 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
             String sql = "select * from ordini";
 
-            printQuery(sql);
+            if (Util.isQueryPrintingEnabled())
+                printQuery(sql);
 
             list = getQueryResult(statement, sql);
 
@@ -189,7 +191,8 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
         String query = "delete from ordini";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
     }
@@ -244,7 +247,8 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
                 a.getCodiceOrdine() + "', " +
                 a.getImportoTotale() + ")";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
     }
@@ -263,7 +267,8 @@ public class OrdiniDAOMySQL implements DAO<Ordini> {
 
         query = query + " WHERE codiceOrdine = '" + a.getCodiceOrdine() + "';";
 
-        printQuery(query);
+        if (Util.isQueryPrintingEnabled())
+            printQuery(query);
 
         executeUpdate(query);
 
