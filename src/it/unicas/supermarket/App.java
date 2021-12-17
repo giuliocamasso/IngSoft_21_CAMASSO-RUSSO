@@ -1,9 +1,11 @@
 package it.unicas.supermarket;
+
 import it.unicas.supermarket.controller.LoginLayoutController;
 import it.unicas.supermarket.controller.MarketSectionLayoutController;
 import it.unicas.supermarket.controller.OrderSummaryLayoutController;
 import it.unicas.supermarket.controller.ReceiptController;
 import it.unicas.supermarket.model.dao.DAOException;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -15,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import java.io.IOException;
 import java.util.*;
 

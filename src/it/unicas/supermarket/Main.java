@@ -1,9 +1,12 @@
 package it.unicas.supermarket;
+
 import it.unicas.supermarket.dataloader.Dataloader;
 import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.model.dao.mysql.*;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 /**

@@ -1,4 +1,5 @@
 package it.unicas.supermarket.model;
+
 import it.unicas.supermarket.model.dao.DAOException;
 import javafx.beans.property.*;
 
@@ -8,14 +9,14 @@ import javafx.beans.property.*;
 public class Articoli {
 
     private IntegerProperty idArticolo;
-    private StringProperty nome;
+    private final StringProperty nome;
     private FloatProperty prezzo;
     private IntegerProperty scorteMagazzino;
-    private StringProperty barcode;
-    private StringProperty reparto;
-    private StringProperty produttore;
-    private StringProperty descrizioneProdotto;
-    private StringProperty descrizioneQuantita;
+    private final StringProperty barcode;
+    private final StringProperty reparto;
+    private final StringProperty produttore;
+    private final StringProperty descrizioneProdotto;
+    private final StringProperty descrizioneQuantita;
 
     private String imageURL = null;
 

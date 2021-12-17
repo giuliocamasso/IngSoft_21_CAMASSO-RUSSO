@@ -3,87 +3,56 @@ package it.unicas.supermarket.controller;
 import it.unicas.supermarket.App;
 import it.unicas.supermarket.model.dao.DAOException;
 import it.unicas.supermarket.Util;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-
 import java.sql.SQLException;
 
 /**
- * [ ! MUST UPDATE THIS______________________________________________________________________________]
- * The controller for the root layout. The root layout provides the basic
- * application layout containing a menu bar and space where other JavaFX
- * elements can be placed.
- *
- * @author GC-GR
+ *  Il controller che gestisce la sezione del login<br>
  */
 public class LoginLayoutController {
 
-    @FXML private TextField codiceCartaTextField;
+    // flag per la gestione della navigazione
+    private Boolean cardAccepted = false;
 
-
-
-    @FXML private PasswordField pinPasswordField;
+    // label messaggio-errori
     @FXML private Label messageLabel;
+
+    // Form
+    @FXML private TextField codiceCartaTextField;
+    @FXML private PasswordField pinPasswordField;
+
+    // Bottoni navigazione
+    @FXML private Button confirmButton;
+    @FXML private Button ejectButton;
+
+    // Carta
     @FXML private Label codiceCartaLabel;
     @FXML private Label codiceClienteLabel;
     @FXML private Label massimaliLabel;
+    @FXML private Label puntiFedeltaLabel;
 
-    public TextField getCodiceCartaTextField() {
-        return codiceCartaTextField;
-    }
+    // getter-setter
+    public Label getMessageLabel()                                      { return messageLabel;              }
 
-    public PasswordField getPinPasswordField() {
-        return pinPasswordField;
-    }
+    public TextField getCodiceCartaTextField()                          { return codiceCartaTextField;      }
+    public PasswordField getPinPasswordField()                          { return pinPasswordField;          }
 
-    public Label getMessageLabel() {
-        return messageLabel;
-    }
+    public Label getMassimaliLabel()                                    { return massimaliLabel;            }
+    public Label getPuntiFedeltaLabel()                                 { return puntiFedeltaLabel;         }
+    public Button getConfirmButton()                                    { return confirmButton;             }
 
-    public Label getMassimaliLabel() {
-        return massimaliLabel;
-    }
-
-    public Label getPuntiFedeltaLabel() {
-        return puntiFedeltaLabel;
-    }
-
-    @FXML
-    private Label puntiFedeltaLabel;
-
-    public Button getConfirmButton() {
-        return confirmButton;
-    }
-
-    @FXML
-    private Button confirmButton;
-
-    @FXML
-    private Button ejectButton;
-
-    public Boolean getCardAccepted() {
-        return cardAccepted;
-    }
-
-    public void setCardAccepted(Boolean cardAccepted) {
-        this.cardAccepted = cardAccepted;
-    }
-
-    private Boolean cardAccepted = false;
+    // getter-setter del flag per la navigazione
+    public Boolean getCardAccepted()                                    { return cardAccepted;              }
+    public void setCardAccepted(Boolean cardAccepted)                   { this.cardAccepted = cardAccepted; }
 
     @FXML
     private void handleConfirm() throws DAOException, SQLException {
-
-/*
-        App.getInstance().initMarketSectionLayout();
-        resetForm();
-        boolean checcoJoni = true;
-        if(checcoJoni)  return;
-*/
 
         if (cardAccepted) {
             if(!App.getInstance().getMarketSectionsVisited()) {
