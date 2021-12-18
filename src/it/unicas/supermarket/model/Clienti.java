@@ -6,19 +6,26 @@ import javafx.beans.property.*;
 import java.util.Objects;
 
 /**
- * Model class for clients.
- * @author GC-GR
+ * La classe del modello Clienti<br>
+ * Tutti i costruttori controllare l'integrita' dei dati passati<br>
+ * NB. la PK nel db e' l'idcliente autoincrement, ma il codiceCliente essendo unique e' comunque identificativo
  */
 public class Clienti {
 
     private IntegerProperty idCliente;
-    private StringProperty nome;
-    private StringProperty cognome;
-    private StringProperty telefono;
+    private final StringProperty nome;
+    private final StringProperty cognome;
+    private final StringProperty telefono;
     private IntegerProperty puntiFedelta;
-    private StringProperty iban;
-    private StringProperty codiceCliente;
+    private final StringProperty iban;
+    private final StringProperty codiceCliente;
 
+    /**
+     * Costruttore di utilita' con nome cognome e codiceCliente (nome e cognome possono essere vuoti, non null)
+     * @param nome autodescrittivo,
+     * @param cognome autodescrittivo
+     * @param codiceCliente autodescrittivo
+     */
     public Clienti(String nome, String cognome, String codiceCliente) throws DAOException {
 
         this.idCliente = null;
@@ -43,6 +50,16 @@ public class Clienti {
 
     }
 
+    /**
+     * Costruttore 'completo'
+     * @param nome autodescrittivo
+     * @param cognome autodescrittivo
+     * @param telefono autodescrittivo
+     * @param puntiFedelta autodescrittivo
+     * @param iban autodescrittivo
+     * @param codiceCliente autodescrittivo
+     * @param idCliente autodescrittivo
+     */
     public Clienti(String nome, String cognome, String telefono, Integer puntiFedelta, String iban, String codiceCliente, Integer idCliente) throws DAOException {
 
         if (idCliente != null)
@@ -77,7 +94,6 @@ public class Clienti {
 
     }
 
-
     // Getter setter and property: @idCliente
     public Integer getIdCliente() throws DAOException       {
         if (idCliente == null){
@@ -85,69 +101,48 @@ public class Clienti {
         }
         else return idCliente.getValue();
     }
-
     public void setIdCliente(Integer idCliente)             {
         if (this.idCliente == null){
             this.idCliente = new SimpleIntegerProperty();
         }
         this.idCliente.set(idCliente);
     }
-
     public IntegerProperty idClienteProperty()              { return idCliente; }
-
 
     // Getter setter and property: @nome
     public String getNome()                                 { return nome.get(); }
-
     public void setNome(String nome)                        { this.nome.set(nome); }
-
     public StringProperty nomeProperty()                    { return nome; }
-
 
     // Getter setter and property: @cognome
     public String getCognome()                              { return cognome.get(); }
-
     public void setCognome(String cognome)                  { this.cognome.set(cognome); }
-
     public StringProperty cognomeProperty()                 { return cognome; }
-
 
     // Getter setter and property: @telefono
     public String getTelefono()                             { return telefono.get(); }
-
     public void setTelefono(String telefono)                { this.telefono.set(telefono); }
-
     public StringProperty telefonoProperty()                { return telefono; }
-
 
     // Getter setter and property: @puntiFedelta
     public Integer getPuntiFedelta()                        { return puntiFedelta.get(); }
-
     public void setPuntiFedelta(Integer puntiFedelta)       {
         if (this.puntiFedelta == null)
             this.puntiFedelta = new SimpleIntegerProperty();
 
         this.puntiFedelta.set(puntiFedelta);
     }
-
     public IntegerProperty puntiFedeltaProperty()           { return puntiFedelta; }
-
 
     // Getter setter and property: @iban
     public String getIban()                                 { return iban.get(); }
-
     public void setIban(String iban)                        { this.iban.set(iban); }
-
     public StringProperty ibanProperty()                    { return iban; }
-
 
     // Getter setter and property: @codiceCliente
     public String getCodiceCliente()                        { return codiceCliente.get(); }
-
     public void setCodiceCliente(String codiceCliente)      { this.codiceCliente.set(codiceCliente); }
-
     public StringProperty codiceClienteProperty()           { return codiceCliente; }
-
 
     // toString() method
     public String toString(){
@@ -163,15 +158,18 @@ public class Clienti {
                 "\npunti: " + puntiFedelta.getValue() + " - IBAN:" + iban.getValue() +"\n";
     }
 
+    // metodi di utilita'
     // 10 spaces long
     public static String ghostPhone(String seed2)              { return "telefono" + seed2; }
-
     // 27 spaces long
     public static String ghostIBAN(String seed2)               { return "IBAN_____________________" + seed2; }
-
     // 8 spaces long
     public static String ghostClientCode(String seed2)         { return "codice" + seed2; }
 
+    /**
+     * Classe di test
+     * @param args -
+     */
     public static void main(String[] args) {
 
         try {

@@ -8,18 +8,22 @@ import it.unicas.supermarket.Util;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import static it.unicas.supermarket.model.Clienti.*;
 
-
+/**
+ * Classe DAO della tabella Clienti
+ */
 public class ClientiDAOMySQL implements DAO<Clienti> {
 
     private static DAO<Clienti> dao = null;
     private static Logger logger = null;
 
+    // singleton design pattern
     private ClientiDAOMySQL() {}
 
     public static DAO<Clienti> getInstance(){
@@ -107,6 +111,11 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         } // end of testing
     }
 
+    /**
+     * Implementazione della select()
+     * @param a il cliente su cui basare la ricerca (codiceCliente-based)
+     * @return Restituisce una lista di Clienti contenente il risultato della query
+     */
     @Override
     public List<Clienti> select(Clienti a) throws DAOException {
 
@@ -141,7 +150,10 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         return lista;
     }
 
-
+    /**
+     * Implementazione della delete()
+     * @param a il cliente su cui basare l'eliminazione (codiceCliente-based)
+     */
     @Override
     // delete codiceCliente-based
     public void delete(Clienti a) throws DAOException {
@@ -162,7 +174,10 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
     }
 
-
+    /**
+     * Specializzazione della select per mostrare tutti i clienti presenti nel db
+     * @return Restituisce una lista contenente tutti i clienti del db
+     */
     public ArrayList<Clienti> selectAll() {
 
         ArrayList<Clienti> list = new ArrayList<>();
@@ -187,7 +202,9 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         return list;
     }
 
-
+    /**
+     * Funzione che svuota la tabella Clienti
+     */
     public void deleteAll() throws DAOException {
 
         String query = "delete from clienti";
@@ -198,7 +215,9 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         executeUpdate(query);
     }
 
-
+    /**
+     * Metodo di utilita' che inserisce 10 clienti fittizi per test
+     */
     @Override
     public void initialize() throws DAOException {
 
@@ -219,7 +238,10 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         list.forEach(System.out::println);
     }
 
-
+    /**
+     * Il metodo esegue la query ricevuta in ingresso
+     * @param query la query sql da eseguire
+     */
     private void executeUpdate(String query) throws DAOException{
         try {
             Statement st = DAOMySQLSettings.getStatement();
@@ -232,7 +254,10 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         }
     }
 
-
+    /**
+     * Implementazione della insert
+     * @param a il cliente da inserire
+     */
     @Override
     public void insert(Clienti a) throws DAOException {
 
@@ -253,9 +278,11 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         executeUpdate(query);
     }
 
-
+    /**
+     * implementazione della update(codiceCliente-based)
+     * @param a istanza di cliente con nuovi dati da sovrascrivere a quelli correnti
+     */
     @Override
-    // update codiceCliente-based
     public void update(Clienti a) throws DAOException {
 
         if (a == null)
@@ -280,7 +307,10 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
     }
 
-
+    /**
+     * Metodo di utilita' che stampa la query eseguita
+     * @param query la query da stampare
+     */
      private void printQuery(String query){
         try{
             logger.info("SQL: " + query);
@@ -290,7 +320,12 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
         }
     }
 
-
+    /**
+     * Il metodo restituisce una lista contenente il risultato della query
+     * @param statement lo statement con cui eseguire la query
+     * @param query la query da eseguire
+     * @return restituisce la lista con il risultato della query
+     */
     private ArrayList<Clienti> getQueryResult(Statement statement, String query) throws SQLException {
 
         ArrayList<Clienti> list = new ArrayList<>();
@@ -316,14 +351,4 @@ public class ClientiDAOMySQL implements DAO<Clienti> {
 
         return list;
     }
-
-
-    public static Integer getIdClienteFromCode(String codiceCliente) throws DAOException {
-
-        List<Clienti> clientiList = ClientiDAOMySQL.getInstance().select(new Clienti("","", codiceCliente));
-
-        return clientiList.get(0).getIdCliente();
-    }
-
-
 }

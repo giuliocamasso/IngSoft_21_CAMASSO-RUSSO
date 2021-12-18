@@ -19,6 +19,7 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
     private static DAO<Articoli> dao = null;
     private static Logger logger = null;
 
+    // design pattern singleton
     private ArticoliDAOMySQL() {}
 
     public static DAO<Articoli> getInstance(){
@@ -51,7 +52,6 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
         ArrayList<Articoli> list =  selectAll();
         list.forEach(System.out::println);
     }
-
 
     /**
      * Metodo di test per le CRUD della classe Articoli
@@ -132,7 +132,6 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
         } // end of testing
     }
 
-
     /**
      * Select
      * @param a Articolo da cui estrarre i campi di selezione
@@ -177,10 +176,9 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
         return lista;
     }
 
-
     /**
      * Select di tutta la tabella Articoli
-     * @return
+     * @return Restituisce tutte le tuple contenute in Articoli
      */
     public ArrayList<Articoli> selectAll() {
 
@@ -206,7 +204,6 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
         return list;
     }
 
-
     /**
      * Delete
      * @param a Articolo da cui estrarre i campi per l'eliminazione
@@ -231,7 +228,6 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
 
     }
 
-
     /**
      * Delete di tutta la tabella Articoli
      */
@@ -243,7 +239,6 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
 
         executeUpdate(query);
     }
-
 
     /**
      * Insert
@@ -273,9 +268,8 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
         executeUpdate(query);
     }
 
-
     /**
-     * Alter Tabel
+     * Alter Table
      * @param a Articolo da cui estrarre i campi per la modifica della tabella. Basata sul barcode
      */
     @Override
@@ -301,7 +295,10 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
 
     }
 
-
+    /**
+     * Il metodo esegue la query ricevuta in ingresso
+     * @param query la query sql da eseguire
+     */
     private void executeUpdate(String query) throws DAOException{
         try {
             Statement st = DAOMySQLSettings.getStatement();
@@ -315,6 +312,10 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
     }
 
 
+    /**
+     * Metodo di utilita' che stampa la query eseguita
+     * @param query la query da stampare
+     */
     private void printQuery(String query){
         try{
             logger.info("SQL: " + query);
@@ -324,7 +325,12 @@ public class ArticoliDAOMySQL implements DAO<Articoli> {
         }
     }
 
-
+    /**
+     * Il metodo restituisce una lista contenente il risultato della query
+     * @param statement lo statement con cui eseguire la query
+     * @param query la query da eseguire
+     * @return restituisce la lista con il risultato della query
+     */
     private ArrayList<Articoli> getQueryResult(Statement statement, String query) throws SQLException {
 
         ArrayList<Articoli> list = new ArrayList<>();

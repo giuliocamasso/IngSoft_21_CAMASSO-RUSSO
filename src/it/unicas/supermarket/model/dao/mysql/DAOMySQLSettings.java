@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Classe delle impostazioni della DAO
+ * Classe delle impostazioni DAO-MySQL
  */
 public class DAOMySQLSettings {
 
@@ -58,7 +58,10 @@ public class DAOMySQLSettings {
         }
     }
 
-
+    /**
+     * Il metodo setta le impostazione di default
+     * @return daoMySQLSettings
+     */
     public static DAOMySQLSettings getDefaultDAOSettings(){
         DAOMySQLSettings daoMySQLSettings = new DAOMySQLSettings();
         daoMySQLSettings.host = HOST;
@@ -68,7 +71,10 @@ public class DAOMySQLSettings {
         return daoMySQLSettings;
     }
 
-
+    /**
+     * Metodo di utilita che restituisce lo statement a partire dall connessione corrente
+     * @return statement con connessione definita dalla classe settings
+     */
     public static Statement getStatement() throws SQLException{
         if (currentDAOMySQLSettings == null){
             currentDAOMySQLSettings = getDefaultDAOSettings();
@@ -76,7 +82,9 @@ public class DAOMySQLSettings {
         return DriverManager.getConnection("jdbc:mysql://" + currentDAOMySQLSettings.host  + "/" + currentDAOMySQLSettings.schema + PARAMETERS, currentDAOMySQLSettings.username, currentDAOMySQLSettings.password).createStatement();
     }
 
-
+    /**
+     * metodo di utilita' che chiude la connessione e lo statement
+     */
     public static void closeStatement(Statement st) throws SQLException{
         st.getConnection().close();
         st.close();

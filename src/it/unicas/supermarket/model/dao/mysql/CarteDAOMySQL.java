@@ -1,4 +1,5 @@
 package it.unicas.supermarket.model.dao.mysql;
+
 import it.unicas.supermarket.model.Carte;
 import it.unicas.supermarket.model.Clienti;
 import it.unicas.supermarket.model.dao.DAO;
@@ -8,10 +9,10 @@ import it.unicas.supermarket.Util;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import static it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL.getIdClienteFromCode;
 
 /**
  * Classe DAO della tabella Carte
@@ -21,6 +22,7 @@ public class CarteDAOMySQL implements DAO<Carte> {
     private static DAO<Carte> dao = null;
     private static Logger logger = null;
 
+    // singleton design pattern
     private CarteDAOMySQL() {}
 
     public static DAO<Carte> getInstance(){
@@ -42,7 +44,7 @@ public class CarteDAOMySQL implements DAO<Carte> {
             Float massimaleMensile = i*1000f;
             Float massimaleRimanente = i*100f;
             String codiceCliente_i = "codice_" + i;
-            Integer id_cliente = getIdClienteFromCode(codiceCliente_i);
+            Integer id_cliente = Util.getIdClienteFromCodiceCliente(codiceCliente_i);
             String pin = "pin_" + i;
             String seed4_i = ""+ i + i + i + i;
 
@@ -50,14 +52,14 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
         }
 
-        // also shows the tuples
+        // stampa delle tuple cosi' inserite
         ArrayList<Carte> list =  selectAll();
         list.forEach(System.out::println);
     }
 
 
     /**
-     * Metodo di test per le CRUD della classe Articoli
+     * Metodo di test per le CRUD della classe Carte
      */
     public static void main(String[] args) throws DAOException {
 
@@ -80,10 +82,10 @@ public class CarteDAOMySQL implements DAO<Carte> {
             List<Clienti> clientiList = ClientiDAOMySQL.getInstance().selectAll();
             clientiList.forEach(System.out::println);
 
-            Integer idCliente = getIdClienteFromCode("codice_1");
+            int idCliente =  Util.getIdClienteFromCodiceCliente("codice_1");
             c.insert(new Carte(100f, 10f, idCliente, "11111", "1111-1111-1111-1111", null));
 
-            idCliente = getIdClienteFromCode("codice_2");
+            idCliente = Util.getIdClienteFromCodiceCliente("codice_2");
             c.insert(new Carte(idCliente,"2222-2222-2222-2222"));
 
             // 2 - testing select all
@@ -97,19 +99,19 @@ public class CarteDAOMySQL implements DAO<Carte> {
             list.forEach(System.out::println);
 
             // 3.2 delete
-            idCliente = getIdClienteFromCode("codice_1");
+            idCliente = Util.getIdClienteFromCodiceCliente("codice_1");
             c.insert(new Carte(100f, 10f, idCliente,"11111", "1111-1111-1111-1111", null));
 
-            idCliente = getIdClienteFromCode("codice_2");
+            idCliente = Util.getIdClienteFromCodiceCliente("codice_2");
             c.insert(new Carte(idCliente, "2222-2222-2222-2222"));
 
-            idCliente = getIdClienteFromCode("codice_3");
+            idCliente = Util.getIdClienteFromCodiceCliente("codice_3");
             c.insert(new Carte(idCliente, "3333-3333-3333-3333"));
 
-            idCliente = getIdClienteFromCode("codice_1");
+            idCliente = Util.getIdClienteFromCodiceCliente("codice_1");
             Carte toDelete = new Carte(0f, 0f, idCliente,"11111", "1111-1111-1111-1111", null);
 
-            idCliente = getIdClienteFromCode("codice_2");
+            idCliente = Util.getIdClienteFromCodiceCliente("codice_2");
             Carte toDelete2 = new Carte(idCliente, "2222-2222-2222-2222");
 
             c.delete(toDelete);
@@ -120,10 +122,10 @@ public class CarteDAOMySQL implements DAO<Carte> {
             list.forEach(System.out::println);
 
             // 3.3 update
-            idCliente = getIdClienteFromCode("codice_4");
+            idCliente = Util.getIdClienteFromCodiceCliente("codice_4");
             Carte toUpdate = new Carte(400f, 40f, idCliente,"44444", "4444-4444-4444-4444", null);
 
-            idCliente = getIdClienteFromCode("codice_5");
+            idCliente = Util.getIdClienteFromCodiceCliente("codice_5");
             Carte toUpdate2 = new Carte(idCliente, "5555-5555-5555-5555");
 
             c.insert(toUpdate);
@@ -132,10 +134,10 @@ public class CarteDAOMySQL implements DAO<Carte> {
             list = c.selectAll();
             list.forEach(System.out::println);
 
-            idCliente = getIdClienteFromCode("codice_4");
+            idCliente = Util.getIdClienteFromCodiceCliente("codice_4");
             Carte updated = new Carte(400f, 40f,idCliente,"44444", "4444-4444-4444-4444", null);
 
-            idCliente =getIdClienteFromCode("codice_5");
+            idCliente = Util.getIdClienteFromCodiceCliente("codice_5");
             Carte updated2 = new Carte(500f, 50f,idCliente,"55555", "5555-5555-5555-5555", null);
 
             c.update(updated);
@@ -148,11 +150,10 @@ public class CarteDAOMySQL implements DAO<Carte> {
         } // end of testing
     }
 
-
     /**
      * Select
      * @param a Carta da cui estrarre i campi di selezione
-     * @return Lista di carte estratti dalla query
+     * @return Lista di carte estratte dalla query
      */
     @Override
     public List<Carte> select(Carte a) throws DAOException {
@@ -184,10 +185,9 @@ public class CarteDAOMySQL implements DAO<Carte> {
         return lista;
     }
 
-
     /**
      * Select di tutta la tabella Carte
-     * @return
+     * @return Lista di tutte le carte presenti nel db
      */
     public ArrayList<Carte> selectAll() {
 
@@ -213,7 +213,6 @@ public class CarteDAOMySQL implements DAO<Carte> {
         return list;
     }
 
-
     /**
      * Delete
      * @param a Carta da cui estrarre i campi per l'eliminazione
@@ -237,7 +236,6 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
     }
 
-
     /**
      * Delete di tutta la tabella Carte
      */
@@ -250,7 +248,6 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
         executeUpdate(query);
     }
-
 
     /**
      * Insert
@@ -275,9 +272,8 @@ public class CarteDAOMySQL implements DAO<Carte> {
         executeUpdate(query);
     }
 
-
     /**
-     * Alter Tabel
+     * Alter Table
      * @param a Carta da cui estrarre i campi per la modifica della tabella. Basata sul codice della carta
      */
     @Override
@@ -302,7 +298,10 @@ public class CarteDAOMySQL implements DAO<Carte> {
 
     }
 
-
+    /**
+     * Il metodo esegue la query ricevuta in ingresso
+     * @param query la query sql da eseguire
+     */
     private void executeUpdate(String query) throws DAOException{
         try {
             Statement st = DAOMySQLSettings.getStatement();
@@ -315,7 +314,10 @@ public class CarteDAOMySQL implements DAO<Carte> {
         }
     }
 
-
+    /**
+     * Metodo di utilita' che stampa la query eseguita
+     * @param query la query da stampare
+     */
     private void printQuery(String query){
         try{
             logger.info("SQL: " + query);
@@ -325,7 +327,12 @@ public class CarteDAOMySQL implements DAO<Carte> {
         }
     }
 
-
+    /**
+     * Il metodo restituisce una lista contenente il risultato della query
+     * @param statement lo statement con cui eseguire la query
+     * @param query la query da eseguire
+     * @return restituisce la lista con il risultato della query
+     */
     private ArrayList<Carte> getQueryResult(Statement statement, String query) throws SQLException {
 
         ArrayList<Carte> list = new ArrayList<>();

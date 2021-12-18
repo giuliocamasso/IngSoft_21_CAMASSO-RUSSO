@@ -1,4 +1,5 @@
 package it.unicas.supermarket.dataloader;
+import it.unicas.supermarket.Util;
 import it.unicas.supermarket.model.Articoli;
 import it.unicas.supermarket.model.Carte;
 import it.unicas.supermarket.model.Clienti;
@@ -8,15 +9,24 @@ import it.unicas.supermarket.model.dao.mysql.ArticoliDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.CarteDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL;
 import it.unicas.supermarket.model.dao.mysql.OrdiniDAOMySQL;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static it.unicas.supermarket.model.dao.mysql.ClientiDAOMySQL.getIdClienteFromCode;
-
+/**
+ * La classe e' usata per inizializzare il database con i dati letti dai file .txt
+ * NB. Ordini e Composizioni non vengono inizializzati in questo modo poiche' inutile, vengono inseriti direttamente a runtime
+ */
 public class Dataloader {
 
-    // NB. The consistence of read data is checked by class constructors
+    // NB. la consistenza dei dati viene gestita dai costruttori delle singole classi
+
+    /**
+     * La funzione che inserisce nel db i clienti
+     * @param filename Il file che contiene i dati dei clienti
+     * @param delim La sequenza che separa i campi della tupla (attuale: ' - ')
+     */
     public static void loadClienti(String filename, String delim) throws IOException, DAOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -25,7 +35,6 @@ public class Dataloader {
 
         while (line != null) {
 
-            // tuple columns are separated by the passed delimiter
             String[] values = line.split(delim);
 
             String nome = values[0];
@@ -37,14 +46,17 @@ public class Dataloader {
 
             ClientiDAOMySQL.getInstance().insert(new Clienti(nome, cognome, telefono, puntiFedelta, iban, codiceCliente, null));
 
-            // reads next line
             line = reader.readLine();
         }
 
         reader.close();
     }
 
-
+    /**
+     * La funzione che inserisce nel db gli articoli
+     * @param filename Il file che contiene i dati degli articoli da inserire
+     * @param delim La sequenza che separa i campi della tupla (attuale: ' - ')
+     */
     public static void loadArticoli(String filename, String delim) throws IOException, DAOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -53,7 +65,6 @@ public class Dataloader {
 
         while (line != null) {
 
-            // tuple columns are separated by the passed delimiter
             String[] values = line.split(delim);
 
             String nome = values[0];
@@ -68,14 +79,17 @@ public class Dataloader {
 
             ArticoliDAOMySQL.getInstance().insert(new Articoli(nome, prezzo, scorteMagazzino, barcode, reparto, produttore, descrizioneProdotto, descrizioneQuantita, null));
 
-            // reads next line
             line = reader.readLine();
         }
 
         reader.close();
     }
 
-
+    /**
+     * La funzione che inserisce nel database le carte lette da file
+     * @param filename Il nome del file che contiene i dati delle carte da inserire
+     * @param delim La sequenza che separa i campi della tupla da inserire (default: ' - ')
+     */
     public static void loadCarte(String filename, String delim) throws IOException, DAOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -84,28 +98,29 @@ public class Dataloader {
 
         while (line != null) {
 
-            // tuple columns are separated by the passed delimiter
             String[] values = line.split(delim);
 
             String codiceCarta = values[0];
             String codiceCliente = values[1];
 
-            // NB. idCliente is required (foreign key for table 'Carte')
-            Integer idCliente = getIdClienteFromCode(codiceCliente);
+            Integer idCliente = Util.getIdClienteFromCodiceCliente(codiceCliente);
             Float massimaleMensile = Float.valueOf(values[2]);
             Float massimaleRimanente = Float.valueOf(values[3]);
             String pin = values[4];
 
             CarteDAOMySQL.getInstance().insert(new Carte( massimaleMensile, massimaleRimanente, idCliente, pin, codiceCarta, null));
 
-            // reads next line
             line = reader.readLine();
         }
 
         reader.close();
     }
 
-
+    /**
+     * [---DEPRECATED---] La funzione che inserisce nel database gli ordini
+     * @param filename Il nome del file che contiene i dati degli ordini
+     * @param delim La sequenza che separa i campi della tupla da inserire (default: ' - ')
+     */
     public static void loadOrdini(String filename, String delim) throws IOException, DAOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -114,14 +129,13 @@ public class Dataloader {
 
         while (line != null) {
 
-            // tuple columns are separated by the passed delimiter
             String[] values = line.split(delim);
 
             String codiceOrdine = values[0];
 
             String codiceCliente = values[1];
             // NB. idCliente is required
-            Integer idCliente = getIdClienteFromCode(codiceCliente);
+            Integer idCliente =  Util.getIdClienteFromCodiceCliente(codiceCliente);
 
             String data = values[2];
 
@@ -129,14 +143,15 @@ public class Dataloader {
 
             OrdiniDAOMySQL.getInstance().insert(new Ordini(idCliente, data, codiceOrdine, importoTotale, null));
 
-            // reads next line
             line = reader.readLine();
         }
 
         reader.close();
     }
 
-
+    /**
+     * Il main svuota il db e chiama tutte le load
+     */
     public static void main(String[] args){
 
         try {

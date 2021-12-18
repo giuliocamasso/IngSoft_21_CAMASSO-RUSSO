@@ -4,8 +4,7 @@ import it.unicas.supermarket.model.dao.DAOException;
 import javafx.beans.property.*;
 
 /**
- * Model class for client orders.
- * @author GC-GR
+* Classe modello per la tabella Ordini
  */
 public class Ordini {
 
@@ -15,7 +14,10 @@ public class Ordini {
     private final StringProperty codiceOrdine;
     private FloatProperty importoTotale;
 
-    // used to create tmp orders searching in select() by codiceOrdine
+    /**
+     * Costruttore di utilita'
+     * @param codiceOrdine autodescrittivo
+     */
     public Ordini(String codiceOrdine) throws DAOException {
 
         this.idOrdine = null;
@@ -32,7 +34,14 @@ public class Ordini {
         this.importoTotale = new SimpleFloatProperty(-1f);
     }
 
-
+    /**
+     * Costruttore 'completo'
+     * @param idCliente autodescrittivo
+     * @param data autodescrittivo (generata al momento dell'ordine)
+     * @param codiceOrdine autodescrittivo (basato sulla data, generato al momento dell'ordine)
+     * @param importoTotale autodescrittivo
+     * @param idOrdine autodescrittivo
+     */
     public Ordini(Integer idCliente, String data, String codiceOrdine, Float importoTotale, Integer idOrdine) throws DAOException {
 
         if (idOrdine != null)
@@ -45,7 +54,6 @@ public class Ordini {
             throw new DAOException("idCliente can't be null to create a new order");
         else
             this.idCliente = new SimpleIntegerProperty(idCliente);
-
 
         // "19-11-2021 16:10"   esempio data
         char delim1 = '-';
@@ -74,7 +82,6 @@ public class Ordini {
 
     }
 
-
     // Getter setter and property: @idOrdine
     public Integer getIdOrdine() throws DAOException{
        if(idOrdine == null)
@@ -82,16 +89,13 @@ public class Ordini {
        else
            return idOrdine.getValue();
     }
-
     public void setIdOrdine(Integer idOrdine) {
         if (this.idOrdine == null){
             this.idOrdine = new SimpleIntegerProperty();
         }
         this.idOrdine.set(idOrdine);
     }
-
     public IntegerProperty idOrdineProperty()                       { return idOrdine; }
-
 
     // Getter setter and property: @idCliente
     public Integer getIdCliente() throws DAOException {
@@ -100,42 +104,32 @@ public class Ordini {
         }
         else return idCliente.get();
     }
-
     public void setIdCliente(Integer idCliente) {
         if (this.idCliente == null){
             this.idCliente = new SimpleIntegerProperty();
         }
         this.idCliente.set(idCliente);
     }
-
     public IntegerProperty idClienteProperty()                      { return idCliente; }
-
 
     // Getter setter and property: @data
     public String getData()                                         { return data.get(); }
-
     public void setData(String data)                                { this.data.set(data); }
-
     public StringProperty dataProperty()                            { return data; }
 
     // Getter setter and property: @codiceOrdine
     public String getCodiceOrdine()                                 { return codiceOrdine.get(); }
-
     public void setCodiceOrdine(String codiceOrdine)                { this.codiceOrdine.set(codiceOrdine); }
-
     public StringProperty codiceOrdineProperty()                    { return codiceOrdine; }
-
 
     // Getter setter and property: @importoTotale
     public Float getImportoTotale()                                 { return importoTotale.get(); }
-
     public void setImportoTotale(Float importoTotale)   {
         if (this.importoTotale == null)
             this.importoTotale = new SimpleFloatProperty();
 
         this.importoTotale.set(importoTotale);
     }
-
     public FloatProperty importoTotaleProperty()                    { return importoTotale; }
 
 
@@ -151,7 +145,9 @@ public class Ordini {
                 codiceOrdine.getValue() + ", data: " + data.getValue() + "\n";
     }
 
-
+    /**
+     * Testing function
+     */
     public static void main(String[] args) {
 
         try {
@@ -167,8 +163,6 @@ public class Ordini {
         catch (DAOException e) {
             e.printStackTrace();
         }
-
     }
-
 }
 

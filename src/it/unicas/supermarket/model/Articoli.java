@@ -4,7 +4,7 @@ import it.unicas.supermarket.model.dao.DAOException;
 import javafx.beans.property.*;
 
 /**
- * Classe per la tabella Articoli con idArticolo chiave primaria autoincrementale
+ * Classe modello per la tabella Articoli con idArticolo chiave primaria autoincrementale
  */
 public class Articoli {
 

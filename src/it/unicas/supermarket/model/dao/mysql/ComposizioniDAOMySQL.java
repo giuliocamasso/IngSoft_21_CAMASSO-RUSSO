@@ -9,11 +9,16 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Classe DAO della tabella Composizioni<br>
+ * NB: sono implementate solo la insert() e la deleteAll() in quanto risultano essere le uniche utili all'applicazione
+ */
 public class ComposizioniDAOMySQL implements DAO<Composizioni> {
 
     private static DAO<Composizioni> dao = null;
     private static Logger logger = null;
 
+    // singleton design pattern
     private ComposizioniDAOMySQL() {
     }
 
@@ -25,16 +30,26 @@ public class ComposizioniDAOMySQL implements DAO<Composizioni> {
         return dao;
     }
 
+    /**
+     * --- Non implementata ---
+     */
     @Override
     public List<Composizioni> select(Composizioni articoloOrdine) throws DAOException {
         return null;
     }
 
+    /**
+     * --- Non implementata ---
+     */
     @Override
     public void update(Composizioni articoloOrdine) throws DAOException {
-
     }
 
+    /**
+     * Implementazione della insert
+     * @param articoloInOrdine la tupla contiene le informazioni necessarie all'inserimento,
+     *                         cioe' l'idArticolo, l'idOrdine, il prezzo e la quantita
+     */
     @Override
     public void insert(Composizioni articoloInOrdine) throws DAOException {
         if (articoloInOrdine == null)
@@ -52,11 +67,17 @@ public class ComposizioniDAOMySQL implements DAO<Composizioni> {
         executeUpdate(query);
     }
 
+    /**
+     * --- Non implementata ---
+     */
     @Override
     public void delete(Composizioni articoloOrdine) throws DAOException {
 
     }
 
+    /**
+     * --- Non implementata ---
+     */
     @Override
     public List<Composizioni> selectAll() throws DAOException {
         return null;
@@ -72,11 +93,18 @@ public class ComposizioniDAOMySQL implements DAO<Composizioni> {
         executeUpdate(query);
     }
 
+    /**
+     * --- Non implementata ---
+     */
     @Override
     public void initialize() throws DAOException {
 
     }
 
+    /**
+     * Metodo di utilita' che stampa la query eseguita
+     * @param query la query da stampare
+     */
     private void printQuery(String query) {
         try {
             logger.info("SQL: " + query);
@@ -85,6 +113,10 @@ public class ComposizioniDAOMySQL implements DAO<Composizioni> {
         }
     }
 
+    /**
+     * Il metodo esegue la query ricevuta in ingresso
+     * @param query la query sql da eseguire
+     */
     private void executeUpdate(String query) throws DAOException {
         try {
             Statement st = DAOMySQLSettings.getStatement();

@@ -3,7 +3,7 @@ import it.unicas.supermarket.model.dao.DAOException;
 import javafx.beans.property.*;
 
 /**
- * Classe per la tabella Carte con idCarta chiave primaria autoincrementale
+ * Classe modello per la tabella Carte con idCarta chiave primaria autoincrementale
  */
 public class Carte {
 
@@ -11,8 +11,8 @@ public class Carte {
     private FloatProperty massimaleMensile;
     private FloatProperty massimaleRimanente;
     private IntegerProperty idCliente;
-    private StringProperty pin;
-    private StringProperty codiceCarta;
+    private final StringProperty pin;
+    private final StringProperty codiceCarta;
 
     /**
      * Costruttore basato sull'idCliente e il codice della Carta
