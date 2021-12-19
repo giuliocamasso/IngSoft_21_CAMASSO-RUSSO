@@ -291,8 +291,8 @@ public class MarketSectionLayoutController implements Initializable {
         // se viene caricato almeno un articolo, imposto il primo come articolo selezionato e ne mostro i dettagli
         if (gridPaneArticles.size() > 0) {
             setChosenArticle(gridPaneArticles.get(0));
-            //NB. Aggiorno il l'articolo corrente del controller con quello selezionato cliccando
-            //articleSelectionListener = articolo -> setChosenArticle(articolo);
+            //NB. Aggiorno il l'articolo corrente con quello selezionato cliccando
+            // articleSelectionListener = articolo -> setChosenArticle(articolo);
             articleSelectionListener = this::setChosenArticle;
         }
 
@@ -1123,6 +1123,7 @@ public class MarketSectionLayoutController implements Initializable {
 
         if (gridPaneArticles.size() > 0) {
             setChosenArticle(gridPaneArticles.get(0));
+            // articleSelectionListener = articolo -> setChosenArticle(articolo);
             articleSelectionListener = this::setChosenArticle;
         }
 
