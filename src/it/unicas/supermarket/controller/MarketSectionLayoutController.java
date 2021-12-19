@@ -39,7 +39,7 @@ public class MarketSectionLayoutController implements Initializable {
     // articoli mostrati sulla grid pane
     private final List<Articoli> gridPaneArticles = new ArrayList<>();
     // listener per mostrare i dettagli dell'articolo selezionato sul pannello 'Dettagli'
-    private ArticleSelectionListener articleSelectionListener;
+    private final ArticleSelectionListener articleSelectionListener = this::setChosenArticle;
 
     // articolo selezionato
     private Articoli chosenArticle;
@@ -291,9 +291,6 @@ public class MarketSectionLayoutController implements Initializable {
         // se viene caricato almeno un articolo, imposto il primo come articolo selezionato e ne mostro i dettagli
         if (gridPaneArticles.size() > 0) {
             setChosenArticle(gridPaneArticles.get(0));
-            //NB. Aggiorno il l'articolo corrente con quello selezionato cliccando
-            // articleSelectionListener = articolo -> setChosenArticle(articolo);
-            articleSelectionListener = this::setChosenArticle;
         }
 
         // aggiorno la grafica della griglia
@@ -1123,8 +1120,6 @@ public class MarketSectionLayoutController implements Initializable {
 
         if (gridPaneArticles.size() > 0) {
             setChosenArticle(gridPaneArticles.get(0));
-            // articleSelectionListener = articolo -> setChosenArticle(articolo);
-            articleSelectionListener = this::setChosenArticle;
         }
 
         try {
