@@ -65,6 +65,8 @@ public class App {
     public LinkedHashMap<String, Integer> cartMap = new LinkedHashMap<>();
 
     // design-pattern Singleton
+    private App() {}
+
     public static App getInstance(){
         if (app == null){
             app = new App();
