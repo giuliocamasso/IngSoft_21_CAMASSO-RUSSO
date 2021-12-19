@@ -33,7 +33,7 @@ public class Util {
     /**
      * Metodo di utilita' che cerca sul db il PIN di una carta
      * @param codiceCarta Il codice della carta di cui si vuole leggere il PIN
-     * @return Resituisce il pin associato alla carta data in input
+     * @return Restituisce il pin associato alla carta data in ingresso
      */
     public static String getPinFromCodiceCarta(String codiceCarta) throws DAOException {
         List<Carte> cardToBeChecked = CarteDAOMySQL.getInstance().select(new Carte(-1, codiceCarta));
@@ -44,7 +44,7 @@ public class Util {
     }
 
     /**
-     * Il metodo resituisce il codice del cliente associato alla carta passata in ingresso
+     * Il metodo restituisce il codice del cliente associato alla carta passata in ingresso
      * @param codiceCarta In ingresso riceve il codice della carta
      * @return Restituisce il codice del cliente
      */
