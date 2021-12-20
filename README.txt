@@ -8,7 +8,7 @@ README Supermercato
 
 - Inizializzazione database:
     In Util.java è presente un flag 'dbInitializationEnabled' inizializzato a false.
-    Settarlo a true per caricare il database al primo lancio del programma, e rimetterlo a false successivamente per evitare di svuotate e riempire il database a ogni lancio.
+    Settarlo a true per caricare il database al primo lancio del programma, e rimetterlo a false successivamente per evitare di svuotare e riempire a ogni lancio.
 
     I dati del db sono contenuti nei file .txt in /src/it/unicas/supermarket/dataloader
 
