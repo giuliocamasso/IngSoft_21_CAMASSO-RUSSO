@@ -30,4 +30,4 @@ README Supermercato
 
 Studenti:       Giulio Camasso, Giulio Russo
 Corso:          Software Engineering 2021-2022
-Docente:        M.Molinara
+Docente:        M. Molinara
