@@ -133,12 +133,11 @@ public class OrderSummaryLayoutController implements Initializable {
      */
     @FXML
     private void handlePayment() throws DAOException {
-
         // il pagamento è abilitato solo se l'importo è maggiore di zero e se il massimale rimanente è sufficiente
         if(totalImport > 0f && totalImport <= App.getInstance().getMassimaleRimanente()) {
             // aggiornamneto massimale e punti fedeltà
             App.getInstance().setMassimaleRimanente(App.getInstance().getMassimaleRimanente()-totalImport);
-            App.getInstance().setPuntiFedelta(App.getInstance().computeFidelity(totalImport));
+            App.getInstance().updatePuntiFedelta(App.getInstance().computeFidelity(totalImport));
 
             // i dati del cliente vengono salvati se necessiterà di effettuare un'altra spesa dopo aver visto
             // lo scontrino, senza bisogno di fare l'eject della carta

@@ -91,7 +91,13 @@ public class App {
     public void setMassimaleRimanente(float massimaleRimanente)             { this.massimaleRimanente = massimaleRimanente; }
 
     public int getPuntiFedelta()                                            { return puntiFedelta;                          }
-    public void setPuntiFedelta(int puntiFedelta)                           { this.puntiFedelta += puntiFedelta;            }
+    public void setPuntiFedelta(int puntiFedelta)                           { this.puntiFedelta = puntiFedelta;            }
+
+    /**
+     * Il metodo aggiorna i punti fedelta in seguito ad un ordine
+     * @param increment il valore dei punti ottenuti con l'ordine effettuato, da sommarsi ai punti fedelta gia posseduti
+     */
+    public void updatePuntiFedelta(int increment)                           { this.puntiFedelta += increment; }
 
     // getter e setter del reparto selezionato
     public String getReparto()                                              { return reparto;                               }
