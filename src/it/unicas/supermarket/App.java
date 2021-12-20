@@ -62,9 +62,11 @@ public class App {
      * E' stata usata una LinkedHashMap perche' consente di memorizzare l'ordine
      * di inserimento dei prodotti nel carrello
      */
-    public LinkedHashMap<String, Integer> cartMap = new LinkedHashMap<>();
+    public final LinkedHashMap<String, Integer> cartMap = new LinkedHashMap<>();
 
     // design-pattern Singleton
+    private App() {}
+
     public static App getInstance(){
         if (app == null){
             app = new App();

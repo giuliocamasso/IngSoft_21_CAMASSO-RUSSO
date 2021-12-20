@@ -26,6 +26,7 @@ public class ArticleGridItemController {
     // listener
     private ArticleSelectionListener articleSelectionListener;
 
+    // On Mouse Pressed action
     @FXML private void click(MouseEvent mouseEvent) {
         articleSelectionListener.onClickListener(articolo);
     }
